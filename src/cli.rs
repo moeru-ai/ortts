@@ -16,6 +16,6 @@ pub enum Commands {
 #[derive(Args, Debug)]
 pub struct ServeArgs {
   /// listen on host:port (default: 127.0.0.1:12775)
-  #[arg(long, default_value = "127.0.0.1:8080")]
-  listen: String,
+  #[arg(long, default_value = "127.0.0.1:12775")]
+  pub listen: String,
 }

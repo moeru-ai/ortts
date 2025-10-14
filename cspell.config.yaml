@@ -11,5 +11,7 @@ words:
   - pkgs
   - pname
   - rustc
+  - serde
+  - utoipa
 ignoreWords: []
 import: []
