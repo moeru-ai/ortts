@@ -1,6 +1,6 @@
 [workspace.package]
 version = "0.1.0"
-authors = ["藍+85CD"]
+authors = ["Moeru AI"]
 edition = "2024"
 rust-version = "1.89"
 description = ""
