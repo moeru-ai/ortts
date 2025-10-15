@@ -1,6 +1,5 @@
 use crate::cli::ServeArgs;
 
-use axum::{http::{Method, StatusCode, Uri}, Router};
 use ortts_shared::AppError;
 use tokio::signal;
 
@@ -28,20 +27,10 @@ async fn shutdown_signal() {
   }
 }
 
-async fn handler_404(method: Method, uri: Uri) -> AppError {
-  AppError::new(
-    format!("Invalid URL ({} {})", method, uri.path()),
-    String::from("invalid_request_error"),
-    Some(StatusCode::NOT_FOUND),
-    None,
-    None,
-  )
-}
-
 pub async fn serve(args: ServeArgs) -> Result<(), AppError> {
   tracing_subscriber::fmt::init();
 
-  let app = Router::new().fallback(handler_404);
+  let app = ortts_server::new();
 
   let listener = tokio::net::TcpListener::bind(args.listen).await?;
 

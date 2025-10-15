@@ -651,12 +651,23 @@ dependencies = [
  "axum-extra",
  "clap",
  "human-panic",
+ "ortts_server",
  "ortts_shared",
  "serde",
  "serde_json",
  "tokio",
  "tracing",
  "tracing-subscriber",
+]
+
+[[package]]
+name = "ortts_server"
+version = "0.1.0"
+dependencies = [
+ "axum",
+ "ortts_shared",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]

@@ -28,12 +28,12 @@ repository.workspace = true
 [workspace]
 members = [
   ".",
-  # "crates/api",
+  "crates/server",
   "crates/shared",
 ]
 
 [workspace.dependencies]
-# ortts_api = { path = "./crates/api" }
+ortts_server = { path = "./crates/server" }
 ortts_shared = { path = "./crates/shared" }
 anyhow = "1.0"
 axum = { version = "0.8", features = ["tokio", "macros"] }
@@ -46,6 +46,7 @@ utoipa-axum = "0.2"
 utoipa-scalar = { version = "0.3", features = ["axum"] }
 
 [dependencies]
+ortts_server = { workspace = true }
 ortts_shared = { workspace = true }
 anyhow = { workspace = true }
 axum = { workspace = true }
