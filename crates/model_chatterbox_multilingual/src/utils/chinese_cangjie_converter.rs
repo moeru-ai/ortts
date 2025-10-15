@@ -30,7 +30,6 @@ impl ChineseCangjieConverter {
         let code = parts[1].to_string();
 
         word2cj.insert(word.clone(), code.clone());
-        // cj2word.entry(code).or_insert_with(|| word);
         cj2word.entry(code).or_insert_with(Vec::new).push(word)
       }
     }
@@ -42,7 +41,7 @@ impl ChineseCangjieConverter {
     })
   }
 
-  fn _cangjie_encode(&self, normed_glyph: &str) -> Option<String> {
+  fn cangjie_encode(&self, normed_glyph: &str) -> Option<String> {
     // fn _cangjie_encode(&self, glyph: &str) -> Option<String> {
     // let normed_glyph = glyph;
 
@@ -75,7 +74,7 @@ impl ChineseCangjieConverter {
       let is_chinese_glyph = get_general_category(t) == GeneralCategory::OtherLetter;
 
       if is_chinese_glyph {
-        if let Some(cangjie) = self._cangjie_encode(&t_str) {
+        if let Some(cangjie) = self.cangjie_encode(&t_str) {
           let mut code: Vec<String> = Vec::new();
           for c in cangjie.chars() {
             code.push(format!("[cj_{}]", c));
