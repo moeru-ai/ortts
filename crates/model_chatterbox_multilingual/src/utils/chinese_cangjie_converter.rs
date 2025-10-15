@@ -32,7 +32,7 @@ impl ChineseCangjieConverter {
         word2cj.insert(word.clone(), code.clone());
         // cj2word.entry(code).or_insert_with(|| word);
         cj2word.entry(code).or_insert_with(Vec::new).push(word)
-      }UcdProperties::general_category_of(t)
+      }
     }
 
     Ok(Self {
