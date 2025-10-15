@@ -5,8 +5,9 @@ use axum::{
 };
 use serde::Serialize;
 use serde_json::Value;
+use utoipa::ToSchema;
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, ToSchema)]
 pub struct AppError {
   pub message: String,
   #[serde(rename = "type")]
@@ -15,6 +16,11 @@ pub struct AppError {
   pub code: Option<String>,
   #[serde(skip)]
   pub status: StatusCode,
+}
+
+#[derive(Debug, Serialize, ToSchema)]
+pub struct AppErrorWrapper {
+  pub error: AppError,
 }
 
 impl AppError {
@@ -49,11 +55,6 @@ impl AppError {
 
 impl IntoResponse for AppError {
   fn into_response(self) -> Response {
-    #[derive(Serialize)]
-    pub struct AppErrorWrapper {
-      pub error: AppError,
-    }
-
     (self.status, Json(AppErrorWrapper { error: self })).into_response()
   }
 }

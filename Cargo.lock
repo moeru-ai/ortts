@@ -692,6 +692,7 @@ dependencies = [
  "axum",
  "serde",
  "serde_json",
+ "utoipa",
 ]
 
 [[package]]
