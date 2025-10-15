@@ -63,7 +63,7 @@ impl ChineseCangjieConverter {
     Some(format!("{}{}", code, index_str))
   }
 
-  pub fn call(&self, text: &str) -> String {
+  pub fn convert(&self, text: &str) -> String {
     let full_text = self.jieba.cut(text, false).join(" ");
 
 
