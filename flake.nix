@@ -4,7 +4,7 @@
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
   outputs =
-    {  nixpkgs, ... }:
+    { nixpkgs, ... }:
     let
       systems = [
         "x86_64-linux"
@@ -28,6 +28,11 @@
               rustfmt
               clippy
               rust-analyzer
+
+              # TODO: tls-rustls
+              # https://github.com/pykeio/ort/issues/436
+              pkg-config
+              openssl
             ];
 
             RUST_SRC_PATH = pkgs.rustPlatform.rustLibSrc;

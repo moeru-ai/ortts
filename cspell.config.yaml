@@ -3,15 +3,19 @@ ignorePaths: []
 dictionaryDefinitions: []
 dictionaries: []
 words:
+  - cangjie
   - clippy
   - moeru
   - nixpkgs
+  - onnx
   - ortts
   - palc
   - pkgs
   - pname
   - rustc
+  - rustls
   - serde
+  - ureq
   - utoipa
 ignoreWords: []
 import: []
