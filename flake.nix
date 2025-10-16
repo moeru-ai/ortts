@@ -23,11 +23,15 @@
         {
           default = pkgs.mkShell {
             nativeBuildInputs = with pkgs; [
+              # rust
               rustc
               cargo
               rustfmt
               clippy
               rust-analyzer
+
+              # utils
+              bacon
 
               # TODO: tls-rustls
               # https://github.com/pykeio/ort/issues/436
