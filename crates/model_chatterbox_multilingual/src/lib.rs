@@ -138,6 +138,9 @@ mod tests {
     // const S3GEN_SR: u32 = 24000;
     const START_SPEECH_TOKEN: u32 = 6561;
     // const STOP_SPEECH_TOKEN: u32 = 6562;
+    const num_hidden_layers: i64 = 30;
+    const num_key_value_heads: i64 = 16;
+    const head_dim: i64 = 64;
 
     let fetcher = CachedHub::new();
 
@@ -285,24 +288,50 @@ mod tests {
     // print(f"{output_file_name} was successfully saved")
 
     // for i in 0..MAX_NEW_TOKENS {
-    let input_embeds = embed_tokens_session.run(ort::inputs![
+    let ort_input_embeds_output = embed_tokens_session.run(ort::inputs![
       "input_ids" => &input_ids_value,
       "position_ids" => &position_ids_value,
       "exaggeration" => &exaggeration_value,
     ]).unwrap();
-    println!("input_embeds: {:?}", input_embeds.get("inputs_embeds").unwrap().shape());
+    let inputs_embeds = ort_input_embeds_output.get("inputs_embeds").unwrap();
+    println!("input_embeds: {:?}", inputs_embeds.shape());
 
     let ort_speech_encoder_output = speech_encoder_session.run(ort::inputs![
       "audio_values" => &audio_value
     ]).unwrap();
-    let audio_features = ort_speech_encoder_output.get("audio_features");
-    let audio_tokens = ort_speech_encoder_output.get("audio_tokens");
-    let speaker_embeddings = ort_speech_encoder_output.get("speaker_embeddings");
-    let speaker_features = ort_speech_encoder_output.get("speaker_features");
-    println!("audio_features: {:?}", audio_features.unwrap().shape());
-    println!("audio_tokens: {:?}", audio_tokens.unwrap().shape());
-    println!("speaker_embeddings: {:?}", speaker_embeddings.unwrap().shape());
-    println!("speaker_features: {:?}", speaker_features.unwrap().shape());
+    let audio_features = ort_speech_encoder_output.get("audio_features").unwrap();
+    let audio_tokens = ort_speech_encoder_output.get("audio_tokens").unwrap();
+    let speaker_embeddings = ort_speech_encoder_output.get("speaker_embeddings").unwrap();
+    let speaker_features = ort_speech_encoder_output.get("speaker_features").unwrap();
+    println!("audio_features: {:?}", audio_features.shape());
+    println!("audio_tokens: {:?}", audio_tokens.shape());
+    println!("speaker_embeddings: {:?}", speaker_embeddings.shape());
+    println!("speaker_features: {:?}", speaker_features.shape());
+
+    let batch_size = inputs_embeds.shape()[0];
+    let seq_len = inputs_embeds.shape()[1];
+
+    let mut past_key_values = std::collections::HashMap::new();
+
+    for layer in 0..num_hidden_layers {
+        for kv in ["key", "value"] {
+            let cache_key = format!("past_key_values.{}.{}", layer, kv);
+            let cache_shape = vec![
+                batch_size as usize,
+                num_key_value_heads as usize,
+                1_usize, // ort doesn't support 0 dimension, use 1 and handle accordingly in model
+                head_dim as usize
+            ];
+
+            let total_elements = cache_shape.iter().product::<usize>();
+            let cache_data = vec![0.0f32; total_elements];
+            let cache_value = Value::from_array((cache_shape.as_slice(), cache_data)).unwrap();
+            println!("kv cache layer created {:?}, based on {:?}, {:?}", cache_value.shape(), batch_size, seq_len);
+            past_key_values.insert(cache_key, cache_value);
+        }
+    }
+
+    println!("Created KV cache with {} entries", past_key_values.len());
     // }
   }
 }
