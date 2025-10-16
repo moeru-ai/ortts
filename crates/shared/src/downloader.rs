@@ -17,14 +17,9 @@ impl Downloader {
   }
 
   pub async fn get_path(&self, model_id: &str, filename: &str) -> Result<PathBuf, AppError> {
-    let path = match self.cache_api.model(String::from(model_id))
-      .get(filename) {
+    let path = match self.cache_api.model(String::from(model_id)).get(filename) {
       Some(p) => p,
-      None => {
-        self.api.model(String::from(model_id))
-          .get(filename)
-          .await?
-      }
+      None => self.api.model(String::from(model_id)).get(filename).await?,
     };
 
     Ok(path)

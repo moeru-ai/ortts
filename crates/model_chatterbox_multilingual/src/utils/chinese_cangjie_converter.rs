@@ -1,7 +1,7 @@
 use jieba_rs::Jieba;
 use ortts_shared::{AppError, Downloader};
 use std::{collections::HashMap, fs};
-use unicode_general_category::{get_general_category, GeneralCategory};
+use unicode_general_category::{GeneralCategory, get_general_category};
 
 pub struct ChineseCangjieConverter {
   word2cj: HashMap<String, String>,
@@ -15,7 +15,10 @@ impl ChineseCangjieConverter {
     let mut cj2word = HashMap::<String, Vec<String>>::new();
 
     let json = Downloader::new()
-      .get_str("onnx-community/chatterbox-multilingual-ONNX", "Cangjie5_TC.json")
+      .get_str(
+        "onnx-community/chatterbox-multilingual-ONNX",
+        "Cangjie5_TC.json",
+      )
       .await?;
 
     let data: Vec<String> = serde_json::from_str(&json)?;
@@ -61,7 +64,6 @@ impl ChineseCangjieConverter {
 
   pub fn convert(&self, text: &str) -> String {
     let full_text = self.jieba.cut(text, false).join(" ");
-
 
     let mut output = Vec::new();
 

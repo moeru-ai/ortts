@@ -1,4 +1,7 @@
-use axum::{debug_handler, http::{Method, StatusCode, Uri}};
+use axum::{
+  debug_handler,
+  http::{Method, StatusCode, Uri},
+};
 use ortts_shared::AppError;
 
 #[debug_handler]

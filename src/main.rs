@@ -4,7 +4,7 @@ mod cli;
 use cli::{Cli, Commands};
 
 use clap::{CommandFactory, Parser};
-use human_panic::{setup_panic, metadata};
+use human_panic::{metadata, setup_panic};
 use ortts_shared::AppError;
 
 #[tokio::main]
@@ -19,8 +19,6 @@ async fn main() -> Result<(), AppError> {
       Commands::Run => todo!(),
     }
   } else {
-    Cli::command()
-      .print_help()
-      .map_err(|err| err.into())
+    Cli::command().print_help().map_err(|err| err.into())
   }
 }

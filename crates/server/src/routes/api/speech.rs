@@ -1,4 +1,8 @@
-use axum::{debug_handler, http::StatusCode, response::{IntoResponse, Response}, Json};
+use axum::{
+  Json, debug_handler,
+  http::StatusCode,
+  response::{IntoResponse, Response},
+};
 use ortts_shared::AppError;
 use serde::Deserialize;
 use utoipa::ToSchema;
@@ -11,11 +15,10 @@ pub struct SpeechOptions {
   /// One of the available TTS models: `chatterbox-multilingual`.
   pub model: String,
   /// The voice to use when generating the audio.
-  pub voice: String
-  // TODO: instructions
-  // TODO: response_format
-  // TODO: speed
-  // TODO: stream_format
+  pub voice: String, // TODO: instructions
+                     // TODO: response_format
+                     // TODO: speed
+                     // TODO: stream_format
 }
 
 #[derive(Debug, ToSchema)]
@@ -40,6 +43,5 @@ impl IntoResponse for SpeechResult {
 )]
 #[debug_handler]
 pub async fn speech(Json(_options): Json<SpeechOptions>) -> Result<SpeechResult, AppError> {
-
   Ok(SpeechResult(String::from("TODO")))
 }

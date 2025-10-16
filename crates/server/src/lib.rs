@@ -1,10 +1,10 @@
-use axum::{routing::get, Json, Router};
+use axum::{Json, Router, routing::get};
 use utoipa::OpenApi;
-use utoipa_axum::routes as route;
 use utoipa_axum::router::OpenApiRouter;
+use utoipa_axum::routes as route;
 
-mod routes;
 mod openapi;
+mod routes;
 
 use openapi::ApiDoc;
 use utoipa_scalar::{Scalar, Servable};
