@@ -57,6 +57,68 @@ pub fn create_session(model_path: &str) -> Result<Session> {
   Ok(session)
 }
 
+pub fn load_audio(path: &str) -> Result<Vec<f32>> {
+  use symphonia::core::io::MediaSourceStream;
+  use symphonia::core::probe::Hint;
+  use symphonia::default::get_probe;
+  use std::fs::File;
+
+  let file = File::open(path)?;
+  let mss = MediaSourceStream::new(Box::new(file), Default::default());
+
+  let mut hint = Hint::new();
+  hint.with_extension("wav");
+
+  let meta_opts = Default::default();
+  let fmt_opts = Default::default();
+
+  let probed = get_probe().format(&hint, mss, &meta_opts, &fmt_opts)?;
+  let mut format = probed.format;
+  let track = format.tracks()
+      .iter()
+      .find(|t| t.codec_params.codec != symphonia::core::codecs::CODEC_TYPE_NULL)
+      .ok_or_else(|| anyhow::anyhow!("No supported audio tracks"))?;
+
+  let track_id = track.id;
+  let mut decoder = symphonia::default::get_codecs()
+      .make(&track.codec_params, &Default::default())?;
+
+  let mut audio_buf = None;
+  let mut samples = Vec::new();
+
+  loop {
+      let packet = match format.next_packet() {
+          Ok(packet) => packet,
+          Err(_) => break,
+      };
+
+      if packet.track_id() != track_id {
+          continue;
+      }
+
+      match decoder.decode(&packet) {
+          Ok(decoded) => {
+              if audio_buf.is_none() {
+                  let spec = *decoded.spec();
+                  let duration = decoded.capacity() as u64;
+                  audio_buf = Some(symphonia::core::audio::SampleBuffer::<f32>::new(duration, spec));
+              }
+
+              if let Some(ref mut buf) = audio_buf {
+                  buf.copy_interleaved_ref(decoded);
+                  samples.extend_from_slice(buf.samples());
+              }
+          }
+          Err(_) => break,
+      }
+  }
+
+  // Resample if needed (simplified - assumes same sample rate)
+  // For proper resampling, you'd use a library like rubato
+
+  Ok(samples)
+}
+
 #[cfg(test)]
 mod tests {
 
@@ -72,11 +134,14 @@ mod tests {
       value::Value,
     };
 
+    // const MAX_NEW_TOKENS: i64 = 256;
     // const S3GEN_SR: u32 = 24000;
     const START_SPEECH_TOKEN: u32 = 6561;
     // const STOP_SPEECH_TOKEN: u32 = 6562;
 
     let fetcher = CachedHub::new();
+
+    // Then in your test at line 219, add:
 
     let speech_encoder_path = fetcher.get("onnx-community/chatterbox-multilingual-ONNX", "onnx/speech_encoder.onnx").await.unwrap();
     let embed_tokens_path = fetcher.get("onnx-community/chatterbox-multilingual-ONNX", "onnx/embed_tokens.onnx").await.unwrap();
@@ -92,13 +157,23 @@ mod tests {
 
     assert!(tokenizer_config_path.exists());
 
-    let _speech_encoder_session = create_session(speech_encoder_path.to_str().unwrap()).unwrap();
-    let _embed_tokens_session = create_session(embed_tokens_path.to_str().unwrap()).unwrap();
+    let mut embed_tokens_session = create_session(embed_tokens_path.to_str().unwrap()).unwrap();
+    let mut speech_encoder_session = create_session(speech_encoder_path.to_str().unwrap()).unwrap();
     let _llama_with_path_session = create_session(llama_with_path_path.to_str().unwrap()).unwrap();
     let _conditional_decoder_session = create_session(conditional_decoder_path.to_str().unwrap()).unwrap();
 
     let tokenizer = Tokenizer::from_pretrained("onnx-community/chatterbox-multilingual-ONNX", None).unwrap();
+
+    let target_voice_path = fetcher.get("onnx-community/chatterbox-multilingual-ONNX", "default_voice.wav").await.unwrap();
+
+    // Convert to ort Value with shape [1, audio_length]
+    let audio_values = load_audio(target_voice_path.to_str().unwrap()).unwrap();
+    let audio_shape = vec![1_usize, audio_values.len()];
+    let audio_value = Value::from_array((audio_shape.as_slice(), audio_values)).unwrap();
+    info!("audio shape: {:?}, dtype: {:?}", audio_value.shape(), audio_value.data_type());
+
     let text = "[en]The Lord of the Rings is the greatest work of literature.";
+
     let tokenized_input = tokenizer.encode(text, true).unwrap();
     info!("{:?}, shape: {:?}", tokenized_input.get_tokens(), tokenized_input.get_tokens().len());
     info!("{:?}, shape: {:?}", tokenized_input.get_ids(), tokenized_input.get_ids().len());
@@ -132,15 +207,102 @@ mod tests {
     let exaggeration_data = vec![exaggeration];
     let exaggeration_value = Value::from_array((exaggeration_shape.as_slice(), exaggeration_data)).unwrap();
 
-    // Create ONNX session inputs
-    let _ort_embed_tokens_input = ort::inputs![
+    // // Create ONNX session inputs
+    // let ort_embed_tokens_input = ort::inputs![
+    //   "input_ids" => &input_ids_value,
+    //   "position_ids" => &position_ids_value,
+    //   "exaggeration" => &exaggeration_value,
+    // ];
+
+    // info!("input_ids shape: {:?}, dtype: {:?}", input_ids_value.shape(), input_ids_value.data_type());
+    // info!("position_ids shape: {:?}, dtype: {:?}", position_ids_value.shape(), position_ids_value.data_type());
+    // info!("exaggeration shape: {:?}, dtype: {:?}", exaggeration_value.shape(), exaggeration_value.data_type());
+
+    // # ---- Generation Loop using kv_cache ----
+    // for i in tqdm(range(max_new_tokens), desc="Sampling", dynamic_ncols=True):
+    //     inputs_embeds = embed_tokens_session.run(None, ort_embed_tokens_inputs)[0]
+    //     if i == 0:
+    //         ort_speech_encoder_input = {
+    //             "audio_values": audio_values,
+    //         }
+    //         cond_emb, prompt_token, speaker_embeddings, speaker_features = speech_encoder_session.run(None, ort_speech_encoder_input)
+    //         inputs_embeds = np.concatenate((cond_emb, inputs_embeds), axis=1)
+
+    //         ## Prepare llm inputs
+    //         batch_size, seq_len, _ = inputs_embeds.shape
+    //         past_key_values = {
+    //             f"past_key_values.{layer}.{kv}": np.zeros([batch_size, num_key_value_heads, 0, head_dim], dtype=np.float32)
+    //             for layer in range(num_hidden_layers)
+    //             for kv in ("key", "value")
+    //         }
+    //         attention_mask = np.ones((batch_size, seq_len), dtype=np.int64)
+    //     logits, *present_key_values = llama_with_past_session.run(None, dict(
+    //         inputs_embeds=inputs_embeds,
+    //         attention_mask=attention_mask,
+    //         **past_key_values,
+    //     ))
+
+    //     logits = logits[:, -1, :]
+    //     next_token_logits = repetition_penalty_processor(generate_tokens, logits)
+
+    //     next_token = np.argmax(next_token_logits, axis=-1, keepdims=True).astype(np.int64)
+    //     generate_tokens = np.concatenate((generate_tokens, next_token), axis=-1)
+    //     if (next_token.flatten() == STOP_SPEECH_TOKEN).all():
+    //         break
+
+    //     # Get embedding for the new token.
+    //     position_ids = np.full(
+    //         (input_ids.shape[0], 1),
+    //         i + 1,
+    //         dtype=np.int64,
+    //     )
+    //     ort_embed_tokens_inputs["input_ids"] = next_token
+    //     ort_embed_tokens_inputs["position_ids"] = position_ids
+
+    //     ## Update values for next generation loop
+    //     attention_mask = np.concatenate([attention_mask, np.ones((batch_size, 1), dtype=np.int64)], axis=1)
+    //     for j, key in enumerate(past_key_values):
+    //         past_key_values[key] = present_key_values[j]
+
+    // speech_tokens = generate_tokens[:, 1:-1]
+    // speech_tokens = np.concatenate([prompt_token, speech_tokens], axis=1)
+
+    // cond_incoder_input = {
+    //     "speech_tokens": speech_tokens,
+    //     "speaker_embeddings": speaker_embeddings,
+    //     "speaker_features": speaker_features,
+    // }
+    // wav = cond_decoder_session.run(None, cond_incoder_input)[0]
+    // wav = np.squeeze(wav, axis=0)
+
+    // # Optional: Apply watermark
+    // if apply_watermark:
+    //     import perth
+    //     watermarker = perth.PerthImplicitWatermarker()
+    //     wav = watermarker.apply_watermark(wav, sample_rate=S3GEN_SR)
+
+    // sf.write(output_file_name, wav, S3GEN_SR)
+    // print(f"{output_file_name} was successfully saved")
+
+    // for i in 0..MAX_NEW_TOKENS {
+    let input_embeds = embed_tokens_session.run(ort::inputs![
       "input_ids" => &input_ids_value,
       "position_ids" => &position_ids_value,
       "exaggeration" => &exaggeration_value,
-    ];
+    ]).unwrap();
+    println!("input_embeds: {:?}", input_embeds.get("inputs_embeds").unwrap().shape());
 
-    info!("input_ids shape: {:?}, dtype: {:?}", input_ids_value.shape(), input_ids_value.data_type());
-    info!("position_ids shape: {:?}, dtype: {:?}", position_ids_value.shape(), position_ids_value.data_type());
-    info!("exaggeration shape: {:?}, dtype: {:?}", exaggeration_value.shape(), exaggeration_value.data_type());
+    let ort_speech_encoder_output = speech_encoder_session.run(ort::inputs![
+      "audio_values" => &audio_value
+    ]).unwrap();
+    let audio_features = ort_speech_encoder_output.get("audio_features");
+    let audio_tokens = ort_speech_encoder_output.get("audio_tokens");
+    let speaker_embeddings = ort_speech_encoder_output.get("speaker_embeddings");
+    let speaker_features = ort_speech_encoder_output.get("speaker_features");
+    println!("audio_features: {:?}", audio_features.unwrap().shape());
+    println!("audio_tokens: {:?}", audio_tokens.unwrap().shape());
+    println!("speaker_embeddings: {:?}", speaker_embeddings.unwrap().shape());
+    println!("speaker_features: {:?}", speaker_features.unwrap().shape());
+    // }
   }
 }

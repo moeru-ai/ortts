@@ -31,3 +31,4 @@ tokio = { workspace = true, features = ["test-util"] }
 tracing = { workspace = true, features = ["log"] }
 tracing-test = "0.2.5"
 ndarray = "0.17.0"
+symphonia = "0.5.5"
