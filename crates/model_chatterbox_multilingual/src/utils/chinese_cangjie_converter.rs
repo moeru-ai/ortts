@@ -1,6 +1,6 @@
 use jieba_rs::Jieba;
 use ortts_shared::{AppError, Downloader};
-use std::{collections::HashMap, fs};
+use std::collections::HashMap;
 use unicode_general_category::{GeneralCategory, get_general_category};
 
 pub struct ChineseCangjieConverter {
