@@ -3,9 +3,13 @@ ignorePaths: []
 dictionaryDefinitions: []
 dictionaries: []
 words:
+  - argmax
   - cangjie
   - clippy
+  - dtype
   - jieba
+  - keepdims
+  - logits
   - moeru
   - ndarray
   - nixpkgs

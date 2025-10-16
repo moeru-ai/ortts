@@ -30,5 +30,6 @@ tokenizers = { version = "0.22.1", features = ["hf-hub", "http"] }
 tokio = { workspace = true, features = ["test-util"] }
 tracing = { workspace = true, features = ["log"] }
 tracing-test = "0.2.5"
-ndarray = "0.17.0"
+ndarray = "0.16.1"
 symphonia = "0.5.5"
+ndarray-stats = "0.6.0"
