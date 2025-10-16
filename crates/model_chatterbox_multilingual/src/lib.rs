@@ -1,41 +1,10 @@
-use std::path::PathBuf;
+use ortts_shared::AppError;
 
-use ort::{
-  session::Session,
-};
-use anyhow::Result;
+use ort::{session::Session};
 
 mod utils;
 
-pub struct CachedHub {
-  cache_api: hf_hub::Cache,
-  api: hf_hub::api::tokio::Api,
-}
-
-impl CachedHub {
-  pub fn new() -> Self {
-    let cache_api = hf_hub::Cache::from_env();
-    let api = hf_hub::api::tokio::Api::new().unwrap();
-
-    Self { cache_api, api }
-  }
-
-  pub async fn get(&self, model_id: &str, filename: &str) -> Result<PathBuf> {
-    let path = match self.cache_api.model(String::from(model_id))
-      .get(filename) {
-      Some(p) => p,
-      None => {
-        self.api.model(String::from(model_id))
-          .get(filename)
-          .await?
-      }
-    };
-
-    Ok(path)
-  }
-}
-
-pub fn create_session(model_path: &str) -> Result<Session> {
+pub fn create_session(model_path: &str) -> Result<Session, AppError> {
   use ort::session::builder::GraphOptimizationLevel;
   use ort::execution_providers::{CPUExecutionProvider, CUDAExecutionProvider, CoreMLExecutionProvider, DirectMLExecutionProvider};
 
@@ -57,7 +26,7 @@ pub fn create_session(model_path: &str) -> Result<Session> {
   Ok(session)
 }
 
-pub fn load_audio(path: &str) -> Result<Vec<f32>> {
+pub fn load_audio(path: &str) -> Result<Vec<f32>, AppError> {
   use symphonia::core::io::MediaSourceStream;
   use symphonia::core::probe::Hint;
   use symphonia::default::get_probe;
@@ -121,13 +90,13 @@ pub fn load_audio(path: &str) -> Result<Vec<f32>> {
 
 #[cfg(test)]
 mod tests {
-
-// Note this useful idiom: importing names from outer (for mod tests) scope.
-    use super::*;
+  // Note this useful idiom: importing names from outer (for mod tests) scope.
+  use super::*;
 
   #[tokio::test]
   #[tracing_test::traced_test]
   async fn test_inference() {
+    use ortts_shared::Downloader;
     use tokenizers::Tokenizer;
     use tracing::{info};
     use ort::{
@@ -138,20 +107,20 @@ mod tests {
     // const S3GEN_SR: u32 = 24000;
     const START_SPEECH_TOKEN: u32 = 6561;
     // const STOP_SPEECH_TOKEN: u32 = 6562;
-    const num_hidden_layers: i64 = 30;
-    const num_key_value_heads: i64 = 16;
-    const head_dim: i64 = 64;
+    const NUM_HIDDEN_LAYERS: i64 = 30;
+    const NUM_KEY_VALUE_HEADS: i64 = 16;
+    const HEAD_DIM: i64 = 64;
 
-    let fetcher = CachedHub::new();
+    let downloader = Downloader::new();
 
     // Then in your test at line 219, add:
 
-    let speech_encoder_path = fetcher.get("onnx-community/chatterbox-multilingual-ONNX", "onnx/speech_encoder.onnx").await.unwrap();
-    let embed_tokens_path = fetcher.get("onnx-community/chatterbox-multilingual-ONNX", "onnx/embed_tokens.onnx").await.unwrap();
-    let llama_with_path_path = fetcher.get("onnx-community/chatterbox-multilingual-ONNX", "onnx/language_model_q4.onnx").await.unwrap();
-    let conditional_decoder_path = fetcher.get("onnx-community/chatterbox-multilingual-ONNX", "onnx/conditional_decoder.onnx").await.unwrap();
+    let speech_encoder_path = downloader.get_path("onnx-community/chatterbox-multilingual-ONNX", "onnx/speech_encoder.onnx").await.unwrap();
+    let embed_tokens_path = downloader.get_path("onnx-community/chatterbox-multilingual-ONNX", "onnx/embed_tokens.onnx").await.unwrap();
+    let llama_with_path_path = downloader.get_path("onnx-community/chatterbox-multilingual-ONNX", "onnx/language_model_q4.onnx").await.unwrap();
+    let conditional_decoder_path = downloader.get_path("onnx-community/chatterbox-multilingual-ONNX", "onnx/conditional_decoder.onnx").await.unwrap();
 
-    let tokenizer_config_path = fetcher.get("onnx-community/chatterbox-multilingual-ONNX", "tokenizer.json").await.unwrap();
+    let tokenizer_config_path = downloader.get_path("onnx-community/chatterbox-multilingual-ONNX", "tokenizer.json").await.unwrap();
 
     assert!(speech_encoder_path.exists());
     assert!(embed_tokens_path.exists());
@@ -167,7 +136,7 @@ mod tests {
 
     let tokenizer = Tokenizer::from_pretrained("onnx-community/chatterbox-multilingual-ONNX", None).unwrap();
 
-    let target_voice_path = fetcher.get("onnx-community/chatterbox-multilingual-ONNX", "default_voice.wav").await.unwrap();
+    let target_voice_path = downloader.get_path("onnx-community/chatterbox-multilingual-ONNX", "default_voice.wav").await.unwrap();
 
     // Convert to ort Value with shape [1, audio_length]
     let audio_values = load_audio(target_voice_path.to_str().unwrap()).unwrap();
@@ -313,14 +282,14 @@ mod tests {
 
     let mut past_key_values = std::collections::HashMap::new();
 
-    for layer in 0..num_hidden_layers {
+    for layer in 0..NUM_HIDDEN_LAYERS {
         for kv in ["key", "value"] {
             let cache_key = format!("past_key_values.{}.{}", layer, kv);
             let cache_shape = vec![
                 batch_size as usize,
-                num_key_value_heads as usize,
+                NUM_KEY_VALUE_HEADS as usize,
                 1_usize, // ort doesn't support 0 dimension, use 1 and handle accordingly in model
-                head_dim as usize
+                HEAD_DIM as usize
             ];
 
             let total_elements = cache_shape.iter().product::<usize>();

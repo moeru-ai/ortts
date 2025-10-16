@@ -1,5 +1,5 @@
 use jieba_rs::Jieba;
-use ortts_shared::AppError;
+use ortts_shared::{AppError, Downloader};
 use std::{collections::HashMap, fs};
 use unicode_general_category::{get_general_category, GeneralCategory};
 
@@ -14,14 +14,11 @@ impl ChineseCangjieConverter {
     let mut word2cj = HashMap::<String, String>::new();
     let mut cj2word = HashMap::<String, Vec<String>>::new();
 
-    let api = hf_hub::api::tokio::Api::new()?;
-
-    let path = api
-      .model(String::from("onnx-community/chatterbox-multilingual-ONNX"))
-      .download("Cangjie5_TC.json")
+    let json = Downloader::new()
+      .get_str("onnx-community/chatterbox-multilingual-ONNX", "Cangjie5_TC.json")
       .await?;
 
-    let data: Vec<String> = serde_json::from_str(&fs::read_to_string(path)?)?;
+    let data: Vec<String> = serde_json::from_str(&json)?;
 
     for entry in data {
       let parts: Vec<&str> = entry.split('\t').collect();
