@@ -145,7 +145,7 @@ mod tests {
     let llama_with_path_path = downloader
       .get_path(
         "onnx-community/chatterbox-multilingual-ONNX",
-        "onnx/language_model_q4.onnx",
+        "onnx/language_model.onnx",
       )
       .await
       .unwrap();
@@ -424,7 +424,15 @@ mod tests {
         .index_axis(ndarray::Axis(1), (logits_shape[1] as usize) - 1)
         .to_owned();
       // next_token_logits = repetition_penalty_processor(generate_tokens, logits)
-      let next_token_logits = processor.call(generate_tokens.row(0), &last_token_logits);
+      let mut next_token_logits = processor.call(generate_tokens.row(0), &last_token_logits);
+
+      // Mask out invalid speech tokens (tokens > 6560)
+      // Valid speech tokens are 0-6560, tokens 6561+ are text/control tokens
+      const MAX_SPEECH_TOKEN: usize = 6560;
+      for token_id in (MAX_SPEECH_TOKEN + 1)..next_token_logits.shape()[1] {
+        next_token_logits[[0, token_id]] = f32::NEG_INFINITY;
+      }
+
       // next_token = np.argmax(next_token_logits, axis=-1, keepdims=True).astype(np.int64)
       let next_token_id = next_token_logits
         .row(0)
@@ -494,5 +502,108 @@ mod tests {
     }
 
     info!("Final generate_tokens: {:?}", generate_tokens);
+
+    // speech_tokens = generate_tokens[:, 1:-1]
+    // In Rust: slice from column 1 to second-to-last column
+    let generate_tokens_shape = generate_tokens.shape();
+    let num_cols = generate_tokens_shape[1];
+
+    // If there are less than 2 tokens (just START_SPEECH_TOKEN), create empty array
+    let speech_tokens = if num_cols > 2 {
+      generate_tokens
+        .slice(ndarray::s![.., 1..(num_cols - 1)])
+        .to_owned()
+    } else {
+      ndarray::Array2::<usize>::zeros((1, 0))
+    };
+
+    info!("speech_tokens shape: {:?}", speech_tokens.shape());
+    info!("speech_tokens: {:?}", speech_tokens);
+
+    // speech_tokens = np.concatenate([prompt_token, speech_tokens], axis=1)
+    let prompt_token = prompt_token.expect("prompt_token should be set after first iteration");
+
+    // Convert prompt_token from i64 to usize for concatenation
+    let prompt_token_usize: ndarray::Array2<usize> = prompt_token.mapv(|x| x as usize);
+
+    let speech_tokens_with_prompt = ndarray::concatenate(
+      ndarray::Axis(1),
+      &[prompt_token_usize.view(), speech_tokens.view()],
+    )
+    .unwrap();
+
+    info!(
+      "speech_tokens_with_prompt shape: {:?}",
+      speech_tokens_with_prompt.shape()
+    );
+
+    // Convert back to i64 for ONNX model input
+    let speech_tokens_i64: ndarray::Array2<i64> = speech_tokens_with_prompt.mapv(|x| x as i64);
+
+    // Prepare conditional decoder inputs
+    let speech_tokens_value = Value::from_array(speech_tokens_i64).unwrap();
+    let speaker_embeddings_array =
+      speaker_embeddings_array.expect("speaker_embeddings should be set");
+    let speaker_features_array = speaker_features_array.expect("speaker_features should be set");
+
+    let speaker_embeddings_value = Value::from_array(speaker_embeddings_array).unwrap();
+    let speaker_features_value = Value::from_array(speaker_features_array).unwrap();
+
+    info!("Running conditional decoder...");
+
+    // wav = cond_decoder_session.run(None, cond_incoder_input)[0]
+    let mut cond_decoder_session = _conditional_decoder_session;
+    let cond_decoder_output = cond_decoder_session
+      .run(ort::inputs![
+        "speech_tokens" => speech_tokens_value,
+        "speaker_embeddings" => speaker_embeddings_value,
+        "speaker_features" => speaker_features_value,
+      ])
+      .unwrap();
+
+    // Debug: print all output keys
+    let output_keys: Vec<&str> = cond_decoder_output.keys().collect();
+    info!("Conditional decoder output keys: {:?}", output_keys);
+
+    // Get the first output (should be "wav" or similar)
+    let wav_output = cond_decoder_output
+      .values()
+      .next()
+      .expect("No outputs from conditional decoder");
+    info!("wav output shape: {:?}", wav_output.shape());
+
+    // Extract wav data
+    let (wav_shape, wav_data) = wav_output.try_extract_tensor::<f32>().unwrap();
+    info!("wav shape: {:?}, length: {}", wav_shape, wav_data.len());
+
+    // wav = np.squeeze(wav, axis=0)
+    // Remove batch dimension if present
+    let wav_squeezed = if wav_shape.len() > 1 && wav_shape[0] == 1 {
+      wav_data.to_vec()
+    } else {
+      wav_data.to_vec()
+    };
+
+    info!("Generated audio with {} samples", wav_squeezed.len());
+
+    // Save WAV file
+    // sf.write(output_file_name, wav, S3GEN_SR)
+    const S3GEN_SR: u32 = 24000;
+    let output_file_name = "output.wav";
+
+    let spec = hound::WavSpec {
+      channels: 1,
+      sample_rate: S3GEN_SR,
+      bits_per_sample: 32,
+      sample_format: hound::SampleFormat::Float,
+    };
+
+    let mut writer = hound::WavWriter::create(output_file_name, spec).unwrap();
+    for sample in wav_squeezed.iter() {
+      writer.write_sample(*sample).unwrap();
+    }
+    writer.finalize().unwrap();
+
+    info!("{} was successfully saved", output_file_name);
   }
 }
