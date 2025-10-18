@@ -12,7 +12,6 @@ pub fn create_session(model_path: &str) -> Result<Session, AppError> {
 
   let session = Session::builder()?
     .with_optimization_level(GraphOptimizationLevel::Level3)?
-    .with_parallel_execution(true)?
     .with_execution_providers([
       CUDAExecutionProvider::default().with_device_id(0).build(),
       CoreMLExecutionProvider::default().build(),
@@ -93,7 +92,7 @@ pub fn load_audio(path: &str) -> Result<Vec<f32>, AppError> {
 
 #[cfg(test)]
 mod tests {
-  use ort::session::input;
+  // use ort::session::input;
 
   // Note this useful idiom: importing names from outer (for mod tests) scope.
   use super::*;
@@ -176,7 +175,7 @@ mod tests {
     let mut speech_encoder_session = create_session(speech_encoder_path.to_str().unwrap()).unwrap();
     let mut llama_with_past_session =
       create_session(llama_with_path_path.to_str().unwrap()).unwrap();
-    let _conditional_decoder_session =
+    let mut conditional_decoder_session =
       create_session(conditional_decoder_path.to_str().unwrap()).unwrap();
 
     let tokenizer =
@@ -191,9 +190,13 @@ mod tests {
       .unwrap();
 
     // Convert to ort Value with shape [1, audio_length]
-    let audio_values = load_audio(target_voice_path.to_str().unwrap()).unwrap();
-    let audio_shape = vec![1_usize, audio_values.len()];
-    let audio_value = Value::from_array((audio_shape.as_slice(), audio_values)).unwrap();
+    let audio_value_data = load_audio(target_voice_path.to_str().unwrap()).unwrap();
+    let audio_value_array = ndarray::Array2::<f32>::from_shape_vec(
+      (1_usize, audio_value_data.len()),
+      audio_value_data.clone(),
+    )
+    .unwrap();
+    let audio_value = Value::from_array(audio_value_array).unwrap();
     info!(
       "audio shape: {:?}, dtype: {:?}",
       audio_value.shape(),
@@ -215,40 +218,48 @@ mod tests {
       tokenized_input.get_ids().len()
     );
 
-    let input_ids = tokenized_input.get_ids();
-    let input_ids_shape = vec![1_usize, input_ids.len()];
-    let input_ids_data: Vec<i64> = input_ids.iter().map(|&id| id as i64).collect();
+    let input_ids_data: Vec<i64> = tokenized_input
+      .get_ids()
+      .iter()
+      .map(|&id| id as i64)
+      .collect();
+    let input_ids_shape = vec![1_usize, input_ids_data.len()];
+    let input_ids_array = ndarray::Array2::<i64>::from_shape_vec(
+      (input_ids_shape[0], input_ids_shape[1]),
+      input_ids_data.clone(),
+    )
+    .unwrap();
+    let input_ids_value = Value::from_array(input_ids_array).unwrap();
 
     // position_ids = np.where(
     //   input_ids >= START_SPEECH_TOKEN,
     //   0,
     //   np.arange(input_ids.shape[1])[np.newaxis, :] - 1
     // )
-    let position_ids_shape = vec![1_usize, input_ids.len()];
-    let position_ids_data: Vec<i64> = input_ids
+    let position_ids_data: Vec<i64> = input_ids_data
       .iter()
       .enumerate()
       .map(|(i, &token_id)| {
-        if token_id >= START_SPEECH_TOKEN {
+        if token_id >= START_SPEECH_TOKEN as i64 {
           0
         } else {
           i as i64 - 1
         }
       })
       .collect();
-
-    // REVIEW: might be able to be optimized
-    let input_ids_value = Value::from_array((input_ids_shape.as_slice(), input_ids_data)).unwrap();
-    let position_ids_value =
-      Value::from_array((position_ids_shape.as_slice(), position_ids_data)).unwrap();
+    let position_ids_array = ndarray::Array2::<i64>::from_shape_vec(
+      (1_usize, input_ids_data.len()),
+      position_ids_data.clone(),
+    )
+    .unwrap();
+    let position_ids_value = Value::from_array(position_ids_array).unwrap();
 
     // exaggeration=0.5
     let exaggeration = 0.5_f32;
     // np.array([exaggeration], dtype=np.float32)
-    let exaggeration_shape = vec![1_usize];
-    let exaggeration_data = vec![exaggeration];
     let exaggeration_value =
-      Value::from_array((exaggeration_shape.as_slice(), exaggeration_data)).unwrap();
+      Value::from_array(ndarray::Array1::from_shape_vec(1_usize, vec![exaggeration]).unwrap())
+        .unwrap();
 
     let mut attention_mask_array = ndarray::Array2::<i64>::zeros((0, 0));
     let mut batch_size = 0;
@@ -256,13 +267,13 @@ mod tests {
     let mut past_key_values: std::collections::HashMap<String, Value> =
       std::collections::HashMap::new();
 
-    // NOTICE: Reuseable during generation loop
+    // // NOTICE: Reuseable during generation loop
     let mut ort_embed_tokens_input_ids = input_ids_value.clone();
     let mut ort_embed_tokens_position_ids = position_ids_value.clone();
     let ort_embed_tokens_exaggeration = exaggeration_value.clone();
 
-    // TODO: Speech conditional decoder model required
-    let mut prompt_token: Option<ndarray::Array2<i64>> = None;
+    // // TODO: Speech conditional decoder model required
+    let mut prompt_token_array: Option<ndarray::Array2<i64>> = None;
     let mut speaker_embeddings_array: Option<ndarray::Array2<f32>> = None;
     let mut speaker_features_array: Option<ndarray::Array3<f32>> = None;
 
@@ -270,98 +281,119 @@ mod tests {
       // inputs_embeds = embed_tokens_session.run(None, ort_embed_tokens_inputs)[0]
       let mut ort_input_embeds_output = embed_tokens_session
         .run(ort::inputs![
-          "input_ids" => &ort_embed_tokens_input_ids,
-          "position_ids" => &ort_embed_tokens_position_ids,
-          "exaggeration" => &ort_embed_tokens_exaggeration,
+        "input_ids" => &ort_embed_tokens_input_ids,
+        "position_ids" => &ort_embed_tokens_position_ids,
+        "exaggeration" => &ort_embed_tokens_exaggeration,
         ])
         .unwrap();
+
       let mut inputs_embeds_value: Value = ort_input_embeds_output.remove("inputs_embeds").unwrap();
+      info!("inputs_embeds_value: {:?}", inputs_embeds_value.shape());
 
       if i == 0 {
         // cond_emb, prompt_token, speaker_embeddings, speaker_features = speech_encoder_session.run(None, ort_speech_encoder_input)
         let ort_speech_encoder_output = speech_encoder_session
           .run(ort::inputs!["audio_values" => &audio_value])
           .unwrap();
-        let audio_features = ort_speech_encoder_output.get("audio_features").unwrap();
-        let audio_tokens = ort_speech_encoder_output.get("audio_tokens").unwrap();
-        let speaker_embeddings = ort_speech_encoder_output.get("speaker_embeddings").unwrap();
-        let speaker_features = ort_speech_encoder_output.get("speaker_features").unwrap();
-
-        info!("audio_features: {:?}", audio_features.shape());
-        info!("audio_tokens: {:?}", audio_tokens.shape());
-        info!("speaker_embeddings: {:?}", speaker_embeddings.shape());
-        info!("speaker_features: {:?}", speaker_features.shape());
-
-        // Store speaker data for later use
-        let (speaker_emb_shape, speaker_emb_data) =
-          speaker_embeddings.try_extract_tensor::<f32>().unwrap();
-        speaker_embeddings_array = Some(
-          ndarray::Array2::from_shape_vec(
-            (speaker_emb_shape[0] as usize, speaker_emb_shape[1] as usize),
-            speaker_emb_data.to_vec(),
-          )
-          .unwrap(),
+        info!(
+          "ort_speech_encoder_output keys: {:?}",
+          ort_speech_encoder_output
         );
+        let cond_emb = ort_speech_encoder_output.get("audio_features").unwrap();
+        let prompt_token = ort_speech_encoder_output.get("audio_tokens").unwrap();
+        let ref_x_vector = ort_speech_encoder_output.get("speaker_embeddings").unwrap();
+        let prompt_feat = ort_speech_encoder_output.get("speaker_features").unwrap();
 
-        let (speaker_feat_shape, speaker_feat_data) =
-          speaker_features.try_extract_tensor::<f32>().unwrap();
-        speaker_features_array = Some(
-          ndarray::Array3::from_shape_vec(
+        info!("cond_emb: {:?}", cond_emb.shape());
+        info!("prompt_token: {:?}", prompt_token.shape());
+        info!("ref_x_vector: {:?}", ref_x_vector.shape());
+        info!("prompt_feat: {:?}", prompt_feat.shape());
+
+        prompt_token_array = Some({
+          let (prompt_token_shape, prompt_token_data) =
+            prompt_token.try_extract_tensor::<i64>().unwrap();
+          ndarray::Array2::<i64>::from_shape_vec(
             (
-              speaker_feat_shape[0] as usize,
-              speaker_feat_shape[1] as usize,
-              speaker_feat_shape[2] as usize,
+              prompt_token_shape[0] as usize,
+              prompt_token_shape[1] as usize,
             ),
-            speaker_feat_data.to_vec(),
+            prompt_token_data.to_vec(),
           )
-          .unwrap(),
-        );
+          .unwrap()
+        });
 
-        let (audio_tok_shape, audio_tok_data) = audio_tokens.try_extract_tensor::<i64>().unwrap();
-        prompt_token = Some(
-          ndarray::Array2::from_shape_vec(
-            (audio_tok_shape[0] as usize, audio_tok_shape[1] as usize),
-            audio_tok_data.to_vec(),
+        speaker_embeddings_array = Some({
+          let (speaker_embeddings_shape, speaker_embeddings_data) =
+            ref_x_vector.try_extract_tensor::<f32>().unwrap();
+          ndarray::Array2::<f32>::from_shape_vec(
+            (
+              speaker_embeddings_shape[0] as usize,
+              speaker_embeddings_shape[1] as usize,
+            ),
+            speaker_embeddings_data.to_vec(),
           )
-          .unwrap(),
-        );
+          .unwrap()
+        });
 
-        // Concatenate audio_features with inputs_embeds
-        let (audio_shape, audio_data) = audio_features.try_extract_tensor::<f32>().unwrap();
-        let (embeds_shape, embeds_data) = inputs_embeds_value.try_extract_tensor::<f32>().unwrap();
+        speaker_features_array = Some({
+          let (speaker_features_shape, speaker_features_data) =
+            prompt_feat.try_extract_tensor::<f32>().unwrap();
+          ndarray::Array3::<f32>::from_shape_vec(
+            (
+              speaker_features_shape[0] as usize,
+              speaker_features_shape[1] as usize,
+              speaker_features_shape[2] as usize,
+            ),
+            speaker_features_data.to_vec(),
+          )
+          .unwrap()
+        });
 
-        use ndarray::ArrayView3;
-        let concatenated = ndarray::concatenate(
-          ndarray::Axis(1),
-          &[
-            ArrayView3::from_shape(
-              (
-                audio_shape[0] as usize,
-                audio_shape[1] as usize,
-                audio_shape[2] as usize,
-              ),
-              audio_data,
-            )
-            .unwrap(),
-            ArrayView3::from_shape(
-              (
-                embeds_shape[0] as usize,
-                embeds_shape[1] as usize,
-                embeds_shape[2] as usize,
-              ),
-              embeds_data,
-            )
-            .unwrap(),
-          ],
-        )
-        .unwrap();
+        // inputs_embeds = np.concatenate((cond_emb, inputs_embeds), axis=1)
+        {
+          let (cond_emb_shape, cond_emb_data) = cond_emb.try_extract_tensor::<f32>().unwrap();
+          let (inputs_embeds_shape, inputs_embeds_data) =
+            inputs_embeds_value.try_extract_tensor::<f32>().unwrap();
 
-        let concat_shape: Vec<usize> = concatenated.shape().to_vec();
-        let concat_data: Vec<f32> = concatenated.iter().copied().collect();
-        inputs_embeds_value = Value::from_array((concat_shape.as_slice(), concat_data))
+          use ndarray::ArrayView3;
+          let inputs_embeds_concatenated = ndarray::concatenate(
+            ndarray::Axis(1),
+            &[
+              ArrayView3::from_shape(
+                (
+                  cond_emb_shape[0] as usize,
+                  cond_emb_shape[1] as usize,
+                  cond_emb_shape[2] as usize,
+                ),
+                cond_emb_data,
+              )
+              .unwrap(),
+              ArrayView3::from_shape(
+                (
+                  inputs_embeds_shape[0] as usize,
+                  inputs_embeds_shape[1] as usize,
+                  inputs_embeds_shape[2] as usize,
+                ),
+                inputs_embeds_data,
+              )
+              .unwrap(),
+            ],
+          )
+          .unwrap();
+
+          let inputs_embeds_concatenated_shape: Vec<usize> =
+            inputs_embeds_concatenated.shape().to_vec();
+          let inputs_embeds_concatenated_data: Vec<f32> =
+            inputs_embeds_concatenated.iter().copied().collect();
+          inputs_embeds_value = Value::from_array((
+            inputs_embeds_concatenated_shape.as_slice(),
+            inputs_embeds_concatenated_data,
+          ))
           .unwrap()
           .into();
+        }
 
+        // batch_size, seq_len, _ = inputs_embeds.shape
         batch_size = inputs_embeds_value.shape()[0];
         let seq_len = inputs_embeds_value.shape()[1];
 
@@ -407,6 +439,7 @@ mod tests {
         .collect::<Vec<ValueRef<'_>>>();
 
       info!("logits: {:?}", logits.shape());
+      info!("present_key_values lengths: {}", present_key_values.len());
 
       let (logits_shape, logits_data) = logits.try_extract_tensor::<f32>().unwrap();
       let logits_array = ndarray::Array3::<f32>::from_shape_vec(
@@ -423,15 +456,10 @@ mod tests {
       let last_token_logits = logits_array
         .index_axis(ndarray::Axis(1), (logits_shape[1] as usize) - 1)
         .to_owned();
+      info!("logits[:, -1, :]: {:?}", last_token_logits.shape(),);
       // next_token_logits = repetition_penalty_processor(generate_tokens, logits)
-      let mut next_token_logits = processor.call(generate_tokens.row(0), &last_token_logits);
-
-      // Mask out invalid speech tokens (tokens > 6560)
-      // Valid speech tokens are 0-6560, tokens 6561+ are text/control tokens
-      const MAX_SPEECH_TOKEN: usize = 6560;
-      for token_id in (MAX_SPEECH_TOKEN + 1)..next_token_logits.shape()[1] {
-        next_token_logits[[0, token_id]] = f32::NEG_INFINITY;
-      }
+      let next_token_logits = processor.call(generate_tokens.row(0), &last_token_logits);
+      info!("next_token_logits: {:?}", next_token_logits.shape(),);
 
       // next_token = np.argmax(next_token_logits, axis=-1, keepdims=True).astype(np.int64)
       let next_token_id = next_token_logits
@@ -482,10 +510,16 @@ mod tests {
       )
       .unwrap();
 
-      // Update KV Cache
-      let past_keys: Vec<String> = past_key_values.keys().cloned().collect();
-      for (j, key) in past_keys.iter().enumerate() {
-        let present_value = &present_key_values[j];
+      // for j, key in enumerate(past_key_values):
+      //     past_key_values[key] = present_key_values[j]
+      for (key, value_slot) in past_key_values.iter_mut() {
+        let present_suffix = key
+          .strip_prefix("past_key_values")
+          .expect("cache key should start with past_key_values");
+        let present_key = format!("present{}", present_suffix);
+        let present_value = ort_llama_with_past_output
+          .get(present_key.as_str())
+          .expect("missing matching present key value tensor");
         let (pres_shape, pres_data) = present_value.try_extract_tensor::<f32>().unwrap();
         let pres_array = ndarray::Array4::<f32>::from_shape_vec(
           (
@@ -497,63 +531,44 @@ mod tests {
           pres_data.to_vec(),
         )
         .unwrap();
-        past_key_values.insert(key.clone(), Value::from_array(pres_array).unwrap().into());
+        *value_slot = Value::from_array(pres_array).unwrap().into();
       }
     }
 
-    info!("Final generate_tokens: {:?}", generate_tokens);
+    info!(
+      "generate_tokens shape: {:?}, value: {:?}",
+      generate_tokens.shape(),
+      generate_tokens
+    );
 
     // speech_tokens = generate_tokens[:, 1:-1]
-    // In Rust: slice from column 1 to second-to-last column
     let generate_tokens_shape = generate_tokens.shape();
-    let num_cols = generate_tokens_shape[1];
-
-    // If there are less than 2 tokens (just START_SPEECH_TOKEN), create empty array
-    let speech_tokens = if num_cols > 2 {
-      generate_tokens
-        .slice(ndarray::s![.., 1..(num_cols - 1)])
-        .to_owned()
-    } else {
-      ndarray::Array2::<usize>::zeros((1, 0))
-    };
-
+    let speech_tokens = generate_tokens
+      .slice(ndarray::s![.., 1..(generate_tokens_shape[1] - 1)])
+      .to_owned();
     info!("speech_tokens shape: {:?}", speech_tokens.shape());
     info!("speech_tokens: {:?}", speech_tokens);
 
     // speech_tokens = np.concatenate([prompt_token, speech_tokens], axis=1)
-    let prompt_token = prompt_token.expect("prompt_token should be set after first iteration");
-
-    // Convert prompt_token from i64 to usize for concatenation
-    let prompt_token_usize: ndarray::Array2<usize> = prompt_token.mapv(|x| x as usize);
-
     let speech_tokens_with_prompt = ndarray::concatenate(
       ndarray::Axis(1),
-      &[prompt_token_usize.view(), speech_tokens.view()],
+      &[
+        prompt_token_array.unwrap().view(),
+        speech_tokens.mapv(|x| x as i64).view(),
+      ],
     )
     .unwrap();
-
     info!(
       "speech_tokens_with_prompt shape: {:?}",
       speech_tokens_with_prompt.shape()
     );
 
-    // Convert back to i64 for ONNX model input
-    let speech_tokens_i64: ndarray::Array2<i64> = speech_tokens_with_prompt.mapv(|x| x as i64);
-
-    // Prepare conditional decoder inputs
-    let speech_tokens_value = Value::from_array(speech_tokens_i64).unwrap();
-    let speaker_embeddings_array =
-      speaker_embeddings_array.expect("speaker_embeddings should be set");
-    let speaker_features_array = speaker_features_array.expect("speaker_features should be set");
-
-    let speaker_embeddings_value = Value::from_array(speaker_embeddings_array).unwrap();
-    let speaker_features_value = Value::from_array(speaker_features_array).unwrap();
-
-    info!("Running conditional decoder...");
+    let speech_tokens_value = Value::from_array(speech_tokens_with_prompt).unwrap();
+    let speaker_embeddings_value = Value::from_array(speaker_embeddings_array.unwrap()).unwrap();
+    let speaker_features_value = Value::from_array(speaker_features_array.unwrap()).unwrap();
 
     // wav = cond_decoder_session.run(None, cond_incoder_input)[0]
-    let mut cond_decoder_session = _conditional_decoder_session;
-    let cond_decoder_output = cond_decoder_session
+    let cond_decoder_output = conditional_decoder_session
       .run(ort::inputs![
         "speech_tokens" => speech_tokens_value,
         "speaker_embeddings" => speaker_embeddings_value,
@@ -561,23 +576,11 @@ mod tests {
       ])
       .unwrap();
 
-    // Debug: print all output keys
-    let output_keys: Vec<&str> = cond_decoder_output.keys().collect();
-    info!("Conditional decoder output keys: {:?}", output_keys);
+    let wav = cond_decoder_output.get("waveform").unwrap();
+    let (wav_shape, wav_data) = wav.try_extract_tensor::<f32>().unwrap();
 
-    // Get the first output (should be "wav" or similar)
-    let wav_output = cond_decoder_output
-      .values()
-      .next()
-      .expect("No outputs from conditional decoder");
-    info!("wav output shape: {:?}", wav_output.shape());
-
-    // Extract wav data
-    let (wav_shape, wav_data) = wav_output.try_extract_tensor::<f32>().unwrap();
     info!("wav shape: {:?}, length: {}", wav_shape, wav_data.len());
-
     // wav = np.squeeze(wav, axis=0)
-    // Remove batch dimension if present
     let wav_squeezed = if wav_shape.len() > 1 && wav_shape[0] == 1 {
       wav_data.to_vec()
     } else {
@@ -586,7 +589,6 @@ mod tests {
 
     info!("Generated audio with {} samples", wav_squeezed.len());
 
-    // Save WAV file
     // sf.write(output_file_name, wav, S3GEN_SR)
     const S3GEN_SR: u32 = 24000;
     let output_file_name = "output.wav";
