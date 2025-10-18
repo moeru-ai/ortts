@@ -31,6 +31,11 @@ pub fn load_audio(path: &str) -> Result<Vec<f32>, AppError> {
   use symphonia::core::probe::Hint;
   use symphonia::default::get_probe;
 
+  // NOTICE: in python, librosa.load(..., sr=S3GEN_SR) resamples to 24000 Hz,
+  // as the s3gen model requires 24kHz audio input, we will resample any audio
+  // file into this target sample rate.
+  const TARGET_SAMPLE_RATE: u32 = 24_000;
+
   let file = File::open(path)?;
   let mss = MediaSourceStream::new(Box::new(file), Default::default());
 
@@ -47,6 +52,12 @@ pub fn load_audio(path: &str) -> Result<Vec<f32>, AppError> {
     .iter()
     .find(|t| t.codec_params.codec != symphonia::core::codecs::CODEC_TYPE_NULL)
     .ok_or_else(|| anyhow::anyhow!("No supported audio tracks"))?;
+
+  let source_sample_rate = track
+    .codec_params
+    .sample_rate
+    .ok_or_else(|| anyhow::anyhow!("Missing sample rate in audio track"))?;
+  let channel_count = track.codec_params.channels.map(|c| c.count()).unwrap_or(1);
 
   let track_id = track.id;
   let mut decoder =
@@ -84,17 +95,98 @@ pub fn load_audio(path: &str) -> Result<Vec<f32>, AppError> {
     }
   }
 
-  // Resample if needed (simplified - assumes same sample rate)
-  // For proper resampling, you'd use a library like rubato
+  if source_sample_rate == TARGET_SAMPLE_RATE {
+    return Ok(samples);
+  }
 
-  Ok(samples)
+  resample_with_rubato(
+    &samples,
+    source_sample_rate,
+    TARGET_SAMPLE_RATE,
+    channel_count,
+  )
+}
+
+fn resample_with_rubato(
+  samples: &[f32],
+  input_rate: u32,
+  target_rate: u32,
+  channels: usize,
+) -> Result<Vec<f32>, AppError> {
+  use rubato::{
+    Resampler, SincFixedIn, SincInterpolationParameters, SincInterpolationType, WindowFunction,
+  };
+
+  if input_rate == target_rate || samples.is_empty() {
+    return Ok(samples.to_vec());
+  }
+
+  let frames_in = samples.len() / channels;
+  if frames_in == 0 {
+    return Ok(Vec::new());
+  }
+
+  let resample_ratio = target_rate as f64 / input_rate as f64;
+
+  let params = SincInterpolationParameters {
+    sinc_len: 256,
+    f_cutoff: 0.95,
+    interpolation: SincInterpolationType::Linear,
+    oversampling_factor: 256,
+    window: WindowFunction::BlackmanHarris2,
+  };
+
+  let chunk_size = frames_in.max(1);
+  let mut resampler = SincFixedIn::<f32>::new(resample_ratio, 2.0, params, chunk_size, channels)
+    .map_err(|e| {
+      AppError::anyhow(&anyhow::anyhow!(format!(
+        "Failed to construct resampler: {e}"
+      )))
+    })?;
+
+  let mut channel_buffers = Vec::with_capacity(channels);
+  for ch in 0..channels {
+    let mut channel = Vec::with_capacity(frames_in);
+    for frame in 0..frames_in {
+      channel.push(samples[frame * channels + ch]);
+    }
+    channel_buffers.push(channel);
+  }
+
+  let mut resampled = resampler
+    .process(&channel_buffers, None)
+    .map_err(|e| AppError::anyhow(&anyhow::anyhow!(format!("Resampling failed: {e}"))))?;
+
+  let residual = resampler
+    .process_partial::<Vec<f32>>(None, None)
+    .map_err(|e| {
+      AppError::anyhow(&anyhow::anyhow!(format!(
+        "Resampling tail flush failed: {e}"
+      )))
+    })?;
+
+  for (channel, tail) in resampled.iter_mut().zip(residual.into_iter()) {
+    channel.extend(tail);
+  }
+
+  if resampled.is_empty() {
+    return Ok(Vec::new());
+  }
+
+  let frames_out = resampled[0].len();
+  let mut interleaved = Vec::with_capacity(frames_out * channels);
+  for frame in 0..frames_out {
+    for ch in 0..channels {
+      interleaved.push(resampled[ch][frame]);
+    }
+  }
+
+  Ok(interleaved)
 }
 
 #[cfg(test)]
 mod tests {
-  // use ort::session::input;
 
-  // Note this useful idiom: importing names from outer (for mod tests) scope.
   use super::*;
 
   #[tokio::test]
@@ -106,9 +198,8 @@ mod tests {
     use tokenizers::Tokenizer;
     use tracing::info;
 
-    // TODO: Start with 5 for testing, Python uses 256
     const MAX_NEW_TOKENS: usize = 256;
-    // const S3GEN_SR: u32 = 24000;
+    const S3GEN_SR: u32 = 24000;
     const START_SPEECH_TOKEN: u32 = 6561;
     const STOP_SPEECH_TOKEN: u32 = 6562;
     const NUM_HIDDEN_LAYERS: i64 = 30;
@@ -191,6 +282,7 @@ mod tests {
 
     // Convert to ort Value with shape [1, audio_length]
     let audio_value_data = load_audio(target_voice_path.to_str().unwrap()).unwrap();
+    info!("audio length: {}", audio_value_data.len());
     let audio_value_array = ndarray::Array2::<f32>::from_shape_vec(
       (1_usize, audio_value_data.len()),
       audio_value_data.clone(),
@@ -203,7 +295,8 @@ mod tests {
       audio_value.data_type()
     );
 
-    let text = "[en]The Lord of the Rings is the greatest work of literature.";
+    let text =
+      "[en]Hello, this is a test message for multilingual text-to-speech synthesis.".to_string();
 
     // input_ids = tokenizer(text, return_tensors="np")["input_ids"].astype(np.int64)
     let tokenized_input = tokenizer.encode(text, true).unwrap();
@@ -512,6 +605,10 @@ mod tests {
 
       // for j, key in enumerate(past_key_values):
       //     past_key_values[key] = present_key_values[j]
+      // NOTICE: HashMap iteration order loves to shuffle things around; if we zip by index we end up
+      // assigning layer N's cache to layer M and the model goes off into la-la land. Always grab the
+      // matching present.* tensor by name so each past_key_values slot stays lined up with the layer
+      // that produced it.
       for (key, value_slot) in past_key_values.iter_mut() {
         let present_suffix = key
           .strip_prefix("past_key_values")
@@ -590,7 +687,6 @@ mod tests {
     info!("Generated audio with {} samples", wav_squeezed.len());
 
     // sf.write(output_file_name, wav, S3GEN_SR)
-    const S3GEN_SR: u32 = 24000;
     let output_file_name = "output.wav";
 
     let spec = hound::WavSpec {
