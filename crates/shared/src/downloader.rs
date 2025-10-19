@@ -31,4 +31,20 @@ impl Downloader {
 
     Ok(str)
   }
+
+  /// get filename.onnx with filename.onnx_data
+  pub async fn get_onnx_with_data(
+    &self,
+    model_id: &str,
+    filename: &str,
+  ) -> Result<PathBuf, AppError> {
+    let path = self.get_path(model_id, filename).await?;
+    // let _data_path = self.get_path(model_id, &format!("{filename}_data")).await?;
+
+    // Ok(path)
+    match self.get_path(model_id, &format!("{filename}_data")).await {
+      Ok(_) => Ok(path),
+      Err(e) => Err(e),
+    }
+  }
 }
