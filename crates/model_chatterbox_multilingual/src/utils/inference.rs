@@ -7,7 +7,7 @@ use tracing::info;
 
 use super::{RepetitionPenaltyLogitsProcessor, create_session, load_audio};
 
-pub async fn inference() -> Result<Vec<u8>, AppError> {
+pub async fn inference(input: String) -> Result<Vec<u8>, AppError> {
   const MAX_NEW_TOKENS: usize = 256;
   const S3GEN_SR: u32 = 24000;
   const START_SPEECH_TOKEN: u32 = 6561;
@@ -94,11 +94,8 @@ pub async fn inference() -> Result<Vec<u8>, AppError> {
     audio_value.data_type()
   );
 
-  let text =
-    "[en]Hello, this is a test message for multilingual text-to-speech synthesis.".to_string();
-
   // input_ids = tokenizer(text, return_tensors="np")["input_ids"].astype(np.int64)
-  let tokenized_input = tokenizer.encode(text, true).unwrap();
+  let tokenized_input = tokenizer.encode(input, true).unwrap();
   info!(
     "{:?}, shape: {:?}",
     tokenized_input.get_tokens(),

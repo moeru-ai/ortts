@@ -1,7 +1,4 @@
 use axum::{Json, Router, routing::get};
-use utoipa::OpenApi;
-use utoipa_axum::router::OpenApiRouter;
-use utoipa_axum::routes as route;
 
 mod openapi;
 mod routes;
@@ -10,9 +7,7 @@ use openapi::ApiDoc;
 use utoipa_scalar::{Scalar, Servable};
 
 pub fn new() -> Router {
-  let (router, api) = OpenApiRouter::with_openapi(ApiDoc::openapi())
-    .routes(route!(routes::api::speech))
-    .split_for_parts();
+  let (router, api) = routes::new().split_for_parts();
 
   let openapi_json = api.clone();
 

@@ -19,6 +19,8 @@ path = "src/lib.rs"
 ortts_shared = { workspace = true }
 anyhow.workspace = true
 axum = { workspace = true }
+axum-extra.workspace = true
+headers.workspace = true
 hf-hub = { workspace = true }
 jieba-rs = { workspace = true }
 ort.workspace = true
@@ -26,6 +28,7 @@ serde = { workspace = true }
 serde_json = { workspace = true }
 unicode-general-category = { workspace = true }
 utoipa = { workspace = true }
+utoipa-axum.workspace = true
 tokenizers = { version = "0.22.1", features = ["hf-hub", "http"] }
 tokio = { workspace = true, features = ["test-util"] }
 tracing = { workspace = true, features = ["log"] }

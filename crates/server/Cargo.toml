@@ -16,6 +16,7 @@ name = "ortts_server"
 path = "src/lib.rs"
 
 [dependencies]
+ortts_model_chatterbox_multilingual.workspace = true
 ortts_shared = { workspace = true }
 axum = { workspace = true }
 serde = { workspace = true }

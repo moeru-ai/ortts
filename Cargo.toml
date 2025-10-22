@@ -40,9 +40,13 @@ ortts_shared = { path = "./crates/shared" }
 anyhow = "1.0"
 axum = { version = "0.8", features = ["tokio", "macros"] }
 axum-extra = { version = "0.10", features = ["typed-header"] }
+headers = "0.4.1"
 # TODO: rustls-tls
 # https://github.com/pykeio/ort/issues/436
-hf-hub = { version = "0.4", default-features = false, features = ["tokio", "native-tls"] }
+hf-hub = { version = "0.4", default-features = false, features = [
+  "tokio",
+  "native-tls",
+] }
 jieba-rs = "0.8.1"
 # TODO: tls-rustls
 # https://github.com/pykeio/ort/issues/436
