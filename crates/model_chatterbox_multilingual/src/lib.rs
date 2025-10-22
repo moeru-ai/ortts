@@ -1,29 +1,6 @@
 use ortts_shared::AppError;
 
-use ort::session::Session;
-
 mod utils;
-
-pub fn create_session(model_path: &str) -> Result<Session, AppError> {
-  use ort::execution_providers::{
-    CPUExecutionProvider, CUDAExecutionProvider, CoreMLExecutionProvider, DirectMLExecutionProvider,
-  };
-  use ort::session::builder::GraphOptimizationLevel;
-
-  let session = Session::builder()?
-    .with_optimization_level(GraphOptimizationLevel::Level3)?
-    .with_execution_providers([
-      CUDAExecutionProvider::default().with_device_id(0).build(),
-      CoreMLExecutionProvider::default().build(),
-      DirectMLExecutionProvider::default()
-        .with_device_id(0)
-        .build(),
-      CPUExecutionProvider::default().build(),
-    ])?
-    .commit_from_file(model_path)?;
-
-  Ok(session)
-}
 
 pub fn load_audio(path: &str) -> Result<Vec<f32>, AppError> {
   use std::fs::File;
@@ -197,6 +174,8 @@ mod tests {
     use ortts_shared::Downloader;
     use tokenizers::Tokenizer;
     use tracing::info;
+
+    use utils::create_session;
 
     const MAX_NEW_TOKENS: usize = 256;
     const S3GEN_SR: u32 = 24000;

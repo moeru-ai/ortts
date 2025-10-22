@@ -6,6 +6,7 @@ words:
   - argmax
   - cangjie
   - clippy
+  - cuda
   - dtype
   - jieba
   - keepdims
