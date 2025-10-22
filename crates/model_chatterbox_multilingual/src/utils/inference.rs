@@ -1,3 +1,5 @@
+use std::io::Cursor;
+
 use ort::value::{Value, ValueRef};
 use ortts_shared::{AppError, Downloader};
 use tokenizers::Tokenizer;
@@ -5,7 +7,7 @@ use tracing::info;
 
 use super::{RepetitionPenaltyLogitsProcessor, create_session, load_audio};
 
-pub async fn inference() -> Result<(), AppError> {
+pub async fn inference() -> Result<Vec<u8>, AppError> {
   const MAX_NEW_TOKENS: usize = 256;
   const S3GEN_SR: u32 = 24000;
   const START_SPEECH_TOKEN: u32 = 6561;
@@ -63,11 +65,10 @@ pub async fn inference() -> Result<(), AppError> {
 
   // assert!(tokenizer_config_path.exists());
 
-  let mut embed_tokens_session = create_session(embed_tokens_path.to_str().unwrap()).unwrap();
-  let mut speech_encoder_session = create_session(speech_encoder_path.to_str().unwrap()).unwrap();
-  let mut llama_with_past_session = create_session(llama_with_path_path.to_str().unwrap()).unwrap();
-  let mut conditional_decoder_session =
-    create_session(conditional_decoder_path.to_str().unwrap()).unwrap();
+  let mut embed_tokens_session = create_session(embed_tokens_path)?;
+  let mut speech_encoder_session = create_session(speech_encoder_path)?;
+  let mut llama_with_past_session = create_session(llama_with_path_path)?;
+  let mut conditional_decoder_session = create_session(conditional_decoder_path)?;
 
   let tokenizer =
     Tokenizer::from_pretrained("onnx-community/chatterbox-multilingual-ONNX", None).unwrap();
@@ -80,7 +81,7 @@ pub async fn inference() -> Result<(), AppError> {
     .await?;
 
   // Convert to ort Value with shape [1, audio_length]
-  let audio_value_data = load_audio(target_voice_path.to_str().unwrap())?;
+  let audio_value_data = load_audio(target_voice_path)?;
   info!("audio length: {}", audio_value_data.len());
   let audio_value_array = ndarray::Array2::<f32>::from_shape_vec(
     (1_usize, audio_value_data.len()),
@@ -478,9 +479,6 @@ pub async fn inference() -> Result<(), AppError> {
 
   info!("Generated audio with {} samples", wav_squeezed.len());
 
-  // sf.write(output_file_name, wav, S3GEN_SR)
-  let output_file_name = "output.wav";
-
   let spec = hound::WavSpec {
     channels: 1,
     sample_rate: S3GEN_SR,
@@ -488,13 +486,12 @@ pub async fn inference() -> Result<(), AppError> {
     sample_format: hound::SampleFormat::Float,
   };
 
-  let mut writer = hound::WavWriter::create(output_file_name, spec).unwrap();
+  let mut buffer = Cursor::new(Vec::<u8>::new());
+  let mut writer = hound::WavWriter::new(&mut buffer, spec)?;
   for sample in wav_squeezed.iter() {
-    writer.write_sample(*sample).unwrap();
+    writer.write_sample(*sample)?;
   }
-  writer.finalize().unwrap();
+  writer.finalize()?;
 
-  info!("{} was successfully saved", output_file_name);
-
-  Ok(())
+  Ok(buffer.into_inner())
 }

@@ -1,12 +1,13 @@
 use ortts_shared::AppError;
 use std::fs::File;
+use std::path::PathBuf;
 use symphonia::core::io::MediaSourceStream;
 use symphonia::core::probe::Hint;
 use symphonia::default::get_probe;
 
 use super::resample_audio;
 
-pub fn load_audio(path: &str) -> Result<Vec<f32>, AppError> {
+pub fn load_audio(path: PathBuf) -> Result<Vec<f32>, AppError> {
   // NOTICE: in python, librosa.load(..., sr=S3GEN_SR) resamples to 24000 Hz,
   // as the s3gen model requires 24kHz audio input, we will resample any audio
   // file into this target sample rate.
