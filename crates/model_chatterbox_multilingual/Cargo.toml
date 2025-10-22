@@ -19,8 +19,6 @@ path = "src/lib.rs"
 ortts_shared = { workspace = true }
 anyhow.workspace = true
 axum = { workspace = true }
-axum-extra.workspace = true
-headers.workspace = true
 hf-hub = { workspace = true }
 jieba-rs = { workspace = true }
 ort.workspace = true

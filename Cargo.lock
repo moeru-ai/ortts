@@ -1809,8 +1809,6 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "axum",
- "axum-extra",
- "headers",
  "hf-hub",
  "hound",
  "jieba-rs",
@@ -1851,6 +1849,8 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "axum",
+ "axum-extra",
+ "headers",
  "hf-hub",
  "serde",
  "serde_json",
