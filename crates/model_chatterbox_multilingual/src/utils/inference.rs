@@ -3,7 +3,6 @@ use std::io::Cursor;
 use ort::value::{Value, ValueRef};
 use ortts_shared::{AppError, Downloader};
 use tokenizers::Tokenizer;
-use tracing::info;
 
 use super::{RepetitionPenaltyLogitsProcessor, create_session, load_audio};
 
@@ -82,13 +81,13 @@ pub async fn inference(input: String) -> Result<Vec<u8>, AppError> {
 
   // Convert to ort Value with shape [1, audio_length]
   let audio_value_data = load_audio(target_voice_path)?;
-  info!("audio length: {}", audio_value_data.len());
+  tracing::debug!("audio length: {}", audio_value_data.len());
   let audio_value_array = ndarray::Array2::<f32>::from_shape_vec(
     (1_usize, audio_value_data.len()),
     audio_value_data.clone(),
   )?;
   let audio_value = Value::from_array(audio_value_array)?;
-  info!(
+  tracing::debug!(
     "audio shape: {:?}, dtype: {:?}",
     audio_value.shape(),
     audio_value.data_type()
@@ -96,12 +95,12 @@ pub async fn inference(input: String) -> Result<Vec<u8>, AppError> {
 
   // input_ids = tokenizer(text, return_tensors="np")["input_ids"].astype(np.int64)
   let tokenized_input = tokenizer.encode(input, true).unwrap();
-  info!(
+  tracing::debug!(
     "{:?}, shape: {:?}",
     tokenized_input.get_tokens(),
     tokenized_input.get_tokens().len()
   );
-  info!(
+  tracing::debug!(
     "{:?}, shape: {:?}",
     tokenized_input.get_ids(),
     tokenized_input.get_ids().len()
@@ -172,14 +171,14 @@ pub async fn inference(input: String) -> Result<Vec<u8>, AppError> {
     ])?;
 
     let mut inputs_embeds_value: Value = ort_input_embeds_output.remove("inputs_embeds").unwrap();
-    info!("inputs_embeds_value: {:?}", inputs_embeds_value.shape());
+    tracing::debug!("inputs_embeds_value: {:?}", inputs_embeds_value.shape());
 
     if i == 0 {
       // cond_emb, prompt_token, speaker_embeddings, speaker_features = speech_encoder_session.run(None, ort_speech_encoder_input)
       let ort_speech_encoder_output = speech_encoder_session
         .run(ort::inputs!["audio_values" => &audio_value])
         .unwrap();
-      info!(
+      tracing::debug!(
         "ort_speech_encoder_output keys: {:?}",
         ort_speech_encoder_output
       );
@@ -188,10 +187,10 @@ pub async fn inference(input: String) -> Result<Vec<u8>, AppError> {
       let ref_x_vector = ort_speech_encoder_output.get("speaker_embeddings").unwrap();
       let prompt_feat = ort_speech_encoder_output.get("speaker_features").unwrap();
 
-      info!("cond_emb: {:?}", cond_emb.shape());
-      info!("prompt_token: {:?}", prompt_token.shape());
-      info!("ref_x_vector: {:?}", ref_x_vector.shape());
-      info!("prompt_feat: {:?}", prompt_feat.shape());
+      tracing::debug!("cond_emb: {:?}", cond_emb.shape());
+      tracing::debug!("prompt_token: {:?}", prompt_token.shape());
+      tracing::debug!("ref_x_vector: {:?}", ref_x_vector.shape());
+      tracing::debug!("prompt_feat: {:?}", prompt_feat.shape());
 
       prompt_token_array = Some({
         let (prompt_token_shape, prompt_token_data) =
@@ -321,8 +320,8 @@ pub async fn inference(input: String) -> Result<Vec<u8>, AppError> {
       .map(|(_, v)| v)
       .collect::<Vec<ValueRef<'_>>>();
 
-    info!("logits: {:?}", logits.shape());
-    info!("present_key_values lengths: {}", present_key_values.len());
+    tracing::debug!("logits: {:?}", logits.shape());
+    tracing::debug!("present_key_values lengths: {}", present_key_values.len());
 
     let (logits_shape, logits_data) = logits.try_extract_tensor::<f32>().unwrap();
     let logits_array = ndarray::Array3::<f32>::from_shape_vec(
@@ -339,10 +338,10 @@ pub async fn inference(input: String) -> Result<Vec<u8>, AppError> {
     let last_token_logits = logits_array
       .index_axis(ndarray::Axis(1), (logits_shape[1] as usize) - 1)
       .to_owned();
-    info!("logits[:, -1, :]: {:?}", last_token_logits.shape(),);
+    tracing::debug!("logits[:, -1, :]: {:?}", last_token_logits.shape(),);
     // next_token_logits = repetition_penalty_processor(generate_tokens, logits)
     let next_token_logits = processor.call(generate_tokens.row(0), &last_token_logits);
-    info!("next_token_logits: {:?}", next_token_logits.shape(),);
+    tracing::debug!("next_token_logits: {:?}", next_token_logits.shape(),);
 
     // next_token = np.argmax(next_token_logits, axis=-1, keepdims=True).astype(np.int64)
     let next_token_id = next_token_logits
@@ -353,7 +352,7 @@ pub async fn inference(input: String) -> Result<Vec<u8>, AppError> {
       .map(|(idx, _)| idx)
       .unwrap();
 
-    info!("next_token_id: {}", next_token_id);
+    tracing::debug!("next_token_id: {}", next_token_id);
 
     // generate_tokens = np.concatenate((generate_tokens, next_token), axis=-1)
     let next_token_usize =
@@ -365,7 +364,7 @@ pub async fn inference(input: String) -> Result<Vec<u8>, AppError> {
     .unwrap();
 
     // if (next_token.flatten() == STOP_SPEECH_TOKEN).all():
-    info!("generate_tokens: {:?}", generate_tokens);
+    tracing::debug!("generate_tokens: {:?}", generate_tokens);
     if next_token_id == STOP_SPEECH_TOKEN as usize {
       break;
     }
@@ -422,7 +421,7 @@ pub async fn inference(input: String) -> Result<Vec<u8>, AppError> {
     }
   }
 
-  info!(
+  tracing::debug!(
     "generate_tokens shape: {:?}, value: {:?}",
     generate_tokens.shape(),
     generate_tokens
@@ -433,8 +432,8 @@ pub async fn inference(input: String) -> Result<Vec<u8>, AppError> {
   let speech_tokens = generate_tokens
     .slice(ndarray::s![.., 1..(generate_tokens_shape[1] - 1)])
     .to_owned();
-  info!("speech_tokens shape: {:?}", speech_tokens.shape());
-  info!("speech_tokens: {:?}", speech_tokens);
+  tracing::debug!("speech_tokens shape: {:?}", speech_tokens.shape());
+  tracing::debug!("speech_tokens: {:?}", speech_tokens);
 
   // speech_tokens = np.concatenate([prompt_token, speech_tokens], axis=1)
   let speech_tokens_with_prompt = ndarray::concatenate(
@@ -445,7 +444,7 @@ pub async fn inference(input: String) -> Result<Vec<u8>, AppError> {
     ],
   )
   .unwrap();
-  info!(
+  tracing::debug!(
     "speech_tokens_with_prompt shape: {:?}",
     speech_tokens_with_prompt.shape()
   );
@@ -466,7 +465,7 @@ pub async fn inference(input: String) -> Result<Vec<u8>, AppError> {
   let wav = cond_decoder_output.get("waveform").unwrap();
   let (wav_shape, wav_data) = wav.try_extract_tensor::<f32>().unwrap();
 
-  info!("wav shape: {:?}, length: {}", wav_shape, wav_data.len());
+  tracing::debug!("wav shape: {:?}, length: {}", wav_shape, wav_data.len());
   // wav = np.squeeze(wav, axis=0)
   let wav_squeezed = if wav_shape.len() > 1 && wav_shape[0] == 1 {
     wav_data.to_vec()
@@ -474,7 +473,7 @@ pub async fn inference(input: String) -> Result<Vec<u8>, AppError> {
     wav_data.to_vec()
   };
 
-  info!("Generated audio with {} samples", wav_squeezed.len());
+  tracing::debug!("Generated audio with {} samples", wav_squeezed.len());
 
   let spec = hound::WavSpec {
     channels: 1,
