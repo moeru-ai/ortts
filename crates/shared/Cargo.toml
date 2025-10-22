@@ -16,11 +16,11 @@ name = "ortts_shared"
 path = "src/lib.rs"
 
 [dependencies]
-anyhow = { workspace = true }
-axum = { workspace = true }
+anyhow.workspace = true
+axum.workspace = true
 axum-extra.workspace = true
 headers.workspace = true
 hf-hub.workspace = true
-serde = { workspace = true }
-serde_json = { workspace = true }
-utoipa = { workspace = true }
+serde.workspace = true
+serde_json.workspace = true
+utoipa.workspace = true
