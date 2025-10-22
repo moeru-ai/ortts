@@ -1,11 +1,11 @@
 use ort::value::{Value, ValueRef};
-use ortts_shared::Downloader;
+use ortts_shared::{AppError, Downloader};
 use tokenizers::Tokenizer;
 use tracing::info;
 
 use super::{RepetitionPenaltyLogitsProcessor, create_session, load_audio};
 
-pub async fn inference() {
+pub async fn inference() -> Result<(), AppError> {
   const MAX_NEW_TOKENS: usize = 256;
   const S3GEN_SR: u32 = 24000;
   const START_SPEECH_TOKEN: u32 = 6561;
@@ -15,12 +15,12 @@ pub async fn inference() {
   const HEAD_DIM: i64 = 64;
 
   let repetition_penalty = 1.2_f32;
-  let processor = RepetitionPenaltyLogitsProcessor::new(repetition_penalty).unwrap();
+  let processor = RepetitionPenaltyLogitsProcessor::new(repetition_penalty)?;
 
   // Generate tokens - for the first iteration, this would be [[START_SPEECH_TOKEN]]
   // Make it mutable so we can concatenate new tokens in each iteration
   let mut generate_tokens =
-    ndarray::Array2::<usize>::from_shape_vec((1, 1), vec![START_SPEECH_TOKEN as usize]).unwrap();
+    ndarray::Array2::<usize>::from_shape_vec((1, 1), vec![START_SPEECH_TOKEN as usize])?;
 
   let downloader = Downloader::new();
 
@@ -29,44 +29,39 @@ pub async fn inference() {
       "onnx-community/chatterbox-multilingual-ONNX",
       "onnx/speech_encoder.onnx",
     )
-    .await
-    .unwrap();
+    .await?;
   let embed_tokens_path = downloader
     .get_path(
       "onnx-community/chatterbox-multilingual-ONNX",
       "onnx/embed_tokens.onnx",
     )
-    .await
-    .unwrap();
+    .await?;
   let llama_with_path_path = downloader
     .get_path(
       "onnx-community/chatterbox-multilingual-ONNX",
       "onnx/language_model.onnx",
     )
-    .await
-    .unwrap();
+    .await?;
   let conditional_decoder_path = downloader
     .get_path(
       "onnx-community/chatterbox-multilingual-ONNX",
       "onnx/conditional_decoder.onnx",
     )
-    .await
-    .unwrap();
+    .await?;
 
-  let tokenizer_config_path = downloader
-    .get_path(
-      "onnx-community/chatterbox-multilingual-ONNX",
-      "tokenizer.json",
-    )
-    .await
-    .unwrap();
+  // let tokenizer_config_path = downloader
+  //   .get_path(
+  //     "onnx-community/chatterbox-multilingual-ONNX",
+  //     "tokenizer.json",
+  //   )
+  //   .await?;
 
-  assert!(speech_encoder_path.exists());
-  assert!(embed_tokens_path.exists());
-  assert!(llama_with_path_path.exists());
-  assert!(conditional_decoder_path.exists());
+  // assert!(speech_encoder_path.exists());
+  // assert!(embed_tokens_path.exists());
+  // assert!(llama_with_path_path.exists());
+  // assert!(conditional_decoder_path.exists());
 
-  assert!(tokenizer_config_path.exists());
+  // assert!(tokenizer_config_path.exists());
 
   let mut embed_tokens_session = create_session(embed_tokens_path.to_str().unwrap()).unwrap();
   let mut speech_encoder_session = create_session(speech_encoder_path.to_str().unwrap()).unwrap();
@@ -82,18 +77,16 @@ pub async fn inference() {
       "onnx-community/chatterbox-multilingual-ONNX",
       "default_voice.wav",
     )
-    .await
-    .unwrap();
+    .await?;
 
   // Convert to ort Value with shape [1, audio_length]
-  let audio_value_data = load_audio(target_voice_path.to_str().unwrap()).unwrap();
+  let audio_value_data = load_audio(target_voice_path.to_str().unwrap())?;
   info!("audio length: {}", audio_value_data.len());
   let audio_value_array = ndarray::Array2::<f32>::from_shape_vec(
     (1_usize, audio_value_data.len()),
     audio_value_data.clone(),
-  )
-  .unwrap();
-  let audio_value = Value::from_array(audio_value_array).unwrap();
+  )?;
+  let audio_value = Value::from_array(audio_value_array)?;
   info!(
     "audio shape: {:?}, dtype: {:?}",
     audio_value.shape(),
@@ -125,9 +118,8 @@ pub async fn inference() {
   let input_ids_array = ndarray::Array2::<i64>::from_shape_vec(
     (input_ids_shape[0], input_ids_shape[1]),
     input_ids_data.clone(),
-  )
-  .unwrap();
-  let input_ids_value = Value::from_array(input_ids_array).unwrap();
+  )?;
+  let input_ids_value = Value::from_array(input_ids_array)?;
 
   // position_ids = np.where(
   //   input_ids >= START_SPEECH_TOKEN,
@@ -148,16 +140,14 @@ pub async fn inference() {
   let position_ids_array = ndarray::Array2::<i64>::from_shape_vec(
     (1_usize, input_ids_data.len()),
     position_ids_data.clone(),
-  )
-  .unwrap();
+  )?;
   let position_ids_value = Value::from_array(position_ids_array).unwrap();
 
   // exaggeration=0.5
   let exaggeration = 0.5_f32;
   // np.array([exaggeration], dtype=np.float32)
   let exaggeration_value =
-    Value::from_array(ndarray::Array1::from_shape_vec(1_usize, vec![exaggeration]).unwrap())
-      .unwrap();
+    Value::from_array(ndarray::Array1::from_shape_vec(1_usize, vec![exaggeration]).unwrap())?;
 
   let mut attention_mask_array = ndarray::Array2::<i64>::zeros((0, 0));
   let mut batch_size = 0;
@@ -177,13 +167,11 @@ pub async fn inference() {
 
   for i in 0..MAX_NEW_TOKENS {
     // inputs_embeds = embed_tokens_session.run(None, ort_embed_tokens_inputs)[0]
-    let mut ort_input_embeds_output = embed_tokens_session
-      .run(ort::inputs![
-      "input_ids" => &ort_embed_tokens_input_ids,
-      "position_ids" => &ort_embed_tokens_position_ids,
-      "exaggeration" => &ort_embed_tokens_exaggeration,
-      ])
-      .unwrap();
+    let mut ort_input_embeds_output = embed_tokens_session.run(ort::inputs![
+    "input_ids" => &ort_embed_tokens_input_ids,
+    "position_ids" => &ort_embed_tokens_position_ids,
+    "exaggeration" => &ort_embed_tokens_exaggeration,
+    ])?;
 
     let mut inputs_embeds_value: Value = ort_input_embeds_output.remove("inputs_embeds").unwrap();
     info!("inputs_embeds_value: {:?}", inputs_embeds_value.shape());
@@ -507,4 +495,6 @@ pub async fn inference() {
   writer.finalize().unwrap();
 
   info!("{} was successfully saved", output_file_name);
+
+  Ok(())
 }
