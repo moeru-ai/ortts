@@ -7,6 +7,6 @@ mod tests {
   #[tokio::test]
   #[tracing_test::traced_test]
   async fn test_inference() {
-    inference().await;
+    inference().await.unwrap();
   }
 }
