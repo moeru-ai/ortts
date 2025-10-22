@@ -15,7 +15,7 @@ use ortts_shared::{SpeechOptions, SpeechResult};
 )]
 #[debug_handler]
 pub async fn speech(Json(options): Json<SpeechOptions>) -> Result<SpeechResult, AppError> {
-  match options.model {
+  match options.model.to_lowercase() {
     m if m.starts_with("chatterbox-multilingual") => Ok(SpeechResult::new(
       ortts_model_chatterbox_multilingual::inference(options.input).await?,
     )),
