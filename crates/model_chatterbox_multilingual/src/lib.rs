@@ -1,5 +1,7 @@
 pub mod routes;
+
 mod utils;
+pub use utils::inference;
 
 #[cfg(test)]
 mod tests {
