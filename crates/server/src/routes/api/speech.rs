@@ -35,7 +35,7 @@ impl IntoResponse for SpeechResult {
 ///
 /// Generates audio from the input text.
 #[utoipa::path(
-  get,
+  post,
   path = "/v1/audio/speech",
   responses(
     (status = 200, body = SpeechResult)

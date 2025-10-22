@@ -43,7 +43,7 @@ impl IntoResponse for ChatterboxMultilingualSpeechResult {
 ///
 /// Generates audio from the input text.
 #[utoipa::path(
-  get,
+  post,
   path = "/v0/chatterbox-multilingual/audio/speech",
   responses(
     (status = 200, body = ChatterboxMultilingualSpeechResult)
