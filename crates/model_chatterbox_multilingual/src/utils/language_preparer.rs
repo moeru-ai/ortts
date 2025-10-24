@@ -13,26 +13,18 @@ impl LanguagePreparer {
     })
   }
 
-  pub async fn prepare(
-    &self,
-    text: String,
-    language_id: Option<String>,
-  ) -> Result<String, AppError> {
-    if let Some(language_id) = language_id {
-      let text = match language_id.as_str() {
-        "zh" => self.cangjie_converter.convert(&text),
-        // TODO: hiragana_normalize
-        "ja" => todo!(),
-        // TODO: add_hebrew_diacritics
-        "he" => todo!(),
-        // TODO: korean_normalize
-        "ko" => todo!(),
-        _ => text,
-      };
+  pub async fn prepare(&self, text: String, language_id: String) -> Result<String, AppError> {
+    let text = match language_id.as_str() {
+      "zh" => self.cangjie_converter.convert(&text),
+      // TODO: hiragana_normalize
+      "ja" => todo!(),
+      // TODO: add_hebrew_diacritics
+      "he" => todo!(),
+      // TODO: korean_normalize
+      "ko" => todo!(),
+      _ => text,
+    };
 
-      Ok(format!("[{}]{}", language_id, text))
-    } else {
-      Ok(text)
-    }
+    Ok(format!("[{}]{}", language_id, text))
   }
 }

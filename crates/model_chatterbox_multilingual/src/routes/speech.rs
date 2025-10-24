@@ -15,7 +15,5 @@ use crate::utils::inference;
 )]
 #[debug_handler]
 pub async fn speech(Json(options): Json<SpeechOptions>) -> Result<SpeechResult, AppError> {
-  let bytes = inference(options.input).await?;
-
-  Ok(SpeechResult::new(bytes))
+  Ok(SpeechResult::new(inference(options).await?))
 }

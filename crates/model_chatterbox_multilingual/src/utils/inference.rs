@@ -1,12 +1,14 @@
 use std::io::Cursor;
 
 use ort::value::{Value, ValueRef};
-use ortts_shared::{AppError, Downloader};
+use ortts_shared::{AppError, Downloader, SpeechOptions};
 use tokenizers::Tokenizer;
+
+use crate::utils::{language_preparer::LanguagePreparer, validate_language_id};
 
 use super::{RepetitionPenaltyLogitsProcessor, create_session, load_audio};
 
-pub async fn inference(input: String) -> Result<Vec<u8>, AppError> {
+pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   const MAX_NEW_TOKENS: usize = 256;
   const S3GEN_SR: u32 = 24000;
   const START_SPEECH_TOKEN: u32 = 6561;
@@ -17,6 +19,7 @@ pub async fn inference(input: String) -> Result<Vec<u8>, AppError> {
 
   let repetition_penalty = 1.2_f32;
   let processor = RepetitionPenaltyLogitsProcessor::new(repetition_penalty)?;
+  let language_preparer = LanguagePreparer::new().await?;
 
   // Generate tokens - for the first iteration, this would be [[START_SPEECH_TOKEN]]
   // Make it mutable so we can concatenate new tokens in each iteration
@@ -72,6 +75,11 @@ pub async fn inference(input: String) -> Result<Vec<u8>, AppError> {
   let tokenizer =
     Tokenizer::from_pretrained("onnx-community/chatterbox-multilingual-ONNX", None).unwrap();
 
+  let language_id = validate_language_id(options.model)?;
+  let text = language_preparer
+    .prepare(options.input, language_id)
+    .await?;
+
   let target_voice_path = downloader
     .get_path(
       "onnx-community/chatterbox-multilingual-ONNX",
@@ -94,7 +102,7 @@ pub async fn inference(input: String) -> Result<Vec<u8>, AppError> {
   );
 
   // input_ids = tokenizer(text, return_tensors="np")["input_ids"].astype(np.int64)
-  let tokenized_input = tokenizer.encode(input, true).unwrap();
+  let tokenized_input = tokenizer.encode(text, true).unwrap();
   tracing::debug!(
     "{:?}, shape: {:?}",
     tokenized_input.get_tokens(),

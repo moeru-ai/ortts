@@ -19,6 +19,7 @@ words:
   - palc
   - pkgs
   - pname
+  - rsplit
   - rustc
   - rustls
   - serde
