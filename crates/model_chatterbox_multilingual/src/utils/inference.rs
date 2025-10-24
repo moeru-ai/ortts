@@ -43,7 +43,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   let llama_with_path_path = downloader
     .get_onnx_with_data(
       "onnx-community/chatterbox-multilingual-ONNX",
-      "onnx/language_model.onnx",
+      "onnx/language_model_q4f16.onnx",
     )
     .await?;
   let conditional_decoder_path = downloader
