@@ -23,39 +23,11 @@
         {
           default = pkgs.mkShell {
             nativeBuildInputs = with pkgs; [
-              # rust
-              rustc
-              cargo
-              rustfmt
-              clippy
-              rust-analyzer
-
-              # utils
-              bacon
-
               # TODO: tls-rustls
               # https://github.com/pykeio/ort/issues/436
               pkg-config
               openssl
             ];
-
-            RUST_SRC_PATH = pkgs.rustPlatform.rustLibSrc;
-          };
-        }
-      );
-
-      packages = forAllSystems (
-        system:
-        let
-          pkgs = import nixpkgs { inherit system; };
-          version = (builtins.fromTOML (builtins.readFile ./Cargo.toml)).package.version;
-        in
-        {
-          default = pkgs.rustPlatform.buildRustPackage {
-            inherit version;
-            pname = "ortts";
-            src = ./.;
-            cargoLock.lockFile = ./Cargo.lock;
           };
         }
       );
