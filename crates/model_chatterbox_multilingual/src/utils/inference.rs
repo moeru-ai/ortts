@@ -26,25 +26,25 @@ pub async fn inference(input: String) -> Result<Vec<u8>, AppError> {
   let downloader = Downloader::new();
 
   let speech_encoder_path = downloader
-    .get_path(
+    .get_onnx_with_data(
       "onnx-community/chatterbox-multilingual-ONNX",
       "onnx/speech_encoder.onnx",
     )
     .await?;
   let embed_tokens_path = downloader
-    .get_path(
+    .get_onnx_with_data(
       "onnx-community/chatterbox-multilingual-ONNX",
       "onnx/embed_tokens.onnx",
     )
     .await?;
   let llama_with_path_path = downloader
-    .get_path(
+    .get_onnx_with_data(
       "onnx-community/chatterbox-multilingual-ONNX",
       "onnx/language_model.onnx",
     )
     .await?;
   let conditional_decoder_path = downloader
-    .get_path(
+    .get_onnx_with_data(
       "onnx-community/chatterbox-multilingual-ONNX",
       "onnx/conditional_decoder.onnx",
     )
