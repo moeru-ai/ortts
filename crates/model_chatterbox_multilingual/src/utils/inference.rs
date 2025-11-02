@@ -1,4 +1,4 @@
-use std::io::Cursor;
+use std::{io::Cursor, path::PathBuf};
 
 use ort::value::{Value, ValueRef};
 use ortts_shared::{AppError, Downloader, SpeechOptions};
@@ -80,12 +80,17 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     .prepare(options.input, language_id)
     .await?;
 
-  let target_voice_path = downloader
-    .get_path(
-      "onnx-community/chatterbox-multilingual-ONNX",
-      "default_voice.wav",
-    )
-    .await?;
+  let target_voice_path = match options.voice.as_str() {
+    "alloy" => {
+      downloader
+        .get_path(
+          "onnx-community/chatterbox-multilingual-ONNX",
+          "default_voice.wav",
+        )
+        .await?
+    }
+    path => PathBuf::from(path),
+  };
 
   // Convert to ort Value with shape [1, audio_length]
   let audio_value_data = load_audio(target_voice_path)?;
