@@ -4,7 +4,7 @@ use ort::value::{Value, ValueRef};
 use ortts_shared::{AppError, Downloader, SpeechOptions};
 use tokenizers::Tokenizer;
 
-use crate::utils::{language_preparer::LanguagePreparer, validate_language_id};
+use crate::utils::{LanguagePreparer, validate_language_id};
 
 use super::{RepetitionPenaltyLogitsProcessor, create_session, load_audio};
 

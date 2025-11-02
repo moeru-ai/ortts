@@ -1,6 +1,6 @@
 use ortts_shared::AppError;
 
-use super::chinese_cangjie_converter::ChineseCangjieConverter;
+use crate::utils::{ChineseCangjieConverter, hiragana_normalize};
 
 pub struct LanguagePreparer {
   cangjie_converter: ChineseCangjieConverter,
@@ -16,8 +16,7 @@ impl LanguagePreparer {
   pub async fn prepare(&self, text: String, language_id: String) -> Result<String, AppError> {
     let text = match language_id.as_str() {
       "zh" => self.cangjie_converter.convert(&text),
-      // TODO: hiragana_normalize
-      "ja" => todo!(),
+      "ja" => hiragana_normalize(&text),
       // TODO: add_hebrew_diacritics
       "he" => todo!(),
       // TODO: korean_normalize

@@ -48,6 +48,7 @@ hf-hub = { version = "0.4", default-features = false, features = [
   "native-tls",
 ] }
 jieba-rs = "0.8.1"
+kakasi = "0.1.0"
 # TODO: tls-rustls
 # https://github.com/pykeio/ort/issues/436
 ort = { version = "=2.0.0-rc.10", features = ["ndarray"] }
