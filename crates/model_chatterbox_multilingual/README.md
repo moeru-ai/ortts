@@ -6,9 +6,9 @@ Use `model: "chatterbox-multilingual"` to activate this model, which defaults to
 
 Use `model: "chatterbox-multilingual/{language}"` to set it to other languages. e.g: `chatterbox-multilingual/zh`
 
-## Languages to be processed
+## Languages
 
 - [x] Chinese
-- [ ] Japanese
+- [x] Japanese
 - [ ] Korean
 - [ ] Hebrew
