@@ -1838,6 +1838,7 @@ dependencies = [
  "tracing",
  "tracing-test",
  "unicode-general-category",
+ "unicode-normalization",
  "utoipa",
  "utoipa-axum",
 ]
