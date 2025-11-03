@@ -151,13 +151,15 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     (1_usize, input_ids_data.len()),
     position_ids_data.clone(),
   )?;
-  let position_ids_value = Value::from_array(position_ids_array).unwrap();
+  let position_ids_value = Value::from_array(position_ids_array)?;
 
   // exaggeration=0.5
   let exaggeration = 0.5_f32;
   // np.array([exaggeration], dtype=np.float32)
-  let exaggeration_value =
-    Value::from_array(ndarray::Array1::from_shape_vec(1_usize, vec![exaggeration]).unwrap())?;
+  let exaggeration_value = Value::from_array(ndarray::Array1::from_shape_vec(
+    1_usize,
+    vec![exaggeration],
+  )?)?;
 
   let mut attention_mask_array = ndarray::Array2::<i64>::zeros((0, 0));
   let mut batch_size = 0;
@@ -188,9 +190,8 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
 
     if i == 0 {
       // cond_emb, prompt_token, speaker_embeddings, speaker_features = speech_encoder_session.run(None, ort_speech_encoder_input)
-      let ort_speech_encoder_output = speech_encoder_session
-        .run(ort::inputs!["audio_values" => &audio_value])
-        .unwrap();
+      let ort_speech_encoder_output =
+        speech_encoder_session.run(ort::inputs!["audio_values" => &audio_value])?;
       tracing::debug!(
         "ort_speech_encoder_output keys: {:?}",
         ort_speech_encoder_output
@@ -206,34 +207,31 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
       tracing::debug!("prompt_feat: {:?}", prompt_feat.shape());
 
       prompt_token_array = Some({
-        let (prompt_token_shape, prompt_token_data) =
-          prompt_token.try_extract_tensor::<i64>().unwrap();
+        let (prompt_token_shape, prompt_token_data) = prompt_token.try_extract_tensor::<i64>()?;
         ndarray::Array2::<i64>::from_shape_vec(
           (
             prompt_token_shape[0] as usize,
             prompt_token_shape[1] as usize,
           ),
           prompt_token_data.to_vec(),
-        )
-        .unwrap()
+        )?
       });
 
       speaker_embeddings_array = Some({
         let (speaker_embeddings_shape, speaker_embeddings_data) =
-          ref_x_vector.try_extract_tensor::<f32>().unwrap();
+          ref_x_vector.try_extract_tensor::<f32>()?;
         ndarray::Array2::<f32>::from_shape_vec(
           (
             speaker_embeddings_shape[0] as usize,
             speaker_embeddings_shape[1] as usize,
           ),
           speaker_embeddings_data.to_vec(),
-        )
-        .unwrap()
+        )?
       });
 
       speaker_features_array = Some({
         let (speaker_features_shape, speaker_features_data) =
-          prompt_feat.try_extract_tensor::<f32>().unwrap();
+          prompt_feat.try_extract_tensor::<f32>()?;
         ndarray::Array3::<f32>::from_shape_vec(
           (
             speaker_features_shape[0] as usize,
@@ -241,8 +239,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
             speaker_features_shape[2] as usize,
           ),
           speaker_features_data.to_vec(),
-        )
-        .unwrap()
+        )?
       });
 
       // inputs_embeds = np.concatenate((cond_emb, inputs_embeds), axis=1)
@@ -262,8 +259,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
                 cond_emb_shape[2] as usize,
               ),
               cond_emb_data,
-            )
-            .unwrap(),
+            )?,
             ArrayView3::from_shape(
               (
                 inputs_embeds_shape[0] as usize,
@@ -271,11 +267,9 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
                 inputs_embeds_shape[2] as usize,
               ),
               inputs_embeds_data,
-            )
-            .unwrap(),
+            )?,
           ],
-        )
-        .unwrap();
+        )?;
 
         let inputs_embeds_concatenated_shape: Vec<usize> =
           inputs_embeds_concatenated.shape().to_vec();
@@ -284,8 +278,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
         inputs_embeds_value = Value::from_array((
           inputs_embeds_concatenated_shape.as_slice(),
           inputs_embeds_concatenated_data,
-        ))
-        .unwrap()
+        ))?
         .into();
       }
 
@@ -303,7 +296,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
             0,
             HEAD_DIM as usize,
           ));
-          let cache_value = Value::from_array(cache).unwrap().into();
+          let cache_value = Value::from_array(cache)?.into();
           past_key_values.insert(cache_key, cache_value);
         }
       }
@@ -312,7 +305,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
       attention_mask_array = ndarray::Array2::<i64>::ones((batch_size as usize, seq_len as usize));
     }
 
-    let attention_mask_value = Value::from_array(attention_mask_array.clone()).unwrap();
+    let attention_mask_value = Value::from_array(attention_mask_array.clone())?;
     let mut ort_llama_with_past_inputs = ort::inputs![
       "inputs_embeds" => inputs_embeds_value,
       "attention_mask" => attention_mask_value,
@@ -322,9 +315,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     }
 
     // logits, *present_key_values = llama_with_past_session.run(...)
-    let ort_llama_with_past_output = llama_with_past_session
-      .run(ort_llama_with_past_inputs)
-      .unwrap();
+    let ort_llama_with_past_output = llama_with_past_session.run(ort_llama_with_past_inputs)?;
     let logits = ort_llama_with_past_output.get("logits").unwrap();
     let present_key_values = ort_llama_with_past_output
       .iter()
@@ -336,7 +327,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     tracing::debug!("logits: {:?}", logits.shape());
     tracing::debug!("present_key_values lengths: {}", present_key_values.len());
 
-    let (logits_shape, logits_data) = logits.try_extract_tensor::<f32>().unwrap();
+    let (logits_shape, logits_data) = logits.try_extract_tensor::<f32>()?;
     let logits_array = ndarray::Array3::<f32>::from_shape_vec(
       (
         logits_shape[0] as usize,
@@ -344,17 +335,16 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
         logits_shape[2] as usize,
       ),
       logits_data.to_vec(),
-    )
-    .unwrap();
+    )?;
 
     // logits = logits[:, -1, :]
     let last_token_logits = logits_array
       .index_axis(ndarray::Axis(1), (logits_shape[1] as usize) - 1)
       .to_owned();
-    tracing::debug!("logits[:, -1, :]: {:?}", last_token_logits.shape(),);
+    tracing::debug!("logits[:, -1, :]: {:?}", last_token_logits.shape());
     // next_token_logits = repetition_penalty_processor(generate_tokens, logits)
     let next_token_logits = processor.call(generate_tokens.row(0), &last_token_logits);
-    tracing::debug!("next_token_logits: {:?}", next_token_logits.shape(),);
+    tracing::debug!("next_token_logits: {:?}", next_token_logits.shape());
 
     // next_token = np.argmax(next_token_logits, axis=-1, keepdims=True).astype(np.int64)
     let next_token_id = next_token_logits
@@ -373,8 +363,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     generate_tokens = ndarray::concatenate(
       ndarray::Axis(1),
       &[generate_tokens.view(), next_token_usize.view()],
-    )
-    .unwrap();
+    )?;
 
     // if (next_token.flatten() == STOP_SPEECH_TOKEN).all():
     tracing::debug!("generate_tokens: {:?}", generate_tokens);
@@ -384,8 +373,8 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
 
     // next_token = np.argmax(next_token_logits, axis=-1, keepdims=True).astype(np.int64)
     let next_token_i64 =
-      ndarray::Array2::<i64>::from_shape_vec((1, 1), vec![next_token_id as i64]).unwrap();
-    ort_embed_tokens_input_ids = Value::from_array(next_token_i64.clone()).unwrap();
+      ndarray::Array2::<i64>::from_shape_vec((1, 1), vec![next_token_id as i64])?;
+    ort_embed_tokens_input_ids = Value::from_array(next_token_i64.clone())?;
 
     // position_ids = np.full(
     //   (input_ids.shape[0], 1),
@@ -394,7 +383,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     // )
     let position_ids_next =
       ndarray::Array2::<i64>::from_elem((input_ids_shape[0], 1), (i + 1) as i64);
-    ort_embed_tokens_position_ids = Value::from_array(position_ids_next).unwrap();
+    ort_embed_tokens_position_ids = Value::from_array(position_ids_next)?;
 
     // np.ones((batch_size, 1), dtype=np.int64)
     let batch_size_ones = ndarray::Array2::<i64>::ones((batch_size as usize, 1));
@@ -402,8 +391,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     attention_mask_array = ndarray::concatenate(
       ndarray::Axis(1),
       &[attention_mask_array.view(), batch_size_ones.view()],
-    )
-    .unwrap();
+    )?;
 
     // for j, key in enumerate(past_key_values):
     //     past_key_values[key] = present_key_values[j]
@@ -419,7 +407,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
       let present_value = ort_llama_with_past_output
         .get(present_key.as_str())
         .expect("missing matching present key value tensor");
-      let (pres_shape, pres_data) = present_value.try_extract_tensor::<f32>().unwrap();
+      let (pres_shape, pres_data) = present_value.try_extract_tensor::<f32>()?;
       let pres_array = ndarray::Array4::<f32>::from_shape_vec(
         (
           pres_shape[0] as usize,
@@ -428,9 +416,8 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
           pres_shape[3] as usize,
         ),
         pres_data.to_vec(),
-      )
-      .unwrap();
-      *value_slot = Value::from_array(pres_array).unwrap().into();
+      )?;
+      *value_slot = Value::from_array(pres_array)?.into();
     }
   }
 
@@ -455,28 +442,25 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
       prompt_token_array.unwrap().view(),
       speech_tokens.mapv(|x| x as i64).view(),
     ],
-  )
-  .unwrap();
+  )?;
   tracing::debug!(
     "speech_tokens_with_prompt shape: {:?}",
     speech_tokens_with_prompt.shape()
   );
 
-  let speech_tokens_value = Value::from_array(speech_tokens_with_prompt).unwrap();
-  let speaker_embeddings_value = Value::from_array(speaker_embeddings_array.unwrap()).unwrap();
-  let speaker_features_value = Value::from_array(speaker_features_array.unwrap()).unwrap();
+  let speech_tokens_value = Value::from_array(speech_tokens_with_prompt)?;
+  let speaker_embeddings_value = Value::from_array(speaker_embeddings_array.unwrap())?;
+  let speaker_features_value = Value::from_array(speaker_features_array.unwrap())?;
 
   // wav = cond_decoder_session.run(None, cond_incoder_input)[0]
-  let cond_decoder_output = conditional_decoder_session
-    .run(ort::inputs![
-      "speech_tokens" => speech_tokens_value,
-      "speaker_embeddings" => speaker_embeddings_value,
-      "speaker_features" => speaker_features_value,
-    ])
-    .unwrap();
+  let cond_decoder_output = conditional_decoder_session.run(ort::inputs![
+    "speech_tokens" => speech_tokens_value,
+    "speaker_embeddings" => speaker_embeddings_value,
+    "speaker_features" => speaker_features_value,
+  ])?;
 
   let wav = cond_decoder_output.get("waveform").unwrap();
-  let (wav_shape, wav_data) = wav.try_extract_tensor::<f32>().unwrap();
+  let (wav_shape, wav_data) = wav.try_extract_tensor::<f32>()?;
 
   tracing::debug!("wav shape: {:?}, length: {}", wav_shape, wav_data.len());
   // wav = np.squeeze(wav, axis=0)
