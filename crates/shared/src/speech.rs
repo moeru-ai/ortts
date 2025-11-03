@@ -26,7 +26,8 @@ pub struct SpeechOptions {
 pub struct SpeechResult(Vec<u8>);
 
 impl SpeechResult {
-  pub fn new(bytes: Vec<u8>) -> Self {
+  #[must_use]
+  pub const fn new(bytes: Vec<u8>) -> Self {
     Self(bytes)
   }
 }

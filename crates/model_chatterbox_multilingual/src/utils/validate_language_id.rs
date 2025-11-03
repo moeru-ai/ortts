@@ -7,24 +7,28 @@ const SUPPORTED_LANGUAGE_IDS: [&str; 23] = [
   "pl", "pt", "ru", "sv", "sw", "tr", "zh",
 ];
 
-pub fn validate_language_id(model: String) -> Result<String, AppError> {
-  match model.rsplit_once('/').map(|(_, language_id)| language_id) {
-    Some(language_id) => {
-      let lowercase_id = language_id.to_lowercase();
-      let is_supported = SUPPORTED_LANGUAGE_IDS
-        .iter()
-        .any(|&supported_id| supported_id == lowercase_id.as_str());
+pub fn validate_language_id(model: &str) -> Result<String, AppError> {
+  model
+    .rsplit_once('/')
+    .map(|(_, language_id)| language_id)
+    .map_or_else(
+      // use English by default
+      || Ok(String::from("en")),
+      |language_id| {
+        let lowercase_id = language_id.to_lowercase();
+        let is_supported = SUPPORTED_LANGUAGE_IDS
+          .iter()
+          .any(|&supported_id| supported_id == lowercase_id.as_str());
 
-      match is_supported {
-        true => Ok(lowercase_id),
-        false => Err(AppError::anyhow(&anyhow!(
-          "Unsupported language_id '{}'. Supported languages: {}",
-          lowercase_id,
-          SUPPORTED_LANGUAGE_IDS.join(", ")
-        ))),
-      }
-    }
-    // use English by default
-    None => Ok(String::from("en")),
-  }
+        if is_supported {
+          Ok(lowercase_id)
+        } else {
+          Err(AppError::anyhow(&anyhow!(
+            "Unsupported language_id '{}'. Supported languages: {}",
+            lowercase_id,
+            SUPPORTED_LANGUAGE_IDS.join(", ")
+          )))
+        }
+      },
+    )
 }

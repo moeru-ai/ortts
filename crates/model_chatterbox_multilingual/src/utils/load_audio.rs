@@ -1,7 +1,10 @@
 use ortts_shared::AppError;
 use std::fs::File;
 use std::path::PathBuf;
-use symphonia::core::io::MediaSourceStream;
+use symphonia::core::codecs::DecoderOptions;
+use symphonia::core::formats::FormatOptions;
+use symphonia::core::io::{MediaSourceStream, MediaSourceStreamOptions};
+use symphonia::core::meta::MetadataOptions;
 use symphonia::core::probe::Hint;
 use symphonia::default::get_probe;
 
@@ -14,13 +17,13 @@ pub fn load_audio(path: PathBuf) -> Result<Vec<f32>, AppError> {
   const TARGET_SAMPLE_RATE: u32 = 24_000;
 
   let file = File::open(path)?;
-  let mss = MediaSourceStream::new(Box::new(file), Default::default());
+  let mss = MediaSourceStream::new(Box::new(file), MediaSourceStreamOptions::default());
 
   let mut hint = Hint::new();
   hint.with_extension("wav");
 
-  let meta_opts = Default::default();
-  let fmt_opts = Default::default();
+  let meta_opts = FormatOptions::default();
+  let fmt_opts = MetadataOptions::default();
 
   let probed = get_probe().format(&hint, mss, &meta_opts, &fmt_opts)?;
   let mut format = probed.format;
@@ -34,21 +37,19 @@ pub fn load_audio(path: PathBuf) -> Result<Vec<f32>, AppError> {
     .codec_params
     .sample_rate
     .ok_or_else(|| anyhow::anyhow!("Missing sample rate in audio track"))?;
-  let channel_count = track.codec_params.channels.map(|c| c.count()).unwrap_or(1);
+  let channel_count = track
+    .codec_params
+    .channels
+    .map_or(1, symphonia::core::audio::Channels::count);
 
   let track_id = track.id;
   let mut decoder =
-    symphonia::default::get_codecs().make(&track.codec_params, &Default::default())?;
+    symphonia::default::get_codecs().make(&track.codec_params, &DecoderOptions::default())?;
 
   let mut audio_buf = None;
   let mut samples = Vec::new();
 
-  loop {
-    let packet = match format.next_packet() {
-      Ok(packet) => packet,
-      Err(_) => break,
-    };
-
+  while let Ok(packet) = format.next_packet() {
     if packet.track_id() != track_id {
       continue;
     }

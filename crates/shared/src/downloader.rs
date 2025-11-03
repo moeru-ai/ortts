@@ -8,6 +8,12 @@ pub struct Downloader {
   api: hf_hub::api::tokio::Api,
 }
 
+impl Default for Downloader {
+  fn default() -> Self {
+    Self::new()
+  }
+}
+
 impl Downloader {
   pub fn new() -> Self {
     let cache_api = hf_hub::Cache::from_env();
@@ -32,7 +38,7 @@ impl Downloader {
     Ok(str)
   }
 
-  /// get filename.onnx with filename.onnx_data
+  /// get `filename.onnx` with `filename.onnx_data`
   pub async fn get_onnx_with_data(
     &self,
     model_id: &str,

@@ -13,7 +13,7 @@ impl LanguagePreparer {
     })
   }
 
-  pub async fn prepare(&self, text: String, language_id: String) -> Result<String, AppError> {
+  pub fn prepare(&self, text: String, language_id: String) -> Result<String, AppError> {
     let text = match language_id.as_str() {
       "zh" => self.cangjie_converter.convert(&text),
       "ja" => hiragana_normalize(&text),
@@ -24,6 +24,6 @@ impl LanguagePreparer {
       _ => text,
     };
 
-    Ok(format!("[{}]{}", language_id, text))
+    Ok(format!("[{language_id}]{text}"))
   }
 }

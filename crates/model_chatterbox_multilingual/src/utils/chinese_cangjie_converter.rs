@@ -30,7 +30,7 @@ impl ChineseCangjieConverter {
         let code = parts[1].to_string();
 
         word2cj.insert(word.clone(), code.clone());
-        cj2word.entry(code).or_insert_with(Vec::new).push(word)
+        cj2word.entry(code).or_default().push(word);
       }
     }
 
@@ -59,7 +59,7 @@ impl ChineseCangjieConverter {
       String::new()
     };
 
-    Some(format!("{}{}", code, index_str))
+    Some(format!("{code}{index_str}"))
   }
 
   pub fn convert(&self, text: &str) -> String {
@@ -76,7 +76,7 @@ impl ChineseCangjieConverter {
         if let Some(cangjie) = self.cangjie_encode(&t_str) {
           let mut code: Vec<String> = Vec::new();
           for c in cangjie.chars() {
-            code.push(format!("[cj_{}]", c));
+            code.push(format!("[cj_{c}]"));
           }
           code.push("[cj_.]".to_string());
           output.push(code.join(""));

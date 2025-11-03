@@ -35,7 +35,7 @@ impl AppError {
     Self {
       message,
       kind,
-      status: status.unwrap_or_else(|| StatusCode::INTERNAL_SERVER_ERROR),
+      status: status.unwrap_or(StatusCode::INTERNAL_SERVER_ERROR),
       param,
       code,
     }

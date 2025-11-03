@@ -11,10 +11,8 @@ pub fn new() -> Router {
 
   let openapi_json = api.clone();
 
-  let router = router
+  router
     .merge(Scalar::with_url("/", api))
     .route("/openapi.json", get(|| async move { Json(openapi_json) }))
-    .fallback(routes::not_found);
-
-  router
+    .fallback(routes::not_found)
 }
