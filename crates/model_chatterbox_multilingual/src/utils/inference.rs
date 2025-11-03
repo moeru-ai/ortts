@@ -77,7 +77,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     Tokenizer::from_pretrained("onnx-community/chatterbox-multilingual-ONNX", None).unwrap();
 
   let language_id = validate_language_id(&options.model)?;
-  let text = language_preparer.prepare(options.input, language_id)?;
+  let text = language_preparer.prepare(options.input, &language_id);
 
   let target_voice_path = match options.voice.as_str() {
     "alloy" => {
