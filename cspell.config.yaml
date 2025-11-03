@@ -4,6 +4,7 @@ dictionaryDefinitions: []
 dictionaries: []
 words:
   - argmax
+  - bitnami
   - cangjie
   - clippy
   - cuda

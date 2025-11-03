@@ -20,4 +20,5 @@ WORKDIR /app
 COPY --from=builder /app/target/release/ortts /usr/local/bin
 
 EXPOSE 12775
-ENTRYPOINT ["/usr/local/bin/ortts", "serve", "--listen", "0.0.0.0:12775"]
+ENTRYPOINT ["/usr/local/bin/ortts"]
+CMD ["serve", "--listen", "0.0.0.0:12775"]
