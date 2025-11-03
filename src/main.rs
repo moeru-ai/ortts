@@ -19,6 +19,6 @@ async fn main() -> Result<(), AppError> {
       Commands::Run => todo!(),
     }
   } else {
-    Cli::command().print_help().map_err(|err| err.into())
+    Cli::command().print_help().map_err(std::convert::Into::into)
   }
 }
