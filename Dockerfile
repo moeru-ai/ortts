@@ -18,4 +18,6 @@ RUN cargo build --release --bin ortts
 FROM bitnami/minideb AS runtime
 WORKDIR /app
 COPY --from=builder /app/target/release/ortts /usr/local/bin
-ENTRYPOINT ["/usr/local/bin/ortts"]
+
+EXPOSE 12775
+ENTRYPOINT ["/usr/local/bin/ortts", "serve", "--listen", "0.0.0.0:12775"]
