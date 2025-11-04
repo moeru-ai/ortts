@@ -9,6 +9,7 @@ words:
   - clippy
   - cuda
   - dtype
+  - huggingface
   - jieba
   - kakasi
   - keepdims
