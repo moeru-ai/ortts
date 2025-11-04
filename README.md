@@ -8,7 +8,7 @@
 
 ## Getting Started
 
-You can always access the integrated Scalar OpenAPI documentation at `http://127.0.0.1:12775`.
+You can always access the integrated Scalar OpenAPI documentation at [`http://127.0.0.1:12775`](http://127.0.0.1:12775).
 
 ### Running
 
