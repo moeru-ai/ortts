@@ -1,7 +1,12 @@
 use std::{io::Cursor, path::PathBuf};
 
+use anyhow::anyhow;
+use half::f16;
 use ndarray::ArrayView3;
-use ort::value::{Value, ValueRef};
+use ort::{
+  tensor::TensorElementType,
+  value::{Value, ValueRef, ValueType},
+};
 use ortts_shared::{AppError, Downloader, SpeechOptions};
 use tokenizers::Tokenizer;
 
@@ -72,6 +77,22 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   let mut speech_encoder_session = create_session(speech_encoder_path)?;
   let mut llama_with_past_session = create_session(llama_with_path_path)?;
   let mut conditional_decoder_session = create_session(conditional_decoder_path)?;
+
+  let past_key_value_dtypes: std::collections::HashMap<String, TensorElementType> =
+    llama_with_past_session
+      .inputs
+      .iter()
+      .filter_map(|input| {
+        if input.name.starts_with("past_key_values") {
+          match &input.input_type {
+            ValueType::Tensor { ty, .. } => Some((input.name.clone(), *ty)),
+            _ => None,
+          }
+        } else {
+          None
+        }
+      })
+      .collect();
 
   let tokenizer =
     Tokenizer::from_pretrained("onnx-community/chatterbox-multilingual-ONNX", None).unwrap();
@@ -285,14 +306,39 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
       // { ... f"past_key_values.{layer}.{kv}": np.zeros([batch_size, num_key_value_heads, 0, head_dim], dtype=np.float32) ... }
       for layer in 0..NUM_HIDDEN_LAYERS {
         for kv in ["key", "value"] {
-          let cache_key = format!("past_key_values.{layer}.{kv}");
-          let cache = ndarray::Array4::<f32>::zeros((
-            batch_size as usize,
-            NUM_KEY_VALUE_HEADS as usize,
-            0,
-            HEAD_DIM as usize,
-          ));
-          let cache_value = Value::from_array(cache)?.into();
+          let cache_key = format!("past_key_values.{}.{}", layer, kv);
+          let cache_dtype = past_key_value_dtypes
+            .get(&cache_key)
+            .copied()
+            .unwrap_or(TensorElementType::Float32);
+          let cache_value = match cache_dtype {
+            TensorElementType::Float16 => {
+              let cache = ndarray::Array4::from_elem(
+                (
+                  batch_size as usize,
+                  NUM_KEY_VALUE_HEADS as usize,
+                  0,
+                  HEAD_DIM as usize,
+                ),
+                f16::ZERO,
+              );
+              Value::from_array(cache).unwrap().into()
+            }
+            TensorElementType::Float32 => {
+              let cache = ndarray::Array4::<f32>::zeros((
+                batch_size as usize,
+                NUM_KEY_VALUE_HEADS as usize,
+                0,
+                HEAD_DIM as usize,
+              ));
+              Value::from_array(cache).unwrap().into()
+            }
+            other => {
+              return Err(AppError::from(anyhow!(
+                "unsupported past_key_values element type: {other:?}"
+              )));
+            }
+          };
           past_key_values.insert(cache_key, cache_value);
         }
       }
@@ -301,8 +347,11 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
       attention_mask_array = ndarray::Array2::<i64>::ones((batch_size as usize, seq_len as usize));
     }
 
-    let attention_mask_value = Value::from_array(attention_mask_array.clone())?;
-    let mut ort_llama_with_past_inputs = ort::inputs![
+    let attention_mask_value = Value::from_array(attention_mask_array.clone()).unwrap();
+    let mut ort_llama_with_past_inputs: Vec<(
+      std::borrow::Cow<'_, str>,
+      ort::session::SessionInputValue<'_>,
+    )> = ort::inputs![
       "inputs_embeds" => inputs_embeds_value,
       "attention_mask" => attention_mask_value,
     ];
@@ -401,17 +450,46 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
       let present_value = ort_llama_with_past_output
         .get(present_key.as_str())
         .expect("missing matching present key value tensor");
-      let (pres_shape, pres_data) = present_value.try_extract_tensor::<f32>()?;
-      let pres_array = ndarray::Array4::<f32>::from_shape_vec(
-        (
-          pres_shape[0] as usize,
-          pres_shape[1] as usize,
-          pres_shape[2] as usize,
-          pres_shape[3] as usize,
-        ),
-        pres_data.to_vec(),
-      )?;
-      *value_slot = Value::from_array(pres_array)?.into();
+      let cache_dtype = past_key_value_dtypes
+        .get(key)
+        .copied()
+        .unwrap_or(TensorElementType::Float32);
+      let updated_value = match cache_dtype {
+        TensorElementType::Float16 => {
+          let (pres_shape, pres_data) = present_value.try_extract_tensor::<f16>().unwrap();
+          let pres_array = ndarray::Array4::<f16>::from_shape_vec(
+            (
+              pres_shape[0] as usize,
+              pres_shape[1] as usize,
+              pres_shape[2] as usize,
+              pres_shape[3] as usize,
+            ),
+            pres_data.to_vec(),
+          )
+          .unwrap();
+          Value::from_array(pres_array).unwrap().into()
+        }
+        TensorElementType::Float32 => {
+          let (pres_shape, pres_data) = present_value.try_extract_tensor::<f32>().unwrap();
+          let pres_array = ndarray::Array4::<f32>::from_shape_vec(
+            (
+              pres_shape[0] as usize,
+              pres_shape[1] as usize,
+              pres_shape[2] as usize,
+              pres_shape[3] as usize,
+            ),
+            pres_data.to_vec(),
+          )
+          .unwrap();
+          Value::from_array(pres_array).unwrap().into()
+        }
+        other => {
+          return Err(AppError::from(anyhow!(
+            "unsupported present key value element type: {other:?}"
+          )));
+        }
+      };
+      *value_slot = updated_value;
     }
   }
 

@@ -38,3 +38,4 @@ ndarray-stats = "0.6.0"
 hound = "3.5.1"
 rubato = "0.16.2"
 unicode-normalization.workspace = true
+half.workspace = true
