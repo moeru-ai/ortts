@@ -16,5 +16,6 @@ name = "ortts_onnx"
 path = "src/lib.rs"
 
 [dependencies]
+num_cpus = "1.17"
 ortts_shared.workspace = true
 ort.workspace = true
