@@ -1,9 +1,6 @@
 mod chinese_cangjie_converter;
 pub use chinese_cangjie_converter::ChineseCangjieConverter;
 
-mod create_session;
-pub use create_session::create_session;
-
 mod hiragana_normalize;
 pub use hiragana_normalize::hiragana_normalize;
 

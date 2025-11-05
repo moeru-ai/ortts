@@ -29,14 +29,16 @@ repository.workspace = true
 members = [
   ".",
   "crates/model_chatterbox_multilingual",
+  "crates/onnx",
   "crates/server",
   "crates/shared",
 ]
 
 [workspace.dependencies]
-ortts_model_chatterbox_multilingual = { path = "crates/model_chatterbox_multilingual" }
-ortts_server = { path = "./crates/server" }
-ortts_shared = { path = "./crates/shared" }
+ortts_model_chatterbox_multilingual.path = "crates/model_chatterbox_multilingual"
+ortts_onnx.path = "./crates/onnx"
+ortts_server.path = "./crates/server"
+ortts_shared.path = "./crates/shared"
 anyhow = "1.0"
 axum = { version = "0.8", features = ["tokio", "macros"] }
 axum-extra = { version = "0.10", features = ["typed-header"] }

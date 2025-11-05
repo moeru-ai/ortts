@@ -7,12 +7,13 @@ use ort::{
   tensor::TensorElementType,
   value::{Value, ValueRef, ValueType},
 };
+use ortts_onnx::inference_session;
 use ortts_shared::{AppError, Downloader, SpeechOptions};
 use tokenizers::Tokenizer;
 
-use crate::utils::{LanguagePreparer, validate_language_id};
-
-use super::{RepetitionPenaltyLogitsProcessor, create_session, load_audio};
+use crate::utils::{
+  LanguagePreparer, RepetitionPenaltyLogitsProcessor, load_audio, validate_language_id,
+};
 
 pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   const MAX_NEW_TOKENS: usize = 256;
@@ -73,10 +74,10 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
 
   // assert!(tokenizer_config_path.exists());
 
-  let mut embed_tokens_session = create_session(embed_tokens_path)?;
-  let mut speech_encoder_session = create_session(speech_encoder_path)?;
-  let mut llama_with_past_session = create_session(llama_with_path_path)?;
-  let mut conditional_decoder_session = create_session(conditional_decoder_path)?;
+  let mut embed_tokens_session = inference_session(embed_tokens_path)?;
+  let mut speech_encoder_session = inference_session(speech_encoder_path)?;
+  let mut llama_with_past_session = inference_session(llama_with_path_path)?;
+  let mut conditional_decoder_session = inference_session(conditional_decoder_path)?;
 
   let past_key_value_dtypes: std::collections::HashMap<String, TensorElementType> =
     llama_with_past_session

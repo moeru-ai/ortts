@@ -1847,6 +1847,7 @@ dependencies = [
  "ndarray",
  "ndarray-stats",
  "ort",
+ "ortts_onnx",
  "ortts_shared",
  "rubato",
  "serde",
@@ -1860,6 +1861,14 @@ dependencies = [
  "unicode-normalization",
  "utoipa",
  "utoipa-axum",
+]
+
+[[package]]
+name = "ortts_onnx"
+version = "0.1.0"
+dependencies = [
+ "ort",
+ "ortts_shared",
 ]
 
 [[package]]

@@ -8,10 +8,11 @@ use ort::{
 };
 use ortts_shared::AppError;
 
-pub fn create_session(model_path: PathBuf) -> Result<Session, AppError> {
+pub fn inference_session(model_filepath: PathBuf) -> Result<Session, AppError> {
   Ok(
     Session::builder()?
       .with_optimization_level(GraphOptimizationLevel::Level3)?
+      .with_intra_threads(4)?
       .with_execution_providers([
         CUDAExecutionProvider::default().with_device_id(0).build(),
         CoreMLExecutionProvider::default().build(),
@@ -20,6 +21,6 @@ pub fn create_session(model_path: PathBuf) -> Result<Session, AppError> {
           .build(),
         CPUExecutionProvider::default().build(),
       ])?
-      .commit_from_file(model_path)?,
+      .commit_from_file(model_filepath)?,
   )
 }
