@@ -8,7 +8,7 @@ use symphonia::core::meta::MetadataOptions;
 use symphonia::core::probe::Hint;
 use symphonia::default::get_probe;
 
-use super::resample_audio;
+use crate::utils::resample_audio;
 
 pub fn load_audio(path: PathBuf) -> Result<Vec<f32>, AppError> {
   // NOTICE: in python, librosa.load(..., sr=S3GEN_SR) resamples to 24000 Hz,
