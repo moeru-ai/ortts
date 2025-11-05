@@ -53,7 +53,16 @@ jieba-rs = "0.8.1"
 kakasi = "0.1.0"
 # TODO: tls-rustls
 # https://github.com/pykeio/ort/issues/436
-ort = { version = "=2.0.0-rc.10", features = ["ndarray", "half"] }
+# TODO: add EP features
+# https://ort.pyke.io/setup/cargo-features#execution-providers
+ort = { version = "=2.0.0-rc.10", features = [
+  "ndarray",
+  "half",
+  # "cuda",
+  # "coreml",
+  # "directml",
+  # "webgpu",
+] }
 half = "2.4"
 serde = "1.0"
 serde_json = "1.0"
