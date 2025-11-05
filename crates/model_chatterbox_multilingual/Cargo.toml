@@ -20,7 +20,6 @@ ortts_onnx.workspace = true
 ortts_shared.workspace = true
 anyhow.workspace = true
 axum.workspace = true
-hf-hub.workspace = true
 jieba-rs.workspace = true
 kakasi.workspace = true
 ort.workspace = true
@@ -30,12 +29,11 @@ unicode-general-category.workspace = true
 utoipa.workspace = true
 utoipa-axum.workspace = true
 tokenizers = { version = "0.22.1", features = ["hf-hub", "http"] }
-tokio = { workspace = true, features = ["test-util"] }
-tracing = { workspace = true, features = ["log"] }
+tokio.workspace = true
+tracing.workspace = true
 tracing-test = "0.2.5"
 ndarray = "0.16.1"
 symphonia = "0.5.5"
-ndarray-stats = "0.6.0"
 hound = "3.5.1"
 rubato = "0.16.2"
 unicode-normalization.workspace = true
