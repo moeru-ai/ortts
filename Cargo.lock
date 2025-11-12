@@ -1805,7 +1805,6 @@ name = "ortts_backend_chatterbox_multilingual"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "axum",
  "half",
  "hound",
  "jieba-rs",
@@ -1824,8 +1823,27 @@ dependencies = [
  "tracing-test",
  "unicode-general-category",
  "unicode-normalization",
- "utoipa",
- "utoipa-axum",
+]
+
+[[package]]
+name = "ortts_backend_kokoro"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "half",
+ "hound",
+ "ndarray",
+ "ort",
+ "ortts_onnx",
+ "ortts_shared",
+ "rubato",
+ "serde",
+ "serde_json",
+ "symphonia",
+ "tokenizers",
+ "tokio",
+ "tracing",
+ "tracing-test",
 ]
 
 [[package]]
@@ -1843,6 +1861,7 @@ version = "0.1.0"
 dependencies = [
  "axum",
  "ortts_backend_chatterbox_multilingual",
+ "ortts_backend_kokoro",
  "ortts_shared",
  "serde",
  "serde_json",

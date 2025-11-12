@@ -28,6 +28,10 @@
               pkg-config
               openssl
             ];
+
+            OPENSSL_DIR = pkgs.openssl.dev;
+            OPENSSL_INCLUDE_DIR = "${pkgs.openssl.dev}/include";
+            OPENSSL_LIB_DIR = "${pkgs.openssl.out}/lib";
           };
         }
       );
