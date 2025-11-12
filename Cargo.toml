@@ -28,14 +28,14 @@ repository.workspace = true
 [workspace]
 members = [
   ".",
-  "crates/model_chatterbox_multilingual",
+  "crates/backend_chatterbox_multilingual",
   "crates/onnx",
   "crates/server",
   "crates/shared",
 ]
 
 [workspace.dependencies]
-ortts_model_chatterbox_multilingual.path = "crates/model_chatterbox_multilingual"
+ortts_backend_chatterbox_multilingual.path = "crates/backend_chatterbox_multilingual"
 ortts_onnx.path = "./crates/onnx"
 ortts_server.path = "./crates/server"
 ortts_shared.path = "./crates/shared"

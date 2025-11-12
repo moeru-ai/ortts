@@ -1801,7 +1801,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "ortts_model_chatterbox_multilingual"
+name = "ortts_backend_chatterbox_multilingual"
 version = "0.1.0"
 dependencies = [
  "anyhow",
@@ -1842,7 +1842,7 @@ name = "ortts_server"
 version = "0.1.0"
 dependencies = [
  "axum",
- "ortts_model_chatterbox_multilingual",
+ "ortts_backend_chatterbox_multilingual",
  "ortts_shared",
  "serde",
  "serde_json",

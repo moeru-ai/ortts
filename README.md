@@ -4,7 +4,7 @@
 
 ## Backends
 
-- [x] [Chatterbox Multilingual](./crates/model_chatterbox_multilingual/)
+- [x] [Chatterbox Multilingual](./crates/backend_chatterbox_multilingual/)
 
 ## Getting Started
 
