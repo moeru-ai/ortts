@@ -1,6 +1,5 @@
 use std::io::Cursor;
 
-use anyhow::anyhow;
 use ndarray::{Array, IxDyn, array};
 use ort::value::Value;
 use ortts_onnx::inference_session;
@@ -8,11 +7,11 @@ use ortts_shared::{AppError, Downloader, SpeechOptions};
 // use tokenizers::Tokenizer;
 
 pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
-  /// TODO: use options.text
-  /// You can generate token ids as follows:
-  ///   1. Convert input text to phonemes using https://github.com/hexgrad/misaki
-  ///   2. Map phonemes to ids using https://huggingface.co/hexgrad/Kokoro-82M/blob/785407d1adfa7ae8fbef8ffd85f34ca127da3039/config.json#L34-L148
-  let text = vec![
+  // TODO: use options.text
+  // You can generate token ids as follows:
+  //   1. Convert input text to phonemes using https://github.com/hexgrad/misaki
+  //   2. Map phonemes to ids using https://huggingface.co/hexgrad/Kokoro-82M/blob/785407d1adfa7ae8fbef8ffd85f34ca127da3039/config.json#L34-L148
+  let tokens = vec![
     50, 157, 43, 135, 16, 53, 135, 46, 16, 43, 102, 16, 56, 156, 57, 135, 6, 16, 102, 62, 61, 16,
     70, 56, 16, 138, 56, 156, 72, 56, 61, 85, 123, 83, 44, 83, 54, 16, 53, 65, 156, 86, 61, 62,
     131, 83, 56, 4, 16, 54, 156, 43, 102, 53, 16, 156, 72, 61, 53, 102, 112, 16, 70, 56, 16, 138,
@@ -34,7 +33,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     .map(|chunk| f32::from_le_bytes(chunk.try_into().unwrap()))
     .collect();
 
-  let token_len = TOKENS.len();
+  let token_len = tokens.len();
   let style_vector_size = 256;
   let style_vector_shape = IxDyn(&[1, style_vector_size]);
 
@@ -46,7 +45,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   let ref_s_array = Array::from_shape_vec(style_vector_shape.clone(), ref_s_data)?.into_dyn();
 
   let mut input_ids_vec = vec![0i64];
-  input_ids_vec.extend(TOKENS.into_iter());
+  input_ids_vec.extend(tokens.into_iter());
   input_ids_vec.push(0i64);
 
   let input_ids_shape = IxDyn(&[1, input_ids_vec.len()]);
