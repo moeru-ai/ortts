@@ -9,7 +9,7 @@ const SUPPORTED_LANGUAGE_IDS: [&str; 23] = [
 
 pub fn validate_language_id(model: &str) -> Result<String, AppError> {
   model
-    .rsplit_once('/')
+    .rsplit_once(':')
     .map(|(_, language_id)| language_id)
     .map_or_else(
       // use English by default
