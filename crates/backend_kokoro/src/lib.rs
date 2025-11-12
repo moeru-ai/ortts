@@ -13,10 +13,10 @@ mod tests {
     let output_file_name = "output.wav";
     let bytes = inference(SpeechOptions {
       input: String::from(
-        "[en]Hello, this is a test message for multilingual text-to-speech synthesis.",
+        "Hello, this is a test message for multilingual text-to-speech synthesis.",
       ),
-      model: String::from("chatterbox-multilingual/en"),
-      voice: String::from("alloy"),
+      model: String::from("kokoro"),
+      voice: String::from("af_alloy"),
     })
     .await
     .unwrap();

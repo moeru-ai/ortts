@@ -17,6 +17,7 @@ path = "src/lib.rs"
 
 [dependencies]
 ortts_backend_chatterbox_multilingual.workspace = true
+ortts_backend_kokoro.workspace = true
 ortts_shared.workspace = true
 axum.workspace = true
 serde.workspace = true
