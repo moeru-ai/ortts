@@ -7,8 +7,10 @@ words:
   - bitnami
   - cangjie
   - clippy
+  - coreml
   - cpus
   - cuda
+  - directml
   - dtype
   - huggingface
   - jieba
@@ -31,5 +33,6 @@ words:
   - sinc
   - ureq
   - utoipa
+  - webgpu
 ignoreWords: []
 import: []

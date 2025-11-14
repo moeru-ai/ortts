@@ -19,10 +19,10 @@ path = "src/lib.rs"
 num_cpus = "1.17"
 ortts_shared.workspace = true
 ort.workspace = true
+tracing.workspace = true
 
 [features]
-default = ["ep_cpu"]
-ep_cpu = []
+default = ["ep_webgpu"]
 ep_cuda = ["ort/cuda"]
 ep_coreml = ["ort/coreml"]
 ep_directml = ["ort/directml"]

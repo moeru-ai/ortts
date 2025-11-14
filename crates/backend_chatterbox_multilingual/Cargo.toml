@@ -38,11 +38,3 @@ hound = "3.5.1"
 rubato = "0.16.2"
 unicode-normalization.workspace = true
 half.workspace = true
-
-[features]
-default = ["ep_cpu"]
-ep_cpu = ["ortts_onnx/ep_cpu"]
-ep_cuda = ["ortts_onnx/ep_cuda"]
-ep_coreml = ["ortts_onnx/ep_coreml"]
-ep_directml = ["ortts_onnx/ep_directml"]
-ep_webgpu = ["ortts_onnx/ep_webgpu"]

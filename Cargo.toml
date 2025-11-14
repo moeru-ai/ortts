@@ -75,6 +75,7 @@ utoipa-axum = "0.2"
 utoipa-scalar = { version = "0.3", features = ["axum"] }
 
 [dependencies]
+ortts_onnx.workspace = true
 ortts_server.workspace = true
 ortts_shared.workspace = true
 anyhow.workspace = true
@@ -89,9 +90,14 @@ tracing.workspace = true
 tracing-subscriber = "0.3"
 
 [features]
-default = ["ep_cpu"]
-ep_cpu = ["ortts_server/ep_cpu"]
-ep_cuda = ["ortts_server/ep_cuda"]
-ep_coreml = ["ortts_server/ep_coreml"]
-ep_directml = ["ortts_server/ep_directml"]
-ep_webgpu = ["ortts_server/ep_webgpu"]
+default = ["ep_webgpu"]
+ep_cuda = ["ortts_onnx/ep_cuda"]
+ep_coreml = ["ortts_onnx/ep_coreml"]
+ep_directml = ["ortts_onnx/ep_directml"]
+ep_webgpu = ["ortts_onnx/ep_webgpu"]
+
+[target.'cfg(macos)'.features]
+default = ["ep_webgpu", "ep_coreml"]
+
+[target.'cfg(windows)'.features]
+default = ["ep_webgpu", "ep_directml"]

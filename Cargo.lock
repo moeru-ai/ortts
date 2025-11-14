@@ -1798,6 +1798,7 @@ dependencies = [
  "axum-extra",
  "clap",
  "human-panic",
+ "ortts_onnx",
  "ortts_server",
  "ortts_shared",
  "serde",
@@ -1842,6 +1843,7 @@ dependencies = [
  "num_cpus",
  "ort",
  "ortts_shared",
+ "tracing",
 ]
 
 [[package]]
