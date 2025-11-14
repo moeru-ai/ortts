@@ -22,7 +22,7 @@ ort.workspace = true
 tracing.workspace = true
 
 [features]
-default = ["ep_webgpu"]
+default = []
 ep_cuda = ["ort/cuda"]
 ep_coreml = ["ort/coreml"]
 ep_directml = ["ort/directml"]

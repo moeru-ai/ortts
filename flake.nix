@@ -27,6 +27,7 @@
               # https://github.com/pykeio/ort/issues/436
               pkg-config
               openssl
+              libiconv
             ];
           };
         }

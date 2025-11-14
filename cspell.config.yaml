@@ -16,6 +16,7 @@ words:
   - jieba
   - kakasi
   - keepdims
+  - libiconv
   - logits
   - moeru
   - ndarray
