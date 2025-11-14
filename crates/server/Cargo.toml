@@ -24,3 +24,11 @@ serde_json.workspace = true
 utoipa.workspace = true
 utoipa-axum.workspace = true
 utoipa-scalar.workspace = true
+
+[features]
+default = ["ep_cpu"]
+ep_cpu = ["ortts_backend_chatterbox_multilingual/ep_cpu"]
+ep_cuda = ["ortts_backend_chatterbox_multilingual/ep_cuda"]
+ep_coreml = ["ortts_backend_chatterbox_multilingual/ep_coreml"]
+ep_directml = ["ortts_backend_chatterbox_multilingual/ep_directml"]
+ep_webgpu = ["ortts_backend_chatterbox_multilingual/ep_webgpu"]
