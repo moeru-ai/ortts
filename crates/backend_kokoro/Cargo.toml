@@ -31,5 +31,3 @@ tokenizers.workspace = true
 tokio.workspace = true
 tracing.workspace = true
 tracing-test.workspace = true
-
-espeak-rs = "0.1.9"
