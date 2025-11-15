@@ -1,5 +1,3 @@
-use std::path::PathBuf;
-
 use ort::{
   execution_providers::{
     CPUExecutionProvider, CUDAExecutionProvider, CoreMLExecutionProvider,
@@ -8,8 +6,21 @@ use ort::{
   session::{Session, builder::GraphOptimizationLevel},
 };
 use ortts_shared::AppError;
+use std::path::PathBuf;
 
 pub fn inference_session(model_filepath: PathBuf) -> Result<Session, AppError> {
+  #[cfg(feature = "ep_webgpu")]
+  tracing::info!("WebGPU Execution Provider is enabled.");
+
+  #[cfg(feature = "ep_cuda")]
+  tracing::info!("CUDA Execution Provider is enabled.");
+
+  #[cfg(feature = "ep_coreml")]
+  tracing::info!("CoreML Execution Provider is enabled.");
+
+  #[cfg(feature = "ep_directml")]
+  tracing::info!("DirectML Execution Provider is enabled.");
+
   Ok(
     Session::builder()?
       .with_intra_threads(num_cpus::get())?
