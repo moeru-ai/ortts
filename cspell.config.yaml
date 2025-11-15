@@ -10,6 +10,7 @@ words:
   - cpus
   - cuda
   - dtype
+  - espeak
   - huggingface
   - jieba
   - kakasi
@@ -31,6 +32,7 @@ words:
   - rustls
   - serde
   - sinc
+  - stdenv
   - ureq
   - utoipa
 ignoreWords: []
