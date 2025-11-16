@@ -27,11 +27,16 @@
               # https://github.com/pykeio/ort/issues/436
               pkg-config
               openssl
+
+              clang # espeak-rs
+              cmake # espeak-rs
             ];
 
             OPENSSL_DIR = pkgs.openssl.dev;
             OPENSSL_INCLUDE_DIR = "${pkgs.openssl.dev}/include";
             OPENSSL_LIB_DIR = "${pkgs.openssl.out}/lib";
+
+            LIBCLANG_PATH = pkgs.lib.makeLibraryPath [ pkgs.llvmPackages.libclang.lib ]; # espeak-rs
           };
         }
       );
