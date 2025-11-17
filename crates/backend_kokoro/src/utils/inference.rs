@@ -4,24 +4,38 @@ use ndarray::{Array, IxDyn, array};
 use ort::value::Value;
 use ortts_onnx::inference_session;
 use ortts_shared::{AppError, Downloader, SpeechOptions};
-// use tokenizers::Tokenizer;
+use tokenizers::{Tokenizer, TruncationDirection, TruncationParams, TruncationStrategy};
+
+use crate::utils::phonemize::phonemize;
 
 pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
-  // TODO: use options.text
-  // You can generate token ids as follows:
-  //   1. Convert input text to phonemes using https://github.com/hexgrad/misaki
-  //   2. Map phonemes to ids using https://huggingface.co/hexgrad/Kokoro-82M/blob/785407d1adfa7ae8fbef8ffd85f34ca127da3039/config.json#L34-L148
-  let tokens = vec![
-    50, 157, 43, 135, 16, 53, 135, 46, 16, 43, 102, 16, 56, 156, 57, 135, 6, 16, 102, 62, 61, 16,
-    70, 56, 16, 138, 56, 156, 72, 56, 61, 85, 123, 83, 44, 83, 54, 16, 53, 65, 156, 86, 61, 62,
-    131, 83, 56, 4, 16, 54, 156, 43, 102, 53, 16, 156, 72, 61, 53, 102, 112, 16, 70, 56, 16, 138,
-    56, 44, 156, 76, 158, 123, 56, 16, 62, 131, 156, 43, 102, 54, 46, 16, 102, 48, 16, 81, 47, 102,
-    54, 16, 54, 156, 51, 158, 46, 16, 70, 16, 92, 156, 135, 46, 16, 54, 156, 43, 102, 48, 4, 16,
-    81, 47, 102, 16, 50, 156, 72, 64, 83, 56, 62, 16, 156, 51, 158, 64, 83, 56, 16, 44, 157, 102,
-    56, 16, 44, 156, 76, 158, 123, 56, 4,
-  ];
-
   let downloader = Downloader::new();
+
+  let mut tokenizer =
+    Tokenizer::from_pretrained("onnx-community/Kokoro-82M-v1.0-ONNX", None).unwrap();
+
+  let tokenizer = tokenizer
+    .with_truncation(Some(TruncationParams {
+      max_length: 512,
+      strategy: TruncationStrategy::LongestFirst,
+      stride: 0,
+      direction: TruncationDirection::Right,
+    }))
+    .unwrap();
+
+  let phonemes = phonemize(options.input, true).await?;
+  let tokenized_input = tokenizer.encode(phonemes, false).unwrap();
+  let input_ids_data: Vec<i64> = tokenized_input
+    .get_ids()
+    .iter()
+    .map(|&id| i64::from(id))
+    .collect();
+  let input_ids_shape = [1_usize, input_ids_data.len()];
+  let input_ids_array = ndarray::Array2::<i64>::from_shape_vec(
+    (input_ids_shape[0], input_ids_shape[1]),
+    input_ids_data.clone(),
+  )?;
+  let input_ids_value = Value::from_array(input_ids_array)?;
 
   let voice_name = format!("voices/{}.bin", options.voice);
   let voice_path = downloader
@@ -33,7 +47,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     .map(|chunk| f32::from_le_bytes(chunk.try_into().unwrap()))
     .collect();
 
-  let token_len = tokens.len();
+  let token_len = input_ids_data.len();
   let style_vector_size = 256;
   let style_vector_shape = IxDyn(&[1, style_vector_size]);
 
@@ -43,13 +57,6 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   let ref_s_data: Vec<f32> = voices[ref_s_start_index..ref_s_end_index].to_vec();
 
   let ref_s_array = Array::from_shape_vec(style_vector_shape.clone(), ref_s_data)?.into_dyn();
-
-  let mut input_ids_vec = vec![0i64];
-  input_ids_vec.extend(tokens.into_iter());
-  input_ids_vec.push(0i64);
-
-  let input_ids_shape = IxDyn(&[1, input_ids_vec.len()]);
-  let input_ids_array = Array::from_shape_vec(input_ids_shape, input_ids_vec)?.into_dyn();
 
   let speed_array = array![1.0f32].into_dyn();
 
@@ -62,7 +69,6 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
 
   let mut session = inference_session(model_path)?;
 
-  let input_ids_value = Value::from_array(input_ids_array)?;
   let style_value = Value::from_array(ref_s_array)?;
   let speed_value = Value::from_array(speed_array)?;
 

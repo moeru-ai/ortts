@@ -16,7 +16,7 @@ mod tests {
         "Hello, this is a test message for multilingual text-to-speech synthesis.",
       ),
       model: String::from("kokoro"),
-      voice: String::from("af_alloy"),
+      voice: String::from("af_heart"),
     })
     .await
     .unwrap();
