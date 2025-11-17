@@ -1907,6 +1907,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e2aba9f5c7c479925205799216e7e5d07cc1d4fa76ea8058c60a9a30f6a4e890"
 dependencies = [
  "flate2",
+ "glob",
  "pkg-config",
  "sha2",
  "tar",
@@ -1922,6 +1923,7 @@ dependencies = [
  "axum-extra",
  "clap",
  "human-panic",
+ "ortts_onnx",
  "ortts_server",
  "ortts_shared",
  "serde",
@@ -1987,6 +1989,7 @@ dependencies = [
  "num_cpus",
  "ort",
  "ortts_shared",
+ "tracing",
 ]
 
 [[package]]

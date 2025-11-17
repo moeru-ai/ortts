@@ -7,8 +7,10 @@ words:
   - bitnami
   - cangjie
   - clippy
+  - coreml
   - cpus
   - cuda
+  - directml
   - dtype
   - espeak
   - huggingface
@@ -16,6 +18,7 @@ words:
   - kakasi
   - keepdims
   - kokoro
+  - libiconv
   - logits
   - moeru
   - ndarray
@@ -36,5 +39,6 @@ words:
   - stdenv
   - ureq
   - utoipa
+  - webgpu
 ignoreWords: []
 import: []
