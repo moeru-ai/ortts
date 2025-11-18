@@ -74,7 +74,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   tracing::debug!("Generated audio with {} samples", wav_squeezed.len());
 
   let spec = hound::WavSpec {
-    channels: 1,
+    channels: 2,
     sample_rate: 24000,
     bits_per_sample: 32,
     sample_format: hound::SampleFormat::Float,
@@ -83,6 +83,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   let mut buffer = Cursor::new(Vec::<u8>::new());
   let mut writer = hound::WavWriter::new(&mut buffer, spec)?;
   for sample in wav_squeezed {
+    writer.write_sample(sample)?;
     writer.write_sample(sample)?;
   }
   writer.finalize()?;
