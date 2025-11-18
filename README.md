@@ -5,6 +5,7 @@
 ## Backends
 
 - [x] [Chatterbox Multilingual](./crates/backend_chatterbox_multilingual/)
+- [x] [Kokoro](./crates/backend_kokoro/)
 
 ## Getting Started
 
