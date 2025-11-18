@@ -36,26 +36,26 @@ fn init_replacements() -> Vec<(Regex, Box<dyn Fn(&str) -> String + Send + Sync>)
       Box::new(|_| "\n\n".to_string()),
     ),
     // 4. Abbreviations
-    (
-      Regex::new(r"\bD[Rr]\.(?= [A-Z])").unwrap(),
-      Box::new(|_| "Doctor".to_string()),
-    ),
-    (
-      Regex::new(r"\b(?:Mr\.|MR\.(?= [A-Z]))").unwrap(),
-      Box::new(|_| "Mister".to_string()),
-    ),
-    (
-      Regex::new(r"\b(?:Ms\.|MS\.(?= [A-Z]))").unwrap(),
-      Box::new(|_| "Miss".to_string()),
-    ),
-    (
-      Regex::new(r"\b(?:Mrs\.|MRS\.(?= [A-Z]))").unwrap(),
-      Box::new(|_| "Mrs".to_string()),
-    ),
-    (
-      Regex::new(r"(?i)\betc\.(?! [A-Z])").unwrap(),
-      Box::new(|_| "etc".to_string()),
-    ),
+    // (
+    //   Regex::new(r"\bD[Rr]\.(?= [A-Z])").unwrap(),
+    //   Box::new(|_| "Doctor".to_string()),
+    // ),
+    // (
+    //   Regex::new(r"\b(?:Mr\.|MR\.(?= [A-Z]))").unwrap(),
+    //   Box::new(|_| "Mister".to_string()),
+    // ),
+    // (
+    //   Regex::new(r"\b(?:Ms\.|MS\.(?= [A-Z]))").unwrap(),
+    //   Box::new(|_| "Miss".to_string()),
+    // ),
+    // (
+    //   Regex::new(r"\b(?:Mrs\.|MRS\.(?= [A-Z]))").unwrap(),
+    //   Box::new(|_| "Mrs".to_string()),
+    // ),
+    // (
+    //   Regex::new(r"(?i)\betc\.(?! [A-Z])").unwrap(),
+    //   Box::new(|_| "etc".to_string()),
+    // ),
     // 5. Normalize casual words
     (
       Regex::new(r"(?i)\b(y)eah?\b").unwrap(),
@@ -68,7 +68,7 @@ fn init_replacements() -> Vec<(Regex, Box<dyn Fn(&str) -> String + Send + Sync>)
     ),
     (
       Regex::new(r"(\d),(\d)").unwrap(),
-      Box::new(|m| format!("{}{}", &m[1..2], &m[3..4])), // 捕获并连接数字
+      Box::new(|m| format!("{}{}", &m[1..2], &m[3..4])),
     ),
     (
       Regex::new(

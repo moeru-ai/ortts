@@ -4,36 +4,23 @@ use ndarray::{Array, IxDyn, array};
 use ort::value::Value;
 use ortts_onnx::inference_session;
 use ortts_shared::{AppError, Downloader, SpeechOptions};
-use tokenizers::{Tokenizer, TruncationDirection, TruncationParams, TruncationStrategy};
 
-use crate::utils::phonemize::phonemize;
+use crate::utils::{Tokenizer, phonemize};
 
 pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   let downloader = Downloader::new();
-
-  let mut tokenizer =
-    Tokenizer::from_pretrained("onnx-community/Kokoro-82M-v1.0-ONNX", None).unwrap();
-
-  let tokenizer = tokenizer
-    .with_truncation(Some(TruncationParams {
-      max_length: 512,
-      strategy: TruncationStrategy::LongestFirst,
-      stride: 0,
-      direction: TruncationDirection::Right,
-    }))
-    .unwrap();
+  let tokenizer = Tokenizer::new().await?;
 
   let phonemes = phonemize(options.input, true).await?;
-  let tokenized_input = tokenizer.encode(phonemes, false).unwrap();
-  let input_ids_data: Vec<i64> = tokenized_input
-    .get_ids()
-    .iter()
-    .map(|&id| i64::from(id))
-    .collect();
-  let input_ids_shape = [1_usize, input_ids_data.len()];
+
+  let mut input_ids = vec![0i64];
+  input_ids.extend(tokenizer.encode(&phonemes).into_iter());
+  input_ids.push(0i64);
+
+  let input_ids_shape = [1_usize, input_ids.len()];
   let input_ids_array = ndarray::Array2::<i64>::from_shape_vec(
     (input_ids_shape[0], input_ids_shape[1]),
-    input_ids_data.clone(),
+    input_ids.clone(),
   )?;
   let input_ids_value = Value::from_array(input_ids_array)?;
 
@@ -47,7 +34,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     .map(|chunk| f32::from_le_bytes(chunk.try_into().unwrap()))
     .collect();
 
-  let token_len = input_ids_data.len();
+  let token_len = input_ids.len();
   let style_vector_size = 256;
   let style_vector_shape = IxDyn(&[1, style_vector_size]);
 
