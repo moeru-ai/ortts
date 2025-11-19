@@ -10,6 +10,10 @@ RUN cargo chef prepare  --recipe-path recipe.json
 
 FROM chef AS builder
 
+RUN apt update
+RUN apt install -y pkg-config ca-certificates build-essential
+RUN apt install -y cmake clang
+
 COPY --from=planner /app/recipe.json recipe.json
 RUN cargo chef cook --release --recipe-path recipe.json
 COPY . .

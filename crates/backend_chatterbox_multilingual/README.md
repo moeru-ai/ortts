@@ -10,6 +10,7 @@ Use `"model": "chatterbox-multilingual:{language}"` to set it to other languages
 
 ### Languages
 
+- [x] English
 - [x] Chinese
 - [x] Japanese
 - [ ] Korean

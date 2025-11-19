@@ -1,5 +1,5 @@
 [package]
-name = "ortts_backend_chatterbox_multilingual"
+name = "ortts_backend_kokoro"
 version.workspace = true
 edition.workspace = true
 publish.workspace = true
@@ -12,19 +12,19 @@ homepage.workspace = true
 repository.workspace = true
 
 [lib]
-name = "ortts_backend_chatterbox_multilingual"
+name = "ortts_backend_kokoro"
 path = "src/lib.rs"
 
 [dependencies]
 ortts_onnx.workspace = true
 ortts_shared.workspace = true
 anyhow.workspace = true
+futures.workspace = true
 half.workspace = true
 hound.workspace = true
-jieba-rs.workspace = true
-kakasi.workspace = true
 ndarray.workspace = true
 ort.workspace = true
+regex.workspace = true
 rubato.workspace = true
 serde.workspace = true
 serde_json.workspace = true
@@ -33,5 +33,5 @@ tokenizers.workspace = true
 tokio.workspace = true
 tracing.workspace = true
 tracing-test.workspace = true
-unicode-general-category.workspace = true
-unicode-normalization.workspace = true
+
+espeak-rs = "0.1.9"

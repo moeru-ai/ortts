@@ -12,10 +12,12 @@ words:
   - cuda
   - directml
   - dtype
+  - espeak
   - huggingface
   - jieba
   - kakasi
   - keepdims
+  - kokoro
   - libiconv
   - logits
   - moeru
@@ -25,6 +27,8 @@ words:
   - onnx
   - ortts
   - palc
+  - phonemization
+  - phonemizer
   - pkgs
   - pname
   - rsplit
@@ -32,6 +36,7 @@ words:
   - rustls
   - serde
   - sinc
+  - stdenv
   - ureq
   - utoipa
   - webgpu
