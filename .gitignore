@@ -27,3 +27,14 @@ target
 # Added by cargo
 
 /target
+
+# Models (PyTorch pickle, ONNX, etc.)
+*.onnx
+*.pb
+*.pt
+*.pth
+*.safetensors
+
+# Audio binaries
+*.wav
+*.mp3
