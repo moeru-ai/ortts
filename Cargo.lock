@@ -1916,7 +1916,7 @@ dependencies = [
 
 [[package]]
 name = "ortts"
-version = "0.1.0"
+version = "0.1.0-beta.1"
 dependencies = [
  "anyhow",
  "axum",
@@ -1935,7 +1935,7 @@ dependencies = [
 
 [[package]]
 name = "ortts_backend_chatterbox_multilingual"
-version = "0.1.0"
+version = "0.1.0-beta.1"
 dependencies = [
  "anyhow",
  "half",
@@ -1960,7 +1960,7 @@ dependencies = [
 
 [[package]]
 name = "ortts_backend_kokoro"
-version = "0.1.0"
+version = "0.1.0-beta.1"
 dependencies = [
  "anyhow",
  "espeak-rs",
@@ -1984,7 +1984,7 @@ dependencies = [
 
 [[package]]
 name = "ortts_onnx"
-version = "0.1.0"
+version = "0.1.0-beta.1"
 dependencies = [
  "num_cpus",
  "ort",
@@ -1994,7 +1994,7 @@ dependencies = [
 
 [[package]]
 name = "ortts_server"
-version = "0.1.0"
+version = "0.1.0-beta.1"
 dependencies = [
  "axum",
  "ortts_backend_chatterbox_multilingual",
@@ -2009,7 +2009,7 @@ dependencies = [
 
 [[package]]
 name = "ortts_shared"
-version = "0.1.0"
+version = "0.1.0-beta.1"
 dependencies = [
  "anyhow",
  "axum",
