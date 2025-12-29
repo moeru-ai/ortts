@@ -35,7 +35,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
       # - if: matrix.musl == true
       #   run: sudo apt update && sudo apt install -y musl-tools && sudo ln -s /bin/g++ /bin/musl-g++
-      - run: cargo build --release ${{ matrix.target }}
+      - run: cargo build --release --target ${{ matrix.target }}
       - uses: actions/upload-artifact@v4
         with:
           name: ortts.${{ matrix.target }}
@@ -61,6 +61,8 @@ jobs:
       contents: read
       attestations: write
       id-token: write
+    needs:
+      - build
     runs-on: ubuntu-latest
     name: build docker
     steps:
