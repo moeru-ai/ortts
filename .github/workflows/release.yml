@@ -1,0 +1,90 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    permissions:
+      contents: write
+    strategy:
+      matrix:
+        include:
+          - target: x86_64-unknown-linux-gnu
+            os: ubuntu-24.04
+            musl: false
+          # - target: x86_64-unknown-linux-musl
+          #   musl: true
+          - target: aarch64-unknown-linux-gnu
+            os: ubuntu-24.04-arm
+            musl: false
+          # - target: aarch64-unknown-linux-musl
+          #   musl: true
+    runs-on: ${{ matrix.os }}
+    name: build ${{ matrix.target }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: dtolnay/rust-toolchain@stable
+      # - if: matrix.musl == true
+      #   run: sudo apt update && sudo apt install -y musl-tools && sudo ln -s /bin/g++ /bin/musl-g++
+      - run: cargo build --release ${{ matrix.target }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ortts.${{ matrix.target }}
+          path: target/${{ matrix.target }}/release/ortts
+          if-no-files-found: error
+          retention-days: 7
+      - uses: TheDoctor0/zip-release@0.7.6
+        with:
+          type: tar
+          filename: ortts.${{ matrix.target }}.tar
+          directory: target/${{ matrix.target }}/release/
+          path: ortts
+      - uses: softprops/action-gh-release@v1
+        with:
+          draft: true
+          generate_release_notes: true
+          prerelease: ${{ contains(github.ref, '-') }}
+          files: target/${{ matrix.target }}/release/ortts.${{ matrix.target }}.tar
+
+  docker:
+    permissions:
+      packages: write
+      contents: read
+      attestations: write
+      id-token: write
+    runs-on: ubuntu-latest
+    name: build docker
+    steps:
+      - uses: actions/checkout@v5
+      - uses: docker/metadata-action@v5
+        id: meta
+        with:
+          images: ghcr.io/${{ github.repository }}
+          flavor: |
+            latest=true
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}},enable=${{ !startsWith(github.ref, 'refs/tags/v0.') }}
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

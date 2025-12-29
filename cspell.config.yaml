@@ -5,12 +5,14 @@ dictionaries: []
 words:
   - argmax
   - bitnami
+  - buildx
   - cangjie
   - clippy
   - coreml
   - cpus
   - cuda
   - directml
+  - dtolnay
   - dtype
   - espeak
   - huggingface
