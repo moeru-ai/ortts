@@ -103,7 +103,7 @@ tracing-subscriber = "0.3"
 ortts_onnx = { workspace = true, features = [] }
 
 [target.'cfg(target_os = "windows")'.dependencies]
-ortts_onnx = { workspace = true, features = ["ep_webgpu", "ep_directml"] }
+ortts_onnx = { workspace = true, features = ["ep_directml"] }
 
 [features]
 default = []
