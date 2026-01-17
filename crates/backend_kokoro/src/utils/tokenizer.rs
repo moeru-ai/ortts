@@ -15,11 +15,9 @@ pub struct TokenizerModel {
 
 impl Tokenizer {
   pub async fn new() -> Result<Self, AppError> {
-    let downloader = Downloader::new();
+    let downloader = Downloader::new("onnx-community/Kokoro-82M-v1.0-ONNX".to_owned());
 
-    let path = downloader
-      .get_path("onnx-community/Kokoro-82M-v1.0-ONNX", "tokenizer.json")
-      .await?;
+    let path = downloader.get_tokenizer().await?;
 
     Ok(serde_json::from_str(&fs::read_to_string(path)?)?)
   }
