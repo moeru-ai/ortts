@@ -4,7 +4,7 @@ pub enum AvailableModel {
 }
 
 impl AvailableModel {
-  pub fn model_id(&self) -> &str {
+  pub fn model_name(&self) -> &str {
     match self {
       Self::ChatterboxMultilingual => "chatterbox-multilingual",
       Self::Kokoro => "kokoro",
@@ -18,7 +18,7 @@ impl AvailableModel {
     }
   }
 
-  pub fn from_model_id(model_id: &str) -> Option<Self> {
+  pub fn from_model_name(model_id: &str) -> Option<Self> {
     match model_id {
       "chatterbox-multilingual" => Some(Self::ChatterboxMultilingual),
       "kokoro" => Some(Self::Kokoro),

@@ -10,7 +10,7 @@ use crate::AvailableModel;
 
 use crate::dir_size;
 
-struct Model {
+struct ModelMetadata {
   commit: String,
   size: String,
   modified: String,
@@ -42,16 +42,22 @@ pub fn list() -> Result<(), AppError> {
       let folder_name = entry.file_name().to_string_lossy().to_string();
 
       if folder_name.starts_with("models--") {
-        let hf_id = folder_name
+        let id = folder_name
           .strip_prefix("models--")
           .unwrap()
           .replace("--", "/");
 
-        if let Some(available_model) = AvailableModel::from_hf_id(&hf_id) {
-          if let Ok(model) = inspect_repo(&entry.path()) {
-            let name = available_model.model_id().to_owned();
+        if let Some(model) = AvailableModel::from_hf_id(&id) {
+          if let Ok(metadata) = get_model_metadata(&entry.path()) {
+            let model = model.model_name().to_owned();
 
-            table.add_row(vec![name, hf_id, model.commit, model.size, model.modified]);
+            table.add_row(vec![
+              model,
+              id,
+              metadata.commit,
+              metadata.size,
+              metadata.modified,
+            ]);
           }
         }
       }
@@ -63,8 +69,8 @@ pub fn list() -> Result<(), AppError> {
   Ok(())
 }
 
-fn inspect_repo(folder_path: &PathBuf) -> Result<Model, AppError> {
-  let ref_path = folder_path.join("refs").join("main");
+fn get_model_metadata(path: &PathBuf) -> Result<ModelMetadata, AppError> {
+  let ref_path = path.join("refs").join("main");
 
   if !ref_path.exists() {
     return Err(AppError::anyhow(&anyhow::anyhow!("No refs/main found")));
@@ -72,7 +78,7 @@ fn inspect_repo(folder_path: &PathBuf) -> Result<Model, AppError> {
 
   let commit_hash = fs::read_to_string(&ref_path)?.trim().to_string();
 
-  let snapshot_path = folder_path.join("snapshots").join(&commit_hash);
+  let snapshot_path = path.join("snapshots").join(&commit_hash);
 
   if !snapshot_path.exists() {
     return Err(AppError::anyhow(&anyhow::anyhow!(
@@ -87,7 +93,7 @@ fn inspect_repo(folder_path: &PathBuf) -> Result<Model, AppError> {
   let dt: DateTime<Local> = modified.into();
   let ht = HumanTime::from(dt);
 
-  Ok(Model {
+  Ok(ModelMetadata {
     commit: commit_hash[..7].to_string(),
     size: format_size(dir_size(&snapshot_path), DECIMAL),
     modified: ht.to_string(),
