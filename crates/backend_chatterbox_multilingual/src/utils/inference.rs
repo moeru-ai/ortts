@@ -33,31 +33,19 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   let mut generate_tokens =
     ndarray::Array2::<usize>::from_shape_vec((1, 1), vec![START_SPEECH_TOKEN as usize])?;
 
-  let downloader = Downloader::new();
+  let downloader = Downloader::new("onnx-community/chatterbox-multilingual-ONNX".to_owned());
 
   let speech_encoder_path = downloader
-    .get_onnx_with_data(
-      "onnx-community/chatterbox-multilingual-ONNX",
-      "onnx/speech_encoder.onnx",
-    )
+    .get_onnx_with_data("onnx/speech_encoder.onnx")
     .await?;
   let embed_tokens_path = downloader
-    .get_onnx_with_data(
-      "onnx-community/chatterbox-multilingual-ONNX",
-      "onnx/embed_tokens.onnx",
-    )
+    .get_onnx_with_data("onnx/embed_tokens.onnx")
     .await?;
   let llama_with_path_path = downloader
-    .get_onnx_with_data(
-      "onnx-community/chatterbox-multilingual-ONNX",
-      "onnx/language_model_q4f16.onnx",
-    )
+    .get_onnx_with_data("onnx/language_model_q4f16.onnx")
     .await?;
   let conditional_decoder_path = downloader
-    .get_onnx_with_data(
-      "onnx-community/chatterbox-multilingual-ONNX",
-      "onnx/conditional_decoder.onnx",
-    )
+    .get_onnx_with_data("onnx/conditional_decoder.onnx")
     .await?;
 
   // let tokenizer_config_path = downloader
@@ -95,21 +83,14 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
       })
       .collect();
 
-  let tokenizer =
-    Tokenizer::from_pretrained("onnx-community/chatterbox-multilingual-ONNX", None).unwrap();
+  let tokenizer_path = downloader.get_tokenizer().await?;
+  let tokenizer = Tokenizer::from_file(tokenizer_path).unwrap();
 
   let language_id = validate_language_id(&options.model)?;
   let text = language_preparer.prepare(options.input, &language_id);
 
   let target_voice_path = match options.voice.as_str() {
-    "alloy" => {
-      downloader
-        .get_path(
-          "onnx-community/chatterbox-multilingual-ONNX",
-          "default_voice.wav",
-        )
-        .await?
-    }
+    "alloy" => downloader.get_path("default_voice.wav").await?,
     path => PathBuf::from(path),
   };
 

@@ -8,7 +8,7 @@ use ortts_shared::{AppError, Downloader, SpeechOptions};
 use crate::utils::{Tokenizer, phonemize};
 
 pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
-  let downloader = Downloader::new();
+  let downloader = Downloader::new("onnx-community/Kokoro-82M-v1.0-ONNX".to_owned());
   let tokenizer = Tokenizer::new().await?;
 
   let phonemes = phonemize(options.input, true).await?;
@@ -25,9 +25,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   let input_ids_value = Value::from_array(input_ids_array)?;
 
   let voice_name = format!("voices/{}.bin", options.voice);
-  let voice_path = downloader
-    .get_path("onnx-community/Kokoro-82M-v1.0-ONNX", &voice_name)
-    .await?;
+  let voice_path = downloader.get_path(&voice_name).await?;
   let voice_bytes = std::fs::read(voice_path)?;
   let voices: Vec<f32> = voice_bytes
     .chunks_exact(4)
@@ -47,12 +45,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
 
   let speed_array = array![1.0f32].into_dyn();
 
-  let model_path = downloader
-    .get_path(
-      "onnx-community/Kokoro-82M-v1.0-ONNX",
-      "onnx/model_q4f16.onnx",
-    )
-    .await?;
+  let model_path = downloader.get_path("onnx/model_q4f16.onnx").await?;
 
   let mut session = inference_session(model_path)?;
 

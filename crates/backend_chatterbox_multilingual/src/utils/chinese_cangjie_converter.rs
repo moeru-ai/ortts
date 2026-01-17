@@ -14,11 +14,8 @@ impl ChineseCangjieConverter {
     let mut word2cj = HashMap::<String, String>::new();
     let mut cj2word = HashMap::<String, Vec<String>>::new();
 
-    let json = Downloader::new()
-      .get_str(
-        "onnx-community/chatterbox-multilingual-ONNX",
-        "Cangjie5_TC.json",
-      )
+    let json = Downloader::new("onnx-community/chatterbox-multilingual-ONNX".to_owned())
+      .get_str("Cangjie5_TC.json")
       .await?;
 
     let data: Vec<String> = serde_json::from_str(&json)?;
