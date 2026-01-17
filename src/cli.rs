@@ -9,13 +9,15 @@ pub struct Cli {
 
 #[derive(Debug, Subcommand)]
 pub enum Commands {
+  /// Run a model (TODO)
   Run,
+  /// Start ortts
   Serve(ServeArgs),
 }
 
 #[derive(Args, Debug)]
 pub struct ServeArgs {
-  /// listen on host:port (default: 127.0.0.1:12775)
+  /// listen on host:port
   #[arg(long, default_value = "127.0.0.1:12775")]
   pub listen: String,
 }
