@@ -16,6 +16,12 @@ pub enum Commands {
   /// List models
   #[command(visible_alias = "ls")]
   List,
+  /// Remove a model
+  #[command(visible_alias = "rm")]
+  Remove {
+    #[arg(required = true)]
+    model: Vec<String>,
+  },
 }
 
 #[derive(Args, Debug)]
