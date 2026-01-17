@@ -21,6 +21,7 @@ async fn main() -> Result<(), AppError> {
       Commands::Serve(args) => commands::serve(args).await,
       Commands::Run => todo!(),
       Commands::List => commands::list(),
+      Commands::Remove { model } => commands::remove(model),
     }
   } else {
     Cli::command()
