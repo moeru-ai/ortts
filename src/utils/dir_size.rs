@@ -23,8 +23,6 @@ pub fn dir_size(path: &PathBuf) -> u64 {
       continue;
     }
 
-    // 使用 file_id 库是最稳健的，这里演示如果不想加太多依赖，
-    // 可以用 canonicalize 后的路径字符串做 Key (在 Unix 上通常有效)
     if seen_files.insert(real_path.clone()) {
       if let Ok(meta) = fs::metadata(&real_path) {
         total_size += meta.len();
