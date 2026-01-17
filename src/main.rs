@@ -3,6 +3,9 @@ mod commands;
 mod cli;
 use cli::{Cli, Commands};
 
+mod utils;
+pub use utils::*;
+
 use clap::{CommandFactory, Parser};
 use human_panic::{metadata, setup_panic};
 use ortts_shared::AppError;
@@ -17,6 +20,7 @@ async fn main() -> Result<(), AppError> {
     match command {
       Commands::Serve(args) => commands::serve(args).await,
       Commands::Run => todo!(),
+      Commands::List => commands::list(),
     }
   } else {
     Cli::command()

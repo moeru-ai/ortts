@@ -13,6 +13,9 @@ pub enum Commands {
   Run,
   /// Start ortts
   Serve(ServeArgs),
+  /// List models
+  #[command(visible_alias = "ls")]
+  List,
 }
 
 #[derive(Args, Debug)]
