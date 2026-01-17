@@ -4,7 +4,7 @@ use walkdir::WalkDir;
 
 pub fn dir_size(path: &PathBuf) -> u64 {
   let mut total_size = 0;
-  let mut seen_files = HashSet::new(); // 简单去重
+  let mut seen_files = HashSet::new(); // Dedupe
 
   for entry in WalkDir::new(path) {
     let entry = match entry {
