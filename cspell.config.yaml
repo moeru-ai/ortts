@@ -39,6 +39,7 @@ words:
   - serde
   - sinc
   - stdenv
+  - trixie
   - ureq
   - utoipa
   - webgpu

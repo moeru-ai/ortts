@@ -67,6 +67,14 @@ jobs:
     name: build docker
     steps:
       - uses: actions/checkout@v5
+      - uses: actions/download-artifact@v4
+        with:
+          name: ortts.x86_64-unknown-linux-gnu
+          path: target_amd64
+      - uses: actions/download-artifact@v4
+        with:
+          name: ortts.aarch64-unknown-linux-gnu
+          path: target_arm64
       - uses: docker/metadata-action@v5
         id: meta
         with:
