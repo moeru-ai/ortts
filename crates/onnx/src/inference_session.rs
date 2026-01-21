@@ -1,16 +1,10 @@
-use ort::{
-  execution_providers::{
-    CPUExecutionProvider, CUDAExecutionProvider, CoreMLExecutionProvider,
-    DirectMLExecutionProvider, WebGPUExecutionProvider,
-  },
-  session::{Session, builder::GraphOptimizationLevel},
-};
+use ort::session::{Session, builder::GraphOptimizationLevel};
 use ortts_shared::AppError;
 use std::{
   collections::HashMap,
   ops::{Deref, DerefMut},
   path::PathBuf,
-  sync::{Arc, Mutex, OnceLock},
+  sync::{Arc, Mutex, OnceLock, RwLock},
 };
 
 // TODO(@nekomeowww,@sumimakito): The current session pool implementation is way too simple, but it works,
@@ -19,7 +13,8 @@ use std::{
 //
 // Our current implementation is more like this one:
 // https://github.com/pykeio/ort/issues/469
-static SESSION_POOLS: OnceLock<Mutex<HashMap<PathBuf, Arc<Mutex<Vec<Session>>>>>> = OnceLock::new();
+static SESSION_POOLS: OnceLock<RwLock<HashMap<PathBuf, Arc<Mutex<Vec<Session>>>>>> =
+  OnceLock::new();
 
 pub fn inference_session(model_filepath: PathBuf) -> Result<SessionPool, AppError> {
   let pool = session_pool(&model_filepath);
@@ -32,45 +27,68 @@ pub fn inference_session(model_filepath: PathBuf) -> Result<SessionPool, AppErro
 }
 
 fn session_pool(model_filepath: &PathBuf) -> Arc<Mutex<Vec<Session>>> {
-  let cache = SESSION_POOLS.get_or_init(|| Mutex::new(HashMap::new()));
-  let mut pools = cache.lock().expect("session pool mutex poisoned");
-  pools
-    .entry(model_filepath.clone())
+  let cache = SESSION_POOLS.get_or_init(Default::default);
+  if let Ok(map) = cache.read() {
+    if let Some(pool) = map.get(model_filepath) {
+      return pool.clone();
+    }
+  }
+
+  cache
+    .write()
+    .expect("session pool rw lock poisoned")
+    .entry(model_filepath.to_path_buf())
     .or_insert_with(|| Arc::new(Mutex::new(Vec::new())))
     .clone()
 }
 
 fn acquire_inference_session(pool: &Arc<Mutex<Vec<Session>>>) -> Option<Session> {
-  let mut sessions = pool.lock().expect("session pool mutex poisoned");
+  let mut sessions = pool.lock().ok()?;
   sessions.pop()
 }
 
 fn build_session(model_filepath: &PathBuf) -> Result<Session, AppError> {
-  #[cfg(feature = "ep_webgpu")]
-  tracing::info!("WebGPU Execution Provider is enabled.");
+  let mut providers = Vec::new();
 
   #[cfg(feature = "ep_cuda")]
-  tracing::info!("CUDA Execution Provider is enabled.");
+  {
+    tracing::info!("CUDA Execution Provider is enabled.");
+    providers.push(
+      ort::execution_providers::CUDAExecutionProvider::default()
+        .with_device_id(0)
+        .build(),
+    );
+  }
 
   #[cfg(feature = "ep_coreml")]
-  tracing::info!("CoreML Execution Provider is enabled.");
+  {
+    tracing::info!("CoreML Execution Provider is enabled.");
+    providers.push(ort::execution_providers::CoreMLExecutionProvider::default().build());
+  }
 
   #[cfg(feature = "ep_directml")]
-  tracing::info!("DirectML Execution Provider is enabled.");
+  {
+    tracing::info!("DirectML Execution Provider is enabled.");
+    providers.push(
+      ort::execution_providers::DirectMLExecutionProvider::default()
+        .with_device_id(0)
+        .build(),
+    )
+  }
+
+  #[cfg(feature = "ep_webgpu")]
+  {
+    tracing::info!("WebGPU Execution Provider is enabled.");
+    providers.push(ort::execution_providers::WebGPUExecutionProvider::default().build());
+  }
+
+  providers.push(ort::execution_providers::CPUExecutionProvider::default().build());
 
   Ok(
     Session::builder()?
       .with_intra_threads(num_cpus::get())?
       .with_optimization_level(GraphOptimizationLevel::Level3)?
-      .with_execution_providers([
-        CUDAExecutionProvider::default().with_device_id(0).build(),
-        CoreMLExecutionProvider::default().build(),
-        DirectMLExecutionProvider::default()
-          .with_device_id(0)
-          .build(),
-        WebGPUExecutionProvider::default().build(),
-        CPUExecutionProvider::default().build(),
-      ])?
+      .with_execution_providers(providers)?
       .commit_from_file(model_filepath)?,
   )
 }
