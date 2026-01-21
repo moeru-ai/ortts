@@ -2,7 +2,7 @@ use std::{io::Cursor, path::PathBuf};
 
 use anyhow::anyhow;
 use half::f16;
-use ndarray::{Array1, Array2, ArrayView3};
+use ndarray::{Array1, Array2, Array3, Array4, ArrayView3, Axis};
 use ort::{
   inputs,
   tensor::TensorElementType,
@@ -98,7 +98,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
       })
       .collect();
 
-  let mut attention_mask_array = ndarray::Array2::<i64>::zeros((0, 0));
+  let mut attention_mask_array = Array2::<i64>::zeros((0, 0));
   let mut batch_size = 0;
   // KV Cache
   let mut past_key_values: std::collections::HashMap<String, Value> =
@@ -110,9 +110,9 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   let embed_tokens_exaggeration = Value::from_array(exaggeration)?;
 
   // // TODO: Speech conditional decoder model required
-  let mut prompt_token_array: Option<ndarray::Array2<i64>> = None;
-  let mut speaker_embeddings_array: Option<ndarray::Array2<f32>> = None;
-  let mut speaker_features_array: Option<ndarray::Array3<f32>> = None;
+  let mut prompt_token_array: Option<Array2<i64>> = None;
+  let mut speaker_embeddings_array: Option<Array2<f32>> = None;
+  let mut speaker_features_array: Option<Array3<f32>> = None;
 
   for i in 0..MAX_NEW_TOKENS {
     // inputs_embeds = embed_tokens_session.run(None, ort_embed_tokens_inputs)[0]
@@ -142,7 +142,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
 
       prompt_token_array = Some({
         let (prompt_token_shape, prompt_token_data) = prompt_token.try_extract_tensor::<i64>()?;
-        ndarray::Array2::<i64>::from_shape_vec(
+        Array2::<i64>::from_shape_vec(
           (
             prompt_token_shape[0] as usize,
             prompt_token_shape[1] as usize,
@@ -154,7 +154,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
       speaker_embeddings_array = Some({
         let (speaker_embeddings_shape, speaker_embeddings_data) =
           ref_x_vector.try_extract_tensor::<f32>()?;
-        ndarray::Array2::<f32>::from_shape_vec(
+        Array2::<f32>::from_shape_vec(
           (
             speaker_embeddings_shape[0] as usize,
             speaker_embeddings_shape[1] as usize,
@@ -166,7 +166,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
       speaker_features_array = Some({
         let (speaker_features_shape, speaker_features_data) =
           prompt_feat.try_extract_tensor::<f32>()?;
-        ndarray::Array3::<f32>::from_shape_vec(
+        Array3::<f32>::from_shape_vec(
           (
             speaker_features_shape[0] as usize,
             speaker_features_shape[1] as usize,
@@ -183,7 +183,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
           inputs_embeds_value.try_extract_tensor::<f32>().unwrap();
 
         let inputs_embeds_concatenated = ndarray::concatenate(
-          ndarray::Axis(1),
+          Axis(1),
           &[
             ArrayView3::from_shape(
               (
@@ -229,7 +229,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
             .unwrap_or(TensorElementType::Float32);
           let cache_value = match cache_dtype {
             TensorElementType::Float16 => {
-              let cache = ndarray::Array4::from_elem(
+              let cache = Array4::from_elem(
                 (
                   batch_size as usize,
                   NUM_KEY_VALUE_HEADS as usize,
@@ -241,7 +241,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
               Value::from_array(cache).unwrap().into()
             }
             TensorElementType::Float32 => {
-              let cache = ndarray::Array4::<f32>::zeros((
+              let cache = Array4::<f32>::zeros((
                 batch_size as usize,
                 NUM_KEY_VALUE_HEADS as usize,
                 0,
@@ -260,7 +260,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
       }
 
       // attention_mask = np.ones((batch_size, seq_len), dtype=np.int64)
-      attention_mask_array = ndarray::Array2::<i64>::ones((batch_size as usize, seq_len as usize));
+      attention_mask_array = Array2::<i64>::ones((batch_size as usize, seq_len as usize));
     }
 
     let attention_mask_value = Value::from_array(attention_mask_array.clone()).unwrap();
@@ -288,7 +288,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     tracing::debug!("present_key_values lengths: {}", present_key_values.len());
 
     let (logits_shape, logits_data) = logits.try_extract_tensor::<f32>()?;
-    let logits_array = ndarray::Array3::<f32>::from_shape_vec(
+    let logits_array = Array3::<f32>::from_shape_vec(
       (
         logits_shape[0] as usize,
         logits_shape[1] as usize,
@@ -299,7 +299,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
 
     // logits = logits[:, -1, :]
     let last_token_logits = logits_array
-      .index_axis(ndarray::Axis(1), (logits_shape[1] as usize) - 1)
+      .index_axis(Axis(1), (logits_shape[1] as usize) - 1)
       .to_owned();
     tracing::debug!("logits[:, -1, :]: {:?}", last_token_logits.shape());
     // next_token_logits = repetition_penalty_processor(generate_tokens, logits)
@@ -319,11 +319,9 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     tracing::debug!("next_token_id: {next_token_id}");
 
     // generate_tokens = np.concatenate((generate_tokens, next_token), axis=-1)
-    let next_token_usize = ndarray::Array2::<usize>::from_shape_vec((1, 1), vec![next_token_id])?;
-    generate_tokens = ndarray::concatenate(
-      ndarray::Axis(1),
-      &[generate_tokens.view(), next_token_usize.view()],
-    )?;
+    let next_token_usize = Array2::<usize>::from_shape_vec((1, 1), vec![next_token_id])?;
+    generate_tokens =
+      ndarray::concatenate(Axis(1), &[generate_tokens.view(), next_token_usize.view()])?;
 
     // if (next_token.flatten() == STOP_SPEECH_TOKEN).all():
     tracing::debug!("generate_tokens: {:?}", generate_tokens);
@@ -332,8 +330,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     }
 
     // next_token = np.argmax(next_token_logits, axis=-1, keepdims=True).astype(np.int64)
-    let next_token_i64 =
-      ndarray::Array2::<i64>::from_shape_vec((1, 1), vec![next_token_id as i64])?;
+    let next_token_i64 = Array2::<i64>::from_shape_vec((1, 1), vec![next_token_id as i64])?;
     embed_tokens_input_ids = Value::from_array(next_token_i64.clone())?;
 
     // position_ids = np.full(
@@ -341,14 +338,14 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     //   i + 1,
     //   dtype=np.int64,
     // )
-    let position_ids_next = ndarray::Array2::<i64>::from_elem((1, 1), (i + 1) as i64);
+    let position_ids_next = Array2::<i64>::from_elem((1, 1), (i + 1) as i64);
     embed_tokens_position_ids = Value::from_array(position_ids_next)?;
 
     // np.ones((batch_size, 1), dtype=np.int64)
-    let batch_size_ones = ndarray::Array2::<i64>::ones((batch_size as usize, 1));
+    let batch_size_ones = Array2::<i64>::ones((batch_size as usize, 1));
     // attention_mask = np.concatenate([attention_mask, np.ones((batch_size, 1), dtype=np.int64)], axis=1)
     attention_mask_array = ndarray::concatenate(
-      ndarray::Axis(1),
+      Axis(1),
       &[attention_mask_array.view(), batch_size_ones.view()],
     )?;
 
@@ -373,7 +370,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
       let updated_value = match cache_dtype {
         TensorElementType::Float16 => {
           let (pres_shape, pres_data) = present_value.try_extract_tensor::<f16>().unwrap();
-          let pres_array = ndarray::Array4::<f16>::from_shape_vec(
+          let pres_array = Array4::<f16>::from_shape_vec(
             (
               pres_shape[0] as usize,
               pres_shape[1] as usize,
@@ -387,7 +384,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
         }
         TensorElementType::Float32 => {
           let (pres_shape, pres_data) = present_value.try_extract_tensor::<f32>().unwrap();
-          let pres_array = ndarray::Array4::<f32>::from_shape_vec(
+          let pres_array = Array4::<f32>::from_shape_vec(
             (
               pres_shape[0] as usize,
               pres_shape[1] as usize,
@@ -425,7 +422,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
 
   // speech_tokens = np.concatenate([prompt_token, speech_tokens], axis=1)
   let speech_tokens_with_prompt = ndarray::concatenate(
-    ndarray::Axis(1),
+    Axis(1),
     &[
       prompt_token_array.unwrap().view(),
       speech_tokens.mapv(|x| x as i64).view(),
