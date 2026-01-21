@@ -56,6 +56,9 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     "alloy" => default_voice_path,
     path => PathBuf::from(path),
   };
+  // NOTICE: in python, librosa.load(..., sr=S3GEN_SR) resamples to 24000 Hz,
+  // as the s3gen model requires 24kHz audio input, we will resample any audio
+  // file into this target sample rate.
   let audio_values = load_audio(target_voice_path, Some(S3GEN_SR))?;
   let audio_values = Array2::from_shape_vec((1_usize, audio_values.len()), audio_values)?;
   let audio_values = Value::from_array(audio_values)?;
@@ -86,11 +89,15 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   let position_ids = Array2::from_shape_vec((1_usize, position_ids.len()), position_ids)?;
 
   // TODO: custom exaggeration
-  let exaggeration = Array1::from_shape_vec(1_usize, vec![0.5_f32])?;
+  let exaggeration = 0.5_f32;
+  let exaggeration = Array1::from_shape_vec(1_usize, vec![exaggeration])?;
 
   // TODO: custom repetition_penalty
   let repetition_penalty = 1.2_f32;
   let repetition_penalty_processor = RepetitionPenaltyLogitsProcessor::new(repetition_penalty)?;
+
+  // Generate tokens - for the first iteration, this would be [[START_SPEECH_TOKEN]]
+  // Make it mutable so we can concatenate new tokens in each iteration
   let mut generate_tokens =
     Array2::<usize>::from_shape_vec((1, 1), vec![START_SPEECH_TOKEN as usize])?;
 
