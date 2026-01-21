@@ -1,14 +1,17 @@
 use ortts_shared::AppError;
-use std::fs::File;
-use std::path::PathBuf;
-use symphonia::core::codecs::DecoderOptions;
-use symphonia::core::formats::FormatOptions;
-use symphonia::core::io::{MediaSourceStream, MediaSourceStreamOptions};
-use symphonia::core::meta::MetadataOptions;
-use symphonia::core::probe::Hint;
-use symphonia::default::get_probe;
+use std::{fs::File, path::PathBuf};
+use symphonia::{
+  core::{
+    codecs::DecoderOptions,
+    formats::FormatOptions,
+    io::{MediaSourceStream, MediaSourceStreamOptions},
+    meta::MetadataOptions,
+    probe::Hint,
+  },
+  default::get_probe,
+};
 
-use crate::utils::resample_audio;
+use crate::resample_audio;
 
 pub fn load_audio(path: PathBuf) -> Result<Vec<f32>, AppError> {
   // NOTICE: in python, librosa.load(..., sr=S3GEN_SR) resamples to 24000 Hz,

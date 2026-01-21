@@ -9,11 +9,10 @@ use ort::{
 };
 use ortts_onnx::inference_session;
 use ortts_shared::{AppError, Downloader, SpeechOptions};
+use ortts_shared_chatterbox::{load_audio, RepetitionPenaltyLogitsProcessor};
 use tokenizers::Tokenizer;
 
-use crate::utils::{
-  LanguagePreparer, RepetitionPenaltyLogitsProcessor, load_audio, validate_language_id,
-};
+use crate::utils::{LanguagePreparer, validate_language_id};
 
 pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   const MAX_NEW_TOKENS: usize = 256;
