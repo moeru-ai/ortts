@@ -52,7 +52,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
 
   // Prepare input
   let tokenizer_path = downloader.get_tokenizer().await?;
-  let tokenizer = Tokenizer::from_file(tokenizer_path).unwrap();
+  let tokenizer = Tokenizer::from_file(tokenizer_path).map_err(|e| anyhow!(e))?;
   let language_preparer = LanguagePreparer::new().await?;
   let text = language_preparer.prepare(options.input, &language_id);
   let input_ids: Vec<i64> = tokenizer
