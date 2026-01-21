@@ -2082,6 +2082,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "ortts_backend_chatterbox_turbo"
+version = "0.1.0-beta.4"
+dependencies = [
+ "anyhow",
+ "half",
+ "hound",
+ "ndarray",
+ "ort",
+ "ortts_onnx",
+ "ortts_shared",
+ "ortts_shared_chatterbox",
+ "serde",
+ "serde_json",
+ "tokenizers",
+ "tokio",
+ "tracing",
+ "tracing-test",
+]
+
+[[package]]
 name = "ortts_backend_kokoro"
 version = "0.1.0-beta.4"
 dependencies = [
