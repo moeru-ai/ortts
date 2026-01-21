@@ -1,10 +1,4 @@
-use ort::{
-  execution_providers::{
-    CPUExecutionProvider, CUDAExecutionProvider, CoreMLExecutionProvider,
-    DirectMLExecutionProvider, WebGPUExecutionProvider,
-  },
-  session::{Session, builder::GraphOptimizationLevel},
-};
+use ort::session::{Session, builder::GraphOptimizationLevel};
 use ortts_shared::AppError;
 use std::{
   collections::HashMap,
@@ -46,31 +40,47 @@ fn acquire_inference_session(pool: &Arc<Mutex<Vec<Session>>>) -> Option<Session>
 }
 
 fn build_session(model_filepath: &PathBuf) -> Result<Session, AppError> {
-  #[cfg(feature = "ep_webgpu")]
-  tracing::info!("WebGPU Execution Provider is enabled.");
+  let mut providers = Vec::new();
 
   #[cfg(feature = "ep_cuda")]
-  tracing::info!("CUDA Execution Provider is enabled.");
+  {
+    tracing::info!("CUDA Execution Provider is enabled.");
+    providers.push(
+      ort::execution_providers::CUDAExecutionProvider::default()
+        .with_device_id(0)
+        .build(),
+    );
+  }
 
   #[cfg(feature = "ep_coreml")]
-  tracing::info!("CoreML Execution Provider is enabled.");
+  {
+    tracing::info!("CoreML Execution Provider is enabled.");
+    providers.push(ort::execution_providers::CoreMLExecutionProvider::default().build());
+  }
 
   #[cfg(feature = "ep_directml")]
-  tracing::info!("DirectML Execution Provider is enabled.");
+  {
+    tracing::info!("DirectML Execution Provider is enabled.");
+    providers.push(
+      ort::execution_providers::DirectMLExecutionProvider::default()
+        .with_device_id(0)
+        .build(),
+    )
+  }
+
+  #[cfg(feature = "ep_webgpu")]
+  {
+    tracing::info!("WebGPU Execution Provider is enabled.");
+    providers.push(ort::execution_providers::WebGPUExecutionProvider::default().build());
+  }
+
+  providers.push(ort::execution_providers::CPUExecutionProvider::default().build());
 
   Ok(
     Session::builder()?
       .with_intra_threads(num_cpus::get())?
       .with_optimization_level(GraphOptimizationLevel::Level3)?
-      .with_execution_providers([
-        CUDAExecutionProvider::default().with_device_id(0).build(),
-        CoreMLExecutionProvider::default().build(),
-        DirectMLExecutionProvider::default()
-          .with_device_id(0)
-          .build(),
-        WebGPUExecutionProvider::default().build(),
-        CPUExecutionProvider::default().build(),
-      ])?
+      .with_execution_providers(providers)?
       .commit_from_file(model_filepath)?,
   )
 }
