@@ -1,9 +1,9 @@
-use std::{collections::HashSet, fs, path::PathBuf};
+use std::{collections::HashSet, fs, path::Path};
 
 use walkdir::WalkDir;
 
 #[must_use]
-pub fn dir_size(path: &PathBuf) -> u64 {
+pub fn dir_size(path: &Path) -> u64 {
   let mut total_size = 0;
   let mut seen_files = HashSet::new();
 
