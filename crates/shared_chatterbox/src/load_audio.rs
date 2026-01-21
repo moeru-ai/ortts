@@ -13,12 +13,7 @@ use symphonia::{
 
 use crate::resample_audio;
 
-pub fn load_audio(path: PathBuf) -> Result<Vec<f32>, AppError> {
-  // NOTICE: in python, librosa.load(..., sr=S3GEN_SR) resamples to 24000 Hz,
-  // as the s3gen model requires 24kHz audio input, we will resample any audio
-  // file into this target sample rate.
-  const TARGET_SAMPLE_RATE: u32 = 24_000;
-
+pub fn load_audio(path: PathBuf, target_rate: Option<u32>) -> Result<Vec<f32>, AppError> {
   let file = File::open(path)?;
   let mss = MediaSourceStream::new(Box::new(file), MediaSourceStreamOptions::default());
 
@@ -76,14 +71,11 @@ pub fn load_audio(path: PathBuf) -> Result<Vec<f32>, AppError> {
     }
   }
 
-  if source_sample_rate == TARGET_SAMPLE_RATE {
-    return Ok(samples);
+  if let Some(target_rate) = target_rate
+    && source_sample_rate != target_rate
+  {
+    resample_audio(&samples, source_sample_rate, target_rate, channel_count)
+  } else {
+    Ok(samples)
   }
-
-  resample_audio(
-    &samples,
-    source_sample_rate,
-    TARGET_SAMPLE_RATE,
-    channel_count,
-  )
 }
