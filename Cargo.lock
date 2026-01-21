@@ -2072,10 +2072,9 @@ dependencies = [
  "ort",
  "ortts_onnx",
  "ortts_shared",
- "rubato",
+ "ortts_shared_chatterbox",
  "serde",
  "serde_json",
- "symphonia",
  "tokenizers",
  "tokio",
  "tracing",
@@ -2145,6 +2144,17 @@ dependencies = [
  "serde",
  "serde_json",
  "utoipa",
+]
+
+[[package]]
+name = "ortts_shared_chatterbox"
+version = "0.1.0-beta.4"
+dependencies = [
+ "anyhow",
+ "ndarray",
+ "ortts_shared",
+ "rubato",
+ "symphonia",
 ]
 
 [[package]]
