@@ -35,7 +35,7 @@ fn session_pool(model_filepath: &PathBuf) -> Arc<Mutex<Vec<Session>>> {
 }
 
 fn acquire_inference_session(pool: &Arc<Mutex<Vec<Session>>>) -> Option<Session> {
-  let mut sessions = pool.lock().expect("session pool mutex poisoned");
+  let mut sessions = pool.lock().ok()?;
   sessions.pop()
 }
 
