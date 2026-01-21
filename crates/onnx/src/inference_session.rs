@@ -4,7 +4,7 @@ use std::{
   collections::HashMap,
   ops::{Deref, DerefMut},
   path::PathBuf,
-  sync::{Arc, Mutex, OnceLock},
+  sync::{Arc, Mutex, OnceLock, RwLock},
 };
 
 // TODO(@nekomeowww,@sumimakito): The current session pool implementation is way too simple, but it works,
@@ -13,7 +13,8 @@ use std::{
 //
 // Our current implementation is more like this one:
 // https://github.com/pykeio/ort/issues/469
-static SESSION_POOLS: OnceLock<Mutex<HashMap<PathBuf, Arc<Mutex<Vec<Session>>>>>> = OnceLock::new();
+static SESSION_POOLS: OnceLock<RwLock<HashMap<PathBuf, Arc<Mutex<Vec<Session>>>>>> =
+  OnceLock::new();
 
 pub fn inference_session(model_filepath: PathBuf) -> Result<SessionPool, AppError> {
   let pool = session_pool(&model_filepath);
@@ -26,10 +27,15 @@ pub fn inference_session(model_filepath: PathBuf) -> Result<SessionPool, AppErro
 }
 
 fn session_pool(model_filepath: &PathBuf) -> Arc<Mutex<Vec<Session>>> {
-  let cache = SESSION_POOLS.get_or_init(|| Mutex::new(HashMap::new()));
-  let mut pools = cache.lock().expect("session pool mutex poisoned");
-  pools
-    .entry(model_filepath.clone())
+  let cache = SESSION_POOLS.get_or_init(Default::default);
+  if let Ok(map) = cache.read() {
+    if let Some(pool) = map.get(model_filepath) {
+      return pool.clone();
+    }
+  }
+  let mut map = cache.write().expect("session pool rw lock poisoned");
+  map
+    .entry(model_filepath.to_path_buf())
     .or_insert_with(|| Arc::new(Mutex::new(Vec::new())))
     .clone()
 }
