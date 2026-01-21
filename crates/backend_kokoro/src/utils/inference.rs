@@ -1,6 +1,6 @@
 use std::io::Cursor;
 
-use ndarray::{Array, IxDyn, array};
+use ndarray::{Array, Array2, IxDyn, array};
 use ort::value::Value;
 use ortts_onnx::inference_session;
 use ortts_shared::{AppError, Downloader, SpeechOptions};
@@ -18,10 +18,8 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   input_ids.push(0i64);
 
   let input_ids_shape = [1_usize, input_ids.len()];
-  let input_ids_array = ndarray::Array2::<i64>::from_shape_vec(
-    (input_ids_shape[0], input_ids_shape[1]),
-    input_ids.clone(),
-  )?;
+  let input_ids_array =
+    Array2::<i64>::from_shape_vec((input_ids_shape[0], input_ids_shape[1]), input_ids.clone())?;
   let input_ids_value = Value::from_array(input_ids_array)?;
 
   let voice_name = format!("voices/{}.bin", options.voice);
