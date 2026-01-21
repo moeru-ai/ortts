@@ -6,9 +6,7 @@ use comfy_table::{ContentArrangement, Table, presets::NOTHING};
 use humansize::{DECIMAL, format_size};
 use ortts_shared::AppError;
 
-use crate::AvailableModel;
-
-use crate::dir_size;
+use crate::{AvailableModel, dir_size};
 
 struct ModelMetadata {
   commit: String,
@@ -16,7 +14,7 @@ struct ModelMetadata {
   modified: String,
 }
 
-pub fn list() -> () {
+pub fn list() -> Result<(), AppError> {
   let mut table = Table::new();
 
   table
@@ -34,7 +32,7 @@ pub fn list() -> () {
 
   if !cache_path.exists() {
     eprintln!("Cache directory not found at {:?}", cache_path.display());
-    return;
+    return Ok(());
   }
 
   if let Ok(entries) = fs::read_dir(cache_path) {
@@ -65,6 +63,8 @@ pub fn list() -> () {
   }
 
   println!("{table}");
+
+  Ok(())
 }
 
 fn get_model_metadata(path: &Path) -> Result<ModelMetadata, AppError> {

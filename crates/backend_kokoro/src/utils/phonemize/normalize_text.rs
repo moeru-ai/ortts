@@ -64,7 +64,7 @@ fn init_replacements() -> Vec<(Regex, Box<dyn Fn(&str) -> String + Send + Sync>)
     // 5. Handle numbers and currencies
     (
       Regex::new(r"\d*\.\d+|\b\d{4}s?\b|(?::)\b(?:[1-9]|1[0-2]):[0-5]\d\b(?::)").unwrap(),
-      Box::new(|m| split_num(m)),
+      Box::new(split_num),
     ),
     (
       Regex::new(r"(\d),(\d)").unwrap(),
@@ -75,9 +75,9 @@ fn init_replacements() -> Vec<(Regex, Box<dyn Fn(&str) -> String + Send + Sync>)
         r"(?i)[$£]\d+(?:\.\d+)?(?: hundred| thousand| (?:[bm]|tr)illion)*\b|[$£]\d+\.\d\d?\b",
       )
       .unwrap(),
-      Box::new(|m| flip_money(m)),
+      Box::new(flip_money),
     ),
-    (Regex::new(r"\d*\.\d+").unwrap(), Box::new(|m| point_num(m))),
+    (Regex::new(r"\d*\.\d+").unwrap(), Box::new(point_num)),
     (
       Regex::new(r"(\d)-(\d)").unwrap(),
       Box::new(|m| format!("{0} to {1}", &m[1..2], &m[3..4])),
