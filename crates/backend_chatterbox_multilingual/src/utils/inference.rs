@@ -29,11 +29,20 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
 
   // Load model
   let downloader = Downloader::new("onnx-community/chatterbox-multilingual-ONNX".to_owned())?;
-  let (speech_encoder_path, embed_tokens_path, language_model_path, conditional_decoder_path) = tokio::try_join!(
+  let (
+    speech_encoder_path,
+    embed_tokens_path,
+    language_model_path,
+    conditional_decoder_path,
+    tokenizer_path,
+    default_voice_path,
+  ) = tokio::try_join!(
     downloader.get_onnx_with_data("onnx/speech_encoder.onnx"),
     downloader.get_onnx_with_data("onnx/embed_tokens.onnx"),
     downloader.get_onnx_with_data("onnx/language_model_q4f16.onnx"),
-    downloader.get_onnx_with_data("onnx/conditional_decoder.onnx")
+    downloader.get_onnx_with_data("onnx/conditional_decoder.onnx"),
+    downloader.get_tokenizer(),
+    downloader.get_path("default_voice.wav"),
   )?;
 
   // Start inference sessions
@@ -41,9 +50,10 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   let mut speech_encoder_session = inference_session(&speech_encoder_path)?;
   let mut llama_with_past_session = inference_session(&language_model_path)?;
   let mut conditional_decoder_session = inference_session(&conditional_decoder_path)?;
+  let tokenizer = Tokenizer::from_file(tokenizer_path).map_err(|e| anyhow!(e))?;
 
   let target_voice_path = match options.voice.as_str() {
-    "alloy" => downloader.get_path("default_voice.wav").await?,
+    "alloy" => default_voice_path,
     path => PathBuf::from(path),
   };
   let audio_values = load_audio(target_voice_path, Some(S3GEN_SR))?;
@@ -51,8 +61,6 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   let audio_values = Value::from_array(audio_values)?;
 
   // Prepare input
-  let tokenizer_path = downloader.get_tokenizer().await?;
-  let tokenizer = Tokenizer::from_file(tokenizer_path).map_err(|e| anyhow!(e))?;
   let language_preparer = LanguagePreparer::new().await?;
   let text = language_preparer.prepare(options.input, &language_id);
   let input_ids: Vec<i64> = tokenizer
