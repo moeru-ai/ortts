@@ -8,7 +8,7 @@ use ortts_shared::{AppError, Downloader, SpeechOptions};
 use crate::utils::{Tokenizer, phonemize};
 
 pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
-  let downloader = Downloader::new("onnx-community/Kokoro-82M-v1.0-ONNX".to_owned());
+  let downloader = Downloader::new("onnx-community/Kokoro-82M-v1.0-ONNX".to_owned())?;
   let tokenizer = Tokenizer::new().await?;
 
   let phonemes = phonemize(options.input, true).await?;
@@ -47,7 +47,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
 
   let model_path = downloader.get_path("onnx/model_q4f16.onnx").await?;
 
-  let mut session = inference_session(model_path)?;
+  let mut session = inference_session(&model_path)?;
 
   let style_value = Value::from_array(ref_s_array)?;
   let speed_value = Value::from_array(speed_array)?;

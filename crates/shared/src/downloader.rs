@@ -10,15 +10,16 @@ pub struct Downloader {
 }
 
 impl Downloader {
-  pub fn new(model_id: String) -> Self {
+  #[must_use]
+  pub fn new(model_id: String) -> Result<Self, AppError> {
+    let api = hf_hub::api::tokio::ApiBuilder::from_env().build()?;
     let cache = hf_hub::Cache::from_env();
-    let api = hf_hub::api::tokio::ApiBuilder::from_env().build().unwrap();
 
-    Self {
-      cache,
+    Ok(Self {
       api,
+      cache,
       model_id,
-    }
+    })
   }
 
   pub async fn get_path(&self, filename: &str) -> Result<PathBuf, AppError> {

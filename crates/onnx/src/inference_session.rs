@@ -16,7 +16,7 @@ use std::{
 static SESSION_POOLS: OnceLock<RwLock<HashMap<PathBuf, Arc<Mutex<Vec<Session>>>>>> =
   OnceLock::new();
 
-pub fn inference_session(model_filepath: PathBuf) -> Result<SessionPool, AppError> {
+pub fn inference_session(model_filepath: &PathBuf) -> Result<SessionPool, AppError> {
   let pool = session_pool(&model_filepath);
   if let Some(session) = acquire_inference_session(&pool) {
     return Ok(SessionPool::new(pool, session));
@@ -28,16 +28,16 @@ pub fn inference_session(model_filepath: PathBuf) -> Result<SessionPool, AppErro
 
 fn session_pool(model_filepath: &PathBuf) -> Arc<Mutex<Vec<Session>>> {
   let cache = SESSION_POOLS.get_or_init(Default::default);
-  if let Ok(map) = cache.read() {
-    if let Some(pool) = map.get(model_filepath) {
-      return pool.clone();
-    }
+  if let Ok(map) = cache.read()
+    && let Some(pool) = map.get(model_filepath)
+  {
+    return pool.clone();
   }
 
   cache
     .write()
     .expect("session pool rw lock poisoned")
-    .entry(model_filepath.to_path_buf())
+    .entry(model_filepath.clone())
     .or_insert_with(|| Arc::new(Mutex::new(Vec::new())))
     .clone()
 }
@@ -100,7 +100,7 @@ pub struct SessionPool {
 }
 
 impl SessionPool {
-  fn new(pool: Arc<Mutex<Vec<Session>>>, session: Session) -> Self {
+  const fn new(pool: Arc<Mutex<Vec<Session>>>, session: Session) -> Self {
     Self {
       pool,
       session: Some(session),

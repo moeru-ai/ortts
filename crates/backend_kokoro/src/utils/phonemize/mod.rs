@@ -28,7 +28,7 @@ fn get_punctuation_pattern() -> &'static Regex {
   PUNCTUATION_PATTERN.get_or_init(|| {
     const PUNCTUATION: &str = ";:,.!?¡¿—…\"«»“”(){}[]";
     let escaped_punctuation = escape_reg_exp(PUNCTUATION);
-    let pattern_str = format!(r"(\s*[{}]+\s*)+", escaped_punctuation);
+    let pattern_str = format!(r"(\s*[{escaped_punctuation}]+\s*)+");
     Regex::new(&pattern_str).unwrap()
   })
 }

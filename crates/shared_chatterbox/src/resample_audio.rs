@@ -18,7 +18,7 @@ pub fn resample_audio(
     return Ok(Vec::new());
   }
 
-  let resample_ratio = target_rate as f64 / input_rate as f64;
+  let resample_ratio = f64::from(target_rate) / f64::from(input_rate);
 
   let params = SincInterpolationParameters {
     sinc_len: 256,

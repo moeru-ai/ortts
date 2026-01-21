@@ -15,7 +15,7 @@ pub struct TokenizerModel {
 
 impl Tokenizer {
   pub async fn new() -> Result<Self, AppError> {
-    let downloader = Downloader::new("onnx-community/Kokoro-82M-v1.0-ONNX".to_owned());
+    let downloader = Downloader::new("onnx-community/Kokoro-82M-v1.0-ONNX".to_owned())?;
 
     let path = downloader.get_tokenizer().await?;
 

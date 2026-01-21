@@ -12,21 +12,21 @@ pub fn flip_money(match_str: &str) -> String {
   let num_part = &match_str[currency_char.len_utf8()..];
 
   if num_part.parse::<f64>().is_err() {
-    return format!("{} {}s", num_part, bill);
+    return format!("{num_part} {bill}s");
   }
 
   if !num_part.contains('.') {
     if num_part.is_empty() {
-      return format!("0 {}s", bill);
-    } else if num_part.parse::<u64>().map_or(false, |n| n == 1) {
-      return format!("1 {}", bill);
-    } else {
-      return format!("{} {}s", num_part, bill);
+      return format!("0 {bill}s");
+    } else if num_part.parse::<u64>() == Ok(1) {
+      return format!("1 {bill}");
     }
+
+    return format!("{num_part} {bill}s");
   }
 
   let parts: Vec<&str> = num_part.split('.').collect();
-  let b = parts.get(0).unwrap_or(&"0");
+  let b = parts.first().unwrap_or(&"0");
   let c = parts.get(1).unwrap_or(&"0");
 
   let padded_c = format!("{c:0<2}");
@@ -34,11 +34,13 @@ pub fn flip_money(match_str: &str) -> String {
 
   let coins = if currency_char == '$' {
     if d == 1 { "cent" } else { "cents" }
+  } else if d == 1 {
+    "penny"
   } else {
-    if d == 1 { "penny" } else { "pence" }
+    "pence"
   };
 
   let bill_suffix = if b == &"1" { "" } else { "s" };
 
-  format!("{} {}{} and {} {}", b, bill, bill_suffix, d, coins)
+  format!("{b} {bill}{bill_suffix} and {d} {coins}")
 }
