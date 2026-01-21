@@ -33,8 +33,10 @@ fn session_pool(model_filepath: &PathBuf) -> Arc<Mutex<Vec<Session>>> {
       return pool.clone();
     }
   }
-  let mut map = cache.write().expect("session pool rw lock poisoned");
-  map
+
+  cache
+    .write()
+    .expect("session pool rw lock poisoned")
     .entry(model_filepath.to_path_buf())
     .or_insert_with(|| Arc::new(Mutex::new(Vec::new())))
     .clone()
