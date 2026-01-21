@@ -28,18 +28,18 @@ repository.workspace = true
 [workspace]
 members = [
   ".",
-  "crates/backend_chatterbox_multilingual",
-  # "crates/backend_chatterbox_turbo",
-  "crates/backend_kokoro",
-  "crates/onnx",
-  "crates/server",
-  "crates/shared",
+  "./crates/backend_chatterbox_multilingual",
+  # "./crates/backend_chatterbox_turbo",
+  "./crates/backend_kokoro",
+  "./crates/onnx",
+  "./crates/server",
+  "./crates/shared",
   "./crates/shared_chatterbox",
 ]
 
 [workspace.dependencies]
-ortts_backend_chatterbox_multilingual.path = "crates/backend_chatterbox_multilingual"
-# ortts_backend_chatterbox_turbo.path = "crates/backend_chatterbox_turbo"
+ortts_backend_chatterbox_multilingual.path = "./crates/backend_chatterbox_multilingual"
+# ortts_backend_chatterbox_turbo.path = "./crates/backend_chatterbox_turbo"
 ortts_backend_kokoro.path = "./crates/backend_kokoro"
 ortts_onnx.path = "./crates/onnx"
 ortts_server.path = "./crates/server"
