@@ -29,18 +29,12 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
 
   // Load model
   let downloader = Downloader::new("onnx-community/chatterbox-multilingual-ONNX".to_owned())?;
-  let speech_encoder_path = downloader
-    .get_onnx_with_data("onnx/speech_encoder.onnx")
-    .await?;
-  let embed_tokens_path = downloader
-    .get_onnx_with_data("onnx/embed_tokens.onnx")
-    .await?;
-  let language_model_path = downloader
-    .get_onnx_with_data("onnx/language_model_q4f16.onnx")
-    .await?;
-  let conditional_decoder_path = downloader
-    .get_onnx_with_data("onnx/conditional_decoder.onnx")
-    .await?;
+  let (speech_encoder_path, embed_tokens_path, language_model_path, conditional_decoder_path) = tokio::try_join!(
+    downloader.get_onnx_with_data("onnx/speech_encoder.onnx"),
+    downloader.get_onnx_with_data("onnx/embed_tokens.onnx"),
+    downloader.get_onnx_with_data("onnx/language_model_q4f16.onnx"),
+    downloader.get_onnx_with_data("onnx/conditional_decoder.onnx")
+  )?;
 
   // Start inference sessions
   let mut embed_tokens_session = inference_session(&embed_tokens_path)?;
@@ -84,8 +78,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   let position_ids = Array2::from_shape_vec((1_usize, position_ids.len()), position_ids)?;
 
   // TODO: custom exaggeration
-  let exaggeration = 0.5_f32;
-  let exaggeration = Array1::from_shape_vec(1_usize, vec![exaggeration])?;
+  let exaggeration = Array1::from_shape_vec(1_usize, vec![0.5_f32])?;
 
   // TODO: custom repetition_penalty
   let repetition_penalty = 1.2_f32;
@@ -97,15 +90,11 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     llama_with_past_session
       .inputs
       .iter()
-      .filter_map(|input| {
-        if input.name.starts_with("past_key_values") {
-          match &input.input_type {
-            ValueType::Tensor { ty, .. } => Some((input.name.clone(), *ty)),
-            _ => None,
-          }
-        } else {
-          None
+      .filter_map(|input| match &input.input_type {
+        ValueType::Tensor { ty, .. } if input.name.starts_with("past_key_values") => {
+          Some((input.name.clone(), *ty))
         }
+        _ => None,
       })
       .collect();
 
