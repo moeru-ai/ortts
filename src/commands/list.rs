@@ -1,4 +1,4 @@
-use std::{fs, path::PathBuf};
+use std::{fs, path::Path};
 
 use chrono::{DateTime, Local};
 use chrono_humanize::HumanTime;
@@ -6,9 +6,7 @@ use comfy_table::{ContentArrangement, Table, presets::NOTHING};
 use humansize::{DECIMAL, format_size};
 use ortts_shared::AppError;
 
-use crate::AvailableModel;
-
-use crate::dir_size;
+use crate::{AvailableModel, dir_size};
 
 struct ModelMetadata {
   commit: String,
@@ -33,7 +31,7 @@ pub fn list() -> Result<(), AppError> {
   let cache_path = cache.path();
 
   if !cache_path.exists() {
-    eprintln!("Cache directory not found at {:?}", cache_path);
+    eprintln!("Cache directory not found at {:?}", cache_path.display());
     return Ok(());
   }
 
@@ -47,18 +45,18 @@ pub fn list() -> Result<(), AppError> {
           .unwrap()
           .replace("--", "/");
 
-        if let Some(model) = AvailableModel::from_hf_id(&id) {
-          if let Ok(metadata) = get_model_metadata(&entry.path()) {
-            let model = model.model_name().to_owned();
+        if let Some(model) = AvailableModel::from_hf_id(&id)
+          && let Ok(metadata) = get_model_metadata(&entry.path())
+        {
+          let model = model.model_name().to_owned();
 
-            table.add_row(vec![
-              model,
-              id,
-              metadata.commit,
-              metadata.size,
-              metadata.modified,
-            ]);
-          }
+          table.add_row(vec![
+            model,
+            id,
+            metadata.commit,
+            metadata.size,
+            metadata.modified,
+          ]);
         }
       }
     }
@@ -69,7 +67,7 @@ pub fn list() -> Result<(), AppError> {
   Ok(())
 }
 
-fn get_model_metadata(path: &PathBuf) -> Result<ModelMetadata, AppError> {
+fn get_model_metadata(path: &Path) -> Result<ModelMetadata, AppError> {
   let ref_path = path.join("refs").join("main");
 
   if !ref_path.exists() {

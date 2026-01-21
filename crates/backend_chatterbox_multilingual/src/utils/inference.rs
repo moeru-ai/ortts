@@ -9,7 +9,7 @@ use ort::{
 };
 use ortts_onnx::inference_session;
 use ortts_shared::{AppError, Downloader, SpeechOptions};
-use ortts_shared_chatterbox::{load_audio, RepetitionPenaltyLogitsProcessor};
+use ortts_shared_chatterbox::{RepetitionPenaltyLogitsProcessor, load_audio};
 use tokenizers::Tokenizer;
 
 use crate::utils::{LanguagePreparer, validate_language_id};
@@ -32,7 +32,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   let mut generate_tokens =
     ndarray::Array2::<usize>::from_shape_vec((1, 1), vec![START_SPEECH_TOKEN as usize])?;
 
-  let downloader = Downloader::new("onnx-community/chatterbox-multilingual-ONNX".to_owned());
+  let downloader = Downloader::new("onnx-community/chatterbox-multilingual-ONNX".to_owned())?;
 
   let speech_encoder_path = downloader
     .get_onnx_with_data("onnx/speech_encoder.onnx")
@@ -61,10 +61,10 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
 
   // assert!(tokenizer_config_path.exists());
 
-  let mut embed_tokens_session = inference_session(embed_tokens_path)?;
-  let mut speech_encoder_session = inference_session(speech_encoder_path)?;
-  let mut llama_with_past_session = inference_session(llama_with_path_path)?;
-  let mut conditional_decoder_session = inference_session(conditional_decoder_path)?;
+  let mut embed_tokens_session = inference_session(&embed_tokens_path)?;
+  let mut speech_encoder_session = inference_session(&speech_encoder_path)?;
+  let mut llama_with_past_session = inference_session(&llama_with_path_path)?;
+  let mut conditional_decoder_session = inference_session(&conditional_decoder_path)?;
 
   let past_key_value_dtypes: std::collections::HashMap<String, TensorElementType> =
     llama_with_past_session
@@ -146,10 +146,8 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
       }
     })
     .collect();
-  let position_ids_array = ndarray::Array2::<i64>::from_shape_vec(
-    (1_usize, input_ids_data.len()),
-    position_ids_data.clone(),
-  )?;
+  let position_ids_array =
+    ndarray::Array2::<i64>::from_shape_vec((1_usize, input_ids_data.len()), position_ids_data)?;
   let position_ids_value = Value::from_array(position_ids_array)?;
 
   // exaggeration=0.5
@@ -287,7 +285,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
       // { ... f"past_key_values.{layer}.{kv}": np.zeros([batch_size, num_key_value_heads, 0, head_dim], dtype=np.float32) ... }
       for layer in 0..NUM_HIDDEN_LAYERS {
         for kv in ["key", "value"] {
-          let cache_key = format!("past_key_values.{}.{}", layer, kv);
+          let cache_key = format!("past_key_values.{layer}.{kv}");
           let cache_dtype = past_key_value_dtypes
             .get(&cache_key)
             .copied()

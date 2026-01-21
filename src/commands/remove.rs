@@ -11,12 +11,12 @@ pub fn remove(models: Vec<String>) -> Result<(), AppError> {
   for model_id in models {
     match AvailableModel::from_model_name(&model_id) {
       Some(model) => {
-        let model_path_name = format!("models--{}", model.hf_id().replace("/", "--"));
+        let model_path_name = format!("models--{}", model.hf_id().replace('/', "--"));
         let model_path = cache_path.join(model_path_name);
 
         if model_path.exists() {
           fs::remove_dir_all(&model_path)?;
-          println!("deleted '{model_id}'")
+          println!("deleted '{model_id}'");
         } else {
           panic!("model '{model_id}' not found")
         }

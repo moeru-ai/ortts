@@ -16,6 +16,7 @@ impl RepetitionPenaltyLogitsProcessor {
     Ok(Self { penalty })
   }
 
+  #[must_use]
   pub fn call(&self, input_ids: ArrayView1<usize>, scores: &Array2<f32>) -> Array2<f32> {
     let mut scores_processed = scores.clone();
 
