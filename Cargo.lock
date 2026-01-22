@@ -2143,6 +2143,7 @@ version = "0.1.0-beta.4"
 dependencies = [
  "axum",
  "ortts_backend_chatterbox_multilingual",
+ "ortts_backend_chatterbox_turbo",
  "ortts_backend_kokoro",
  "ortts_shared",
  "serde",
