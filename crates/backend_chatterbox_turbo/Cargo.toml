@@ -1,5 +1,5 @@
 [package]
-name = "ortts_server"
+name = "ortts_backend_chatterbox_turbo"
 version.workspace = true
 edition.workspace = true
 publish.workspace = true
@@ -12,17 +12,21 @@ homepage.workspace = true
 repository.workspace = true
 
 [lib]
-name = "ortts_server"
+name = "ortts_backend_chatterbox_turbo"
 path = "src/lib.rs"
 
 [dependencies]
-ortts_backend_chatterbox_multilingual.workspace = true
-ortts_backend_chatterbox_turbo.workspace = true
-ortts_backend_kokoro.workspace = true
+ortts_onnx.workspace = true
 ortts_shared.workspace = true
-axum.workspace = true
+ortts_shared_chatterbox.workspace = true
+anyhow.workspace = true
+half.workspace = true
+hound.workspace = true
+ndarray.workspace = true
+ort.workspace = true
 serde.workspace = true
 serde_json.workspace = true
-utoipa.workspace = true
-utoipa-axum.workspace = true
-utoipa-scalar.workspace = true
+tokenizers.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+tracing-test.workspace = true

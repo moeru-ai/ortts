@@ -19,6 +19,9 @@ pub async fn speech(Json(options): Json<SpeechOptions>) -> Result<SpeechResult, 
     m if m.starts_with("chatterbox-multilingual") => Ok(SpeechResult::new(
       ortts_backend_chatterbox_multilingual::inference(options).await?,
     )),
+    m if m.starts_with("chatterbox-turbo") => Ok(SpeechResult::new(
+      ortts_backend_chatterbox_turbo::inference(options).await?,
+    )),
     m if m.starts_with("kokoro") => Ok(SpeechResult::new(
       ortts_backend_kokoro::inference(options).await?,
     )),
