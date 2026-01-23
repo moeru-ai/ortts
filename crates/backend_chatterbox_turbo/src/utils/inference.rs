@@ -19,6 +19,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   const START_SPEECH_TOKEN: u32 = 6561;
   const STOP_SPEECH_TOKEN: u32 = 6562;
   const SILENCE_TOKEN: u32 = 4299;
+  const NUM_HIDDEN_LAYERS: i64 = 24;
   const NUM_KV_HEADS: usize = 16;
   const HEAD_DIM: usize = 64;
 
@@ -55,8 +56,8 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     }
     path => PathBuf::from(path),
   };
+
   let audio_values = load_audio(target_voice_path, Some(SAMPLE_RATE))?;
-  let audio_values = Array2::from_shape_vec((1_usize, audio_values.len()), audio_values)?;
   let audio_values = Value::from_array(audio_values)?;
 
   // Prepare text input
@@ -82,9 +83,22 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   let mut attention_mask = Array2::<i64>::zeros((0, 0));
   let mut position_ids = Array2::<i64>::zeros((0, 0));
   let mut batch_size = 0;
+  // let mut past_key_values: HashMap<String, Value> = HashMap::new();
+  // let mut past_key_value_names: Vec<String> = Vec::new();
+  // let mut past_key_value_tensor_types: HashMap<String, TensorElementType> = HashMap::new();
+  let past_key_value_tensor_types: HashMap<String, TensorElementType> = language_model_session
+    .inputs()
+    .iter()
+    .filter_map(|input| match &input.dtype() {
+      ValueType::Tensor { ty, .. } if input.name().starts_with("past_key_values") => {
+        Some((input.name().to_owned(), *ty))
+      }
+      _ => None,
+    })
+    .collect();
+
+  // KV Cache
   let mut past_key_values: HashMap<String, Value> = HashMap::new();
-  let mut past_key_value_names: Vec<String> = Vec::new();
-  let mut past_key_value_dtypes: HashMap<String, TensorElementType> = HashMap::new();
 
   let mut prompt_token_global = None;
   let mut speaker_embeddings_global = None;
@@ -187,45 +201,34 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
 
       println!("past_key_value_specs: {:?}", past_key_value_specs);
 
-      for (name, dtype) in past_key_value_specs {
-        past_key_value_names.push(name.to_string());
-        past_key_value_dtypes.insert(name.to_string(), dtype);
+      for layer in 0..NUM_HIDDEN_LAYERS {
+        for kv in ["key", "value"] {
+          let cache_key = format!("past_key_values.{layer}.{kv}");
+          let cache_dtype = past_key_value_tensor_types
+            .get(&cache_key)
+            .copied()
+            .unwrap_or(TensorElementType::Float32);
 
-        println!("Initializing past key value cache for: {}", name);
-
-        let dtype = *past_key_value_dtypes
-          .get(name)
-          .unwrap_or(&TensorElementType::Float32);
-        match dtype {
-          TensorElementType::Float16 => {
-            let zeros = Array4::from_shape_vec(
-              (batch_size as usize, NUM_KV_HEADS, 0 as usize, HEAD_DIM),
-              Vec::<f16>::new(),
-            )?;
-            past_key_values.insert(
-              name.to_string(),
-              Value::from_array(zeros)
-                .expect("should create f16 cache")
-                .into(),
-            );
-          }
-          TensorElementType::Float32 => {
-            let zeros = Array4::from_shape_vec(
-              (batch_size as usize, NUM_KV_HEADS, 0 as usize, HEAD_DIM),
-              Vec::<f32>::new(),
-            )?;
-            past_key_values.insert(
-              name.to_string(),
-              Value::from_array(zeros)
-                .expect("should create f32 cache")
-                .into(),
-            );
-          }
-          other => {
-            return Err(AppError::from(anyhow!(
-              "unsupported past key value dtype: {other:?}"
-            )));
-          }
+          let cache_shape = (
+            batch_size as usize,
+            NUM_KV_HEADS as usize,
+            0,
+            HEAD_DIM as usize,
+          );
+          let cache_value = match cache_dtype {
+            TensorElementType::Float16 => {
+              Value::from_array(Array4::from_elem(cache_shape, f16::ZERO))?.into()
+            }
+            TensorElementType::Float32 => {
+              Value::from_array(Array4::<f32>::zeros(cache_shape))?.into()
+            }
+            other => {
+              return Err(AppError::from(anyhow!(
+                "unsupported past_key_values element type: {other:?}"
+              )));
+            }
+          };
+          past_key_values.insert(cache_key, cache_value);
         }
       }
 
@@ -242,13 +245,17 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
       "position_ids" => Value::from_array(position_ids.clone())?,
     };
 
-    for name in &past_key_value_names {
-      if let Some(v) = past_key_values.get(name) {
-        language_model_inputs.push((name.clone().into(), v.into()));
-      }
+    for (key, value) in &past_key_values {
+      language_model_inputs.push((key.into(), value.into()));
     }
 
-    let language_model_output = language_model_session.run(language_model_inputs)?;
+    // for name in &past_key_value_names {
+    //   if let Some(v) = past_key_values.get(name) {
+    //     language_model_inputs.push((name.clone().into(), v.into()));
+    //   }
+    // }
+
+    let mut language_model_output = language_model_session.run(language_model_inputs)?;
     let logits = language_model_output.get("logits").unwrap();
     // let present_key_values = language_model_output
     //   .iter()
@@ -307,53 +314,17 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     position_ids = Array2::from_elem((1, 1), last_val + 1);
 
     // Update cache entries in a deterministic order to avoid HashMap ordering issues.
-    for name in &past_key_value_names {
-      if let Some(value_slot) = past_key_values.get_mut(name) {
-        println!("Updating past key value for: {}", name);
-        let present_suffix = name
-          .strip_prefix("past_key_values")
-          .expect("cache key should start with past_key_values");
-        let present_key = format!("present{present_suffix}");
-        let present_value = language_model_output
-          .get(present_key.as_str())
-          .expect("missing matching present key value tensor");
-        let dtype = *past_key_value_dtypes
-          .get(name)
-          .unwrap_or(&TensorElementType::Float32);
-        match dtype {
-          TensorElementType::Float16 => {
-            let (pres_shape, pres_data) = present_value.try_extract_tensor::<f16>().unwrap();
-            let pres_array = Array4::<f16>::from_shape_vec(
-              (
-                pres_shape[0] as usize,
-                pres_shape[1] as usize,
-                pres_shape[2] as usize,
-                pres_shape[3] as usize,
-              ),
-              pres_data.to_vec(),
-            )?;
-            *value_slot = Value::from_array(pres_array)?.into();
-          }
-          TensorElementType::Float32 => {
-            let (pres_shape, pres_data) = present_value.try_extract_tensor::<f32>().unwrap();
-            let pres_array = Array4::<f32>::from_shape_vec(
-              (
-                pres_shape[0] as usize,
-                pres_shape[1] as usize,
-                pres_shape[2] as usize,
-                pres_shape[3] as usize,
-              ),
-              pres_data.to_vec(),
-            )?;
-            *value_slot = Value::from_array(pres_array)?.into();
-          }
-          other => {
-            return Err(AppError::from(anyhow!(
-              "unsupported present key value element type: {other:?}"
-            )));
-          }
-        }
-      }
+    for (key, value_slot) in &mut past_key_values {
+      let present_suffix = key
+        .strip_prefix("past_key_values")
+        .expect("cache key should start with past_key_values");
+      let present_key = format!("present{present_suffix}");
+
+      let updated_value = language_model_output
+        .remove(present_key.as_str())
+        .expect("missing matching present key value tensor");
+
+      *value_slot = updated_value;
     }
   }
 
