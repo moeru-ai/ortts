@@ -103,11 +103,11 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
 
   let past_key_value_dtypes: std::collections::HashMap<String, TensorElementType> =
     llama_with_past_session
-      .inputs
+      .inputs()
       .iter()
-      .filter_map(|input| match &input.input_type {
-        ValueType::Tensor { ty, .. } if input.name.starts_with("past_key_values") => {
-          Some((input.name.clone(), *ty))
+      .filter_map(|input| match &input.dtype() {
+        ValueType::Tensor { ty, .. } if input.name().starts_with("past_key_values") => {
+          Some((input.name().to_owned(), *ty))
         }
         _ => None,
       })

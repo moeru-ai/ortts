@@ -58,12 +58,12 @@ hf-hub = { version = "0.4", default-features = false, features = [
 ] }
 jieba-rs = "0.8.1"
 kakasi = "0.1.0"
-ndarray = "0.16.1"
+ndarray = "0.17.2"
 # TODO: tls-rustls
 # https://github.com/pykeio/ort/issues/436
 # TODO: add EP features
 # https://ort.pyke.io/setup/cargo-features#execution-providers
-ort = { version = "=2.0.0-rc.10", features = [
+ort = { version = "=2.0.0-rc.11", features = [
   "ndarray",
   "half",
   # "cuda",
