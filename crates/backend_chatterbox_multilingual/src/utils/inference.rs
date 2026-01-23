@@ -6,7 +6,7 @@ use ndarray::{Array1, Array2, Array3, Array4, Axis};
 use ort::{
   inputs,
   tensor::TensorElementType,
-  value::{Value, ValueRef, ValueType},
+  value::{Value, ValueType},
 };
 use ortts_onnx::inference_session;
 use ortts_shared::{AppError, Downloader, SpeechOptions};
@@ -195,27 +195,19 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
             .get(&cache_key)
             .copied()
             .unwrap_or(TensorElementType::Float32);
+
+          let cache_shape = (
+            batch_size as usize,
+            NUM_KEY_VALUE_HEADS as usize,
+            0,
+            HEAD_DIM as usize,
+          );
           let cache_value = match cache_dtype {
             TensorElementType::Float16 => {
-              let cache = Array4::from_elem(
-                (
-                  batch_size as usize,
-                  NUM_KEY_VALUE_HEADS as usize,
-                  0,
-                  HEAD_DIM as usize,
-                ),
-                f16::ZERO,
-              );
-              Value::from_array(cache).unwrap().into()
+              Value::from_array(Array4::from_elem(cache_shape, f16::ZERO))?.into()
             }
             TensorElementType::Float32 => {
-              let cache = Array4::<f32>::zeros((
-                batch_size as usize,
-                NUM_KEY_VALUE_HEADS as usize,
-                0,
-                HEAD_DIM as usize,
-              ));
-              Value::from_array(cache).unwrap().into()
+              Value::from_array(Array4::<f32>::zeros(cache_shape))?.into()
             }
             other => {
               return Err(AppError::from(anyhow!(
@@ -324,48 +316,11 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
         .strip_prefix("past_key_values")
         .expect("cache key should start with past_key_values");
       let present_key = format!("present{present_suffix}");
-      let present_value = llama_with_past_output
-        .get(present_key.as_str())
+
+      let updated_value = llama_with_past_output
+        .remove(present_key.as_str())
         .expect("missing matching present key value tensor");
-      let cache_dtype = past_key_value_dtypes
-        .get(key)
-        .copied()
-        .unwrap_or(TensorElementType::Float32);
-      let updated_value = match cache_dtype {
-        TensorElementType::Float16 => {
-          let (pres_shape, pres_data) = present_value.try_extract_tensor::<f16>().unwrap();
-          let pres_array = Array4::<f16>::from_shape_vec(
-            (
-              pres_shape[0] as usize,
-              pres_shape[1] as usize,
-              pres_shape[2] as usize,
-              pres_shape[3] as usize,
-            ),
-            pres_data.to_vec(),
-          )
-          .unwrap();
-          Value::from_array(pres_array).unwrap().into()
-        }
-        TensorElementType::Float32 => {
-          let (pres_shape, pres_data) = present_value.try_extract_tensor::<f32>().unwrap();
-          let pres_array = Array4::<f32>::from_shape_vec(
-            (
-              pres_shape[0] as usize,
-              pres_shape[1] as usize,
-              pres_shape[2] as usize,
-              pres_shape[3] as usize,
-            ),
-            pres_data.to_vec(),
-          )
-          .unwrap();
-          Value::from_array(pres_array).unwrap().into()
-        }
-        other => {
-          return Err(AppError::from(anyhow!(
-            "unsupported present key value element type: {other:?}"
-          )));
-        }
-      };
+
       *value_slot = updated_value;
     }
   }
