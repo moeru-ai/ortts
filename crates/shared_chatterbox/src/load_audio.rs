@@ -1,3 +1,4 @@
+use ndarray::Array2;
 use ortts_shared::AppError;
 use std::{fs::File, path::PathBuf};
 use symphonia::{
@@ -13,7 +14,7 @@ use symphonia::{
 
 use crate::resample_audio;
 
-pub fn load_audio(path: PathBuf, target_rate: Option<u32>) -> Result<Vec<f32>, AppError> {
+pub fn load_audio(path: PathBuf, target_rate: Option<u32>) -> Result<Array2<f32>, AppError> {
   let file = File::open(path)?;
   let mss = MediaSourceStream::new(Box::new(file), MediaSourceStreamOptions::default());
 
@@ -71,11 +72,13 @@ pub fn load_audio(path: PathBuf, target_rate: Option<u32>) -> Result<Vec<f32>, A
     }
   }
 
-  if let Some(target_rate) = target_rate
+  let audio = if let Some(target_rate) = target_rate
     && source_sample_rate != target_rate
   {
     resample_audio(&samples, source_sample_rate, target_rate, channel_count)
   } else {
     Ok(samples)
-  }
+  }?;
+
+  Ok(Array2::from_shape_vec((1_usize, audio.len()), audio)?)
 }
