@@ -6,7 +6,7 @@ use ndarray::{Array1, Array2, Array3, Array4, Axis};
 use ort::{
   inputs,
   tensor::TensorElementType,
-  value::{Value, ValueType},
+  value::{Value, ValueRef, ValueType},
 };
 use ortts_onnx::inference_session;
 use ortts_shared::{AppError, Downloader, SpeechOptions};
@@ -99,7 +99,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   // Make it mutable so we can concatenate new tokens in each iteration
   let mut generate_tokens = Array2::<usize>::from_elem((1, 1), START_SPEECH_TOKEN as usize);
 
-  let past_key_value_dtypes: std::collections::HashMap<String, TensorElementType> =
+  let past_key_value_tensor_types: std::collections::HashMap<String, TensorElementType> =
     llama_with_past_session
       .inputs()
       .iter()
@@ -191,7 +191,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
       for layer in 0..NUM_HIDDEN_LAYERS {
         for kv in ["key", "value"] {
           let cache_key = format!("past_key_values.{layer}.{kv}");
-          let cache_dtype = past_key_value_dtypes
+          let cache_dtype = past_key_value_tensor_types
             .get(&cache_key)
             .copied()
             .unwrap_or(TensorElementType::Float32);
@@ -236,7 +236,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     }
 
     // logits, *present_key_values = llama_with_past_session.run(...)
-    let llama_with_past_output = llama_with_past_session.run(llama_with_past_inputs)?;
+    let mut llama_with_past_output = llama_with_past_session.run(llama_with_past_inputs)?;
     let logits = llama_with_past_output.get("logits").unwrap();
     let present_key_values = llama_with_past_output
       .iter()

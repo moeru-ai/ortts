@@ -2109,6 +2109,8 @@ dependencies = [
 name = "ortts_onnx"
 version = "0.1.0-beta.4"
 dependencies = [
+ "half",
+ "ndarray",
  "num_cpus",
  "ort",
  "ortts_shared",
