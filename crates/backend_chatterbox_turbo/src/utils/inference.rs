@@ -106,7 +106,7 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
 
   for i in 0..MAX_NEW_TOKENS {
     let inputs_embeds_output =
-      &embed_tokens_session.run(inputs!["input_ids" => input_ids.clone()])?["inputs_embeds"];
+      &embed_tokens_session.run(inputs!["input_ids" => &input_ids])?["inputs_embeds"];
 
     let (inputs_embeds_shape, inputs_embeds_data) =
       inputs_embeds_output.try_extract_tensor::<f32>()?;
@@ -335,7 +335,8 @@ pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
     .to_owned();
 
   // silence_tokens = np.full((speech_tokens.shape[0], 3), SILENCE_TOKEN, dtype=np.int64)
-  let silence_tokens = Array2::<i64>::from_elem((1, 1), SILENCE_TOKEN as i64);
+  let silence_tokens =
+    Array2::<i64>::from_elem((speech_tokens.shape()[0], 3), SILENCE_TOKEN as i64);
 
   // speech_tokens = np.concatenate([prompt_token, speech_tokens, silence_token], axis=1)
   let speech_tokens_with_prompt = ndarray::concatenate(
