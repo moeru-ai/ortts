@@ -23,6 +23,9 @@ target
 # direnv
 .direnv
 
+# Pixi environments
+.pixi
+
 # Models (PyTorch pickle, ONNX, etc.)
 *.onnx
 *.pb

@@ -143,9 +143,9 @@ pub enum SpeechAudioStreamEvent {
 pub struct SpeechOptions {
   /// The text to generate audio for.
   pub input: String,
-  /// One of the available TTS models: `chatterbox-multilingual`.
+  /// One of the available TTS models, optionally with a language suffix.
   pub model: String,
-  /// The voice to use when generating the audio.
+  /// The voice to use, or a reference-audio path for voice-cloning models.
   pub voice: String, // TODO: instructions
   // TODO: response_format
   // TODO: speed

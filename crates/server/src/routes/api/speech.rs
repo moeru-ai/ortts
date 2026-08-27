@@ -26,6 +26,7 @@ async fn inference(options: SpeechOptions) -> Result<SpeechAudioStream, AppError
       ortts_backend_chatterbox_turbo::inference(options).await
     }
     m if m.starts_with("kokoro") => ortts_backend_kokoro::inference(options).await,
+    m if m.starts_with("qwen3-tts-base") => ortts_backend_qwen3_tts::inference(options).await,
     model => Err(AppError::new(
       format!("Model `{model}` is not supported"),
       String::from("invalid_request_error"),
@@ -99,9 +100,21 @@ fn audio_response(speech_stream: SpeechAudioStream) -> Response {
     .into_response()
 }
 
-/// Create speech
+/// Creates speech with the backend selected by [`SpeechOptions::model`].
 ///
-/// Generates audio from the input text.
+/// Triggering workflow:
+///
+/// [`crate::routes::new`]
+///   -> `POST /v1/audio/speech`
+///     -> [`speech`]
+///       -> backend `inference`
+///
+/// Upstream:
+/// - [`crate::routes::new`] registers this Axum handler.
+///
+/// Downstream:
+/// - [`inference`] selects a backend and returns a [`SpeechAudioStream`].
+/// - [`audio_response`] or [`sse_response`] converts that stream into the requested response.
 #[utoipa::path(
   post,
   path = "/v1/audio/speech",

@@ -8,6 +8,8 @@ pub enum AvailableModel {
   ChatterboxMultilingual,
   #[strum(props(hf = "onnx-community/Kokoro-82M-v1.0-ONNX"))]
   Kokoro,
+  #[strum(props(hf = "onnx-community/Qwen3-TTS-12Hz-0.6B-Base"))]
+  Qwen3TtsBase,
 }
 
 impl AvailableModel {
