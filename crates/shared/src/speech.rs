@@ -186,7 +186,6 @@ pub struct SpeechOptions {
   // TODO: response_format
   // TODO: speed
   /// Omit this field for a complete response, or select `audio` or `sse` for streaming.
-  #[serde(default)]
   pub stream_format: Option<StreamFormat>,
 }
 
