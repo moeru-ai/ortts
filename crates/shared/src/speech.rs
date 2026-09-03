@@ -1,4 +1,8 @@
-use std::{io::Cursor, pin::Pin};
+use std::{
+  io::Cursor,
+  pin::Pin,
+  task::{Context, Poll},
+};
 
 use axum::{
   http::StatusCode,
@@ -11,8 +15,6 @@ use headers::{ContentLength, ContentType, Mime};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use utoipa::ToSchema;
-
-pub type SpeechChunkStream = Pin<Box<dyn Stream<Item = Result<Vec<f32>, crate::AppError>> + Send>>;
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq)]
 pub struct AudioSpec {
@@ -32,7 +34,7 @@ impl AudioSpec {
 
 pub struct SpeechStream {
   spec: AudioSpec,
-  stream: SpeechChunkStream,
+  stream: Pin<Box<dyn Stream<Item = Result<Vec<f32>, crate::AppError>> + Send>>,
 }
 
 impl SpeechStream {
@@ -50,10 +52,13 @@ impl SpeechStream {
   pub const fn spec(&self) -> AudioSpec {
     self.spec
   }
+}
 
-  #[must_use]
-  pub fn into_stream(self) -> SpeechChunkStream {
-    self.stream
+impl Stream for SpeechStream {
+  type Item = Result<Vec<f32>, crate::AppError>;
+
+  fn poll_next(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>> {
+    self.get_mut().stream.as_mut().poll_next(cx)
   }
 }
 
@@ -61,14 +66,14 @@ pub async fn collect_speech_stream(
   mut speech_stream: SpeechStream,
 ) -> Result<Vec<u8>, crate::AppError> {
   let mut samples = Vec::new();
-  while let Some(chunk) = speech_stream.stream.next().await {
+  while let Some(chunk) = speech_stream.next().await {
     samples.extend(chunk?);
   }
 
   encode_wav(&samples, speech_stream.spec)
 }
 
-pub fn encode_wav(samples: &[f32], audio_spec: AudioSpec) -> Result<Vec<u8>, crate::AppError> {
+fn encode_wav(samples: &[f32], audio_spec: AudioSpec) -> Result<Vec<u8>, crate::AppError> {
   let spec = hound::WavSpec {
     channels: audio_spec.channels,
     sample_rate: audio_spec.sample_rate,

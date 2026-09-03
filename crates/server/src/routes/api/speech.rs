@@ -34,48 +34,41 @@ async fn inference_stream(options: SpeechOptions) -> Result<SpeechStream, AppErr
   }
 }
 
-fn event<T: serde::Serialize>(data: T) -> Event {
-  Event::default()
-    .json_data(data)
-    .expect("speech SSE event serialization cannot fail")
-}
-
 fn sse_response(speech_stream: SpeechStream) -> Response {
-  let audio_spec = speech_stream.spec();
-  let audio_stream = speech_stream.into_stream();
-  let events = stream::try_unfold(
-    (audio_stream, audio_spec, false, false),
-    |(mut audio_stream, audio_spec, mut header_sent, finished)| async move {
-      if finished {
-        return Ok(None);
-      }
+  let events = stream::try_unfold(Some((speech_stream, false)), |state| async move {
+    let Some((mut speech_stream, mut header_sent)) = state else {
+      return Ok(None);
+    };
 
-      match audio_stream.next().await {
-        Some(Ok(samples)) => {
-          let mut bytes = pcm_bytes(&samples);
-          if !header_sent {
-            let mut header = wav_stream_header(audio_spec);
-            header.append(&mut bytes);
-            bytes = header;
-            header_sent = true;
-          }
+    match speech_stream.next().await {
+      Some(Ok(samples)) => {
+        let mut bytes = pcm_bytes(&samples);
+        if !header_sent {
+          let mut header = wav_stream_header(speech_stream.spec());
+          header.append(&mut bytes);
+          bytes = header;
+          header_sent = true;
+        }
 
-          Ok(Some((
-            event(SpeechAudioDeltaEvent::new(&bytes)),
-            (audio_stream, audio_spec, header_sent, false),
-          )))
-        }
-        Some(Err(error)) => {
-          error!(message = %error.message, "speech inference stream failed");
-          Err(std::io::Error::other(error.message))
-        }
-        None => Ok(Some((
-          event(SpeechAudioDoneEvent::new()),
-          (audio_stream, audio_spec, header_sent, true),
-        ))),
+        Ok(Some((
+          Event::default()
+            .json_data(SpeechAudioDeltaEvent::new(&bytes))
+            .expect("speech SSE event serialization cannot fail"),
+          Some((speech_stream, header_sent)),
+        )))
       }
-    },
-  );
+      Some(Err(error)) => {
+        error!(message = %error.message, "speech inference stream failed");
+        Err(std::io::Error::other(error.message))
+      }
+      None => Ok(Some((
+        Event::default()
+          .json_data(SpeechAudioDoneEvent::new())
+          .expect("speech SSE event serialization cannot fail"),
+        None,
+      ))),
+    }
+  });
 
   Sse::new(events)
     .keep_alive(KeepAlive::default())
