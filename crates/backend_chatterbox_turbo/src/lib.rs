@@ -20,6 +20,11 @@ mod tests {
     .await
     .unwrap();
 
+    let reader = hound::WavReader::new(std::io::Cursor::new(&bytes)).unwrap();
+    assert_eq!(reader.spec().channels, 1);
+    assert_eq!(reader.spec().sample_rate, 24_000);
+    assert_eq!(reader.duration(), 106_560);
+
     fs::write(output_file_name, bytes).unwrap();
     tracing::info!("{} was successfully saved", output_file_name);
   }

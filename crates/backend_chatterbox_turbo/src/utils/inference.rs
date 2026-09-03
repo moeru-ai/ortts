@@ -290,7 +290,8 @@ impl TurboStream {
       self.speech_tokens.push(next_token_id as i64);
       self.pending_tokens += 1;
       self.input_ids = Array2::from_shape_vec((1, 1), vec![next_token_id as i64])?;
-      self.position_ids = Array2::from_elem((1, 1), self.iteration as i64);
+      let next_position = self.position_ids[[0, self.position_ids.shape()[1] - 1]] + 1;
+      self.position_ids = Array2::from_elem((1, 1), next_position);
       self.attention_mask = ndarray::concatenate(
         Axis(1),
         &[
