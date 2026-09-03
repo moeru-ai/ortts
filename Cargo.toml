@@ -47,10 +47,8 @@ ortts_shared.path = "./crates/shared"
 ortts_shared_chatterbox.path = "./crates/shared_chatterbox"
 anyhow = "1.0"
 axum = { version = "0.8", features = ["tokio", "macros"] }
-axum-extra = { version = "0.10", features = ["typed-header"] }
 base64 = "0.22.1"
 futures = "0.3.31"
-headers = "0.4.1"
 # TODO: rustls-tls
 # https://github.com/pykeio/ort/issues/436
 hf-hub = { version = "0.4", default-features = false, features = [
@@ -73,7 +71,6 @@ ort = { version = "=2.0.0-rc.11", features = [
   # "webgpu",
 ] }
 half = "2.4"
-hound = "3.5"
 regex = "1.12.2"
 rubato = "0.16"
 serde = "1.0"
@@ -82,7 +79,6 @@ symphonia = "0.5"
 tokenizers = { version = "0.22.1", features = ["hf-hub", "http"] }
 tokio = { version = "1.48", features = ["full"] }
 tracing = "0.1"
-tracing-test = "0.2"
 unicode-general-category = "1.1"
 unicode-normalization = "0.1"
 utoipa = { version = "5.4", features = ["axum_extras"] }
@@ -95,7 +91,6 @@ ortts_server.workspace = true
 ortts_shared.workspace = true
 anyhow.workspace = true
 axum.workspace = true
-axum-extra.workspace = true
 clap = { version = "4.5", features = ["derive"] }
 comfy-table = "7.2.2"
 hf-hub.workspace = true

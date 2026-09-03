@@ -1,17 +1,9 @@
-use std::{
-  io::Cursor,
-  pin::Pin,
-  task::{Context, Poll},
-};
+use std::pin::Pin;
+use std::task::{Context, Poll};
 
-use axum::{
-  http::StatusCode,
-  response::{IntoResponse, Response},
-};
-use axum_extra::TypedHeader;
+use axum::http::StatusCode;
 use base64::{Engine, engine::general_purpose::STANDARD as BASE64};
-use futures::{Stream, StreamExt};
-use headers::{ContentLength, ContentType, Mime};
+use futures::Stream;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use utoipa::ToSchema;
@@ -32,12 +24,12 @@ impl AudioSpec {
   }
 }
 
-pub struct SpeechStream {
+pub struct SpeechAudioStream {
   spec: AudioSpec,
   stream: Pin<Box<dyn Stream<Item = Result<Vec<f32>, crate::AppError>> + Send>>,
 }
 
-impl SpeechStream {
+impl SpeechAudioStream {
   pub fn new<S>(spec: AudioSpec, stream: S) -> Self
   where
     S: Stream<Item = Result<Vec<f32>, crate::AppError>> + Send + 'static,
@@ -54,40 +46,12 @@ impl SpeechStream {
   }
 }
 
-impl Stream for SpeechStream {
+impl Stream for SpeechAudioStream {
   type Item = Result<Vec<f32>, crate::AppError>;
 
   fn poll_next(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>> {
     self.get_mut().stream.as_mut().poll_next(cx)
   }
-}
-
-pub async fn collect_speech_stream(
-  mut speech_stream: SpeechStream,
-) -> Result<Vec<u8>, crate::AppError> {
-  let mut samples = Vec::new();
-  while let Some(chunk) = speech_stream.next().await {
-    samples.extend(chunk?);
-  }
-
-  encode_wav(&samples, speech_stream.spec)
-}
-
-fn encode_wav(samples: &[f32], audio_spec: AudioSpec) -> Result<Vec<u8>, crate::AppError> {
-  let spec = hound::WavSpec {
-    channels: audio_spec.channels,
-    sample_rate: audio_spec.sample_rate,
-    bits_per_sample: 32,
-    sample_format: hound::SampleFormat::Float,
-  };
-  let mut buffer = Cursor::new(Vec::new());
-  let mut writer = hound::WavWriter::new(&mut buffer, spec)?;
-  for sample in samples {
-    writer.write_sample(*sample)?;
-  }
-  writer.finalize()?;
-
-  Ok(buffer.into_inner())
 }
 
 #[must_use]
@@ -99,7 +63,7 @@ pub fn pcm_bytes(samples: &[f32]) -> Vec<u8> {
 }
 
 #[must_use]
-pub fn wav_stream_header(audio_spec: AudioSpec) -> Vec<u8> {
+pub fn wav_header(audio_spec: AudioSpec) -> Vec<u8> {
   let bytes_per_sample = 4_u32;
   let block_align = audio_spec.channels as u32 * bytes_per_sample;
   let byte_rate = audio_spec.sample_rate * block_align;
@@ -185,7 +149,8 @@ pub struct SpeechOptions {
   pub voice: String, // TODO: instructions
   // TODO: response_format
   // TODO: speed
-  /// Omit this field for a complete response, or select `audio` or `sse` for streaming.
+  /// The format to stream the audio in. Defaults to `audio` when omitted.
+  #[schema(default = "audio")]
   pub stream_format: Option<StreamFormat>,
 }
 
@@ -217,59 +182,18 @@ impl SpeechOptions {
 
 #[derive(Debug, ToSchema)]
 #[schema(value_type = String, format = Binary)]
-pub struct SpeechResult(Vec<u8>);
-
-impl SpeechResult {
-  #[must_use]
-  pub const fn new(bytes: Vec<u8>) -> Self {
-    Self(bytes)
-  }
-}
-
-impl IntoResponse for SpeechResult {
-  fn into_response(self) -> Response {
-    // TODO: custom mime type
-    let mime = "audio/wav".parse::<Mime>().unwrap();
-    let content_type = TypedHeader(ContentType::from(mime));
-    let content_length = TypedHeader(ContentLength(self.0.len() as u64));
-
-    (StatusCode::OK, content_type, content_length, self.0).into_response()
-  }
-}
+#[allow(dead_code)]
+/// OpenAPI schema marker for the binary audio response.
+pub struct SpeechAudio(Vec<u8>);
 
 #[cfg(test)]
 mod tests {
-  use futures::stream;
   use serde_json::json;
 
-  use super::{
-    AudioSpec, SpeechAudioDeltaEvent, SpeechAudioDoneEvent, SpeechOptions, SpeechStream,
-    StreamFormat, collect_speech_stream,
-  };
-
-  #[tokio::test]
-  async fn collecting_audio_chunks_produces_a_wav_file() {
-    let stream = SpeechStream::new(
-      AudioSpec::new(1, 24_000),
-      stream::iter([Ok(vec![0.0_f32, 0.25]), Ok(vec![-0.5_f32, 1.0])]),
-    );
-
-    let wav = collect_speech_stream(stream).await.unwrap();
-    let reader = hound::WavReader::new(std::io::Cursor::new(wav)).unwrap();
-
-    assert_eq!(reader.spec().channels, 1);
-    assert_eq!(reader.spec().sample_rate, 24_000);
-    assert_eq!(
-      reader
-        .into_samples::<f32>()
-        .collect::<Result<Vec<_>, _>>()
-        .unwrap(),
-      vec![0.0, 0.25, -0.5, 1.0]
-    );
-  }
+  use super::{SpeechAudioDeltaEvent, SpeechAudioDoneEvent, SpeechOptions, StreamFormat};
 
   #[test]
-  fn stream_format_preserves_omitted_audio_and_sse() {
+  fn stream_format_accepts_audio_and_sse() {
     let default_options: SpeechOptions = serde_json::from_value(json!({
       "input": "hello",
       "model": "kokoro",

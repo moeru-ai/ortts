@@ -3,9 +3,7 @@ use futures::stream;
 use ndarray::{Array, Array2, IxDyn, array};
 use ort::value::Value;
 use ortts_onnx::{SessionPool, inference_session};
-use ortts_shared::{
-  AppError, AudioSpec, Downloader, SpeechOptions, SpeechStream, collect_speech_stream,
-};
+use ortts_shared::{AppError, AudioSpec, Downloader, SpeechAudioStream, SpeechOptions};
 
 use crate::utils::{Tokenizer, prepare_segments};
 
@@ -13,11 +11,7 @@ const SAMPLE_RATE: u32 = 24_000;
 const CHANNELS: u16 = 2;
 const STYLE_VECTOR_SIZE: usize = 256;
 
-pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
-  collect_speech_stream(inference_stream(options).await?).await
-}
-
-pub async fn inference_stream(options: SpeechOptions) -> Result<SpeechStream, AppError> {
+pub async fn inference(options: SpeechOptions) -> Result<SpeechAudioStream, AppError> {
   let state = KokoroStream::prepare(options).await?;
   let audio_stream = stream::try_unfold(state, |state| async move {
     let (chunk, state) = tokio::task::spawn_blocking(move || {
@@ -31,7 +25,7 @@ pub async fn inference_stream(options: SpeechOptions) -> Result<SpeechStream, Ap
     Ok(chunk.map(|chunk| (chunk, state)))
   });
 
-  Ok(SpeechStream::new(
+  Ok(SpeechAudioStream::new(
     AudioSpec::new(CHANNELS, SAMPLE_RATE),
     audio_stream,
   ))

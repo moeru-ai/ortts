@@ -1,17 +1,15 @@
 mod utils;
-pub use utils::{inference, inference_stream};
+pub use utils::inference;
 
 #[cfg(test)]
 mod tests {
   use crate::utils::inference;
+  use futures::StreamExt;
   use ortts_shared::SpeechOptions;
-  use std::fs;
 
   #[tokio::test]
-  #[tracing_test::traced_test]
   async fn test_inference() {
-    let output_file_name = "output.wav";
-    let bytes = inference(SpeechOptions {
+    let mut speech_stream = inference(SpeechOptions {
       input: String::from("Oh, that's hilarious! [chuckle] Um anyway, how are you doing today?"),
       model: String::from("chatterbox-turbo"),
       voice: String::from("alloy"),
@@ -20,12 +18,14 @@ mod tests {
     .await
     .unwrap();
 
-    let reader = hound::WavReader::new(std::io::Cursor::new(&bytes)).unwrap();
-    assert_eq!(reader.spec().channels, 1);
-    assert_eq!(reader.spec().sample_rate, 24_000);
-    assert_eq!(reader.duration(), 106_560);
+    let spec = speech_stream.spec();
+    let mut sample_count = 0;
+    while let Some(chunk) = speech_stream.next().await {
+      sample_count += chunk.unwrap().len();
+    }
 
-    fs::write(output_file_name, bytes).unwrap();
-    tracing::info!("{} was successfully saved", output_file_name);
+    assert_eq!(spec.channels, 1);
+    assert_eq!(spec.sample_rate, 24_000);
+    assert_eq!(sample_count, 106_560);
   }
 }

@@ -10,9 +10,7 @@ use ort::{
   value::{Value, ValueType},
 };
 use ortts_onnx::{SessionPool, inference_session};
-use ortts_shared::{
-  AppError, AudioSpec, Downloader, SpeechOptions, SpeechStream, collect_speech_stream,
-};
+use ortts_shared::{AppError, AudioSpec, Downloader, SpeechAudioStream, SpeechOptions};
 use ortts_shared_chatterbox::{RepetitionPenaltyLogitsProcessor, load_audio};
 use tokenizers::Tokenizer;
 
@@ -26,11 +24,7 @@ const NUM_HIDDEN_LAYERS: i64 = 24;
 const NUM_KV_HEADS: usize = 16;
 const HEAD_DIM: usize = 64;
 
-pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
-  collect_speech_stream(inference_stream(options).await?).await
-}
-
-pub async fn inference_stream(options: SpeechOptions) -> Result<SpeechStream, AppError> {
+pub async fn inference(options: SpeechOptions) -> Result<SpeechAudioStream, AppError> {
   let state = TurboStream::prepare(options).await?;
   let audio_stream = stream::try_unfold(state, |state| async move {
     let (chunk, state) = tokio::task::spawn_blocking(move || {
@@ -44,7 +38,7 @@ pub async fn inference_stream(options: SpeechOptions) -> Result<SpeechStream, Ap
     Ok(chunk.map(|chunk| (chunk, state)))
   });
 
-  Ok(SpeechStream::new(
+  Ok(SpeechAudioStream::new(
     AudioSpec::new(1, SAMPLE_RATE),
     audio_stream,
   ))

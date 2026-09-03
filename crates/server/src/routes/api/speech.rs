@@ -11,21 +11,21 @@ use axum::{
 };
 use futures::{StreamExt, stream};
 use ortts_shared::{
-  AppError, SpeechAudioDeltaEvent, SpeechAudioDoneEvent, SpeechAudioStreamEvent, SpeechOptions,
-  SpeechResult, SpeechStream, StreamFormat, collect_speech_stream, pcm_bytes, wav_stream_header,
+  AppError, SpeechAudio, SpeechAudioDeltaEvent, SpeechAudioDoneEvent, SpeechAudioStream,
+  SpeechAudioStreamEvent, SpeechOptions, StreamFormat, pcm_bytes, wav_header,
 };
 use serde_json::json;
 use tracing::error;
 
-async fn inference_stream(options: SpeechOptions) -> Result<SpeechStream, AppError> {
+async fn inference(options: SpeechOptions) -> Result<SpeechAudioStream, AppError> {
   match options.model.to_lowercase() {
     m if m.starts_with("chatterbox-multilingual") => {
-      ortts_backend_chatterbox_multilingual::inference_stream(options).await
+      ortts_backend_chatterbox_multilingual::inference(options).await
     }
     m if m.starts_with("chatterbox-turbo") => {
-      ortts_backend_chatterbox_turbo::inference_stream(options).await
+      ortts_backend_chatterbox_turbo::inference(options).await
     }
-    m if m.starts_with("kokoro") => ortts_backend_kokoro::inference_stream(options).await,
+    m if m.starts_with("kokoro") => ortts_backend_kokoro::inference(options).await,
     model => Err(AppError::new(
       format!("Model `{model}` is not supported"),
       String::from("invalid_request_error"),
@@ -36,7 +36,7 @@ async fn inference_stream(options: SpeechOptions) -> Result<SpeechStream, AppErr
   }
 }
 
-fn sse_response(speech_stream: SpeechStream) -> Response {
+fn sse_response(speech_stream: SpeechAudioStream) -> Response {
   let events = stream::try_unfold(Some((speech_stream, false)), |state| async move {
     let Some((mut speech_stream, mut header_sent)) = state else {
       return Ok(None);
@@ -46,7 +46,7 @@ fn sse_response(speech_stream: SpeechStream) -> Response {
       Some(Ok(samples)) => {
         let mut bytes = pcm_bytes(&samples);
         if !header_sent {
-          let mut header = wav_stream_header(speech_stream.spec());
+          let mut header = wav_header(speech_stream.spec());
           header.append(&mut bytes);
           bytes = header;
           header_sent = true;
@@ -77,11 +77,11 @@ fn sse_response(speech_stream: SpeechStream) -> Response {
     .into_response()
 }
 
-fn audio_response(speech_stream: SpeechStream) -> Response {
+fn audio_response(speech_stream: SpeechAudioStream) -> Response {
   // Preserve the WAV metadata in the stream, but use a generic binary MIME
   // type because the final RIFF length is unknown while the body is generated.
-  let wav_header = wav_stream_header(speech_stream.spec());
-  let audio_stream = stream::once(async move { Ok::<_, std::io::Error>(wav_header) }).chain(
+  let header = wav_header(speech_stream.spec());
+  let audio_stream = stream::once(async move { Ok::<_, std::io::Error>(header) }).chain(
     speech_stream.map(|chunk| match chunk {
       Ok(samples) => Ok(pcm_bytes(&samples)),
       Err(error) => {
@@ -110,8 +110,7 @@ fn audio_response(speech_stream: SpeechStream) -> Response {
     (
       status = 200,
       content(
-        (SpeechResult = "audio/wav"),
-        (SpeechResult = "application/octet-stream"),
+        (SpeechAudio = "application/octet-stream"),
         (SpeechAudioStreamEvent = "text/event-stream")
       )
     )
@@ -132,11 +131,10 @@ pub async fn speech(
   })?;
   options.validate()?;
   let stream_format = options.stream_format;
-  let audio_stream = inference_stream(options).await?;
+  let audio_stream = inference(options).await?;
 
   match stream_format {
-    None => Ok(SpeechResult::new(collect_speech_stream(audio_stream).await?).into_response()),
-    Some(StreamFormat::Audio) => Ok(audio_response(audio_stream)),
+    None | Some(StreamFormat::Audio) => Ok(audio_response(audio_stream)),
     Some(StreamFormat::Sse) => Ok(sse_response(audio_stream)),
   }
 }
@@ -146,12 +144,12 @@ mod tests {
   use super::{audio_response, sse_response};
   use axum::{body::to_bytes, http::StatusCode};
   use futures::stream;
-  use ortts_shared::{AudioSpec, SpeechAudioDoneEvent, SpeechStream};
+  use ortts_shared::{AudioSpec, SpeechAudioDoneEvent, SpeechAudioStream};
   use serde_json::{Value, json};
 
   #[tokio::test]
   async fn audio_response_streams_wav_bytes_without_content_length() {
-    let speech_stream = SpeechStream::new(
+    let speech_stream = SpeechAudioStream::new(
       AudioSpec::new(1, 24_000),
       stream::iter([Ok(vec![0.0_f32, 0.25]), Ok(vec![-0.5_f32])]),
     );
@@ -180,7 +178,7 @@ mod tests {
 
   #[tokio::test]
   async fn sse_response_emits_audio_chunks_followed_by_done() {
-    let speech_stream = SpeechStream::new(
+    let speech_stream = SpeechAudioStream::new(
       AudioSpec::new(1, 24_000),
       stream::iter([Ok(vec![0.0_f32, 0.25]), Ok(vec![-0.5_f32])]),
     );
