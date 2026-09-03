@@ -21,7 +21,6 @@ ortts_shared.workspace = true
 anyhow.workspace = true
 futures.workspace = true
 half.workspace = true
-hound.workspace = true
 ndarray.workspace = true
 ort.workspace = true
 regex.workspace = true
@@ -31,7 +30,5 @@ serde_json.workspace = true
 symphonia.workspace = true
 tokenizers.workspace = true
 tokio.workspace = true
-tracing.workspace = true
-tracing-test.workspace = true
 
 espeak-rs = "0.1.9"

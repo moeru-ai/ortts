@@ -23,11 +23,6 @@ target
 # direnv
 .direnv
 
-
-# Added by cargo
-
-/target
-
 # Models (PyTorch pickle, ONNX, etc.)
 *.onnx
 *.pb
@@ -38,3 +33,6 @@ target
 # Audio binaries
 *.wav
 *.mp3
+
+# Docs
+docs

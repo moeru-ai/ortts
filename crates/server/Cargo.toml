@@ -21,8 +21,13 @@ ortts_backend_chatterbox_turbo.workspace = true
 ortts_backend_kokoro.workspace = true
 ortts_shared.workspace = true
 axum.workspace = true
+futures.workspace = true
 serde.workspace = true
 serde_json.workspace = true
+tracing.workspace = true
 utoipa.workspace = true
 utoipa-axum.workspace = true
 utoipa-scalar.workspace = true
+
+[dev-dependencies]
+tokio.workspace = true
