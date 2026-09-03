@@ -2062,6 +2062,7 @@ name = "ortts_backend_chatterbox_multilingual"
 version = "0.1.0-beta.4"
 dependencies = [
  "anyhow",
+ "futures",
  "half",
  "hound",
  "jieba-rs",
@@ -2086,6 +2087,7 @@ name = "ortts_backend_chatterbox_turbo"
 version = "0.1.0-beta.4"
 dependencies = [
  "anyhow",
+ "futures",
  "half",
  "hound",
  "ndarray",
@@ -2142,12 +2144,15 @@ name = "ortts_server"
 version = "0.1.0-beta.4"
 dependencies = [
  "axum",
+ "futures",
  "ortts_backend_chatterbox_multilingual",
  "ortts_backend_chatterbox_turbo",
  "ortts_backend_kokoro",
  "ortts_shared",
  "serde",
  "serde_json",
+ "tokio",
+ "tracing",
  "utoipa",
  "utoipa-axum",
  "utoipa-scalar",
@@ -2160,10 +2165,14 @@ dependencies = [
  "anyhow",
  "axum",
  "axum-extra",
+ "base64 0.22.1",
+ "futures",
  "headers",
  "hf-hub",
+ "hound",
  "serde",
  "serde_json",
+ "tokio",
  "utoipa",
 ]
 

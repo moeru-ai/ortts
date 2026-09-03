@@ -11,4 +11,4 @@ mod language_preparer;
 pub use language_preparer::LanguagePreparer;
 
 mod inference;
-pub use inference::inference;
+pub use inference::{inference, inference_stream};

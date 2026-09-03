@@ -1,5 +1,5 @@
 mod utils;
-pub use utils::inference;
+pub use utils::{inference, inference_stream};
 
 #[cfg(test)]
 mod tests {
@@ -17,6 +17,7 @@ mod tests {
       ),
       model: String::from("chatterbox-multilingual/en"),
       voice: String::from("alloy"),
+      stream_format: ortts_shared::StreamFormat::Audio,
     })
     .await
     .unwrap();

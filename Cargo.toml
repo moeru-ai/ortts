@@ -48,6 +48,7 @@ ortts_shared_chatterbox.path = "./crates/shared_chatterbox"
 anyhow = "1.0"
 axum = { version = "0.8", features = ["tokio", "macros"] }
 axum-extra = { version = "0.10", features = ["typed-header"] }
+base64 = "0.22.1"
 futures = "0.3.31"
 headers = "0.4.1"
 # TODO: rustls-tls

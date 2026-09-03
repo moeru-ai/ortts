@@ -20,6 +20,7 @@ ortts_onnx.workspace = true
 ortts_shared.workspace = true
 ortts_shared_chatterbox.workspace = true
 anyhow.workspace = true
+futures.workspace = true
 half.workspace = true
 hound.workspace = true
 jieba-rs.workspace = true

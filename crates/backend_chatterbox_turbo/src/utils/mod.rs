@@ -1,2 +1,2 @@
 mod inference;
-pub use inference::inference;
+pub use inference::{inference, inference_stream};
