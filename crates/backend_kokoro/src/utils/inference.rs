@@ -7,12 +7,11 @@ use ortts_shared::{
   AppError, AudioSpec, Downloader, SpeechOptions, SpeechStream, collect_speech_stream,
 };
 
-use crate::utils::{Tokenizer, phonemize};
+use crate::utils::{Tokenizer, prepare_segments};
 
 const SAMPLE_RATE: u32 = 24_000;
 const CHANNELS: u16 = 2;
 const STYLE_VECTOR_SIZE: usize = 256;
-const MAX_SEGMENT_CHARS: usize = 240;
 
 pub async fn inference(options: SpeechOptions) -> Result<Vec<u8>, AppError> {
   collect_speech_stream(inference_stream(options).await?).await
@@ -59,22 +58,12 @@ impl KokoroStream {
       .collect();
 
     let tokenizer = Tokenizer::new().await?;
-    let segments = split_text(&options.input);
-    let mut phoneme_segments = Vec::with_capacity(segments.len());
-    for segment in segments {
-      let phonemes = phonemize(segment, true).await?;
-      let mut input_ids = vec![0_i64];
-      input_ids.extend(tokenizer.encode(&phonemes));
-      input_ids.push(0_i64);
-      if input_ids.len() > 2 {
-        phoneme_segments.push(input_ids);
-      }
-    }
+    let segments = prepare_segments(&options.input, &tokenizer).await?;
 
     Ok(Self {
       session: inference_session(&model_path)?,
       voices,
-      segments: phoneme_segments,
+      segments,
       segment_index: 0,
     })
   }
@@ -113,65 +102,4 @@ impl KokoroStream {
     }
     Ok(Some(interleaved))
   }
-}
-
-fn split_text(text: &str) -> Vec<String> {
-  let mut sentences = Vec::new();
-  let mut start = 0;
-
-  for (index, character) in text.char_indices() {
-    if matches!(character, '.' | '!' | '?' | '。' | '！' | '？' | '\n') {
-      let end = index + character.len_utf8();
-      if let Some(segment) = text.get(start..end).map(str::trim)
-        && !segment.is_empty()
-      {
-        sentences.push(segment.to_owned());
-      }
-      start = end;
-    }
-  }
-
-  if let Some(segment) = text.get(start..).map(str::trim)
-    && !segment.is_empty()
-  {
-    sentences.push(segment.to_owned());
-  }
-
-  let mut segments = Vec::new();
-  for sentence in sentences {
-    let mut current = String::new();
-    let mut current_chars = 0;
-    for word in sentence.split_whitespace() {
-      let word_chars = word.chars().count();
-      if word_chars > MAX_SEGMENT_CHARS {
-        if !current.is_empty() {
-          segments.push(std::mem::take(&mut current));
-          current_chars = 0;
-        }
-
-        let characters: Vec<_> = word.chars().collect();
-        for chunk in characters.chunks(MAX_SEGMENT_CHARS) {
-          segments.push(chunk.iter().collect());
-        }
-        continue;
-      }
-
-      let separator_chars = if current.is_empty() { 0 } else { 1 };
-      if current_chars + separator_chars + word_chars > MAX_SEGMENT_CHARS && !current.is_empty() {
-        segments.push(std::mem::take(&mut current));
-        current_chars = 0;
-      }
-      if !current.is_empty() {
-        current.push(' ');
-        current_chars += 1;
-      }
-      current.push_str(word);
-      current_chars += word_chars;
-    }
-    if !current.is_empty() {
-      segments.push(current);
-    }
-  }
-
-  segments
 }

@@ -12,6 +12,7 @@ words:
   - cpus
   - cuda
   - directml
+  - direnv
   - dtolnay
   - dtype
   - espeak
