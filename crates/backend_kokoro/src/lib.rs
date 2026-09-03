@@ -21,7 +21,7 @@ mod tests {
       ),
       model: String::from("kokoro"),
       voice: String::from("af_heart"),
-      stream_format: ortts_shared::StreamFormat::Audio,
+      stream_format: None,
     })
     .await
     .unwrap();
@@ -42,7 +42,7 @@ mod tests {
       input,
       model: String::from("kokoro"),
       voice: String::from("af_heart"),
-      stream_format: ortts_shared::StreamFormat::Sse,
+      stream_format: Some(ortts_shared::StreamFormat::Sse),
     })
     .await
     .unwrap();

@@ -119,10 +119,9 @@ pub fn wav_stream_header(audio_spec: AudioSpec) -> Vec<u8> {
   header
 }
 
-#[derive(Debug, Clone, Copy, Default, Deserialize, Eq, PartialEq, Serialize, ToSchema)]
+#[derive(Debug, Clone, Copy, Deserialize, Eq, PartialEq, Serialize, ToSchema)]
 #[serde(rename_all = "lowercase")]
 pub enum StreamFormat {
-  #[default]
   Audio,
   Sse,
 }
@@ -186,8 +185,9 @@ pub struct SpeechOptions {
   pub voice: String, // TODO: instructions
   // TODO: response_format
   // TODO: speed
+  /// Omit this field for a complete response, or select `audio` or `sse` for streaming.
   #[serde(default)]
-  pub stream_format: StreamFormat,
+  pub stream_format: Option<StreamFormat>,
 }
 
 impl SpeechOptions {
@@ -270,14 +270,23 @@ mod tests {
   }
 
   #[test]
-  fn stream_format_defaults_to_audio_and_accepts_sse() {
+  fn stream_format_preserves_omitted_audio_and_sse() {
     let default_options: SpeechOptions = serde_json::from_value(json!({
       "input": "hello",
       "model": "kokoro",
       "voice": "af_heart"
     }))
     .unwrap();
-    assert_eq!(default_options.stream_format, StreamFormat::Audio);
+    assert_eq!(default_options.stream_format, None);
+
+    let audio_options: SpeechOptions = serde_json::from_value(json!({
+      "input": "hello",
+      "model": "kokoro",
+      "voice": "af_heart",
+      "stream_format": "audio"
+    }))
+    .unwrap();
+    assert_eq!(audio_options.stream_format, Some(StreamFormat::Audio));
 
     let sse_options: SpeechOptions = serde_json::from_value(json!({
       "input": "hello",
@@ -286,7 +295,7 @@ mod tests {
       "stream_format": "sse"
     }))
     .unwrap();
-    assert_eq!(sse_options.stream_format, StreamFormat::Sse);
+    assert_eq!(sse_options.stream_format, Some(StreamFormat::Sse));
   }
 
   #[test]

@@ -17,7 +17,7 @@ mod tests {
       ),
       model: String::from("chatterbox-multilingual/en"),
       voice: String::from("alloy"),
-      stream_format: ortts_shared::StreamFormat::Audio,
+      stream_format: None,
     })
     .await
     .unwrap();

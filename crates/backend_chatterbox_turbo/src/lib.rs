@@ -15,7 +15,7 @@ mod tests {
       input: String::from("Oh, that's hilarious! [chuckle] Um anyway, how are you doing today?"),
       model: String::from("chatterbox-turbo"),
       voice: String::from("alloy"),
-      stream_format: ortts_shared::StreamFormat::Audio,
+      stream_format: None,
     })
     .await
     .unwrap();

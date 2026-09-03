@@ -1,7 +1,9 @@
 use axum::{
-  Json, debug_handler,
+  Json,
+  body::Body,
+  debug_handler,
   extract::rejection::JsonRejection,
-  http::StatusCode,
+  http::{StatusCode, header},
   response::{
     IntoResponse, Response,
     sse::{Event, KeepAlive, Sse},
@@ -75,6 +77,28 @@ fn sse_response(speech_stream: SpeechStream) -> Response {
     .into_response()
 }
 
+fn audio_response(speech_stream: SpeechStream) -> Response {
+  // Preserve the WAV metadata in the stream, but use a generic binary MIME
+  // type because the final RIFF length is unknown while the body is generated.
+  let wav_header = wav_stream_header(speech_stream.spec());
+  let audio_stream = stream::once(async move { Ok::<_, std::io::Error>(wav_header) }).chain(
+    speech_stream.map(|chunk| match chunk {
+      Ok(samples) => Ok(pcm_bytes(&samples)),
+      Err(error) => {
+        error!(message = %error.message, "speech inference stream failed");
+        Err(std::io::Error::other(error.message))
+      }
+    }),
+  );
+
+  (
+    StatusCode::OK,
+    [(header::CONTENT_TYPE, "application/octet-stream")],
+    Body::from_stream(audio_stream),
+  )
+    .into_response()
+}
+
 /// Create speech
 ///
 /// Generates audio from the input text.
@@ -87,6 +111,7 @@ fn sse_response(speech_stream: SpeechStream) -> Response {
       status = 200,
       content(
         (SpeechResult = "audio/wav"),
+        (SpeechResult = "application/octet-stream"),
         (SpeechAudioStreamEvent = "text/event-stream")
       )
     )
@@ -110,20 +135,48 @@ pub async fn speech(
   let audio_stream = inference_stream(options).await?;
 
   match stream_format {
-    StreamFormat::Audio => {
-      Ok(SpeechResult::new(collect_speech_stream(audio_stream).await?).into_response())
-    }
-    StreamFormat::Sse => Ok(sse_response(audio_stream)),
+    None => Ok(SpeechResult::new(collect_speech_stream(audio_stream).await?).into_response()),
+    Some(StreamFormat::Audio) => Ok(audio_response(audio_stream)),
+    Some(StreamFormat::Sse) => Ok(sse_response(audio_stream)),
   }
 }
 
 #[cfg(test)]
 mod tests {
-  use super::sse_response;
+  use super::{audio_response, sse_response};
   use axum::{body::to_bytes, http::StatusCode};
   use futures::stream;
   use ortts_shared::{AudioSpec, SpeechAudioDoneEvent, SpeechStream};
   use serde_json::{Value, json};
+
+  #[tokio::test]
+  async fn audio_response_streams_wav_bytes_without_content_length() {
+    let speech_stream = SpeechStream::new(
+      AudioSpec::new(1, 24_000),
+      stream::iter([Ok(vec![0.0_f32, 0.25]), Ok(vec![-0.5_f32])]),
+    );
+    let response = audio_response(speech_stream);
+
+    assert_eq!(response.status(), StatusCode::OK);
+    assert_eq!(
+      response.headers().get("content-type").unwrap(),
+      "application/octet-stream"
+    );
+    assert!(response.headers().get("content-length").is_none());
+
+    let body = to_bytes(response.into_body(), usize::MAX).await.unwrap();
+    let bytes: Vec<u8> = body.into_iter().collect();
+    assert_eq!(&bytes[..4], b"RIFF");
+    assert_eq!(&bytes[8..12], b"WAVE");
+    assert_eq!(
+      &bytes[44..],
+      &[
+        0, 0, 0, 0, // 0.0
+        0, 0, 128, 62, // 0.25
+        0, 0, 0, 191, // -0.5
+      ]
+    );
+  }
 
   #[tokio::test]
   async fn sse_response_emits_audio_chunks_followed_by_done() {
