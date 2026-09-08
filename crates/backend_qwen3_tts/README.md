@@ -7,7 +7,7 @@ The public ORTTS speech interface stays unchanged:
 
 - `input` is the text to synthesize.
 - `voice` is a local reference-audio path.
-- `model` is `qwen3-tts-base`, optionally suffixed with `-zh`, `-en`, or `-ja`.
+- `model` is `qwen3-tts-base`, optionally suffixed with `:zh`, `:en`, or `:ja`.
 
 The first version uses Qwen3-TTS's x-vector-only cloning mode. It therefore needs reference
 audio but not its transcript. ICL cloning can be added later without changing the backend's
