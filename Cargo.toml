@@ -111,6 +111,7 @@ strum = { version = "0.27.2", features = ["derive"] }
 
 [target.'cfg(target_os = "linux")'.dependencies]
 ortts_onnx = { workspace = true, features = ["ep_cuda"] }
+ortts_server = { workspace = true, features = ["ep_cuda"] }
 
 # TODO: enable this
 # [target.'cfg(target_os = "macos")'.dependencies]
@@ -121,7 +122,7 @@ ortts_onnx = { workspace = true, features = ["ep_directml"] }
 
 [features]
 default = []
-ep_cuda = ["ortts_onnx/ep_cuda"]
+ep_cuda = ["ortts_onnx/ep_cuda", "ortts_server/ep_cuda"]
 ep_coreml = ["ortts_onnx/ep_coreml"]
 ep_directml = ["ortts_onnx/ep_directml"]
 ep_webgpu = ["ortts_onnx/ep_webgpu"]

@@ -18,7 +18,10 @@ use super::{
 
 const MODEL_ID: &str = "onnx-community/Qwen3-TTS-12Hz-0.6B-Base";
 const CONFIG_ID: &str = "Qwen/Qwen3-TTS-12Hz-0.6B-Base";
+#[cfg(not(feature = "ep_cuda"))]
 const MODEL_VARIANT: &str = "cpu_int4";
+#[cfg(feature = "ep_cuda")]
+const MODEL_VARIANT: &str = "cuda_int4";
 const SAMPLE_RATE: u32 = 24_000;
 const CODE_GROUPS: usize = 16;
 const DECODER_FRAMES: usize = 25;
@@ -38,7 +41,22 @@ struct ModelPaths {
   merges: PathBuf,
 }
 
-type TalkerStep = (Array3<f32>, Array3<f32>, Vec<Value>);
+struct TalkerStep {
+  logits: Array3<f32>,
+  hidden: Array3<f32>,
+  cache: Vec<Value>,
+}
+
+struct QwenRequest {
+  input: String,
+  language: Language,
+  reference_path: PathBuf,
+  paths: ModelPaths,
+}
+
+struct QwenStream {
+  request: Option<QwenRequest>,
+}
 
 /// Synthesizes one Qwen3-TTS Base request into a mono 24 kHz WAV.
 ///
@@ -47,35 +65,74 @@ type TalkerStep = (Array3<f32>, Array3<f32>, Vec<Value>);
 /// Returns an error when the model assets, reference audio, tokenization, ONNX execution,
 /// codec generation, or WAV encoding fails.
 pub async fn inference(options: SpeechOptions) -> Result<SpeechAudioStream, AppError> {
-  let language = Language::from_model_name(&options.model)?;
-  let reference_path = PathBuf::from(&options.voice);
-  if !reference_path.is_file() {
-    return Err(
-      anyhow!(
-        "Qwen3-TTS Base expects `voice` to be a local reference-audio file; '{}' is not a file",
-        reference_path.display()
-      )
-      .into(),
-    );
+  let state = QwenStream::prepare(options).await?;
+  let audio_stream = stream::try_unfold(state, |state| async move {
+    let (chunk, state) = tokio::task::spawn_blocking(move || {
+      let mut state = state;
+      let chunk = state.next_audio_chunk();
+      (chunk, state)
+    })
+    .await
+    .map_err(|error| AppError::from(anyhow!(error)))?;
+    let chunk = chunk?;
+    Ok(chunk.map(|chunk| (chunk, state)))
+  });
+
+  Ok(SpeechAudioStream::new(
+    AudioSpec::new(1, SAMPLE_RATE),
+    audio_stream,
+  ))
+}
+
+impl QwenStream {
+  async fn prepare(options: SpeechOptions) -> Result<Self, AppError> {
+    let language = Language::from_model_name(&options.model)?;
+    let reference_path = PathBuf::from(&options.voice);
+    if !reference_path.is_file() {
+      return Err(
+        anyhow!(
+          "Qwen3-TTS Base expects `voice` to be a local reference-audio file; '{}' is not a file",
+          reference_path.display()
+        )
+        .into(),
+      );
+    }
+
+    Ok(Self {
+      request: Some(QwenRequest {
+        input: options.input,
+        language,
+        reference_path,
+        paths: Box::pin(download_model()).await?,
+      }),
+    })
   }
 
-  let paths = Box::pin(download_model()).await?;
-  let config = ModelConfig::from_path(&paths.config)?;
-  let tokenizer = load_tokenizer(&paths.vocab, &paths.merges)?;
-  let input_ids = assistant_ids(&tokenizer, &options.input)?;
+  fn next_audio_chunk(&mut self) -> Result<Option<Vec<f32>>, AppError> {
+    let Some(request) = self.request.take() else {
+      return Ok(None);
+    };
+    synthesize(request).map(Some)
+  }
+}
+
+fn synthesize(request: QwenRequest) -> Result<Vec<f32>, AppError> {
+  let config = ModelConfig::from_path(&request.paths.config)?;
+  let tokenizer = load_tokenizer(&request.paths.vocab, &request.paths.merges)?;
+  let input_ids = assistant_ids(&tokenizer, &request.input)?;
   if input_ids.len() < 9 {
     return Err(anyhow!("Qwen3-TTS input token sequence is unexpectedly short").into());
   }
 
-  let mut code_predictor = inference_session(&paths.code_predictor)?;
-  let mut codec_embed = inference_session(&paths.codec_embed)?;
-  let mut residual_embed = inference_session(&paths.residual_embed)?;
-  let mut speaker_encoder = inference_session(&paths.speaker_encoder)?;
-  let mut talker_cache = inference_session(&paths.talker_cache)?;
-  let mut text_embed = inference_session(&paths.text_embed)?;
-  let mut token_decoder = inference_session(&paths.token_decoder)?;
+  let mut code_predictor = inference_session(&request.paths.code_predictor)?;
+  let mut codec_embed = inference_session(&request.paths.codec_embed)?;
+  let mut residual_embed = inference_session(&request.paths.residual_embed)?;
+  let mut speaker_encoder = inference_session(&request.paths.speaker_encoder)?;
+  let mut talker_cache = inference_session(&request.paths.talker_cache)?;
+  let mut text_embed = inference_session(&request.paths.text_embed)?;
+  let mut token_decoder = inference_session(&request.paths.token_decoder)?;
 
-  let reference_audio = load_mono(&reference_path, SAMPLE_RATE)?;
+  let reference_audio = load_mono(&request.reference_path, SAMPLE_RATE)?;
   let speaker = speaker_embedding(
     &mut speaker_encoder,
     reference_audio,
@@ -83,7 +140,7 @@ pub async fn inference(options: SpeechOptions) -> Result<SpeechAudioStream, AppE
   )?;
   let prefill = build_prefill(
     &config,
-    language,
+    request.language,
     &input_ids,
     &speaker,
     &mut text_embed,
@@ -104,11 +161,7 @@ pub async fn inference(options: SpeechOptions) -> Result<SpeechAudioStream, AppE
     &mut code_predictor,
     &mut residual_embed,
   )?;
-  let waveform = decode_codes(&codes, &mut token_decoder)?;
-  Ok(SpeechAudioStream::new(
-    AudioSpec::new(1, SAMPLE_RATE),
-    stream::once(async move { Ok(waveform) }),
-  ))
+  decode_codes(&codes, &mut token_decoder)
 }
 
 async fn download_model() -> Result<ModelPaths, AppError> {
@@ -340,7 +393,7 @@ fn generate_codes(
     i64::try_from(position).expect("Qwen3-TTS position should fit in i64")
   });
   let attention_mask = Array2::<i64>::ones((1, total_length));
-  let (mut logits, mut hidden, new_past) = run_cached_talker(
+  let initial = run_cached_talker(
     talker_cache,
     &cache_input_names,
     &cache_output_names,
@@ -349,7 +402,9 @@ fn generate_codes(
     attention_mask,
     &past,
   )?;
-  past = new_past;
+  let mut logits = initial.logits;
+  let mut hidden = initial.hidden;
+  past = initial.cache;
 
   let mut rng = StdRng::seed_from_u64(0);
   let mut generated = Vec::new();
@@ -392,7 +447,7 @@ fn generate_codes(
         .iter()
         .copied()
         .collect::<Vec<_>>();
-      frame[group] = i64::try_from(sample(&group_logits, SamplingOptions::residual(), &mut rng))
+      frame[group] = i64::try_from(sample(&group_logits, SamplingOptions::main(), &mut rng))
         .expect("Qwen3-TTS residual token should fit in i64");
     }
     generated.push(frame);
@@ -414,9 +469,9 @@ fn generate_codes(
       next_attention,
       &past,
     )?;
-    logits = result.0;
-    hidden = result.1;
-    past = result.2;
+    logits = result.logits;
+    hidden = result.hidden;
+    past = result.cache;
 
     if (step + 1) % 25 == 0 {
       tracing::debug!(frames = step + 1, "Qwen3-TTS generated codec frames");
@@ -477,7 +532,11 @@ fn run_cached_talker(
         .ok_or_else(|| anyhow!("Qwen3-TTS talker did not return cache tensor '{name}'").into())
     })
     .collect::<Result<Vec<_>, AppError>>()?;
-  Ok((logits, hidden, present))
+  Ok(TalkerStep {
+    logits,
+    hidden,
+    cache: present,
+  })
 }
 
 fn predict_residual(

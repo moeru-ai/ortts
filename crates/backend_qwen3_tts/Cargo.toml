@@ -15,6 +15,10 @@ repository.workspace = true
 name = "ortts_backend_qwen3_tts"
 path = "src/lib.rs"
 
+[features]
+default = []
+ep_cuda = ["ortts_onnx/ep_cuda"]
+
 [dependencies]
 ortts_onnx.workspace = true
 ortts_shared.workspace = true

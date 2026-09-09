@@ -9,6 +9,7 @@ use symphonia::{
   core::{
     audio::SampleBuffer,
     codecs::DecoderOptions,
+    errors::Error as SymphoniaError,
     formats::FormatOptions,
     io::{MediaSourceStream, MediaSourceStreamOptions},
     meta::MetadataOptions,
@@ -54,8 +55,10 @@ pub fn load_mono(path: &Path, target_rate: u32) -> Result<Vec<f32>, AppError> {
     if packet.track_id() != track_id {
       continue;
     }
-    let Ok(decoded_audio) = decoder.decode(&packet) else {
-      break;
+    let decoded_audio = match decoder.decode(&packet) {
+      Ok(decoded_audio) => decoded_audio,
+      Err(SymphoniaError::DecodeError(_)) => continue,
+      Err(error) => return Err(error.into()),
     };
     let mut buffer =
       SampleBuffer::<f32>::new(decoded_audio.capacity() as u64, *decoded_audio.spec());

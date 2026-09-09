@@ -15,6 +15,10 @@ repository.workspace = true
 name = "ortts_server"
 path = "src/lib.rs"
 
+[features]
+default = []
+ep_cuda = ["ortts_backend_qwen3_tts/ep_cuda"]
+
 [dependencies]
 ortts_backend_chatterbox_multilingual.workspace = true
 ortts_backend_chatterbox_turbo.workspace = true

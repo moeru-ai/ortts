@@ -17,10 +17,6 @@ impl SamplingOptions {
       temperature: 0.9,
     }
   }
-
-  pub const fn residual() -> Self {
-    Self::main()
-  }
 }
 
 pub fn apply_repetition_penalty(logits: &mut [f32], previous: &[usize], penalty: f32) {
