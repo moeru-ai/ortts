@@ -84,10 +84,10 @@ impl TurboStream {
       downloader.get_tokenizer(),
     )?;
 
-    let mut embed_tokens_session = inference_session(&embed_tokens_path)?;
-    let mut speech_encoder_session = inference_session(&speech_encoder_path)?;
-    let language_model_session = inference_session(&language_model_path)?;
-    let conditional_decoder_session = inference_session(&conditional_decoder_path)?;
+    let mut embed_tokens_session = inference_session(&embed_tokens_path).await?;
+    let mut speech_encoder_session = inference_session(&speech_encoder_path).await?;
+    let language_model_session = inference_session(&language_model_path).await?;
+    let conditional_decoder_session = inference_session(&conditional_decoder_path).await?;
     let tokenizer = Tokenizer::from_file(tokenizer_path).map_err(|e| anyhow!(e))?;
 
     let target_voice_path = match options.voice.as_str() {

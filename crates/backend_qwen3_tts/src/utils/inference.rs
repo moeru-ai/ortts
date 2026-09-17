@@ -4,7 +4,7 @@ use anyhow::anyhow;
 use futures::stream;
 use ndarray::{Array2, Array3, Array4, Axis, concatenate, s};
 use ort::{session::SessionInputValue, value::Value};
-use ortts_onnx::{SessionPool, inference_session};
+use ortts_onnx::{SessionPool, inference_session_blocking};
 use ortts_shared::{AppError, AudioSpec, Downloader, SpeechAudioStream, SpeechOptions};
 use rand::{SeedableRng, rngs::StdRng};
 
@@ -124,13 +124,13 @@ fn synthesize(request: QwenRequest) -> Result<Vec<f32>, AppError> {
     return Err(anyhow!("Qwen3-TTS input token sequence is unexpectedly short").into());
   }
 
-  let mut code_predictor = inference_session(&request.paths.code_predictor)?;
-  let mut codec_embed = inference_session(&request.paths.codec_embed)?;
-  let mut residual_embed = inference_session(&request.paths.residual_embed)?;
-  let mut speaker_encoder = inference_session(&request.paths.speaker_encoder)?;
-  let mut talker_cache = inference_session(&request.paths.talker_cache)?;
-  let mut text_embed = inference_session(&request.paths.text_embed)?;
-  let mut token_decoder = inference_session(&request.paths.token_decoder)?;
+  let mut code_predictor = inference_session_blocking(&request.paths.code_predictor)?;
+  let mut codec_embed = inference_session_blocking(&request.paths.codec_embed)?;
+  let mut residual_embed = inference_session_blocking(&request.paths.residual_embed)?;
+  let mut speaker_encoder = inference_session_blocking(&request.paths.speaker_encoder)?;
+  let mut talker_cache = inference_session_blocking(&request.paths.talker_cache)?;
+  let mut text_embed = inference_session_blocking(&request.paths.text_embed)?;
+  let mut token_decoder = inference_session_blocking(&request.paths.token_decoder)?;
 
   let reference_audio = load_mono(&request.reference_path, SAMPLE_RATE)?;
   let speaker = speaker_embedding(

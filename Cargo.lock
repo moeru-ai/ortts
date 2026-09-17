@@ -2031,11 +2031,13 @@ dependencies = [
 name = "ortts_onnx"
 version = "0.1.0-beta.4"
 dependencies = [
+ "futures",
  "half",
  "ndarray",
  "num_cpus",
  "ort",
  "ortts_shared",
+ "tokio",
  "tracing",
 ]
 

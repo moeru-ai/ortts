@@ -19,9 +19,11 @@ path = "src/lib.rs"
 half.workspace = true
 ndarray.workspace = true
 num_cpus = "1.17"
+futures.workspace = true
 ortts_shared.workspace = true
 ort.workspace = true
 tracing.workspace = true
+tokio.workspace = true
 
 [features]
 default = []

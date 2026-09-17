@@ -7,26 +7,58 @@ use std::{
   sync::{Arc, Mutex, OnceLock, RwLock},
 };
 
-// TODO(@nekomeowww,@sumimakito): The current session pool implementation is way too simple, but it works,
-// for now. The possible approach to improve involves different strategies where memory aware, request queuing
-// (should be implemented on request handler side instead of here), eviction policies, etc.
-//
-// Our current implementation is more like this one:
-// https://github.com/pykeio/ort/issues/469
-static SESSION_POOLS: OnceLock<RwLock<HashMap<PathBuf, Arc<Mutex<Vec<Session>>>>>> =
-  OnceLock::new();
+const MAX_SESSIONS_PER_MODEL: usize = 2;
 
-pub fn inference_session(model_filepath: &PathBuf) -> Result<SessionPool, AppError> {
-  let pool = session_pool(&model_filepath);
-  if let Some(session) = acquire_inference_session(&pool) {
-    return Ok(SessionPool::new(pool, session));
-  }
-
-  let session = build_session(&model_filepath)?;
-  Ok(SessionPool::new(pool, session))
+#[derive(Debug)]
+struct SessionPoolState {
+  sessions: Mutex<Vec<Session>>,
+  permits: Arc<tokio::sync::Semaphore>,
 }
 
-fn session_pool(model_filepath: &PathBuf) -> Arc<Mutex<Vec<Session>>> {
+static SESSION_POOLS: OnceLock<RwLock<HashMap<PathBuf, Arc<SessionPoolState>>>> = OnceLock::new();
+
+pub async fn inference_session(model_filepath: &PathBuf) -> Result<SessionPool, AppError> {
+  let pool = session_pool(model_filepath);
+  let permit = pool
+    .permits
+    .clone()
+    .acquire_owned()
+    .await
+    .map_err(|error| semaphore_error(error.to_string()))?;
+  session_with_permit(pool, model_filepath, permit)
+}
+
+pub fn inference_session_blocking(model_filepath: &PathBuf) -> Result<SessionPool, AppError> {
+  let pool = session_pool(model_filepath);
+  let permit = futures::executor::block_on(pool.permits.clone().acquire_owned())
+    .map_err(|error| semaphore_error(error.to_string()))?;
+  session_with_permit(pool, model_filepath, permit)
+}
+
+fn session_with_permit(
+  pool: Arc<SessionPoolState>,
+  model_filepath: &PathBuf,
+  permit: tokio::sync::OwnedSemaphorePermit,
+) -> Result<SessionPool, AppError> {
+  let session = if let Some(session) = acquire_inference_session(&pool) {
+    session
+  } else {
+    build_session(model_filepath)?
+  };
+  Ok(SessionPool::new(pool, session, permit))
+}
+
+fn semaphore_error(message: String) -> AppError {
+  AppError::new(
+    message,
+    String::from("internal_server_error"),
+    None,
+    None,
+    None,
+  )
+}
+
+fn session_pool(model_filepath: &PathBuf) -> Arc<SessionPoolState> {
   let cache = SESSION_POOLS.get_or_init(Default::default);
   if let Ok(map) = cache.read()
     && let Some(pool) = map.get(model_filepath)
@@ -38,12 +70,17 @@ fn session_pool(model_filepath: &PathBuf) -> Arc<Mutex<Vec<Session>>> {
     .write()
     .expect("session pool rw lock poisoned")
     .entry(model_filepath.clone())
-    .or_insert_with(|| Arc::new(Mutex::new(Vec::new())))
+    .or_insert_with(|| {
+      Arc::new(SessionPoolState {
+        sessions: Mutex::new(Vec::new()),
+        permits: Arc::new(tokio::sync::Semaphore::new(MAX_SESSIONS_PER_MODEL)),
+      })
+    })
     .clone()
 }
 
-fn acquire_inference_session(pool: &Arc<Mutex<Vec<Session>>>) -> Option<Session> {
-  let mut sessions = pool.lock().ok()?;
+fn acquire_inference_session(pool: &Arc<SessionPoolState>) -> Option<Session> {
+  let mut sessions = pool.sessions.lock().ok()?;
   sessions.pop()
 }
 
@@ -95,15 +132,21 @@ fn build_session(model_filepath: &PathBuf) -> Result<Session, AppError> {
 
 #[derive(Debug)]
 pub struct SessionPool {
-  pool: Arc<Mutex<Vec<Session>>>,
+  pool: Arc<SessionPoolState>,
   session: Option<Session>,
+  _permit: tokio::sync::OwnedSemaphorePermit,
 }
 
 impl SessionPool {
-  const fn new(pool: Arc<Mutex<Vec<Session>>>, session: Session) -> Self {
+  const fn new(
+    pool: Arc<SessionPoolState>,
+    session: Session,
+    permit: tokio::sync::OwnedSemaphorePermit,
+  ) -> Self {
     Self {
       pool,
       session: Some(session),
+      _permit: permit,
     }
   }
 }
@@ -131,7 +174,11 @@ impl DerefMut for SessionPool {
 impl Drop for SessionPool {
   fn drop(&mut self) {
     if let Some(session) = self.session.take() {
-      let mut sessions = self.pool.lock().expect("session pool mutex poisoned");
+      let mut sessions = self
+        .pool
+        .sessions
+        .lock()
+        .expect("session pool mutex poisoned");
       sessions.push(session);
     }
   }
