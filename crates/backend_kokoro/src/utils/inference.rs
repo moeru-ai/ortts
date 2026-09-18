@@ -55,7 +55,7 @@ impl KokoroStream {
     let segments = prepare_segments(&options.input, &tokenizer).await?;
 
     Ok(Self {
-      session: inference_session(&model_path)?,
+      session: inference_session(&model_path).await?,
       voices,
       segments,
       segment_index: 0,
