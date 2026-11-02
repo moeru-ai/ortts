@@ -1,0 +1,216 @@
+{"text":"价格￥100元。","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"j ia4 g e2 SP2 y i4 b ai3 y van2 .","word2ph":[2,2,1,2,2,2,1],"norm":"价格,一百元."}}
+{"text":"价格￥100元。","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"j ia4 g e2 y i4 b ai3 y van2 .","word2ph":[2,2,2,2,2,1],"norm":"价格一百元."}}
+{"text":"价格￥100元。","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Yg Yaai3 Yg Yaak3 SP2 Yj Yat1 Yb Yaak3 Yj Yyun4 .","word2ph":[2,2,1,2,2,2,1],"norm":"价格,一百元."}}
+{"text":"价格￥100元。","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Yg Yaai3 Yg Yaak3 Yj Yat1 Yb Yaak3 Yj Yyun4 .","word2ph":[2,2,2,2,2,1],"norm":"价格一百元."}}
+{"text":"价格￥100元。","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"价格￥100元。","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"￥","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"SP2","word2ph":[1],"norm":","}}
+{"text":"￥","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"￥","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"SP2","word2ph":[1],"norm":","}}
+{"text":"￥","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"￥","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"￥","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"^","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"^","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"SP3","word2ph":[1],"norm":","}}
+{"text":"^","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"^","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"SP3","word2ph":[1],"norm":","}}
+{"text":"^","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"^","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"^_^","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"^_^","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"SP3","word2ph":[1],"norm":","}}
+{"text":"^_^","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"^_^","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"SP3 SP3","word2ph":[1,1],"norm":",,"}}
+{"text":"^_^","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"^_^","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"你好^啊，^^今天。","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"n i2 h ao3 AA a5 SP2 j in1 t ian1 .","word2ph":[2,2,2,1,2,2,1],"norm":"你好啊,今天."}}
+{"text":"你好^啊，^^今天。","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"n i2 h ao3 SP3 AA a5 SP3 j in1 t ian1 .","word2ph":[2,2,1,2,1,2,2,1],"norm":"你好,啊,今天."}}
+{"text":"你好^啊，^^今天。","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Yn Yei5 Yh You2 Yaa Ya3 SP2 Yg Yam1 Yt Yin1 .","word2ph":[2,2,2,1,2,2,1],"norm":"你好啊,今天."}}
+{"text":"你好^啊，^^今天。","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Yn Yei5 Yh You2 SP3 Yaa Ya3 SP3 SP3 SP3 Yg Yam1 Yt Yin1 .","word2ph":[2,2,1,2,1,1,1,2,2,1],"norm":"你好,啊,,,今天."}}
+{"text":"你好^啊，^^今天。","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"你好^啊，^^今天。","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"￥￥￥五十","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"SP2 w u3 sh ir2","word2ph":[1,2,2],"norm":",五十"}}
+{"text":"￥￥￥五十","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"w u3 sh ir2","word2ph":[2,2],"norm":"五十"}}
+{"text":"￥￥￥五十","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"SP2 SP2 SP2 Yng Yg5 Ys Yap6","word2ph":[1,1,1,2,2],"norm":",,,五十"}}
+{"text":"￥￥￥五十","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Yng Yg5 Ys Yap6","word2ph":[2,2],"norm":"五十"}}
+{"text":"￥￥￥五十","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"￥￥￥五十","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"a^b","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"a^b","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"SP3","word2ph":[1],"norm":","}}
+{"text":"a^b","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"a^b","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"SP3","word2ph":[1],"norm":","}}
+{"text":"a^b","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"a^b","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"今天^天气^很好。","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"j in1 t ian1 t ian1 q i4 h en2 h ao3 .","word2ph":[2,2,2,2,2,2,1],"norm":"今天天气很好."}}
+{"text":"今天^天气^很好。","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"j in1 t ian1 SP3 t ian1 q i4 SP3 h en2 h ao3 .","word2ph":[2,2,1,2,2,1,2,2,1],"norm":"今天,天气,很好."}}
+{"text":"今天^天气^很好。","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Yg Yam1 Yt Yin1 Yt Yin1 Yh Yei3 Yh Yan2 Yh You2 .","word2ph":[2,2,2,2,2,2,1],"norm":"今天天气很好."}}
+{"text":"今天^天气^很好。","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Yg Yam1 Yt Yin1 SP3 Yt Yin1 Yh Yei3 SP3 Yh Yan2 Yh You2 .","word2ph":[2,2,1,2,2,1,2,2,1],"norm":"今天,天气,很好."}}
+{"text":"今天^天气^很好。","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"今天^天气^很好。","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"Hello^world","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"Hello^world","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"SP3","word2ph":[1],"norm":","}}
+{"text":"Hello^world","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"Hello^world","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"SP3","word2ph":[1],"norm":","}}
+{"text":"Hello^world","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"Hello^world","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"こんにちは^さようなら","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"こんにちは^さようなら","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"SP3","word2ph":[1],"norm":","}}
+{"text":"こんにちは^さようなら","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"こんにちは^さようなら","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"SP3","word2ph":[1],"norm":","}}
+{"text":"こんにちは^さようなら","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"こんにちは^さようなら","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"佢^唔係^好鍾意。","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"j v4 w u2 x i4 h ao3 zh ong1 y i4 .","word2ph":[2,2,2,2,2,2,1],"norm":"佢唔系好锺意."}}
+{"text":"佢^唔係^好鍾意。","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"j v4 SP3 w u2 x i4 SP3 h ao3 zh ong1 y i4 .","word2ph":[2,1,2,2,1,2,2,2,1],"norm":"佢,唔系,好锺意."}}
+{"text":"佢^唔係^好鍾意。","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Yk Yeoi5 Ym Ym4 Yh Yai6 Yh You2 Yz Yung1 Yj Yi3 .","word2ph":[2,2,2,2,2,2,1],"norm":"佢唔系好锺意."}}
+{"text":"佢^唔係^好鍾意。","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Yk Yeoi5 SP3 Ym Ym4 Yh Yai6 SP3 Yh You2 Yz Yung1 Yj Yi3 .","word2ph":[2,1,2,2,1,2,2,2,1],"norm":"佢,唔系,好锺意."}}
+{"text":"佢^唔係^好鍾意。","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"佢^唔係^好鍾意。","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"UNK测试","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"c e4 sh ir4","word2ph":[2,2],"norm":"测试"}}
+{"text":"UNK测试","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"c e4 sh ir4","word2ph":[2,2],"norm":"测试"}}
+{"text":"UNK测试","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Yc Yaak1 Ys Yi3","word2ph":[2,2],"norm":"测试"}}
+{"text":"UNK测试","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Yc Yaak1 Ys Yi3","word2ph":[2,2],"norm":"测试"}}
+{"text":"UNK测试","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"UNK测试","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"「こんにちは」『世界』","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"sh ir4 j ie4","word2ph":[2,2],"norm":"世界"}}
+{"text":"「こんにちは」『世界』","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"sh ir4 j ie4","word2ph":[2,2],"norm":"世界"}}
+{"text":"「こんにちは」『世界』","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Ys Yai3 Yg Yaai3","word2ph":[2,2],"norm":"世界"}}
+{"text":"「こんにちは」『世界』","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Ys Yai3 Yg Yaai3","word2ph":[2,2],"norm":"世界"}}
+{"text":"「こんにちは」『世界』","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"「こんにちは」『世界』","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"a","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"a","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"a","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"a","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"a","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"a","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"ab","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"ab","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"ab","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"ab","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"ab","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"ab","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"I","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"I","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"I","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"I","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"I","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"I","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"OK.","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":".","word2ph":[1],"norm":"."}}
+{"text":"OK.","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":".","word2ph":[1],"norm":"."}}
+{"text":"OK.","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":".","word2ph":[1],"norm":"."}}
+{"text":"OK.","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":".","word2ph":[1],"norm":"."}}
+{"text":"OK.","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"OK.","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"，","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"SP2","word2ph":[1],"norm":","}}
+{"text":"，","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"SP3","word2ph":[1],"norm":","}}
+{"text":"，","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"SP2","word2ph":[1],"norm":","}}
+{"text":"，","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"SP3","word2ph":[1],"norm":","}}
+{"text":"，","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"，","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":"","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":" ","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":" ","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":" ","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":" ","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"","word2ph":[],"norm":""}}
+{"text":" ","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":" ","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"你好，很高兴认识你。","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"n i2 h ao3 SP2 h en3 g ao1 x ing4 r en4 sh ir5 n i3 .","word2ph":[2,2,1,2,2,2,2,2,2,1],"norm":"你好,很高兴认识你."}}
+{"text":"你好，很高兴认识你。","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"n i2 h ao3 SP3 h en3 g ao1 x ing4 r en4 sh ir5 n i3 .","word2ph":[2,2,1,2,2,2,2,2,2,1],"norm":"你好,很高兴认识你."}}
+{"text":"你好，很高兴认识你。","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Yn Yei5 Yh You2 SP2 Yh Yan2 Yg You1 Yh Ying3 Yj Ying6 Ys Yik1 Yn Yei5 .","word2ph":[2,2,1,2,2,2,2,2,2,1],"norm":"你好,很高兴认识你."}}
+{"text":"你好，很高兴认识你。","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Yn Yei5 Yh You2 SP3 Yh Yan2 Yg You1 Yh Ying3 Yj Ying6 Ys Yik1 Yn Yei5 .","word2ph":[2,2,1,2,2,2,2,2,2,1],"norm":"你好,很高兴认识你."}}
+{"text":"你好，很高兴认识你。","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"你好，很高兴认识你。","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"嗯。","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"EE en1 .","word2ph":[2,1],"norm":"恩."}}
+{"text":"嗯。","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"EE en1 .","word2ph":[2,1],"norm":"恩."}}
+{"text":"嗯。","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Yng Yg6 .","word2ph":[2,1],"norm":"嗯."}}
+{"text":"嗯。","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Yng Yg6 .","word2ph":[2,1],"norm":"嗯."}}
+{"text":"嗯。","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"嗯。","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"他还没还我钱。","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"t a1 h ai2 m ei2 h uan2 w o3 q ian2 .","word2ph":[2,2,2,2,2,2,1],"norm":"他还没还我钱."}}
+{"text":"他还没还我钱。","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"t a1 h ai2 m ei2 h uan2 w o3 q ian2 .","word2ph":[2,2,2,2,2,2,1],"norm":"他还没还我钱."}}
+{"text":"他还没还我钱。","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Yt Yaa1 Yw Yaan4 Ym Yut6 Yw Yaan4 Yng Yo5 Yc Yin4 .","word2ph":[2,2,2,2,2,2,1],"norm":"他还没还我钱."}}
+{"text":"他还没还我钱。","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Yt Yaa1 Yw Yaan4 Ym Yut6 Yw Yaan4 Yng Yo5 Yc Yin4 .","word2ph":[2,2,2,2,2,2,1],"norm":"他还没还我钱."}}
+{"text":"他还没还我钱。","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"他还没还我钱。","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"朝阳区的朝鲜族朋友早上来了。","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"ch ao2 y ang2 q v1 d e5 ch ao2 x ian3 z u2 p eng2 y ou5 z ao3 sh ang4 l ai2 l e5 .","word2ph":[2,2,2,2,2,2,2,2,2,2,2,2,2,1],"norm":"朝阳区的朝鲜族朋友早上来了."}}
+{"text":"朝阳区的朝鲜族朋友早上来了。","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"ch ao2 y ang2 q v1 d e5 ch ao2 x ian3 z u2 p eng2 y ou5 z ao3 sh ang4 l ai2 l e5 .","word2ph":[2,2,2,2,2,2,2,2,2,2,2,2,2,1],"norm":"朝阳区的朝鲜族朋友早上来了."}}
+{"text":"朝阳区的朝鲜族朋友早上来了。","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Yz Yiu1 Yj Yoeng4 Yk Yeoi1 Yd Yik1 Yc Yiu4 Ys Yin1 Yz Yuk6 Yp Yang4 Yj Yau5 Yz You2 Ys Yoeng6 Yl Yoi4 Yl Yiu5 .","word2ph":[2,2,2,2,2,2,2,2,2,2,2,2,2,1],"norm":"朝阳区的朝鲜族朋友早上来了."}}
+{"text":"朝阳区的朝鲜族朋友早上来了。","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Yz Yiu1 Yj Yoeng4 Yk Yeoi1 Yd Yik1 Yc Yiu4 Ys Yin1 Yz Yuk6 Yp Yang4 Yj Yau5 Yz You2 Ys Yoeng6 Yl Yoi4 Yl Yiu5 .","word2ph":[2,2,2,2,2,2,2,2,2,2,2,2,2,1],"norm":"朝阳区的朝鲜族朋友早上来了."}}
+{"text":"朝阳区的朝鲜族朋友早上来了。","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"朝阳区的朝鲜族朋友早上来了。","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"不是不要不对不去不好。","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"b u2 sh ir4 b u2 y ao4 b u2 d ui4 b u2 q v4 b u4 h ao3 .","word2ph":[2,2,2,2,2,2,2,2,2,2,1],"norm":"不是不要不对不去不好."}}
+{"text":"不是不要不对不去不好。","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"b u2 sh ir4 b u2 y ao4 b u2 d ui4 b u2 q v4 b u4 h ao3 .","word2ph":[2,2,2,2,2,2,2,2,2,2,1],"norm":"不是不要不对不去不好."}}
+{"text":"不是不要不对不去不好。","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Yb Yat1 Ys Yi6 Yb Yat1 Yj Yiu3 Yb Yat1 Yd Yeoi3 Yb Yat1 Yh Yeoi3 Yb Yat1 Yh You2 .","word2ph":[2,2,2,2,2,2,2,2,2,2,1],"norm":"不是不要不对不去不好."}}
+{"text":"不是不要不对不去不好。","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Yb Yat1 Ys Yi6 Yb Yat1 Yj Yiu3 Yb Yat1 Yd Yeoi3 Yb Yat1 Yh Yeoi3 Yb Yat1 Yh You2 .","word2ph":[2,2,2,2,2,2,2,2,2,2,1],"norm":"不是不要不对不去不好."}}
+{"text":"不是不要不对不去不好。","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"不是不要不对不去不好。","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"他把事情告诉了大家伙儿。","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"t a1 b a3 sh ir4 q ing5 g ao4 s u5 l e5 d a4 j ia1 h uo3 EE er3 .","word2ph":[2,2,2,2,2,2,2,2,2,2,2,1],"norm":"他把事情告诉了大家伙儿."}}
+{"text":"他把事情告诉了大家伙儿。","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"t a1 b a3 sh ir4 q ing5 g ao4 s u5 l e5 d a4 j ia1 h uo3 EE er3 .","word2ph":[2,2,2,2,2,2,2,2,2,2,2,1],"norm":"他把事情告诉了大家伙儿."}}
+{"text":"他把事情告诉了大家伙儿。","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Yt Yaa1 Yb Yaa2 Ys Yi6 Yc Ying4 Yg You3 Ys You3 Yl Yiu5 Yd Yaai6 Yg Yaa1 Yf Yo2 Yj Yan4 .","word2ph":[2,2,2,2,2,2,2,2,2,2,2,1],"norm":"他把事情告诉了大家伙儿."}}
+{"text":"他把事情告诉了大家伙儿。","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Yt Yaa1 Yb Yaa2 Ys Yi6 Yc Ying4 Yg You3 Ys You3 Yl Yiu5 Yd Yaai6 Yg Yaa1 Yf Yo2 Yj Yan4 .","word2ph":[2,2,2,2,2,2,2,2,2,2,2,1],"norm":"他把事情告诉了大家伙儿."}}
+{"text":"他把事情告诉了大家伙儿。","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"他把事情告诉了大家伙儿。","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"现在是下午3:45。","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"x ian4 z ai4 sh ir4 x ia4 w u3 s an1 d ian3 s i04 sh ir2 w u3 f en1 .","word2ph":[2,2,2,2,2,2,2,2,2,2,2,1],"norm":"现在是下午三点四十五分."}}
+{"text":"现在是下午3:45。","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"x ian4 z ai4 sh ir4 x ia4 w u3 s an1 d ian3 s i04 sh ir2 w u3 f en1 .","word2ph":[2,2,2,2,2,2,2,2,2,2,2,1],"norm":"现在是下午三点四十五分."}}
+{"text":"现在是下午3:45。","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Yj Yin6 Yz Yoi6 Ys Yi6 Yh Yaa6 Yng Yg5 Ys Yaam1 Yd Yim2 Ys Yei3 Ys Yap6 Yng Yg5 Yf Yan1 .","word2ph":[2,2,2,2,2,2,2,2,2,2,2,1],"norm":"现在是下午三点四十五分."}}
+{"text":"现在是下午3:45。","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Yj Yin6 Yz Yoi6 Ys Yi6 Yh Yaa6 Yng Yg5 Ys Yaam1 Yd Yim2 Ys Yei3 Ys Yap6 Yng Yg5 Yf Yan1 .","word2ph":[2,2,2,2,2,2,2,2,2,2,2,1],"norm":"现在是下午三点四十五分."}}
+{"text":"现在是下午3:45。","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"现在是下午3:45。","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"第1章到第10章是重点。","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"d i4 y i1 zh ang1 d ao4 d i4 sh ir2 zh ang1 sh ir4 zh ong4 d ian3 .","word2ph":[2,2,2,2,2,2,2,2,2,2,1],"norm":"第一章到第十章是重点."}}
+{"text":"第1章到第10章是重点。","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"d i4 y i1 zh ang1 d ao4 d i4 sh ir2 zh ang1 sh ir4 zh ong4 d ian3 .","word2ph":[2,2,2,2,2,2,2,2,2,2,1],"norm":"第一章到第十章是重点."}}
+{"text":"第1章到第10章是重点。","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Yd Yai6 Yj Yat1 Yz Yoeng1 Yd You3 Yd Yai6 Ys Yap6 Yz Yoeng1 Ys Yi6 Yz Yung6 Yd Yim2 .","word2ph":[2,2,2,2,2,2,2,2,2,2,1],"norm":"第一章到第十章是重点."}}
+{"text":"第1章到第10章是重点。","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Yd Yai6 Yj Yat1 Yz Yoeng1 Yd You3 Yd Yai6 Ys Yap6 Yz Yoeng1 Ys Yi6 Yz Yung6 Yd Yim2 .","word2ph":[2,2,2,2,2,2,2,2,2,2,1],"norm":"第一章到第十章是重点."}}
+{"text":"第1章到第10章是重点。","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"第1章到第10章是重点。","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"第二十三届运动会有一百二十个国家参加。","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"d i4 EE er4 sh ir2 s an1 j ie4 y vn4 d ong4 h ui4 y ou3 y i4 b ai3 EE er4 sh ir2 g e5 g uo2 j ia1 c an1 j ia1 .","word2ph":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],"norm":"第二十三届运动会有一百二十个国家参加."}}
+{"text":"第二十三届运动会有一百二十个国家参加。","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"d i4 EE er4 sh ir2 s an1 j ie4 y vn4 d ong4 h ui4 y ou3 y i4 b ai3 EE er4 sh ir2 g e5 g uo2 j ia1 c an1 j ia1 .","word2ph":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],"norm":"第二十三届运动会有一百二十个国家参加."}}
+{"text":"第二十三届运动会有一百二十个国家参加。","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Yd Yai6 Yj Yi6 Ys Yap6 Ys Yaam1 Yg Yaai3 Yw Yan6 Yd Yung6 Yw Yui6 Yj Yau5 Yj Yat1 Yb Yaak3 Yj Yi6 Ys Yap6 Yg Yo3 Ygw Yok3 Yg Yaa1 Yc Yaam1 Yg Yaa1 .","word2ph":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],"norm":"第二十三届运动会有一百二十个国家参加."}}
+{"text":"第二十三届运动会有一百二十个国家参加。","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Yd Yai6 Yj Yi6 Ys Yap6 Ys Yaam1 Yg Yaai3 Yw Yan6 Yd Yung6 Yw Yui6 Yj Yau5 Yj Yat1 Yb Yaak3 Yj Yi6 Ys Yap6 Yg Yo3 Ygw Yok3 Yg Yaa1 Yc Yaam1 Yg Yaa1 .","word2ph":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],"norm":"第二十三届运动会有一百二十个国家参加."}}
+{"text":"第二十三届运动会有一百二十个国家参加。","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"第二十三届运动会有一百二十个国家参加。","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"这是一个长句子，没有句号","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"zh e4 sh ir4 y i2 g e5 ch ang2 j v4 z i05 SP2 m ei2 y ou3 j v4 h ao4","word2ph":[2,2,2,2,2,2,2,1,2,2,2,2],"norm":"这是一个长句子,没有句号"}}
+{"text":"这是一个长句子，没有句号","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"zh e4 sh ir4 y i2 g e5 ch ang2 j v4 z i05 SP3 m ei2 y ou3 j v4 h ao4","word2ph":[2,2,2,2,2,2,2,1,2,2,2,2],"norm":"这是一个长句子,没有句号"}}
+{"text":"这是一个长句子，没有句号","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Yz Ye5 Ys Yi6 Yj Yat1 Yg Yo3 Yc Yoeng4 Yg Yeoi3 Yz Yi2 SP2 Ym Yut6 Yj Yau5 Yg Yeoi3 Yh You6","word2ph":[2,2,2,2,2,2,2,1,2,2,2,2],"norm":"这是一个长句子,没有句号"}}
+{"text":"这是一个长句子，没有句号","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Yz Ye5 Ys Yi6 Yj Yat1 Yg Yo3 Yc Yoeng4 Yg Yeoi3 Yz Yi2 SP3 Ym Yut6 Yj Yau5 Yg Yeoi3 Yh You6","word2ph":[2,2,2,2,2,2,2,1,2,2,2,2],"norm":"这是一个长句子,没有句号"}}
+{"text":"这是一个长句子，没有句号","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"这是一个长句子，没有句号","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"I would like a cup of coffee, please.","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"SP2 m iao3 .","word2ph":[1,2,1],"norm":",秒."}}
+{"text":"I would like a cup of coffee, please.","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"SP3 m iao3 .","word2ph":[1,2,1],"norm":",秒."}}
+{"text":"I would like a cup of coffee, please.","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"SP2 Ym Yiu5 .","word2ph":[1,2,1],"norm":",秒."}}
+{"text":"I would like a cup of coffee, please.","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"SP3 Ym Yiu5 .","word2ph":[1,2,1],"norm":",秒."}}
+{"text":"I would like a cup of coffee, please.","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"I would like a cup of coffee, please.","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"Please record the record.","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"m iao3 .","word2ph":[2,1],"norm":"秒."}}
+{"text":"Please record the record.","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"m iao3 .","word2ph":[2,1],"norm":"秒."}}
+{"text":"Please record the record.","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Ym Yiu5 .","word2ph":[2,1],"norm":"秒."}}
+{"text":"Please record the record.","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Ym Yiu5 .","word2ph":[2,1],"norm":"秒."}}
+{"text":"Please record the record.","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"Please record the record.","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"The price is $19.99.","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"m iao3 . sh ir2 j iu3 d ian2 j iu3 j iu3 .","word2ph":[2,1,2,2,2,2,2,1],"norm":"秒.十九点九九."}}
+{"text":"The price is $19.99.","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"m iao3 . sh ir2 j iu3 d ian2 j iu3 j iu3 .","word2ph":[2,1,2,2,2,2,2,1],"norm":"秒.十九点九九."}}
+{"text":"The price is $19.99.","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Ym Yiu5 . Ys Yap6 Yg Yau2 Yd Yim2 Yg Yau2 Yg Yau2 .","word2ph":[2,1,2,2,2,2,2,1],"norm":"秒.十九点九九."}}
+{"text":"The price is $19.99.","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Ym Yiu5 . Ys Yap6 Yg Yau2 Yd Yim2 Yg Yau2 Yg Yau2 .","word2ph":[2,1,2,2,2,2,2,1],"norm":"秒.十九点九九."}}
+{"text":"The price is $19.99.","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"The price is $19.99.","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"这个API的response time太长了。","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"zh e4 g e5 d e5 m iao2 m iao3 m i3 t ai4 ch ang2 l e5 .","word2ph":[2,2,2,2,2,2,2,2,2,1],"norm":"这个的秒秒米太长了."}}
+{"text":"这个API的response time太长了。","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"zh e4 g e5 d e5 m iao2 m iao3 m i3 t ai4 ch ang2 l e5 .","word2ph":[2,2,2,2,2,2,2,2,2,1],"norm":"这个的秒秒米太长了."}}
+{"text":"这个API的response time太长了。","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Yz Ye5 Yg Yo3 Yd Yik1 Ym Yiu5 Ym Yiu5 Ym Yai5 Yt Yaai3 Yc Yoeng4 Yl Yiu5 .","word2ph":[2,2,2,2,2,2,2,2,2,1],"norm":"这个的秒秒米太长了."}}
+{"text":"这个API的response time太长了。","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Yz Ye5 Yg Yo3 Yd Yik1 Ym Yiu5 Ym Yiu5 Ym Yai5 Yt Yaai3 Yc Yoeng4 Yl Yiu5 .","word2ph":[2,2,2,2,2,2,2,2,2,1],"norm":"这个的秒秒米太长了."}}
+{"text":"这个API的response time太长了。","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"这个API的response time太长了。","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"我最喜欢的歌是Let It Go。","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"w o3 z ui4 x i3 h uan5 d e5 g e1 sh ir4 .","word2ph":[2,2,2,2,2,2,2,1],"norm":"我最喜欢的歌是."}}
+{"text":"我最喜欢的歌是Let It Go。","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"w o3 z ui4 x i3 h uan5 d e5 g e1 sh ir4 .","word2ph":[2,2,2,2,2,2,2,1],"norm":"我最喜欢的歌是."}}
+{"text":"我最喜欢的歌是Let It Go。","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Yng Yo5 Yz Yeoi3 Yh Yei2 Yf Yun1 Yd Yik1 Yg Yo1 Ys Yi6 .","word2ph":[2,2,2,2,2,2,2,1],"norm":"我最喜欢的歌是."}}
+{"text":"我最喜欢的歌是Let It Go。","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Yng Yo5 Yz Yeoi3 Yh Yei2 Yf Yun1 Yd Yik1 Yg Yo1 Ys Yi6 .","word2ph":[2,2,2,2,2,2,2,1],"norm":"我最喜欢的歌是."}}
+{"text":"我最喜欢的歌是Let It Go。","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"我最喜欢的歌是Let It Go。","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}
+{"text":"呢個地方好靚，我好鍾意。","language":"zh","special_s":"￥","target_symbol":"SP2","out":{"phones":"n e5 g e5 d i4 f ang5 h ao3 j ing4 SP2 w o2 h ao3 zh ong1 y i4 .","word2ph":[2,2,2,2,2,2,1,2,2,2,2,1],"norm":"呢个地方好靓,我好锺意."}}
+{"text":"呢個地方好靚，我好鍾意。","language":"zh","special_s":"^","target_symbol":"SP3","out":{"phones":"n e5 g e5 d i4 f ang5 h ao3 j ing4 SP3 w o2 h ao3 zh ong1 y i4 .","word2ph":[2,2,2,2,2,2,1,2,2,2,2,1],"norm":"呢个地方好靓,我好锺意."}}
+{"text":"呢個地方好靚，我好鍾意。","language":"yue","special_s":"￥","target_symbol":"SP2","out":{"phones":"Yn Yi1 Yg Yo3 Yd Yei6 Yf Yong1 Yh You2 Yl Yeng3 SP2 Yng Yo5 Yh You2 Yz Yung1 Yj Yi3 .","word2ph":[2,2,2,2,2,2,1,2,2,2,2,1],"norm":"呢个地方好靓,我好锺意."}}
+{"text":"呢個地方好靚，我好鍾意。","language":"yue","special_s":"^","target_symbol":"SP3","out":{"phones":"Yn Yi1 Yg Yo3 Yd Yei6 Yf Yong1 Yh You2 Yl Yeng3 SP3 Yng Yo5 Yh You2 Yz Yung1 Yj Yi3 .","word2ph":[2,2,2,2,2,2,1,2,2,2,2,1],"norm":"呢个地方好靓,我好锺意."}}
+{"text":"呢個地方好靚，我好鍾意。","language":"fr","special_s":"￥","target_symbol":"SP2","out":{"error":"KeyError"}}
+{"text":"呢個地方好靚，我好鍾意。","language":"fr","special_s":"^","target_symbol":"SP3","out":{"error":"KeyError"}}

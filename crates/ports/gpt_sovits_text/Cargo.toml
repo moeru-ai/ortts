@@ -1,0 +1,37 @@
+[package]
+name = "gpt_sovits_text"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+authors.workspace = true
+license = "MIT AND Apache-2.0 AND BSD-3-Clause"
+description = "Port of the GPT-SoVITS text frontend (GPT_SoVITS/text and TTS_infer_pack/TextPreprocessor) at 04a44eb"
+
+[dependencies]
+cn2an.workspace = true
+fast_langdetect.workspace = true
+g2p_en.workspace = true
+inflect.workspace = true
+jieba_fast.workspace = true
+nltk.workspace = true
+pypinyin.workspace = true
+split_lang.workspace = true
+tojyutping.workspace = true
+wordsegment.workspace = true
+anyhow.workspace = true
+fancy-regex.workspace = true
+jpreprocess.workspace = true
+jpreprocess-core.workspace = true
+jpreprocess-dictionary.workspace = true
+jpreprocess-jpcommon.workspace = true
+jpreprocess-njd.workspace = true
+lindera-dictionary.workspace = true
+ndarray.workspace = true
+ort.workspace = true
+regex.workspace = true
+serde = { workspace = true, features = ["derive"] }
+serde_json.workspace = true
+tokenizers.workspace = true
+unicode-normalization.workspace = true
+
+[dev-dependencies]

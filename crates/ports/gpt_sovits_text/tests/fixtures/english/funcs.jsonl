@@ -1,0 +1,645 @@
+{"f":"replace_consecutive_punctuation","i":"","o":""}
+{"f":"replace_consecutive_punctuation","i":"a","o":"a"}
+{"f":"replace_consecutive_punctuation","i":"!!","o":"!"}
+{"f":"replace_consecutive_punctuation","i":"a!!","o":"a!"}
+{"f":"replace_consecutive_punctuation","i":"a!!b","o":"a!b"}
+{"f":"replace_consecutive_punctuation","i":" !!","o":" "}
+{"f":"replace_consecutive_punctuation","i":" ! ! !","o":"   "}
+{"f":"replace_consecutive_punctuation","i":"..","o":"."}
+{"f":"replace_consecutive_punctuation","i":"...","o":"."}
+{"f":"replace_consecutive_punctuation","i":"…","o":"…"}
+{"f":"replace_consecutive_punctuation","i":"……","o":"…"}
+{"f":"replace_consecutive_punctuation","i":"-","o":"-"}
+{"f":"replace_consecutive_punctuation","i":"--","o":"-"}
+{"f":"replace_consecutive_punctuation","i":"a--b","o":"a-b"}
+{"f":"replace_consecutive_punctuation","i":",,,","o":","}
+{"f":"replace_consecutive_punctuation","i":"?!","o":"?"}
+{"f":"replace_consecutive_punctuation","i":"!?.,-…","o":"!"}
+{"f":"replace_consecutive_punctuation","i":"\t!!","o":"\t"}
+{"f":"replace_consecutive_punctuation","i":"\n..","o":"\n"}
+{"f":"replace_consecutive_punctuation","i":"　,,","o":"　"}
+{"f":"replace_consecutive_punctuation","i":"\u001c..","o":"\u001c"}
+{"f":"replace_consecutive_punctuation","i":" !!","o":" "}
+{"f":"replace_consecutive_punctuation","i":"a .","o":"a "}
+{"f":"replace_consecutive_punctuation","i":"a  ..","o":"a  "}
+{"f":"replace_consecutive_punctuation","i":"x?!?!y","o":"x?y"}
+{"f":"replace_consecutive_punctuation","i":"end.","o":"end."}
+{"f":"replace_consecutive_punctuation","i":"end..","o":"end."}
+{"f":"replace_consecutive_punctuation","i":"!a!","o":"!a!"}
+{"f":"replace_consecutive_punctuation","i":"! a !","o":"! a "}
+{"f":"replace_consecutive_punctuation","i":"a;;b","o":"a;;b"}
+{"f":"replace_consecutive_punctuation","i":"a::b","o":"a::b"}
+{"f":"replace_consecutive_punctuation","i":"''","o":"''"}
+{"f":"replace_consecutive_punctuation","i":"'!!","o":"'!"}
+{"f":"replace_consecutive_punctuation","i":"a\n :;\t.--:\n:…","o":"a\n :;\t:\n:…"}
+{"f":"replace_consecutive_punctuation","i":"?!!.ab\n…","o":"?ab\n"}
+{"f":"replace_consecutive_punctuation","i":";!","o":";!"}
+{"f":"replace_consecutive_punctuation","i":"b?\n-a.a\n b?","o":"b?\na.a\n b?"}
+{"f":"replace_consecutive_punctuation","i":";","o":";"}
+{"f":"replace_consecutive_punctuation","i":"bab ;?b;　","o":"bab ;?b;　"}
+{"f":"replace_consecutive_punctuation","i":"…;!!!?\n\n-a!\n!b!b:!b!","o":"…;!\n\na!\nb!b:!b!"}
+{"f":"replace_consecutive_punctuation","i":"; -??!;b…;\t　;?","o":"; ;b…;\t　;?"}
+{"f":"replace_consecutive_punctuation","i":"?\na　","o":"?\na　"}
+{"f":"replace_consecutive_punctuation","i":":.'-?","o":":.'-"}
+{"f":"replace_consecutive_punctuation","i":" ,\n","o":" \n"}
+{"f":"replace_consecutive_punctuation","i":";.:\n:b\t…';!\nb","o":";.:\n:b\t';!\nb"}
+{"f":"replace_consecutive_punctuation","i":"a　\n","o":"a　\n"}
+{"f":"replace_consecutive_punctuation","i":"…-:…''!a?,.'　　-.\t","o":"…:…''!a?'　　\t"}
+{"f":"replace_consecutive_punctuation","i":"b:…,　,;\t…: -?a","o":"b:…　;\t: a"}
+{"f":"replace_consecutive_punctuation","i":"-;b.:\n…-; b;","o":"-;b.:\n; b;"}
+{"f":"replace_consecutive_punctuation","i":":……: .　a…:b　,…!…-';b","o":":…: 　a…:b　';b"}
+{"f":"replace_consecutive_punctuation","i":"-- -","o":"- "}
+{"f":"replace_consecutive_punctuation","i":"-","o":"-"}
+{"f":"replace_consecutive_punctuation","i":"a…\na:,b\n'?,;","o":"a…\na:,b\n'?;"}
+{"f":"replace_consecutive_punctuation","i":";'","o":";'"}
+{"f":"replace_consecutive_punctuation","i":"　''\t!:a:\n;-","o":"　''\t:a:\n;-"}
+{"f":"replace_consecutive_punctuation","i":",\n…?',:'; 　:\t\n,b?-';","o":",\n',:'; 　:\t\nb?';"}
+{"f":"replace_consecutive_punctuation","i":"…-b!\t, !…!\na!!b\t!a a","o":"…b!\t \na!b\ta a"}
+{"f":"replace_consecutive_punctuation","i":"!\t\t-","o":"!\t\t"}
+{"f":"replace_consecutive_punctuation","i":"',':'.","o":"',':'."}
+{"f":"replace_consecutive_punctuation","i":";a, ,,\n. .\t-!\n\na　-b ","o":";a, \n \t\n\na　b "}
+{"f":"replace_consecutive_punctuation","i":"\t　:","o":"\t　:"}
+{"f":"replace_consecutive_punctuation","i":"a:;　","o":"a:;　"}
+{"f":"replace_consecutive_punctuation","i":"!,　…;.:,\t\n?\t'-b","o":"!　;.:,\t\n\t'-b"}
+{"f":"replace_consecutive_punctuation","i":"\tb　 ;,\n: ,a,…,\t!?:;","o":"\tb　 ;,\n: a,\t:;"}
+{"f":"replace_consecutive_punctuation","i":"!a\n　'　 \t,　:\t","o":"!a\n　'　 \t　:\t"}
+{"f":"replace_consecutive_punctuation","i":",:!\n　aab\nb:,　　,","o":",:!\n　aab\nb:,　　"}
+{"f":"replace_consecutive_punctuation","i":"\na…b\t .?","o":"\na…b\t "}
+{"f":"replace_consecutive_punctuation","i":"b;a\n\na\n\t-!\t","o":"b;a\n\na\n\t\t"}
+{"f":"replace_consecutive_punctuation","i":"ab　","o":"ab　"}
+{"f":"replace_consecutive_punctuation","i":"?,\n","o":"?\n"}
+{"f":"replace_consecutive_punctuation","i":";b?:,.;!-　\t","o":";b?:,;!　\t"}
+{"f":"replace_consecutive_punctuation","i":",!　'　?…!!:","o":",　'　:"}
+{"f":"replace_consecutive_punctuation","i":"　!\t,-\n","o":"　\t\n"}
+{"f":"replace_consecutive_punctuation","i":"'??-b\t-…","o":"'?b\t"}
+{"f":"replace_consecutive_punctuation","i":"\t -a; ;.,-;.:","o":"\t a; ;.;.:"}
+{"f":"replace_consecutive_punctuation","i":";. …?","o":";. "}
+{"f":"replace_consecutive_punctuation","i":"'-…,\tb.\n;;;'bb ,-;a","o":"'-\tb.\n;;;'bb ;a"}
+{"f":"replace_consecutive_punctuation","i":": 　…;\t.\t;","o":": 　;\t\t;"}
+{"f":"replace_consecutive_punctuation","i":". \n,b…a'.?a:'b　…:-","o":". \nb…a'.a:'b　:-"}
+{"f":"replace_consecutive_punctuation","i":"!!?…;:?.?! ?:;,\n\n ","o":"!;:? :;,\n\n "}
+{"f":"replace_consecutive_punctuation","i":"\t!　!,.;b?　…?\n'","o":"\t　;b?　\n'"}
+{"f":"replace_consecutive_punctuation","i":"-a?-　;","o":"-a?　;"}
+{"f":"replace_consecutive_punctuation","i":";\nb;;a?….\t.　'-;?';","o":";\nb;;a?\t　'-;?';"}
+{"f":"replace_consecutive_punctuation","i":",, 　","o":", 　"}
+{"f":"replace_consecutive_punctuation","i":"b　　","o":"b　　"}
+{"f":"replace_consecutive_punctuation","i":"\t;","o":"\t;"}
+{"f":"replace_consecutive_punctuation","i":"…; .b,\n　　","o":"…; b,\n　　"}
+{"f":"replace_consecutive_punctuation","i":"….?;-\t;\n'\n.,aa","o":"…;-\t;\n'\naa"}
+{"f":"replace_consecutive_punctuation","i":":;'　 . -","o":":;'　  "}
+{"f":"replace_consecutive_punctuation","i":"!　.;　 　","o":"!　;　 　"}
+{"f":"replace_consecutive_punctuation","i":"?a\n.;\t\n-b,:;…b","o":"?a\n;\t\nb,:;…b"}
+{"f":"replace_consecutive_punctuation","i":"　?!':.　\t-\n?,\n,!b","o":"　':.　\t\n\nb"}
+{"f":"replace_consecutive_punctuation","i":"!? \n'a","o":"! \n'a"}
+{"f":"replace_consecutive_punctuation","i":"..;'b-…!-.; aa-","o":".;'b-; aa-"}
+{"f":"replace_consecutive_punctuation","i":"\n;!, ","o":"\n;! "}
+{"f":"replace_consecutive_punctuation","i":"\n\t ;a\n\t:　b　..!-!!:…;","o":"\n\t ;a\n\t:　b　:…;"}
+{"f":"replace_consecutive_punctuation","i":"\n　a!?;!' '","o":"\n　a!;!' '"}
+{"f":"replace_consecutive_punctuation","i":"'!! '\n\n:\n!?a…　;","o":"'! '\n\n:\na…　;"}
+{"f":"replace_consecutive_punctuation","i":"…!…??…","o":"…"}
+{"f":"replace_consecutive_punctuation","i":";,abb'?'?…:'","o":";,abb'?'?:'"}
+{"f":"replace_consecutive_punctuation","i":"! \n?!","o":"! \n"}
+{"f":"replace_consecutive_punctuation","i":"…?a;,\n?.b: b\t. ! ","o":"…a;,\nb: b\t  "}
+{"f":"replace_consecutive_punctuation","i":"b …-?　'? …a,\n…:;","o":"b 　'? a,\n:;"}
+{"f":"replace_consecutive_punctuation","i":"-.\n\n!'…-;?;.!? :","o":"-\n\n'…;?;. :"}
+{"f":"replace_consecutive_punctuation","i":"a!","o":"a!"}
+{"f":"replace_consecutive_punctuation","i":",　a…b-　, ,","o":",　a…b-　 "}
+{"f":"replace_consecutive_punctuation","i":"a…b　\t…　　","o":"a…b　\t　　"}
+{"f":"replace_consecutive_punctuation","i":"b……?.aa…　\t.-　b.　","o":"b…aa…　\t　b.　"}
+{"f":"replace_consecutive_punctuation","i":"\n ''　\n:　 ","o":"\n ''　\n:　 "}
+{"f":"replace_consecutive_punctuation","i":"b　","o":"b　"}
+{"f":"replace_consecutive_punctuation","i":".b　　-.… …a- '\n\n…?\nb-","o":".b　　 a- '\n\n\nb-"}
+{"f":"replace_consecutive_punctuation","i":" !-…!b…:' a\tb ","o":" b…:' a\tb "}
+{"f":"replace_consecutive_punctuation","i":"\t?\t'…! 　\n","o":"\t\t'… 　\n"}
+{"f":"replace_consecutive_punctuation","i":"\t\t","o":"\t\t"}
+{"f":"replace_consecutive_punctuation","i":", ;!'!-","o":", ;!'!"}
+{"f":"replace_consecutive_punctuation","i":"b　　","o":"b　　"}
+{"f":"replace_consecutive_punctuation","i":"　-?…b'","o":"　b'"}
+{"f":"replace_consecutive_punctuation","i":"b-,.,a';\na","o":"b-a';\na"}
+{"f":"replace_consecutive_punctuation","i":"\t… ';:","o":"\t ';:"}
+{"f":"replace_consecutive_punctuation","i":"\n.…,!a….","o":"\na…"}
+{"f":"replace_consecutive_punctuation","i":"\n\n:\t","o":"\n\n:\t"}
+{"f":"replace_consecutive_punctuation","i":"'","o":"'"}
+{"f":"replace_consecutive_punctuation","i":".-?…\na!\t-..? ","o":".\na!\t "}
+{"f":"replace_consecutive_punctuation","i":"　aa　\n-…-!,,?:!\t;?'","o":"　aa　\n:!\t;?'"}
+{"f":"replace_consecutive_punctuation","i":"?'!'.;?a!;'…-!\t","o":"?'!'.;?a!;'…\t"}
+{"f":"replace_consecutive_punctuation","i":"\n:b　,:","o":"\n:b　:"}
+{"f":"replace_consecutive_punctuation","i":"?;a","o":"?;a"}
+{"f":"replace_consecutive_punctuation","i":"a''!,a? …\t?!b'?a-","o":"a''!a? \tb'?a-"}
+{"f":"replace_consecutive_punctuation","i":"a.,?,:a　b,!,.:.'.\n.","o":"a.:a　b,:.'.\n"}
+{"f":"replace_consecutive_punctuation","i":",　?…'b ","o":",　'b "}
+{"f":"replace_consecutive_punctuation","i":" .:.,'\t a\n:…\n","o":" :.'\t a\n:…\n"}
+{"f":"replace_consecutive_punctuation","i":"\t\n:!:-…\t!","o":"\t\n:!:-\t"}
+{"f":"replace_consecutive_punctuation","i":"a.\t-b","o":"a.\tb"}
+{"f":"replace_consecutive_punctuation","i":"bb;'","o":"bb;'"}
+{"f":"replace_consecutive_punctuation","i":"\t…?;\n!: .;…　.","o":"\t;\n: ;…　"}
+{"f":"replace_consecutive_punctuation","i":"a-;-;..,,:　\t…a,","o":"a-;-;.:　\ta,"}
+{"f":"replace_consecutive_punctuation","i":":.!.\t:…\n ;a ?","o":":.\t:…\n ;a "}
+{"f":"replace_consecutive_punctuation","i":"?,?'-;!, .:","o":"?'-;! :"}
+{"f":"replace_consecutive_punctuation","i":".\n-a;\t?;. ,--:　\t:","o":".\na;\t;. :　\t:"}
+{"f":"replace_consecutive_punctuation","i":"\t;\n \t!.!b!-.…,　\t!. b","o":"\t;\n \tb!　\t b"}
+{"f":"replace_consecutive_punctuation","i":";:?a.a?;. 　'…'\t'","o":";:?a.a?;. 　'…'\t'"}
+{"f":"replace_consecutive_punctuation","i":".?!'b\t\t?bb:… ':","o":".'b\t\tbb:… ':"}
+{"f":"replace_consecutive_punctuation","i":"'","o":"'"}
+{"f":"replace_consecutive_punctuation","i":",　\t!!…:　a\n;….a'?　?:.","o":",　\t:　a\n;…a'?　:."}
+{"f":"replace_consecutive_punctuation","i":"…'　　a:; …: a　;!.","o":"…'　　a:; : a　;!"}
+{"f":"replace_consecutive_punctuation","i":".bb","o":".bb"}
+{"f":"replace_consecutive_punctuation","i":"a::!b　?\t.…","o":"a::!b　\t"}
+{"f":"replace_consecutive_punctuation","i":".","o":"."}
+{"f":"replace_consecutive_punctuation","i":",-.:::-\n.\n:\t.\t","o":",:::-\n\n:\t\t"}
+{"f":"replace_consecutive_punctuation","i":"a .-…\n?\n\t:?","o":"a \n\n\t:?"}
+{"f":"replace_consecutive_punctuation","i":":;;\t　\nb ","o":":;;\t　\nb "}
+{"f":"replace_consecutive_punctuation","i":"-","o":"-"}
+{"f":"replace_consecutive_punctuation","i":"　","o":"　"}
+{"f":"replace_consecutive_punctuation","i":" ;","o":" ;"}
+{"f":"replace_consecutive_punctuation","i":";　!-\n\t\n:b?","o":";　\n\t\n:b?"}
+{"f":"replace_consecutive_punctuation","i":"- ;',' : b","o":"- ;',' : b"}
+{"f":"replace_consecutive_punctuation","i":"…b-\na\n…\n:!　?-'","o":"…b-\na\n\n:!　'"}
+{"f":"replace_consecutive_punctuation","i":" 　","o":" 　"}
+{"f":"replace_consecutive_punctuation","i":"　\t\t","o":"　\t\t"}
+{"f":"replace_consecutive_punctuation","i":";;;;'……..","o":";;;;'…"}
+{"f":"replace_consecutive_punctuation","i":"　'!-!","o":"　'!"}
+{"f":"replace_consecutive_punctuation","i":"' -!.","o":"' "}
+{"f":"replace_consecutive_punctuation","i":"\nbb:'  -'\t　,-a;,\n?:'","o":"\nbb:'  '\t　a;,\n:'"}
+{"f":"replace_consecutive_punctuation","i":"　: ::;　a,","o":"　: ::;　a,"}
+{"f":"replace_consecutive_punctuation","i":"?;.-","o":"?;."}
+{"f":"replace_consecutive_punctuation","i":"'a ; -,.…:;b'?","o":"'a ; :;b'?"}
+{"f":"replace_consecutive_punctuation","i":"-","o":"-"}
+{"f":"replace_consecutive_punctuation","i":"a…","o":"a…"}
+{"f":"replace_consecutive_punctuation","i":"?-a　.:…","o":"?a　:…"}
+{"f":"replace_consecutive_punctuation","i":".\n :-,?-a\t!!\n::…","o":".\n :-a\t\n::…"}
+{"f":"replace_consecutive_punctuation","i":"  a…,a:',\n?-\t:';-","o":"  a…a:',\n\t:';-"}
+{"f":"replace_consecutive_punctuation","i":"…a…?-\n-…\n","o":"…a…\n\n"}
+{"f":"replace_consecutive_punctuation","i":".;:.??. b-:b　\n;.:","o":".;:. b-:b　\n;.:"}
+{"f":"replace_consecutive_punctuation","i":" ?!!.:\t\n--!\n,-\t\t,\na　","o":" :\t\n\n\t\t\na　"}
+{"f":"replace_consecutive_punctuation","i":",\n--,!\ta.\t　","o":",\n\ta.\t　"}
+{"f":"replace_consecutive_punctuation","i":"….ab.-''…!'?","o":"…ab.''…'?"}
+{"f":"replace_consecutive_punctuation","i":":　babb?'\t ","o":":　babb?'\t "}
+{"f":"replace_consecutive_punctuation","i":"'\t;-.\n\n","o":"'\t;-\n\n"}
+{"f":"replace_consecutive_punctuation","i":"　.:\na-!a'…\n","o":"　:\na-a'…\n"}
+{"f":"replace_consecutive_punctuation","i":"-b ''\n","o":"-b ''\n"}
+{"f":"replace_consecutive_punctuation","i":",\t?'-- ?:….\n","o":",\t'- :…\n"}
+{"f":"replace_consecutive_punctuation","i":";;.a","o":";;.a"}
+{"f":"replace_consecutive_punctuation","i":".…:,?b-a?　-","o":".:,b-a?　"}
+{"f":"replace_consecutive_punctuation","i":"\t':-;a\t,';:b","o":"\t':-;a\t';:b"}
+{"f":"replace_consecutive_punctuation","i":",b!　!;…,\t-b'","o":",b!　;…\tb'"}
+{"f":"replace_consecutive_punctuation","i":".\n ;…:\t.\t!;:-\n\t","o":".\n ;…:\t\t;:-\n\t"}
+{"f":"replace_consecutive_punctuation","i":"\tb?-?':!\t;　　　 ;\tb","o":"\tb?':!\t;　　　 ;\tb"}
+{"f":"replace_consecutive_punctuation","i":"a.,a…--b-;!","o":"a.a…b-;!"}
+{"f":"replace_consecutive_punctuation","i":" \n","o":" \n"}
+{"f":"replace_consecutive_punctuation","i":";'?. …'\n,","o":";'? '\n"}
+{"f":"replace_consecutive_punctuation","i":"!; ::,:　a.:\tb;…,?b","o":"!; ::,:　a.:\tb;…b"}
+{"f":"replace_consecutive_punctuation","i":"　?　-…..\n\t!:,!　:ba","o":"　　\n\t:,　:ba"}
+{"f":"replace_consecutive_punctuation","i":"!,? b:…'…\naa","o":"! b:…'…\naa"}
+{"f":"replace_consecutive_punctuation","i":"\t .'\t-","o":"\t '\t"}
+{"f":"replace_consecutive_punctuation","i":"b-..-\t;….","o":"b-\t;…"}
+{"f":"replace_consecutive_punctuation","i":"\nba\t'!.","o":"\nba\t'!"}
+{"f":"replace_consecutive_punctuation","i":"\n,…?,\t…","o":"\n\t"}
+{"f":"replace_consecutive_punctuation","i":" \n\t; ;.\t::　b\n　…\na?a!","o":" \n\t; ;.\t::　b\n　\na?a!"}
+{"f":"replace_consecutive_punctuation","i":" \n;\n!　\t","o":" \n;\n　\t"}
+{"f":"replace_consecutive_punctuation","i":"　\t \n","o":"　\t \n"}
+{"f":"replace_consecutive_punctuation","i":"  - ?:,\n .\ta…\n:\t:-\t","o":"   :,\n \ta…\n:\t:-\t"}
+{"f":"replace_consecutive_punctuation","i":".\t!.;!--, .:''\t\t!?\n","o":".\t;! :''\t\t\n"}
+{"f":"replace_consecutive_punctuation","i":"b?;, \n:;　'　,;…a?-","o":"b?;, \n:;　'　;…a?"}
+{"f":"replace_consecutive_punctuation","i":"--a…!a-\t'--b a…","o":"-a…a-\t'-b a…"}
+{"f":"replace_consecutive_punctuation","i":"?\na!…-\n","o":"?\na!\n"}
+{"f":"replace_consecutive_punctuation","i":"!! …'?!;aa;:,　!\n\t\n","o":"! '?;aa;:,　\n\t\n"}
+{"f":"replace_consecutive_punctuation","i":"';! !　\t \t;　: \n　 　:","o":"';! 　\t \t;　: \n　 　:"}
+{"f":"replace_consecutive_punctuation","i":"b;!.,:?a","o":"b;!:?a"}
+{"f":"replace_consecutive_punctuation","i":" b　'!:a","o":" b　'!:a"}
+{"f":"replace_consecutive_punctuation","i":"-'","o":"-'"}
+{"f":"replace_consecutive_punctuation","i":"　!\n…　?","o":"　\n　"}
+{"f":"replace_consecutive_punctuation","i":",.","o":","}
+{"f":"replace_consecutive_punctuation","i":"b',　-　-';:a\n","o":"b',　　';:a\n"}
+{"f":"replace_consecutive_punctuation","i":"\n!:-\t;………-　　-..'","o":"\n:-\t;…　　'"}
+{"f":"replace_consecutive_punctuation","i":" …'b\n\t!;a. b;bab\n\n　","o":" 'b\n\t;a. b;bab\n\n　"}
+{"f":"replace_consecutive_punctuation","i":"\nb…\na","o":"\nb…\na"}
+{"f":"replace_consecutive_punctuation","i":".!…:","o":".:"}
+{"f":"replace_consecutive_punctuation","i":"b\n !'!. ","o":"b\n '! "}
+{"f":"replace_consecutive_punctuation","i":":'!-'\t …\t\n","o":":'!'\t \t\n"}
+{"f":"replace_consecutive_punctuation","i":"b.'!::;,! ","o":"b.'!::;, "}
+{"f":"replace_consecutive_punctuation","i":"\nb\naa　;--:…?,:,,","o":"\nb\naa　;-:…:,"}
+{"f":"replace_consecutive_punctuation","i":"-!a! !!;-!\t,…?.a","o":"-a! ;-\ta"}
+{"f":"replace_consecutive_punctuation","i":"b !,.\t\t;!a;.?'","o":"b \t\t;!a;.'"}
+{"f":"replace_consecutive_punctuation","i":";\n!:\n:,\n…,?b……\t","o":";\n:\n:,\nb…\t"}
+{"f":"replace_consecutive_punctuation","i":":　??a…bb'b","o":":　a…bb'b"}
+{"f":"replace_consecutive_punctuation","i":"-;a……a'a","o":"-;a…a'a"}
+{"f":"replace_consecutive_punctuation","i":",a　a-!;b　…?, ;.\t.!　b","o":",a　a-;b　 ;.\t　b"}
+{"f":"replace_consecutive_punctuation","i":"　.,  ,\n:","o":"　  \n:"}
+{"f":"replace_consecutive_punctuation","i":"b.;,..::; ?\n'\t?","o":"b.;,::; \n'\t"}
+{"f":"replace_consecutive_punctuation","i":"!: ?　ba:\t;.!-　a.","o":"!: 　ba:\t;.　a."}
+{"f":"replace_consecutive_punctuation","i":" ?　\n.'?? .… 　-.…","o":" 　\n'?  　"}
+{"f":"replace_consecutive_punctuation","i":"':!,!;'!;…","o":"':!;'!;…"}
+{"f":"replace_consecutive_punctuation","i":"..","o":"."}
+{"f":"replace_consecutive_punctuation","i":".\n ;…,:\n!\t","o":".\n ;…:\n\t"}
+{"f":"replace_consecutive_punctuation","i":" a…!a　　","o":" a…a　　"}
+{"f":"replace_consecutive_punctuation","i":"''.??:\t,  \n.:?","o":"''.:\t  \n:?"}
+{"f":"replace_consecutive_punctuation","i":".\n　b!\tbb\t","o":".\n　b!\tbb\t"}
+{"f":"replace_consecutive_punctuation","i":"\n","o":"\n"}
+{"f":"replace_consecutive_punctuation","i":"b","o":"b"}
+{"f":"replace_consecutive_punctuation","i":"a!:　\ta!","o":"a!:　\ta!"}
+{"f":"replace_consecutive_punctuation","i":"　\n'…,……!:-\n?\n'\n!…-","o":"　\n'…:-\n\n'\n"}
+{"f":"replace_consecutive_punctuation","i":"b?;::　　?","o":"b?;::　　"}
+{"f":"replace_consecutive_punctuation","i":".-,-\n'?","o":".\n'?"}
+{"f":"replace_consecutive_punctuation","i":"?…:-,\ta\t;!\t--:…!'.","o":"?:-\ta\t;!\t:…'."}
+{"f":"replace_consecutive_punctuation","i":"-!ab:-,a　a:\n\n\n\n","o":"-ab:-a　a:\n\n\n\n"}
+{"f":"replace_consecutive_punctuation","i":"a,.'b.…'b:\t ","o":"a,'b.'b:\t "}
+{"f":"replace_consecutive_punctuation","i":"…a","o":"…a"}
+{"f":"replace_consecutive_punctuation","i":"!!?..!' \n","o":"!' \n"}
+{"f":"replace_consecutive_punctuation","i":"\t …!;,a.\n,…\t …-\t","o":"\t ;,a.\n\t \t"}
+{"f":"replace_consecutive_punctuation","i":":'　\n\na,　\t","o":":'　\n\na,　\t"}
+{"f":"replace_consecutive_punctuation","i":"b\n ,b.　,　:;.…?b","o":"b\n b.　　:;.b"}
+{"f":"replace_consecutive_punctuation","i":"!\t?b!　,\n;;:b,a-","o":"!\tb!　\n;;:b,a-"}
+{"f":"replace_consecutive_punctuation","i":"!? a","o":"! a"}
+{"f":"replace_consecutive_punctuation","i":"a.;.,","o":"a.;."}
+{"f":"replace_consecutive_punctuation","i":";… !\t.?'\t\n! ","o":";… \t'\t\n "}
+{"f":"replace_consecutive_punctuation","i":"-:　!\t;.:a　a?;\n.b\n…","o":"-:　\t;.:a　a?;\nb\n"}
+{"f":"replace_consecutive_punctuation","i":"\t!:…::,:　\t","o":"\t:…::,:　\t"}
+{"f":"replace_consecutive_punctuation","i":"!''\t\n…\t　　.　b\t?'. ?':","o":"!''\t\n\t　　　b\t'. ':"}
+{"f":"replace_consecutive_punctuation","i":",'b　\t;,","o":",'b　\t;,"}
+{"f":"replace_consecutive_punctuation","i":"…:\t\t,?　: 　; ;","o":"…:\t\t　: 　; ;"}
+{"f":"replace_consecutive_punctuation","i":"!\t,\ta…:　\t:.\n","o":"!\t\ta…:　\t:.\n"}
+{"f":"replace_consecutive_punctuation","i":"? a\t'-.-!.,'?","o":"? a\t'-'?"}
+{"f":"replace_consecutive_punctuation","i":"　b　a\n. -;a","o":"　b　a\n ;a"}
+{"f":"replace_consecutive_punctuation","i":"　!a…….a\n,,.-..,-; a ","o":"　a…a\n; a "}
+{"f":"replace_consecutive_punctuation","i":"\t:a'b!a;　'!-a…","o":"\t:a'b!a;　'!a…"}
+{"f":"replace_consecutive_punctuation","i":"　.:\t!b!b:'　!","o":"　:\tb!b:'　"}
+{"f":"replace_consecutive_punctuation","i":" ?;?'…,b. !a:-:,-","o":" ;?'…b. a:-:,"}
+{"f":"replace_consecutive_punctuation","i":":'\tb\t!…:b　\t;\n\n?,\t","o":":'\tb\t:b　\t;\n\n\t"}
+{"f":"replace_consecutive_punctuation","i":"　.　:!,  　 ,","o":"　　:!  　 "}
+{"f":"replace_consecutive_punctuation","i":"\n\n'-a,b","o":"\n\n'-a,b"}
+{"f":"replace_consecutive_punctuation","i":",\n.'b',\n?\t;","o":",\n'b',\n\t;"}
+{"f":"replace_consecutive_punctuation","i":".\na\t'!,:","o":".\na\t'!:"}
+{"f":"replace_consecutive_punctuation","i":"!\n;　","o":"!\n;　"}
+{"f":"replace_consecutive_punctuation","i":"-\n　  b\t;a,,\t　…b","o":"-\n　  b\t;a,\t　b"}
+{"f":"replace_consecutive_punctuation","i":"　'.;,","o":"　'.;,"}
+{"f":"replace_consecutive_punctuation","i":" a?,-b \t","o":" a?b \t"}
+{"f":"replace_consecutive_punctuation","i":" ?\t","o":" \t"}
+{"f":"replace_consecutive_punctuation","i":"\n,'?","o":"\n'?"}
+{"f":"replace_consecutive_punctuation","i":".\n　!?,.,…,a\n\t ","o":".\n　a\n\t "}
+{"f":"replace_consecutive_punctuation","i":",b\n;.a :; ","o":",b\n;.a :; "}
+{"f":"replace_consecutive_punctuation","i":",:\n\nb:　b\t?\nb … ","o":",:\n\nb:　b\t\nb  "}
+{"f":"replace_consecutive_punctuation","i":" !!","o":" "}
+{"f":"replace_consecutive_punctuation","i":"a -bb　a!:a!!","o":"a bb　a!:a!"}
+{"f":"replace_consecutive_punctuation","i":"'　a!a:'-,,'a…:':…!","o":"'　a!a:'-'a…:':…"}
+{"f":"replace_consecutive_punctuation","i":"　a　　\t b-.a;,;! ??","o":"　a　　\t b-a;,;! "}
+{"f":"replace_consecutive_punctuation","i":".\n .\t, \t!!!","o":".\n \t \t"}
+{"f":"replace_consecutive_punctuation","i":"…!-,","o":"…"}
+{"f":"replace_consecutive_punctuation","i":"…a;\t　,ba.\t;?'\t;-!!.b","o":"…a;\t　ba.\t;?'\t;-b"}
+{"f":"replace_consecutive_punctuation","i":",b","o":",b"}
+{"f":"replace_consecutive_punctuation","i":"!a\n'\t","o":"!a\n'\t"}
+{"f":"replace_consecutive_punctuation","i":":b　;'?…\n;\na!?…\n:\t.","o":":b　;'?\n;\na!\n:\t"}
+{"f":"replace_consecutive_punctuation","i":"!\t.: ;…\n..\n?.b-","o":"!\t: ;…\n\nb-"}
+{"f":"replace_consecutive_punctuation","i":"a:;'bb,,","o":"a:;'bb,"}
+{"f":"replace_consecutive_punctuation","i":"'a","o":"'a"}
+{"f":"replace_consecutive_punctuation","i":",","o":","}
+{"f":"replace_consecutive_punctuation","i":".\t\nb\n b;;;?","o":".\t\nb\n b;;;?"}
+{"f":"replace_consecutive_punctuation","i":"\t?.'-;　\n-\n 'a;　","o":"\t'-;　\n\n 'a;　"}
+{"f":"replace_consecutive_punctuation","i":"!……?;?b,:　…b?;","o":"!;?b,:　b?;"}
+{"f":"replace_consecutive_punctuation","i":"…? .b　-","o":"… b　"}
+{"f":"replace_consecutive_punctuation","i":"\na\t: 　　.-b,　?':a\n","o":"\na\t: 　　b,　':a\n"}
+{"f":"replace_consecutive_punctuation","i":"a　 'b a--","o":"a　 'b a-"}
+{"f":"replace_consecutive_punctuation","i":"\n…'","o":"\n'"}
+{"f":"replace_consecutive_punctuation","i":"!.a'\t; ….'…","o":"!a'\t; '…"}
+{"f":"replace_consecutive_punctuation","i":"a,- ;;;,-;\n","o":"a, ;;;,;\n"}
+{"f":"replace_consecutive_punctuation","i":"-a.,-!;\t,…a\n","o":"-a.;\ta\n"}
+{"f":"replace_consecutive_punctuation","i":":\t　\t","o":":\t　\t"}
+{"f":"replace_consecutive_punctuation","i":",!,;　? \n\n","o":",;　 \n\n"}
+{"f":"replace_consecutive_punctuation","i":";b;-; ","o":";b;-; "}
+{"f":"replace_consecutive_punctuation","i":"\t!","o":"\t"}
+{"f":"replace_consecutive_punctuation","i":"…\taaa:.…　-\t　: ?'","o":"…\taaa:.　\t　: '"}
+{"f":"replace_consecutive_punctuation","i":" .'::?''!!?!!-…':;.","o":" '::?''!':;."}
+{"f":"replace_consecutive_punctuation","i":"…","o":"…"}
+{"f":"replace_consecutive_punctuation","i":"' !　","o":"' 　"}
+{"f":"replace_consecutive_punctuation","i":"… .:aa;","o":"… :aa;"}
+{"f":"replace_consecutive_punctuation","i":"aa!?-\t?　:;　:!!:…:","o":"aa!\t　:;　:!:…:"}
+{"f":"replace_consecutive_punctuation","i":"\t\t\t!.","o":"\t\t\t"}
+{"f":"replace_consecutive_punctuation","i":".\t.-a. \n\n\n","o":".\ta. \n\n\n"}
+{"f":"replace_consecutive_punctuation","i":"b\t　…?b-…,:!b:b","o":"b\t　b-:!b:b"}
+{"f":"replace_consecutive_punctuation","i":" '.b,:': \n!","o":" '.b,:': \n"}
+{"f":"replace_consecutive_punctuation","i":"\tab:b?-,.,.","o":"\tab:b?"}
+{"f":"replace_consecutive_punctuation","i":"a\n?　…\nb::;,?","o":"a\n　\nb::;,"}
+{"f":"replace_consecutive_punctuation","i":"b\t\t?","o":"b\t\t"}
+{"f":"replace_consecutive_punctuation","i":"!:　…'… b?a….?","o":"!:　'… b?a…"}
+{"f":"replace_consecutive_punctuation","i":"b…,\n　\t: \n.--:\t","o":"b…\n　\t: \n:\t"}
+{"f":"replace_consecutive_punctuation","i":"\n?…aa ab　;\nb.;.a:,:","o":"\naa ab　;\nb.;.a:,:"}
+{"f":"replace_consecutive_punctuation","i":".…;b-aa'':??b'\n?　\n?","o":".;b-aa'':?b'\n　\n"}
+{"f":"replace_consecutive_punctuation","i":"a…;b;' \t?ab;","o":"a…;b;' \tab;"}
+{"f":"replace_consecutive_punctuation","i":"\t:\n　.\n","o":"\t:\n　\n"}
+{"f":"replace_consecutive_punctuation","i":"b","o":"b"}
+{"f":"replace_consecutive_punctuation","i":",a!　!…","o":",a!　"}
+{"f":"replace_consecutive_punctuation","i":"-…ba\t!.-\n　abb\t;　","o":"-ba\t\n　abb\t;　"}
+{"f":"replace_consecutive_punctuation","i":";aa,　b'　-…b…","o":";aa,　b'　b…"}
+{"f":"replace_consecutive_punctuation","i":".b　?.;?: !b!\t","o":".b　;?: b!\t"}
+{"f":"replace_consecutive_punctuation","i":"':;a?a;\n","o":"':;a?a;\n"}
+{"f":"replace_consecutive_punctuation","i":"… aab'!,?","o":"… aab'!"}
+{"f":"replace_consecutive_punctuation","i":":…: ","o":":…: "}
+{"f":"replace_consecutive_punctuation","i":"　'\t\n　 ;　","o":"　'\t\n　 ;　"}
+{"f":"replace_consecutive_punctuation","i":"…. \tb　-:bb!.-!","o":"… \tb　:bb!"}
+{"f":"replace_consecutive_punctuation","i":"..","o":"."}
+{"f":"replace_consecutive_punctuation","i":"-.b'..…　:'\t\na  ","o":"-b'.　:'\t\na  "}
+{"f":"replace_consecutive_punctuation","i":"\t\n'.!","o":"\t\n'."}
+{"f":"replace_consecutive_punctuation","i":"….;'? ","o":"…;'? "}
+{"f":"replace_consecutive_punctuation","i":",a!,-!b…\n","o":",a!b…\n"}
+{"f":"replace_consecutive_punctuation","i":";aa:….…　a! 　a　-","o":";aa:…　a! 　a　"}
+{"f":"replace_consecutive_punctuation","i":"?'-","o":"?'-"}
+{"f":"replace_consecutive_punctuation","i":":!","o":":!"}
+{"f":"replace_consecutive_punctuation","i":":?\tb??b　 \t':b","o":":?\tb?b　 \t':b"}
+{"f":"replace_consecutive_punctuation","i":":\tb　aa!\t….ab; '-,","o":":\tb　aa!\tab; '-"}
+{"f":"replace_consecutive_punctuation","i":":　. !\n","o":":　 \n"}
+{"f":"replace_consecutive_punctuation","i":"\n;　,\n?\t,  a!,","o":"\n;　\n\t  a!"}
+{"f":"replace_consecutive_punctuation","i":"\n\t .!　?　…!?　:-  \n…!","o":"\n\t 　　　:-  \n"}
+{"f":"replace_consecutive_punctuation","i":"'-,.　b  ","o":"'-　b  "}
+{"f":"replace_consecutive_punctuation","i":"　:;!,!::a-':?;\t 　","o":"　:;!::a-':?;\t 　"}
+{"f":"replace_consecutive_punctuation","i":"!\t\ta-?;b!ba…:\n","o":"!\t\ta-;b!ba…:\n"}
+{"f":"replace_consecutive_punctuation","i":".\t';- \t!\nb?…,?…\n　,","o":".\t';- \t\nb?\n　"}
+{"f":"replace_consecutive_punctuation","i":"…ba\t! \t　…\n;a,　","o":"…ba\t \t　\n;a,　"}
+{"f":"replace_consecutive_punctuation","i":" ","o":" "}
+{"f":"replace_consecutive_punctuation","i":" \n'…?.!!:………,,b.. b","o":" \n'…:…b. b"}
+{"f":"replace_consecutive_punctuation","i":"!?\n;a:?…?","o":"!\n;a:?"}
+{"f":"replace_consecutive_punctuation","i":"-.'bba.:,…, a' b\t-","o":"-'bba.:, a' b\t"}
+{"f":"replace_consecutive_punctuation","i":"\n?","o":"\n"}
+{"f":"replace_consecutive_punctuation","i":"\na\n !\t ……\n;:.\t-","o":"\na\n \t \n;:.\t"}
+{"f":"replace_consecutive_punctuation","i":":?　","o":":?　"}
+{"f":"replace_consecutive_punctuation","i":"?　b","o":"?　b"}
+{"f":"replace_consecutive_punctuation","i":"…","o":"…"}
+{"f":"replace_consecutive_punctuation","i":" ;\na:;a?","o":" ;\na:;a?"}
+{"f":"replace_consecutive_punctuation","i":";: ","o":";: "}
+{"f":"replace_consecutive_punctuation","i":"!-　b\t　!.'.","o":"!　b\t　'."}
+{"f":"replace_consecutive_punctuation","i":"　\t-.:-?!-!!;　","o":"　\t:-;　"}
+{"f":"replace_consecutive_punctuation","i":"….a:'!\n,a-b.?:\n, :","o":"…a:'!\na-b.:\n :"}
+{"f":"replace_consecutive_punctuation","i":":!- .…-,","o":":! "}
+{"f":"replace_consecutive_punctuation","i":"\tb\na　…!\t","o":"\tb\na　\t"}
+{"f":"replace_consecutive_punctuation","i":"　;\n","o":"　;\n"}
+{"f":"replace_consecutive_punctuation","i":"'…　!,.:?","o":"'…　:?"}
+{"f":"replace_consecutive_punctuation","i":"　.!…:b　b","o":"　:b　b"}
+{"f":"replace_consecutive_punctuation","i":"ab '\t…,　","o":"ab '\t　"}
+{"f":"replace_consecutive_punctuation","i":"!\na\t \t!;\t","o":"!\na\t \t;\t"}
+{"f":"replace_consecutive_punctuation","i":":\t","o":":\t"}
+{"f":"replace_consecutive_punctuation","i":"'-;a","o":"'-;a"}
+{"f":"replace_consecutive_punctuation","i":"a--:';…","o":"a-:';…"}
+{"f":"replace_consecutive_punctuation","i":",","o":","}
+{"f":"replace_consecutive_punctuation","i":"'! 　…,… \n??　!;\t\n\n-!;","o":"'! 　 \n　;\t\n\n;"}
+{"f":"replace_consecutive_punctuation","i":",  .b;　…","o":",  b;　"}
+{"f":"replace_consecutive_punctuation","i":"a!b　.\n??','","o":"a!b　\n','"}
+{"f":"replace_consecutive_punctuation","i":"-　a-b;\t!.;","o":"-　a-b;\t;"}
+{"f":"replace_consecutive_punctuation","i":".","o":"."}
+{"f":"replace_consecutive_punctuation","i":"b\t-….a…!-　,","o":"b\ta…　"}
+{"f":"replace_consecutive_punctuation","i":"a b--　-'\n:.;;;…\t.!b,","o":"a b-　'\n:.;;;…\tb,"}
+{"f":"replace_consecutive_punctuation","i":"…","o":"…"}
+{"f":"replace_consecutive_punctuation","i":"…,a　:?-b,.?\nb-;'?;","o":"…a　:?b,\nb-;'?;"}
+{"f":"replace_consecutive_punctuation","i":"'","o":"'"}
+{"f":"replace_consecutive_punctuation","i":"- !\nab??'''?-?,?.…!","o":"- \nab?'''?"}
+{"f":"replace_consecutive_punctuation","i":" ","o":" "}
+{"f":"replace_consecutive_punctuation","i":"::  ;?'","o":"::  ;?'"}
+{"f":"replace_consecutive_punctuation","i":"::　　? a!-!.;b,","o":"::　　 a!;b,"}
+{"f":"replace_consecutive_punctuation","i":"!\t\n .\n b,:……?;","o":"!\t\n \n b,:…;"}
+{"f":"replace_consecutive_punctuation","i":"b…a　; .-　a? -'\n　","o":"b…a　; 　a? '\n　"}
+{"f":"replace_consecutive_punctuation","i":";a?\t,,- ,,b","o":";a?\t b"}
+{"f":"replace_consecutive_punctuation","i":":\n'.　….,,':b !-\t","o":":\n'.　':b \t"}
+{"f":"replace_consecutive_punctuation","i":"b\n:-　b","o":"b\n:-　b"}
+{"f":"replace_consecutive_punctuation","i":"b'?!?.","o":"b'?"}
+{"f":"replace_consecutive_punctuation","i":"b'","o":"b'"}
+{"f":"replace_consecutive_punctuation","i":"?,\t'.!\n?'　;a:…:a,! b","o":"?\t'.\n'　;a:…:a, b"}
+{"f":"replace_consecutive_punctuation","i":":'","o":":'"}
+{"f":"replace_consecutive_punctuation","i":" ","o":" "}
+{"f":"replace_consecutive_punctuation","i":"',' 　b…!\n,","o":"',' 　b…\n"}
+{"f":"replace_consecutive_punctuation","i":"b! \n.","o":"b! \n"}
+{"f":"replace_consecutive_punctuation","i":"'.","o":"'."}
+{"f":"replace_consecutive_punctuation","i":":!'bab??-a.!","o":":!'bab?a."}
+{"f":"replace_consecutive_punctuation","i":"….a.-!'-: bb","o":"…a.'-: bb"}
+{"f":"replace_consecutive_punctuation","i":".\nb","o":".\nb"}
+{"f":"replace_consecutive_punctuation","i":"a,.………\tbb　\t\t ","o":"a,\tbb　\t\t "}
+{"f":"replace_consecutive_punctuation","i":"!","o":"!"}
+{"f":"replace_consecutive_punctuation","i":"　\t","o":"　\t"}
+{"f":"replace_consecutive_punctuation","i":"b.a\n-\t,b; ,!;; :…;b","o":"b.a\n\tb; ;; :…;b"}
+{"f":"replace_consecutive_punctuation","i":"\t\n!","o":"\t\n"}
+{"f":"replace_consecutive_punctuation","i":"\n…-\n!…a.!;-　b!\t;","o":"\n\na.;-　b!\t;"}
+{"f":"replace_consecutive_punctuation","i":"\n\n:…　'-;b…a:?","o":"\n\n:…　'-;b…a:?"}
+{"f":"replace_consecutive_punctuation","i":"a …b!;;!--;","o":"a b!;;!;"}
+{"f":"replace_consecutive_punctuation","i":".; ,:,'-;b\n '\n'","o":".; :,'-;b\n '\n'"}
+{"f":"replace_consecutive_punctuation","i":"b,;;\t　","o":"b,;;\t　"}
+{"f":"replace_consecutive_punctuation","i":" :.:?b!\t;\t　'!:a","o":" :.:?b!\t;\t　'!:a"}
+{"f":"replace_consecutive_punctuation","i":",\n…?","o":",\n"}
+{"f":"replace_consecutive_punctuation","i":"\n?'.a","o":"\n'.a"}
+{"f":"replace_consecutive_punctuation","i":"b!:!'?,\t;'b","o":"b!:!'?\t;'b"}
+{"f":"replace_consecutive_punctuation","i":":\n\n::","o":":\n\n::"}
+{"f":"replace_consecutive_punctuation","i":"\t…\t　'…\n;　-","o":"\t\t　'…\n;　"}
+{"f":"replace_consecutive_punctuation","i":"\t\t\n!-\t'--a-","o":"\t\t\n\t'-a-"}
+{"f":"replace_consecutive_punctuation","i":"\t-;","o":"\t;"}
+{"f":"replace_consecutive_punctuation","i":"　'a.\t,… ;!-;","o":"　'a.\t ;!;"}
+{"f":"replace_consecutive_punctuation","i":"'　b\t;-.a,  ,;!:?:\t","o":"'　b\t;-a,  ;!:?:\t"}
+{"f":"replace_consecutive_punctuation","i":" \n'?…　\n!\t..:　 …!\n","o":" \n'?　\n\t:　 \n"}
+{"f":"replace_consecutive_punctuation","i":";?'\t ","o":";?'\t "}
+{"f":"replace_phs","i":[],"o":[]}
+{"f":"replace_phs","i":["'"],"o":["-"]}
+{"f":"replace_phs","i":["AH0","'","B"],"o":["AH0","-","B"]}
+{"f":"replace_phs","i":[" "],"o":[]}
+{"f":"replace_phs","i":["UNK"],"o":["UNK"]}
+{"f":"replace_phs","i":["<unk>"],"o":[]}
+{"f":"replace_phs","i":["SP"],"o":["SP"]}
+{"f":"replace_phs","i":["é","AH0"],"o":["AH0"]}
+{"f":"replace_phs","i":["","AA1"],"o":["AA1"]}
+{"f":"replace_phs","i":["!","?","…",",",".","-"],"o":["!","?","…",",",".","-"]}
+{"f":"replace_phs","i":["a","ㄱ","[","]","Yi1","AA","ER","IH","UW"],"o":["a","ㄱ","[","]","Yi1","AA","ER","IH"]}
+{"f":"replace_phs","i":["\"",";",":","..."],"o":[]}
+{"f":"replace_phs","i":["?",""],"o":["?"]}
+{"f":"replace_phs","i":[",","_","","a",","],"o":[",","_","a",","]}
+{"f":"replace_phs","i":["'","IH","UNK"],"o":["-","IH","UNK"]}
+{"f":"replace_phs","i":["_","a","UW","_",",","[",".","UW","-"],"o":["_","a","_",",","[",".","-"]}
+{"f":"replace_phs","i":["AH0","[","_",",","UW",","],"o":["AH0","[","_",",",","]}
+{"f":"replace_phs","i":[],"o":[]}
+{"f":"replace_phs","i":[" ","...","UW1","-","'","ㄱ","...","SP"],"o":["UW1","-","-","ㄱ","SP"]}
+{"f":"replace_phs","i":["ㄱ",",","!","!","SP","?","",".","'","_"],"o":["ㄱ",",","!","!","SP","?",".","-","_"]}
+{"f":"replace_phs","i":[" ","SP"],"o":["SP"]}
+{"f":"replace_phs","i":["...","...","IH","AH0","a","!","-",",","'","UNK"],"o":["IH","AH0","a","!","-",",","-","UNK"]}
+{"f":"replace_phs","i":["AH0",",","!","AH0","UW1","-","UNK","UW","UNK"],"o":["AH0",",","!","AH0","UW1","-","UNK","UNK"]}
+{"f":"replace_phs","i":["AH0","_","IH","UNK","IH","?","ㄱ","SP",",","AH0"],"o":["AH0","_","IH","UNK","IH","?","ㄱ","SP",",","AH0"]}
+{"f":"replace_phs","i":["IH","ㄱ","","UNK","IH",".","UW1"],"o":["IH","ㄱ","UNK","IH",".","UW1"]}
+{"f":"replace_phs","i":["UW1","ER"," "],"o":["UW1","ER"]}
+{"f":"replace_phs","i":["?","SP","'"],"o":["?","SP","-"]}
+{"f":"replace_phs","i":["UNK","x","UW1","ER","","UNK"],"o":["UNK","x","UW1","ER","UNK"]}
+{"f":"replace_phs","i":["'","AH0","ㄱ"],"o":["-","AH0","ㄱ"]}
+{"f":"replace_phs","i":[],"o":[]}
+{"f":"replace_phs","i":["a","IH","","SP","-","'","a","_","["],"o":["a","IH","SP","-","-","a","_","["]}
+{"f":"replace_phs","i":[],"o":[]}
+{"f":"replace_phs","i":["!","SP","UNK",".","x","...","x","-"],"o":["!","SP","UNK",".","x","x","-"]}
+{"f":"replace_phs","i":[".","","-","?"," "],"o":[".","-","?"]}
+{"f":"replace_phs","i":["a","."],"o":["a","."]}
+{"f":"replace_phs","i":["-","ㄱ","?","'","UW"],"o":["-","ㄱ","?","-"]}
+{"f":"replace_phs","i":["a","ㄱ","AH0","SP","SP","!",""],"o":["a","ㄱ","AH0","SP","SP","!"]}
+{"f":"replace_phs","i":["UW1"],"o":["UW1"]}
+{"f":"replace_phs","i":["'","[","!","[","?","!"," "," ","_","["],"o":["-","[","!","[","?","!","_","["]}
+{"f":"replace_phs","i":["UNK","!"],"o":["UNK","!"]}
+{"f":"replace_phs","i":["[",","],"o":["[",","]}
+{"f":"replace_phs","i":["UW1"],"o":["UW1"]}
+{"f":"replace_phs","i":[",","UNK"],"o":[",","UNK"]}
+{"f":"replace_phs","i":["'","a","a","x","ㄱ","-","[","!"],"o":["-","a","a","x","ㄱ","-","[","!"]}
+{"f":"replace_phs","i":["?","...","UNK"," ",".","IH","_"],"o":["?","UNK",".","IH","_"]}
+{"f":"replace_phs","i":[],"o":[]}
+{"f":"replace_phs","i":["UW1",".",""],"o":["UW1","."]}
+{"f":"replace_phs","i":["x","AH0",".","ㄱ"," ","","SP"],"o":["x","AH0",".","ㄱ","SP"]}
+{"f":"replace_phs","i":[],"o":[]}
+{"f":"replace_phs","i":["a","?","'","UNK"],"o":["a","?","-","UNK"]}
+{"f":"replace_phs","i":["UNK"],"o":["UNK"]}
+{"f":"replace_phs","i":["?","_","AH0","","ER",".","[","AH0","x","ㄱ"],"o":["?","_","AH0","ER",".","[","AH0","x","ㄱ"]}
+{"f":"replace_phs","i":["-","SP","."],"o":["-","SP","."]}
+{"f":"replace_phs","i":["SP","UNK"],"o":["SP","UNK"]}
+{"f":"replace_phs","i":[" ","x"],"o":["x"]}
+{"f":"replace_phs","i":["?","'","...","SP","UW","x","UNK","SP","","-"],"o":["?","-","SP","x","UNK","SP","-"]}
+{"f":"replace_phs","i":["UW1",",","a","'","?","SP","AH0","_"],"o":["UW1",",","a","-","?","SP","AH0","_"]}
+{"f":"replace_phs","i":["UNK","...","UW",","],"o":["UNK",","]}
+{"f":"replace_phs","i":["UNK","AH0",",","SP",".","...","ㄱ"],"o":["UNK","AH0",",","SP",".","ㄱ"]}
+{"f":"replace_phs","i":["-","IH","SP","."],"o":["-","IH","SP","."]}
+{"f":"replace_phs","i":["-"],"o":["-"]}
+{"f":"replace_phs","i":["?","...","...","x"," "],"o":["?","x"]}
+{"f":"replace_phs","i":["'","...","SP","...","UW1","!","x","AH0",","],"o":["-","SP","UW1","!","x","AH0",","]}
+{"f":"replace_phs","i":["AH0","AH0","SP","_",",","-","UW1","UNK","ER"],"o":["AH0","AH0","SP","_",",","-","UW1","UNK","ER"]}
+{"f":"replace_phs","i":["UW","","ER","!","UNK","UNK","[","_"],"o":["ER","!","UNK","UNK","[","_"]}
+{"f":"replace_phs","i":["ㄱ","x","'","UNK","-"],"o":["ㄱ","x","-","UNK","-"]}
+{"f":"replace_phs","i":["ㄱ","_","SP","x","IH"," ","","["],"o":["ㄱ","_","SP","x","IH","["]}
+{"f":"replace_phs","i":["...","!"," ","!",".","a"," "," ",","],"o":["!","!",".","a",","]}
+{"f":"replace_phs","i":["UW","-"],"o":["-"]}
+{"f":"replace_phs","i":[".","[","SP","'","a"],"o":[".","[","SP","-","a"]}
+{"f":"replace_phs","i":["UNK","a","'","'","a","AH0","!",",","ㄱ","ER"],"o":["UNK","a","-","-","a","AH0","!",",","ㄱ","ER"]}
+{"f":"replace_phs","i":["ㄱ","x","SP","UW","ㄱ","ER","UW","a","UW","_"],"o":["ㄱ","x","SP","ㄱ","ER","a","_"]}
+{"f":"replace_phs","i":["...","x","AH0"],"o":["x","AH0"]}
+{"f":"replace_phs","i":["a",",","ER","'","?","AH0","ㄱ"],"o":["a",",","ER","-","?","AH0","ㄱ"]}
+{"f":"replace_phs","i":["a","[",",","ER","","","...","UW"],"o":["a","[",",","ER"]}
+{"f":"replace_phs","i":["a",",","UNK","IH","UW1"],"o":["a",",","UNK","IH","UW1"]}
+{"f":"replace_phs","i":["UW1","ㄱ","["],"o":["UW1","ㄱ","["]}
+{"f":"replace_phs","i":["UW","AH0"],"o":["AH0"]}
+{"f":"replace_phs","i":["UNK","ㄱ","ER","?","...","","ㄱ","SP"],"o":["UNK","ㄱ","ER","?","ㄱ","SP"]}
+{"f":"replace_phs","i":["x","ER","UNK","SP","[","x","x","_",""],"o":["x","ER","UNK","SP","[","x","x","_"]}
+{"f":"replace_phs","i":["AH0","UW1","-","","AH0","!","[","?","UNK"],"o":["AH0","UW1","-","AH0","!","[","?","UNK"]}
+{"f":"replace_phs","i":["UW","SP","a","."],"o":["SP","a","."]}
+{"f":"replace_phs","i":[],"o":[]}
+{"f":"replace_phs","i":["[","_","_"],"o":["[","_","_"]}
+{"f":"replace_phs","i":["UNK"," ","UNK","UW1","UW","'","UNK","[","UW","a"],"o":["UNK","UNK","UW1","-","UNK","[","a"]}
+{"f":"replace_phs","i":["...","UW1","?"],"o":["UW1","?"]}
+{"f":"replace_phs","i":[],"o":[]}
+{"f":"replace_phs","i":["IH","'"],"o":["IH","-"]}
+{"f":"replace_phs","i":["ㄱ","...","'","AH0","AH0","'","SP","ER"],"o":["ㄱ","-","AH0","AH0","-","SP","ER"]}
+{"f":"replace_phs","i":["UNK","AH0","ER","ER","x","IH","AH0"],"o":["UNK","AH0","ER","ER","x","IH","AH0"]}
+{"f":"replace_phs","i":["UW1","UW1","[","!","[","-"," "],"o":["UW1","UW1","[","!","[","-"]}
+{"f":"replace_phs","i":["a"],"o":["a"]}
+{"f":"replace_phs","i":["UW"," ","ER","x","!","-","x","SP","UW","..."],"o":["ER","x","!","-","x","SP"]}
+{"f":"replace_phs","i":[],"o":[]}
+{"f":"replace_phs","i":["IH","UW1","x","UW","SP"],"o":["IH","UW1","x","SP"]}
+{"f":"replace_phs","i":["SP","SP","-","SP"," "],"o":["SP","SP","-","SP"]}
+{"f":"replace_phs","i":["_"],"o":["_"]}
+{"f":"replace_phs","i":["ㄱ","AH0","ER","'","UNK","UW"],"o":["ㄱ","AH0","ER","-","UNK"]}
+{"f":"replace_phs","i":[".","...","-","","a","ㄱ"],"o":[".","-","a","ㄱ"]}
+{"f":"replace_phs","i":[".","-","x","'","'","-","AH0",".","UW1","IH"],"o":[".","-","x","-","-","-","AH0",".","UW1","IH"]}
+{"f":"replace_phs","i":["","[","!","UNK","_","UNK","_","."],"o":["[","!","UNK","_","UNK","_","."]}
+{"f":"replace_phs","i":["_","UW1","UW1","[","_","SP","IH",""],"o":["_","UW1","UW1","[","_","SP","IH"]}
+{"f":"replace_phs","i":["-","UNK","[","UW","UW","!"],"o":["-","UNK","[","!"]}
+{"f":"replace_phs","i":["ER",".","...","UW1","IH","x","UW","","AH0","AH0"],"o":["ER",".","UW1","IH","x","AH0","AH0"]}
+{"f":"replace_phs","i":[],"o":[]}
+{"f":"replace_phs","i":["SP","...",",","a","_","","AH0","UNK"],"o":["SP",",","a","_","AH0","UNK"]}
+{"f":"replace_phs","i":["UW1","_","?","'",".","'","!","[","'","["],"o":["UW1","_","?","-",".","-","!","[","-","["]}
+{"f":"replace_phs","i":["["," ","a","?","IH","ㄱ"],"o":["[","a","?","IH","ㄱ"]}
+{"f":"replace_phs","i":[],"o":[]}
+{"f":"replace_phs","i":["AH0","."],"o":["AH0","."]}
+{"f":"replace_phs","i":["a","_","x","[","-"," ","-","ER","."],"o":["a","_","x","[","-","-","ER","."]}
+{"f":"replace_phs","i":["AH0","","UNK",",","UNK","UW","UW1","?","UW1",","],"o":["AH0","UNK",",","UNK","UW1","?","UW1",","]}
+{"f":"replace_phs","i":["","ER","SP"],"o":["ER","SP"]}
+{"f":"replace_phs","i":[" "," ","SP","?","",".","[","'","["],"o":["SP","?",".","[","-","["]}
+{"f":"replace_phs","i":["[","UNK","","ER","'","ㄱ","-","[","ㄱ","."],"o":["[","UNK","ER","-","ㄱ","-","[","ㄱ","."]}
+{"f":"replace_phs","i":[],"o":[]}
+{"f":"replace_phs","i":[".","["],"o":[".","["]}
+{"f":"replace_phs","i":["IH","-",",","SP","UW","?"],"o":["IH","-",",","SP","?"]}
+{"f":"replace_phs","i":[],"o":[]}
+{"f":"replace_phs","i":["IH","UNK"],"o":["IH","UNK"]}
+{"f":"replace_phs","i":["UW1","x"],"o":["UW1","x"]}
+{"f":"replace_phs","i":["x","?"],"o":["x","?"]}
+{"f":"replace_phs","i":["'","AH0"," ","ㄱ","UW1","UW","UW1",".","-","UW1"],"o":["-","AH0","ㄱ","UW1","UW1",".","-","UW1"]}
+{"f":"replace_phs","i":["_","UW1","!",".","'",""],"o":["_","UW1","!",".","-"]}
+{"f":"replace_phs","i":["_","UW1","!",".","!","x","_"],"o":["_","UW1","!",".","!","x","_"]}
+{"f":"replace_phs","i":["x","","SP","AH0",",","'"],"o":["x","SP","AH0",",","-"]}
+{"f":"replace_phs","i":["AH0"],"o":["AH0"]}
+{"f":"replace_phs","i":["."],"o":["."]}
+{"f":"replace_phs","i":["x","!","","'","x","_","a","!","UW"],"o":["x","!","-","x","_","a","!"]}
+{"f":"replace_phs","i":["ER","!","IH","-","SP","UW","AH0","-"],"o":["ER","!","IH","-","SP","AH0","-"]}
+{"f":"replace_phs","i":["-","-","'","IH","."],"o":["-","-","-","IH","."]}
+{"f":"replace_phs","i":["ER","x","[","[","a"],"o":["ER","x","[","[","a"]}
+{"f":"replace_phs","i":["!","ER","ER"," ","SP","!"],"o":["!","ER","ER","SP","!"]}
+{"f":"replace_phs","i":[".","a","_","x","SP","","-",".","","AH0"],"o":[".","a","_","x","SP","-",".","AH0"]}
+{"f":"replace_phs","i":["x","UW1","x","AH0"],"o":["x","UW1","x","AH0"]}
+{"f":"replace_phs","i":[" ",".","ER","SP","a",""],"o":[".","ER","SP","a"]}
+{"f":"replace_phs","i":["["],"o":["["]}
+{"f":"replace_phs","i":[",","SP","AH0","UW1","UW","UW","AH0"],"o":[",","SP","AH0","UW1","AH0"]}
+{"f":"replace_phs","i":[],"o":[]}
+{"f":"replace_phs","i":["...",""," ","[",".","a"],"o":["[",".","a"]}
+{"f":"replace_phs","i":["'","ER","UW1","a","UW1"],"o":["-","ER","UW1","a","UW1"]}
+{"f":"replace_phs","i":[" ","SP","ㄱ","ㄱ","-","!","ㄱ"],"o":["SP","ㄱ","ㄱ","-","!","ㄱ"]}
+{"f":"replace_phs","i":["?",".","AH0"],"o":["?",".","AH0"]}
+{"f":"replace_phs","i":["","x","[","...",","],"o":["x","[",","]}
+{"f":"replace_phs","i":[" ","-","a"," ","?","[","a","x","IH","'"],"o":["-","a","?","[","a","x","IH","-"]}
+{"f":"replace_phs","i":["?","UW1","'","[","."],"o":["?","UW1","-","[","."]}
+{"f":"replace_phs","i":[" ",","," ","ㄱ","SP","UW"],"o":[",","ㄱ","SP"]}
+{"f":"replace_phs","i":[],"o":[]}
+{"f":"replace_phs","i":["UW","UNK"],"o":["UNK"]}
+{"f":"replace_phs","i":["AH0"],"o":["AH0"]}
+{"f":"replace_phs","i":["AH0","...","a","!","IH",",","_","IH"],"o":["AH0","a","!","IH",",","_","IH"]}
+{"f":"replace_phs","i":[" ","IH","-","UW","","!","'"],"o":["IH","-","!","-"]}
+{"f":"replace_phs","i":["."],"o":["."]}
+{"f":"replace_phs","i":["SP"],"o":["SP"]}
+{"f":"replace_phs","i":["!"," ","!"],"o":["!","!"]}
+{"f":"replace_phs","i":["ㄱ","ER"],"o":["ㄱ","ER"]}
+{"f":"replace_phs","i":["a",",","AH0","x"],"o":["a",",","AH0","x"]}
+{"f":"replace_phs","i":[",","["],"o":[",","["]}
+{"f":"replace_phs","i":["ER","UNK","UNK","_","AH0","?","SP","?"],"o":["ER","UNK","UNK","_","AH0","?","SP","?"]}
+{"f":"replace_phs","i":["ㄱ","x"],"o":["ㄱ","x"]}
+{"f":"replace_phs","i":[".","-","ER"],"o":[".","-","ER"]}
+{"f":"replace_phs","i":["SP","UW1","IH","",""," "],"o":["SP","UW1","IH"]}
+{"f":"replace_phs","i":["UW","'","AH0"],"o":["-","AH0"]}
+{"f":"replace_phs","i":["UW","ㄱ"],"o":["ㄱ"]}
+{"f":"replace_phs","i":["!","ER","IH"],"o":["!","ER","IH"]}
+{"f":"replace_phs","i":["UNK","ㄱ","IH"," ","ㄱ"],"o":["UNK","ㄱ","IH","ㄱ"]}
+{"f":"replace_phs","i":[".","x","_","UNK","["],"o":[".","x","_","UNK","["]}
+{"f":"replace_phs","i":["AH0","SP","UNK"," ","[","[","UW","a","UW1"],"o":["AH0","SP","UNK","[","[","a","UW1"]}
+{"f":"replace_phs","i":["IH","?","",",","UW1","UW1"],"o":["IH","?",",","UW1","UW1"]}
+{"f":"replace_phs","i":["UNK","ㄱ","'","","UW","?",".","IH","","!"],"o":["UNK","ㄱ","-","?",".","IH","!"]}
+{"f":"replace_phs","i":[",","SP","a","SP","a","UW1","UW"],"o":[",","SP","a","SP","a","UW1"]}
+{"f":"replace_phs","i":["'","[","SP","a","","!","UNK",",","x"],"o":["-","[","SP","a","!","UNK",",","x"]}
+{"f":"replace_phs","i":["?","IH","a","?"],"o":["?","IH","a","?"]}
+{"f":"replace_phs","i":["UNK","."],"o":["UNK","."]}
+{"f":"replace_phs","i":["AH0","ER","x","SP","UNK","_","UW"],"o":["AH0","ER","x","SP","UNK","_"]}
+{"f":"replace_phs","i":["-","SP","ER","a","ER","ㄱ","UNK"],"o":["-","SP","ER","a","ER","ㄱ","UNK"]}
+{"f":"replace_phs","i":[",",",","IH","'","_","[","[","UW1",""],"o":[",",",","IH","-","_","[","[","UW1"]}
+{"f":"replace_phs","i":["_","UW","IH","'","ER","UW","ㄱ",""],"o":["_","IH","-","ER","ㄱ"]}
+{"f":"replace_phs","i":["AH0","-","'","","UW1","UW"],"o":["AH0","-","-","UW1"]}
+{"f":"replace_phs","i":["x","SP","ER","AH0","SP","[","[",".","a"],"o":["x","SP","ER","AH0","SP","[","[",".","a"]}
+{"f":"replace_phs","i":["?","[","-","x"],"o":["?","[","-","x"]}
+{"f":"replace_phs","i":["ㄱ","SP","","...","ER","UW"," "],"o":["ㄱ","SP","ER"]}
+{"f":"replace_phs","i":[",",".","SP","!","ER","IH","IH","'","x","."],"o":[",",".","SP","!","ER","IH","IH","-","x","."]}
+{"f":"replace_phs","i":["'","?","UW1","ㄱ","?","!"],"o":["-","?","UW1","ㄱ","?","!"]}
+{"f":"replace_phs","i":["'","AH0","x","",",","AH0","UW",""],"o":["-","AH0","x",",","AH0"]}
+{"f":"replace_phs","i":[],"o":[]}
+{"f":"replace_phs","i":["[","!","x","[","ㄱ","AH0","AH0","IH","UW","["],"o":["[","!","x","[","ㄱ","AH0","AH0","IH","["]}
+{"f":"replace_phs","i":["[","UNK"],"o":["[","UNK"]}
+{"f":"replace_phs","i":["UW","AH0","...","?",".","!","a"],"o":["AH0","?",".","!","a"]}
+{"f":"replace_phs","i":["a","AH0","...","_","UW"],"o":["a","AH0","_"]}
+{"f":"replace_phs","i":["x","UNK","x","ㄱ","AH0","a","UW1","!","-"," "],"o":["x","UNK","x","ㄱ","AH0","a","UW1","!","-"]}
+{"f":"replace_phs","i":["?","UNK","UNK","IH","","AH0","AH0","ER"],"o":["?","UNK","UNK","IH","AH0","AH0","ER"]}
+{"f":"replace_phs","i":["","a"],"o":["a"]}
+{"f":"replace_phs","i":["IH"],"o":["IH"]}
+{"f":"replace_phs","i":["?",".","?","UNK"],"o":["?",".","?","UNK"]}
+{"f":"replace_phs","i":[],"o":[]}
+{"f":"replace_phs","i":["AH0","UW1","",".","UW1","-"," "],"o":["AH0","UW1",".","UW1","-"]}
+{"f":"replace_phs","i":["'","[",",","AH0","IH","["],"o":["-","[",",","AH0","IH","["]}
+{"f":"replace_phs","i":[],"o":[]}
+{"f":"replace_phs","i":["-","AH0","","_","SP"],"o":["-","AH0","_","SP"]}
+{"f":"replace_phs","i":["UNK","?","","?","x","ㄱ"],"o":["UNK","?","?","x","ㄱ"]}
+{"f":"replace_phs","i":[" ",".","IH",",","'"],"o":[".","IH",",","-"]}
+{"f":"replace_phs","i":["IH","UNK","-","UNK","x","IH"],"o":["IH","UNK","-","UNK","x","IH"]}
+{"f":"replace_phs","i":[],"o":[]}
+{"f":"replace_phs","i":["ER","UNK","UNK","ER","SP","UNK","'","SP"],"o":["ER","UNK","UNK","ER","SP","UNK","-","SP"]}
+{"f":"replace_phs","i":["-"],"o":["-"]}
+{"f":"replace_phs","i":["ER","AH0"],"o":["ER","AH0"]}
+{"f":"replace_phs","i":["_","AH0","[","UW1","...","..."],"o":["_","AH0","[","UW1"]}
+{"f":"replace_phs","i":["SP","...","'"],"o":["SP","-"]}
+{"f":"replace_phs","i":["ER","x"],"o":["ER","x"]}
+{"f":"replace_phs","i":["...","UW",",","","UNK","'","","!","..."],"o":[",","UNK","-","!"]}
+{"f":"replace_phs","i":["UNK","AH0","-","_"],"o":["UNK","AH0","-","_"]}
