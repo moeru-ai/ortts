@@ -29,7 +29,7 @@ const GSV_LANG_MAP: &[(&str, &str)] = &[
 ];
 
 /// Inputs whose `split_by_lang` output is known to differ, as
-/// `(config, text)` (documented in the crate README). Empty: every case
+/// `(config, text)` (documented in `parity/README.md`). Empty: every case
 /// matches.
 const KNOWN_MISMATCHES: &[(&str, &str)] = &[];
 

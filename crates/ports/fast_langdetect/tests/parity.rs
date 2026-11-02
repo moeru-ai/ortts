@@ -24,7 +24,7 @@ struct Case {
 /// Allowed absolute score difference.
 const SCORE_TOLERANCE: f64 = 1e-5;
 
-/// Cases whose labels are known to differ (documented in the crate README).
+/// Cases whose labels are known to differ (documented in parity/README.md).
 /// Each entry is `(text, k, threshold)`.
 const KNOWN_LABEL_MISMATCHES: &[(&str, i32, f64)] = &[];
 
