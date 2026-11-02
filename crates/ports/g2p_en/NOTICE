@@ -1,0 +1,11 @@
+g2p_en (Rust port)
+
+This crate is a partial translation to Rust of g2p_en 2.1.0
+(https://github.com/Kyubyong/g2p), a Python module for English
+grapheme-to-phoneme conversion by Kyubyong Park (kbpark.linguist@gmail.com)
+and Jongseok Kim (https://github.com/ozmig77), licensed under the Apache
+License, Version 2.0.
+
+The code in src/ was translated from g2p_en/g2p.py and g2p_en/__init__.py.
+The files data/checkpoint20.npz (GRU model weights) and data/homographs.en
+are copied unchanged from the g2p_en 2.1.0 distribution.

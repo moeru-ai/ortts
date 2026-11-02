@@ -135,3 +135,6 @@ opt-level = 3
 
 [profile.dev.package.wordsegment]
 opt-level = 3
+
+[profile.dev.package.g2p_en]
+opt-level = 3
