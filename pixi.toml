@@ -37,7 +37,7 @@ PATH = "/usr/bin:/bin:$HOME/.cargo/bin:$CONDA_PREFIX/bin:$PATH"
 # crates/ports. Versions are pinned so golden fixtures are reproducible.
 # Usage: pixi run -e parity python tools/parity/<script>.py
 [feature.parity]
-platforms = ["linux-64", "osx-arm64"]
+platforms = ["linux-64", "osx-arm64", "win-64"]
 
 [feature.parity.dependencies]
 python = "3.11.*"
