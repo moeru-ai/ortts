@@ -955,6 +955,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "g2p_en"
+version = "0.1.0-beta.4"
+dependencies = [
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "getrandom"
 version = "0.2.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
