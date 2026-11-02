@@ -33,6 +33,7 @@ members = [
   "./crates/backend_kokoro",
   "./crates/backend_qwen3_tts",
   "./crates/onnx",
+  "./crates/ports/*",
   "./crates/server",
   "./crates/shared",
   "./crates/shared_chatterbox",
