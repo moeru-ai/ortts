@@ -1,0 +1,21 @@
+# Python reference environment for the tojyutping parity fixtures.
+# Versions are pinned so the golden fixtures are reproducible.
+# Usage: pixi run --manifest-path crates/ports/tojyutping/pixi.toml <task>
+[workspace]
+name = "tojyutping-parity"
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-arm64", "win-64"]
+
+[dependencies]
+# Keep 3.11: constants.json lists `str.isspace()` over all of Unicode, which
+# depends on the Unicode version of the interpreter (Unicode 14 in 3.11).
+python = "3.11.*"
+
+[pypi-dependencies]
+ToJyutping = "==3.2.0"
+
+[tasks]
+# Regenerates tests/fixtures/{constants,chars,words,sentences}.json.
+fixtures = "python parity/gen_fixtures.py"
+# Copies data/trie.txt from the ToJyutping 3.2.0 wheel.
+data = "python parity/copy_trie.py"
