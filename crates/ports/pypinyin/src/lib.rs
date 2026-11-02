@@ -5,7 +5,7 @@
 //!
 //! The module layout mirrors the Python package (`pypinyin.core` is
 //! [`core`], `pypinyin.contrib.tone_convert` is [`contrib::tone_convert`] and
-//! so on). See the crate README for the ported scope and for how to express
+//! so on). See `parity/README.md` for the ported scope and for how to express
 //! the Python subclassing extension points (`Converter`, `Pinyin`).
 
 pub mod _re_digit;

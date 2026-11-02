@@ -18,7 +18,7 @@
 //!   `UltimateConverter` holds an `UltimateConverter` and forwards those two
 //!   methods (and [`Converter::is_ultimate_converter`]) to it.
 //!
-//! See the crate README for a full example (the GPT-SoVITS G2PW converter).
+//! See `parity/README.md` for a full example (the GPT-SoVITS G2PW converter).
 
 use std::fmt;
 use std::sync::Arc;
