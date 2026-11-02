@@ -11,7 +11,7 @@ Translated parts: nltk/tokenize/casual.py (Christopher Potts, Ewan Klein,
 Pierpaolo Pantone, Tom Aarsen), nltk/tag/perceptron.py (averaged perceptron
 tagger after Matthew Honnibal), and pos_tag from nltk/tag/__init__.py. The
 code was translated from Python to Rust by the ortts authors; changes are
-described in README.md.
+described in parity/README.md.
 
 data/averaged_perceptron_tagger_eng.*.json are the pretrained English model
 files of the nltk_data package taggers/averaged_perceptron_tagger_eng,

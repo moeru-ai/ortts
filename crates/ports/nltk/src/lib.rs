@@ -13,7 +13,8 @@
 //! assert_eq!(tags[0], ("I".to_owned(), "PRP".to_owned()));
 //! ```
 //!
-//! See the crate README for the ported scope and the known differences.
+//! See the crate README for the ported scope and `parity/README.md` for the
+//! known differences.
 
 pub mod python;
 pub mod tag;

@@ -22,7 +22,7 @@ Writes to tests/fixtures/ of this crate:
 
 Python returns lone surrogates for `&#xD800;`..`&#xDFFF;`. JSON cannot carry
 them to Rust, so they are replaced with U+FFFD and the record gets
-`"surrogate": true` (see the crate README).
+`"surrogate": true` (see parity/README.md).
 """
 
 import contextlib

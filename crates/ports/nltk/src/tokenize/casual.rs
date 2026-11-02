@@ -4,7 +4,7 @@
 //! compiles them with the third-party `regex` module (through `nltk.redos`);
 //! here they go through [`compile`], which applies the Python `VERBOSE` rules
 //! itself and hands the result to `fancy-regex` (a backtracking engine, needed
-//! for the lookarounds and backreferences). See the crate README for the
+//! for the lookarounds and backreferences). See `parity/README.md` for the
 //! remaining differences between the two engines.
 
 use std::collections::HashMap;

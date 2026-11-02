@@ -13,11 +13,11 @@ use serde::Deserialize;
 
 use common::{all_chars, read_json, read_jsonl};
 
-/// Inputs whose tokens differ from Python. See the crate README.
+/// Inputs whose tokens differ from Python. See parity/README.md.
 const TOKENIZE_EXCEPTIONS: &[&str] = &[];
 
 /// Character-class probes whose code point sets differ from Python, with the
-/// code points that differ. See the crate README.
+/// code points that differ. See parity/README.md.
 const CLASS_EXCEPTIONS: &[(&str, bool, &[u32])] = &[];
 
 #[derive(Deserialize)]
