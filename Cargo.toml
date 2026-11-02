@@ -48,7 +48,16 @@ ortts_onnx.path = "./crates/onnx"
 ortts_server.path = "./crates/server"
 ortts_shared.path = "./crates/shared"
 ortts_shared_chatterbox.path = "./crates/shared_chatterbox"
+cn2an.path = "./crates/ports/cn2an"
 fast_langdetect.path = "./crates/ports/fast_langdetect"
+g2p_en.path = "./crates/ports/g2p_en"
+inflect.path = "./crates/ports/inflect"
+jieba_fast.path = "./crates/ports/jieba_fast"
+nltk.path = "./crates/ports/nltk"
+pypinyin.path = "./crates/ports/pypinyin"
+split_lang.path = "./crates/ports/split_lang"
+tojyutping.path = "./crates/ports/tojyutping"
+wordsegment.path = "./crates/ports/wordsegment"
 anyhow = "1.0"
 axum = { version = "0.8", features = ["tokio", "macros"] }
 base64 = "0.22.1"
@@ -61,7 +70,13 @@ hf-hub = { version = "0.4", default-features = false, features = [
   "native-tls",
 ] }
 jieba-rs = "0.8.1"
+jpreprocess = { version = "0.15", features = ["naist-jdic"] }
+jpreprocess-core = "0.15.0"
+jpreprocess-dictionary = "0.15.0"
+jpreprocess-jpcommon = "0.15.0"
+jpreprocess-njd = "0.15.0"
 kakasi = "0.1.0"
+lindera-dictionary = { version = "3.0.7", default-features = false }
 ndarray = "0.17.2"
 # TODO: tls-rustls
 # https://github.com/pykeio/ort/issues/436

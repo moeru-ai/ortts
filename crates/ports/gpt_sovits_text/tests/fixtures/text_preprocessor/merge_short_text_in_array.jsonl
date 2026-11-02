@@ -1,0 +1,600 @@
+{"texts":["一二三四五","abcdef","abcdef","一二三四五","x","abc","ab"],"threshold":8,"out":["一二三四五abcdef","abcdef一二三四五xabcab"]}
+{"texts":["x","ab","a","abcdef","你好","ab","a"],"threshold":8,"out":["xabaabcdef你好aba"]}
+{"texts":[],"threshold":6,"out":[]}
+{"texts":["x","ab","x","","一二三四五","a",""],"threshold":0,"out":["x","ab","x","","一二三四五","a",""]}
+{"texts":["abc","x",""],"threshold":7,"out":["abcx"]}
+{"texts":["abcdef","x","abc","一二三四五","abc"],"threshold":4,"out":["abcdef","xabc","一二三四五abc"]}
+{"texts":["","a","abcdef","你好"," ","一二三四五","a"],"threshold":4,"out":["aabcdef","你好 一二三四五a"]}
+{"texts":["abc","一二三四五","你好","","a"],"threshold":1,"out":["abc","一二三四五","你好","a"]}
+{"texts":["a","你好"," ","a","",""],"threshold":3,"out":["a你好 a"]}
+{"texts":["","abcdef"," "],"threshold":6,"out":["abcdef "]}
+{"texts":["a","x","abc","你好","。","a"],"threshold":4,"out":["axabc","你好。a"]}
+{"texts":[""," ","a","ab","abc"],"threshold":1,"out":[" ","a","ab","abc"]}
+{"texts":[],"threshold":0,"out":[]}
+{"texts":["abcdef","ab","一二三四五","abc","abcdef","一二三四五","abc"],"threshold":2,"out":["abcdef","ab","一二三四五","abc","abcdef","一二三四五","abc"]}
+{"texts":[" ","a"," "," ","abc",""],"threshold":4,"out":[" a  abc"]}
+{"texts":["","abc","ab"," "],"threshold":1,"out":["abc","ab"," "]}
+{"texts":[],"threshold":2,"out":[]}
+{"texts":["abcdef","你好",""],"threshold":5,"out":["abcdef你好"]}
+{"texts":[" ","a","a","a"],"threshold":3,"out":[" aaa"]}
+{"texts":["","x","。"],"threshold":5,"out":["x。"]}
+{"texts":["ab","x","abcdef","x","ab"," ","ab"],"threshold":2,"out":["ab","xabcdef","xab"," ab"]}
+{"texts":["abc","x","abc","abc"],"threshold":2,"out":["abc","xabc","abc"]}
+{"texts":["abc"," ","abcdef","x","a"," ","","a"],"threshold":1,"out":["abc"," ","abcdef","x","a"," ","a"]}
+{"texts":[],"threshold":8,"out":[]}
+{"texts":["abc"," ","你好"," "],"threshold":7,"out":["abc 你好 "]}
+{"texts":["一二三四五","ab","a","ab"],"threshold":3,"out":["一二三四五","abaab"]}
+{"texts":["一二三四五","x","x","a","你好","abc","abc"],"threshold":0,"out":["一二三四五","x","x","a","你好","abc","abc"]}
+{"texts":["你好"],"threshold":6,"out":["你好"]}
+{"texts":["abc","","","ab","你好","。","一二三四五"],"threshold":2,"out":["abc","ab","你好","。一二三四五"]}
+{"texts":["。"],"threshold":2,"out":["。"]}
+{"texts":["。","一二三四五","x","ab","x","",""],"threshold":7,"out":["。一二三四五xabx"]}
+{"texts":["你好","","","x","a"],"threshold":7,"out":["你好xa"]}
+{"texts":["你好"],"threshold":5,"out":["你好"]}
+{"texts":["a","a"],"threshold":7,"out":["aa"]}
+{"texts":["。","","ab","。","。","a","abcdef","a"],"threshold":6,"out":["。ab。。a","abcdefa"]}
+{"texts":[],"threshold":7,"out":[]}
+{"texts":[],"threshold":6,"out":[]}
+{"texts":["x","","x","a","a","a"],"threshold":1,"out":["x","x","a","a","a"]}
+{"texts":[" ","。"," ","x"],"threshold":7,"out":[" 。 x"]}
+{"texts":["abcdef","一二三四五","a","一二三四五","一二三四五","","你好"],"threshold":1,"out":["abcdef","一二三四五","a","一二三四五","一二三四五","你好"]}
+{"texts":["","abc","a","abcdef","x","abcdef","你好"],"threshold":0,"out":["","abc","a","abcdef","x","abcdef","你好"]}
+{"texts":["你好","ab","x","abc","一二三四五"],"threshold":2,"out":["你好","ab","xabc","一二三四五"]}
+{"texts":["abcdef","abcdef","abc","。"," "],"threshold":4,"out":["abcdef","abcdef","abc。 "]}
+{"texts":[" ","abc","abc"],"threshold":6,"out":[" abcabc"]}
+{"texts":["x","。","abc"],"threshold":2,"out":["x。","abc"]}
+{"texts":["abcdef","。"],"threshold":0,"out":["abcdef","。"]}
+{"texts":["你好"],"threshold":2,"out":["你好"]}
+{"texts":["abcdef"],"threshold":7,"out":["abcdef"]}
+{"texts":["abc"," "," ","一二三四五"],"threshold":7,"out":["abc  一二三四五"]}
+{"texts":["x","abcdef","。","a",""],"threshold":4,"out":["xabcdef。a"]}
+{"texts":[],"threshold":4,"out":[]}
+{"texts":["你好","x","","ab"," "],"threshold":7,"out":["你好xab "]}
+{"texts":["","你好","abc"],"threshold":2,"out":["你好","abc"]}
+{"texts":[],"threshold":1,"out":[]}
+{"texts":["a","一二三四五","。","a","abc","abc","abcdef"],"threshold":4,"out":["a一二三四五","。aabc","abcabcdef"]}
+{"texts":["","abcdef"],"threshold":8,"out":["abcdef"]}
+{"texts":[],"threshold":2,"out":[]}
+{"texts":["你好","。","一二三四五"],"threshold":8,"out":["你好。一二三四五"]}
+{"texts":["x","ab"," ","abc","a"," "," ","ab"],"threshold":7,"out":["xab abca  ab"]}
+{"texts":["abc",""," ","一二三四五","x","一二三四五","。"],"threshold":7,"out":["abc 一二三四五","x一二三四五。"]}
+{"texts":["abc","a","a","abc","abc"],"threshold":6,"out":["abcaaabcabc"]}
+{"texts":["你好"],"threshold":8,"out":["你好"]}
+{"texts":["你好","","。","一二三四五","a"],"threshold":0,"out":["你好","","。","一二三四五","a"]}
+{"texts":["。","一二三四五"," ","你好","abcdef","","abc"],"threshold":1,"out":["。","一二三四五"," ","你好","abcdef","abc"]}
+{"texts":["","ab","一二三四五","。","ab","abcdef"],"threshold":2,"out":["ab","一二三四五","。ab","abcdef"]}
+{"texts":["一二三四五","abcdef","abcdef","x","a","abc","abcdef","一二三四五"],"threshold":8,"out":["一二三四五abcdef","abcdefxa","abcabcdef一二三四五"]}
+{"texts":["一二三四五","ab","一二三四五","一二三四五"],"threshold":8,"out":["一二三四五ab一二三四五一二三四五"]}
+{"texts":["你好"," ","x","abc"],"threshold":4,"out":["你好 xabc"]}
+{"texts":["一二三四五","一二三四五"],"threshold":4,"out":["一二三四五","一二三四五"]}
+{"texts":["abc"," ","一二三四五","a","一二三四五","","x"],"threshold":6,"out":["abc 一二三四五","a一二三四五x"]}
+{"texts":[],"threshold":8,"out":[]}
+{"texts":[],"threshold":8,"out":[]}
+{"texts":["一二三四五","x","a","abcdef","a","ab"],"threshold":1,"out":["一二三四五","x","a","abcdef","a","ab"]}
+{"texts":["abcdef"," "," ","你好","abc","abcdef","abcdef","ab"],"threshold":5,"out":["abcdef","  你好abc","abcdef","abcdefab"]}
+{"texts":["abcdef","一二三四五","。","a","abc"," "],"threshold":0,"out":["abcdef","一二三四五","。","a","abc"," "]}
+{"texts":["ab","","","abc"],"threshold":2,"out":["ab","abc"]}
+{"texts":["","你好","。"],"threshold":5,"out":["你好。"]}
+{"texts":["x","abcdef","a"],"threshold":7,"out":["xabcdefa"]}
+{"texts":["一二三四五"],"threshold":4,"out":["一二三四五"]}
+{"texts":["一二三四五"," ",""],"threshold":6,"out":["一二三四五 "]}
+{"texts":["一二三四五","x","ab","一二三四五","abc","一二三四五"],"threshold":3,"out":["一二三四五","xab","一二三四五","abc","一二三四五"]}
+{"texts":["abc","一二三四五","x","x","ab","abc","。","ab"],"threshold":5,"out":["abc一二三四五","xxababc。ab"]}
+{"texts":["abc","abc","abc","a","ab"],"threshold":3,"out":["abc","abc","abc","aab"]}
+{"texts":["a","你好"],"threshold":6,"out":["a你好"]}
+{"texts":[" "],"threshold":6,"out":[" "]}
+{"texts":["ab","abc"," ","","a","abc","x","。"],"threshold":5,"out":["ababc"," aabcx。"]}
+{"texts":["一二三四五"],"threshold":5,"out":["一二三四五"]}
+{"texts":["abc","a","abcdef","a","","","一二三四五","x"],"threshold":8,"out":["abcaabcdefa一二三四五x"]}
+{"texts":["ab","abc","ab","a","abc","ab","ab"],"threshold":4,"out":["ababc","abaabc","abab"]}
+{"texts":["x"],"threshold":0,"out":["x"]}
+{"texts":["abcdef","a"],"threshold":1,"out":["abcdef","a"]}
+{"texts":[" ","abcdef"," ","一二三四五","。"],"threshold":6,"out":[" abcdef"," 一二三四五。"]}
+{"texts":["x","。",""],"threshold":0,"out":["x","。",""]}
+{"texts":["ab"," ","abcdef"],"threshold":5,"out":["ab abcdef"]}
+{"texts":[" ","abc","x","ab","a"],"threshold":8,"out":[" abcxaba"]}
+{"texts":[],"threshold":5,"out":[]}
+{"texts":[" "],"threshold":3,"out":[" "]}
+{"texts":["x","。","你好","你好","a","ab"," ","ab"],"threshold":5,"out":["x。你好你好","aab ab"]}
+{"texts":["。"," ","ab"," ","abc","ab","a","。"],"threshold":4,"out":["。 ab"," abc","aba。"]}
+{"texts":["a","","。","x","","abc","你好"],"threshold":4,"out":["a。xabc你好"]}
+{"texts":["abc"," ","x","ab","一二三四五"],"threshold":1,"out":["abc"," ","x","ab","一二三四五"]}
+{"texts":["一二三四五","abcdef","abc","a"," ","x"],"threshold":0,"out":["一二三四五","abcdef","abc","a"," ","x"]}
+{"texts":["x"],"threshold":1,"out":["x"]}
+{"texts":["你好","abcdef"," "],"threshold":8,"out":["你好abcdef "]}
+{"texts":[],"threshold":3,"out":[]}
+{"texts":["","a","你好","你好","你好","。"],"threshold":8,"out":["a你好你好你好。"]}
+{"texts":["一二三四五"," ","一二三四五","x","a","abcdef","a","一二三四五"],"threshold":0,"out":["一二三四五"," ","一二三四五","x","a","abcdef","a","一二三四五"]}
+{"texts":["ab"," ","abcdef","ab","abcdef","一二三四五"],"threshold":0,"out":["ab"," ","abcdef","ab","abcdef","一二三四五"]}
+{"texts":["abcdef"," ","你好","一二三四五"," ","x"],"threshold":4,"out":["abcdef"," 你好一二三四五 x"]}
+{"texts":["一二三四五","你好","abcdef","你好","一二三四五"],"threshold":4,"out":["一二三四五","你好abcdef","你好一二三四五"]}
+{"texts":["","","abc","x"],"threshold":0,"out":["","","abc","x"]}
+{"texts":[" "," "],"threshold":0,"out":[" "," "]}
+{"texts":[" ","","x","。","a"],"threshold":3,"out":[" x。a"]}
+{"texts":["abcdef","你好","abc","","一二三四五","a"],"threshold":7,"out":["abcdef你好","abc一二三四五a"]}
+{"texts":["abc","x"],"threshold":1,"out":["abc","x"]}
+{"texts":[],"threshold":6,"out":[]}
+{"texts":["a","abc","","。","一二三四五","ab","a"],"threshold":5,"out":["aabc。","一二三四五aba"]}
+{"texts":["ab"," ","abcdef","x","你好","x"," "],"threshold":5,"out":["ab abcdef","x你好x "]}
+{"texts":["ab","你好","ab","abc","abcdef","a","一二三四五","你好"],"threshold":8,"out":["ab你好ababc","abcdefa一二三四五你好"]}
+{"texts":["你好","你好","x","x","x"],"threshold":3,"out":["你好你好","xxx"]}
+{"texts":["abc","abc","abc","一二三四五"],"threshold":3,"out":["abc","abc","abc","一二三四五"]}
+{"texts":[],"threshold":0,"out":[]}
+{"texts":[],"threshold":4,"out":[]}
+{"texts":[" ","","x",""],"threshold":1,"out":[" ","x"]}
+{"texts":["一二三四五","你好","a"],"threshold":1,"out":["一二三四五","你好","a"]}
+{"texts":["一二三四五","abc"],"threshold":5,"out":["一二三四五abc"]}
+{"texts":["abcdef","。","abc","。","。","abcdef","ab"],"threshold":1,"out":["abcdef","。","abc","。","。","abcdef","ab"]}
+{"texts":["abcdef"],"threshold":3,"out":["abcdef"]}
+{"texts":[" ","你好"," ","ab","。","ab","x"],"threshold":5,"out":[" 你好 ab。abx"]}
+{"texts":["一二三四五","ab"," ","。"],"threshold":1,"out":["一二三四五","ab"," ","。"]}
+{"texts":["。","a","一二三四五","a"," ","x","x"],"threshold":7,"out":["。a一二三四五a xx"]}
+{"texts":["你好","","a","你好","abc","x","a"],"threshold":4,"out":["你好a你好","abcxa"]}
+{"texts":["。","你好","ab","abc","。","。","。"],"threshold":1,"out":["。","你好","ab","abc","。","。","。"]}
+{"texts":["abcdef","x","x","你好","abcdef"],"threshold":8,"out":["abcdefxx","你好abcdef"]}
+{"texts":["abcdef","。","abc"," "],"threshold":8,"out":["abcdef。abc "]}
+{"texts":["a","。","。"],"threshold":0,"out":["a","。","。"]}
+{"texts":[" ","x"," ","abc","x"],"threshold":5,"out":[" x abcx"]}
+{"texts":["一二三四五","ab","x","x","ab","ab"],"threshold":1,"out":["一二三四五","ab","x","x","ab","ab"]}
+{"texts":["你好","","abc","一二三四五","","一二三四五","ab"],"threshold":4,"out":["你好abc","一二三四五","一二三四五ab"]}
+{"texts":[],"threshold":6,"out":[]}
+{"texts":["x"],"threshold":8,"out":["x"]}
+{"texts":["一二三四五","a","。","a"],"threshold":4,"out":["一二三四五a。a"]}
+{"texts":["。"],"threshold":1,"out":["。"]}
+{"texts":[],"threshold":2,"out":[]}
+{"texts":[" "],"threshold":3,"out":[" "]}
+{"texts":["abcdef","一二三四五","。"],"threshold":7,"out":["abcdef一二三四五。"]}
+{"texts":["。","。","。","ab","abcdef","abcdef"],"threshold":8,"out":["。。。ababcdefabcdef"]}
+{"texts":["x"],"threshold":0,"out":["x"]}
+{"texts":["。",""," ","a","abcdef","一二三四五"],"threshold":0,"out":["。",""," ","a","abcdef","一二三四五"]}
+{"texts":["。","","a"," "," ","ab","abc","ab"],"threshold":6,"out":["。a  ababcab"]}
+{"texts":["。","abc"],"threshold":6,"out":["。abc"]}
+{"texts":["一二三四五","你好","你好","","abcdef","你好"],"threshold":1,"out":["一二三四五","你好","你好","abcdef","你好"]}
+{"texts":["ab","ab","","abcdef"],"threshold":0,"out":["ab","ab","","abcdef"]}
+{"texts":["","。","a","abc","ab","。","abc"],"threshold":3,"out":["。aabc","ab。","abc"]}
+{"texts":["x","一二三四五","abc","abcdef","ab","你好"," "],"threshold":2,"out":["x一二三四五","abc","abcdef","ab","你好 "]}
+{"texts":["一二三四五","一二三四五","abcdef","你好"],"threshold":7,"out":["一二三四五一二三四五","abcdef你好"]}
+{"texts":["。","一二三四五","a","abcdef","abc"," "],"threshold":0,"out":["。","一二三四五","a","abcdef","abc"," "]}
+{"texts":["ab"," ","一二三四五"],"threshold":8,"out":["ab 一二三四五"]}
+{"texts":["","abc","","abcdef"],"threshold":5,"out":["abcabcdef"]}
+{"texts":["abc"," ","x","ab"," ","ab","。"],"threshold":2,"out":["abc"," x","ab"," ab。"]}
+{"texts":["一二三四五","ab","x","你好"],"threshold":8,"out":["一二三四五abx你好"]}
+{"texts":["","ab","x","ab","","abc","ab","ab"],"threshold":1,"out":["ab","x","ab","abc","ab","ab"]}
+{"texts":["你好","x","一二三四五","a","abcdef"],"threshold":7,"out":["你好x一二三四五","aabcdef"]}
+{"texts":["x"],"threshold":8,"out":["x"]}
+{"texts":["你好","","abc"," ","abc","a","abcdef","abc"],"threshold":0,"out":["你好","","abc"," ","abc","a","abcdef","abc"]}
+{"texts":[" ","一二三四五","abcdef","ab","你好","。","你好"," "],"threshold":1,"out":[" ","一二三四五","abcdef","ab","你好","。","你好"," "]}
+{"texts":["你好","abcdef","a","。","a","ab","a"," "],"threshold":7,"out":["你好abcdef","a。aaba "]}
+{"texts":["abcdef"],"threshold":0,"out":["abcdef"]}
+{"texts":["abcdef","abc","你好","x","a","abcdef"],"threshold":0,"out":["abcdef","abc","你好","x","a","abcdef"]}
+{"texts":["x","ab","你好"],"threshold":6,"out":["xab你好"]}
+{"texts":["你好","。"," ","一二三四五","a","你好","abc","abc"],"threshold":6,"out":["你好。 一二三四五","a你好abcabc"]}
+{"texts":["。"],"threshold":4,"out":["。"]}
+{"texts":["x","abcdef","。","abcdef"],"threshold":6,"out":["xabcdef","。abcdef"]}
+{"texts":["a"],"threshold":2,"out":["a"]}
+{"texts":["ab"],"threshold":2,"out":["ab"]}
+{"texts":["abc"," "],"threshold":0,"out":["abc"," "]}
+{"texts":["x","a","a","abc","","ab","a"],"threshold":6,"out":["xaaabcaba"]}
+{"texts":["a","。"," ","一二三四五","ab","abc"],"threshold":2,"out":["a。"," 一二三四五","ab","abc"]}
+{"texts":["abcdef","。"," ","x",""," "],"threshold":5,"out":["abcdef。 x "]}
+{"texts":["x","一二三四五",""],"threshold":4,"out":["x一二三四五"]}
+{"texts":["abc","。","你好","abcdef","a"],"threshold":8,"out":["abc。你好abcdefa"]}
+{"texts":["abc","一二三四五","。","你好","a","x"],"threshold":2,"out":["abc","一二三四五","。你好","ax"]}
+{"texts":["一二三四五","你好","一二三四五","abc"],"threshold":5,"out":["一二三四五","你好一二三四五abc"]}
+{"texts":["一二三四五","ab","x","abc","一二三四五","abc","x",""],"threshold":3,"out":["一二三四五","abx","abc","一二三四五","abcx"]}
+{"texts":["ab"],"threshold":3,"out":["ab"]}
+{"texts":["x"," ","。","。","a","。","你好"],"threshold":7,"out":["x 。。a。你好"]}
+{"texts":["abcdef"],"threshold":2,"out":["abcdef"]}
+{"texts":["x","一二三四五","一二三四五"],"threshold":8,"out":["x一二三四五一二三四五"]}
+{"texts":["一二三四五"],"threshold":4,"out":["一二三四五"]}
+{"texts":["。","x"],"threshold":2,"out":["。x"]}
+{"texts":[""],"threshold":4,"out":[""]}
+{"texts":["abc","x","。","ab","ab"],"threshold":8,"out":["abcx。abab"]}
+{"texts":["abcdef"],"threshold":0,"out":["abcdef"]}
+{"texts":["ab","ab","你好"," ","x","x"],"threshold":0,"out":["ab","ab","你好"," ","x","x"]}
+{"texts":["abc"," "],"threshold":7,"out":["abc "]}
+{"texts":[],"threshold":2,"out":[]}
+{"texts":[" ","a","x"," ","ab","。","一二三四五","ab"],"threshold":4,"out":[" ax ","ab。一二三四五ab"]}
+{"texts":["x","。",""],"threshold":0,"out":["x","。",""]}
+{"texts":[" ","abcdef"],"threshold":1,"out":[" ","abcdef"]}
+{"texts":["。"," ","x","x"," ","你好","abcdef"],"threshold":7,"out":["。 xx 你好abcdef"]}
+{"texts":[" ","a","x","a","一二三四五","。"],"threshold":8,"out":[" axa一二三四五。"]}
+{"texts":[" "," ","","。","","你好","x"," "],"threshold":6,"out":["  。你好x "]}
+{"texts":["你好","x","a","abc","a"],"threshold":7,"out":["你好xaabca"]}
+{"texts":["一二三四五"," ",""],"threshold":7,"out":["一二三四五 "]}
+{"texts":["一二三四五"],"threshold":3,"out":["一二三四五"]}
+{"texts":["你好"," ","abc","a","。","一二三四五"," ","x"],"threshold":2,"out":["你好"," abc","a。","一二三四五"," x"]}
+{"texts":[" ","x","a"],"threshold":1,"out":[" ","x","a"]}
+{"texts":["一二三四五"],"threshold":2,"out":["一二三四五"]}
+{"texts":["一二三四五"],"threshold":7,"out":["一二三四五"]}
+{"texts":[],"threshold":4,"out":[]}
+{"texts":["你好","","。"],"threshold":2,"out":["你好。"]}
+{"texts":["abcdef"],"threshold":7,"out":["abcdef"]}
+{"texts":[" ","ab","。","x","abc","","你好",""],"threshold":7,"out":[" ab。xabc你好"]}
+{"texts":["你好","。","abcdef","ab","abcdef"],"threshold":3,"out":["你好。","abcdef","ababcdef"]}
+{"texts":["你好","","abc"],"threshold":5,"out":["你好abc"]}
+{"texts":["abcdef","","ab","一二三四五","abc"],"threshold":8,"out":["abcdefab","一二三四五abc"]}
+{"texts":["abc","","a"],"threshold":4,"out":["abca"]}
+{"texts":["你好"," ","ab","。","abcdef"],"threshold":6,"out":["你好 ab。","abcdef"]}
+{"texts":["ab"],"threshold":3,"out":["ab"]}
+{"texts":["a","abc","你好","ab"],"threshold":3,"out":["aabc","你好ab"]}
+{"texts":["你好","你好","。","一二三四五","a","x","一二三四五","abc"],"threshold":4,"out":["你好你好","。一二三四五","ax一二三四五abc"]}
+{"texts":["abc","你好"],"threshold":2,"out":["abc","你好"]}
+{"texts":["abcdef"],"threshold":1,"out":["abcdef"]}
+{"texts":["一二三四五","a","一二三四五","","","x","x"],"threshold":4,"out":["一二三四五","a一二三四五xx"]}
+{"texts":["你好"," ","x","a","ab","你好","abc","abc"],"threshold":2,"out":["你好"," x","aab","你好","abc","abc"]}
+{"texts":["一二三四五","","ab","ab"],"threshold":0,"out":["一二三四五","","ab","ab"]}
+{"texts":["x"," ","","abcdef","","ab","a"],"threshold":8,"out":["x abcdefaba"]}
+{"texts":["。","abcdef","","一二三四五","你好"],"threshold":8,"out":["。abcdef一二三四五你好"]}
+{"texts":["一二三四五","ab","x","ab","a","x"," ","abc"],"threshold":7,"out":["一二三四五ab","xabax abc"]}
+{"texts":["你好","abc","你好","abcdef","一二三四五","abc","x","x"],"threshold":7,"out":["你好abc你好","abcdef一二三四五abcxx"]}
+{"texts":["","abc","x",""],"threshold":7,"out":["abcx"]}
+{"texts":["。","ab"],"threshold":0,"out":["。","ab"]}
+{"texts":[" ","一二三四五","abcdef","你好","","a","a"],"threshold":2,"out":[" 一二三四五","abcdef","你好","aa"]}
+{"texts":["x","abc","x","ab","","你好"," ",""],"threshold":5,"out":["xabcx","ab你好 "]}
+{"texts":["你好","x","abcdef","a","一二三四五","ab"," ","你好"],"threshold":3,"out":["你好x","abcdef","a一二三四五","ab 你好"]}
+{"texts":["abcdef","x"],"threshold":7,"out":["abcdefx"]}
+{"texts":[],"threshold":5,"out":[]}
+{"texts":["abcdef","。","abc","","ab","abcdef"],"threshold":2,"out":["abcdef","。abc","ab","abcdef"]}
+{"texts":["abcdef","一二三四五"],"threshold":0,"out":["abcdef","一二三四五"]}
+{"texts":[],"threshold":3,"out":[]}
+{"texts":["一二三四五","ab","a"," ","一二三四五","你好"],"threshold":7,"out":["一二三四五ab","a 一二三四五你好"]}
+{"texts":["a","","x","abc","你好","你好"],"threshold":1,"out":["a","x","abc","你好","你好"]}
+{"texts":["abc"," ","abcdef","a","abc","。","你好","。"],"threshold":3,"out":["abc"," abcdef","aabc","。你好。"]}
+{"texts":[],"threshold":2,"out":[]}
+{"texts":["x","","。","x","x","ab"],"threshold":7,"out":["x。xxab"]}
+{"texts":["abc"," "," ","","abc"," "],"threshold":5,"out":["abc  abc "]}
+{"texts":["ab","一二三四五","ab"],"threshold":7,"out":["ab一二三四五ab"]}
+{"texts":[" ","abc","x"],"threshold":7,"out":[" abcx"]}
+{"texts":["abcdef","abcdef","abcdef","ab"],"threshold":7,"out":["abcdefabcdef","abcdefab"]}
+{"texts":["一二三四五"," "," "],"threshold":1,"out":["一二三四五"," "," "]}
+{"texts":[],"threshold":4,"out":[]}
+{"texts":["你好","x","","一二三四五","ab"],"threshold":4,"out":["你好x一二三四五ab"]}
+{"texts":[" ","x","abc","你好","a","。","","ab"],"threshold":5,"out":[" xabc","你好a。ab"]}
+{"texts":["abc","a"],"threshold":0,"out":["abc","a"]}
+{"texts":[" ","abcdef","a"," ","。"],"threshold":4,"out":[" abcdefa 。"]}
+{"texts":["","你好"," ","x","abc","abcdef","","abc"],"threshold":2,"out":["你好"," x","abc","abcdef","abc"]}
+{"texts":["x","ab","","abc","你好"," "," ","abcdef"],"threshold":8,"out":["xababc你好","  abcdef"]}
+{"texts":["一二三四五","一二三四五"],"threshold":4,"out":["一二三四五","一二三四五"]}
+{"texts":["abcdef"," ","ab","abc","你好"],"threshold":8,"out":["abcdef ababc你好"]}
+{"texts":[" ","ab"," ","一二三四五","。","abc","a"],"threshold":4,"out":[" ab ","一二三四五","。abca"]}
+{"texts":["。","x","abc","ab",""],"threshold":0,"out":["。","x","abc","ab",""]}
+{"texts":["x","","你好","a","abc","一二三四五","。"],"threshold":1,"out":["x","你好","a","abc","一二三四五","。"]}
+{"texts":["abc","你好","a"," ","a"],"threshold":6,"out":["abc你好a a"]}
+{"texts":["","abcdef"," ","。","你好","abcdef","你好"],"threshold":3,"out":["abcdef"," 。你好","abcdef你好"]}
+{"texts":[" ","abc"],"threshold":7,"out":[" abc"]}
+{"texts":["。","abc"],"threshold":8,"out":["。abc"]}
+{"texts":["。"],"threshold":6,"out":["。"]}
+{"texts":["abcdef","x"],"threshold":4,"out":["abcdefx"]}
+{"texts":["你好",""," ","a","。","a"," ","你好"],"threshold":0,"out":["你好",""," ","a","。","a"," ","你好"]}
+{"texts":["abcdef","x","你好","abcdef","。","你好"],"threshold":1,"out":["abcdef","x","你好","abcdef","。","你好"]}
+{"texts":[],"threshold":0,"out":[]}
+{"texts":["。","。","x","你好","你好"],"threshold":2,"out":["。。","x你好","你好"]}
+{"texts":[" ","x","。","。","","x","abc"],"threshold":1,"out":[" ","x","。","。","x","abc"]}
+{"texts":[],"threshold":8,"out":[]}
+{"texts":["x"," ","a","你好","a","abcdef"],"threshold":7,"out":["x a你好aabcdef"]}
+{"texts":[" ","","ab","一二三四五","你好","你好"],"threshold":7,"out":[" ab一二三四五你好你好"]}
+{"texts":["abcdef","","ab","x","abc"],"threshold":4,"out":["abcdef","abxabc"]}
+{"texts":["你好","abc","abc"],"threshold":8,"out":["你好abcabc"]}
+{"texts":[],"threshold":8,"out":[]}
+{"texts":["","abc","一二三四五","abcdef","一二三四五","a"],"threshold":8,"out":["abc一二三四五","abcdef一二三四五a"]}
+{"texts":["你好","。","a","","。"],"threshold":3,"out":["你好。a。"]}
+{"texts":["ab","abc","ab","ab","。","x"],"threshold":7,"out":["ababcabab。x"]}
+{"texts":["。"," ","你好","。"],"threshold":8,"out":["。 你好。"]}
+{"texts":["abc","abc","。","。","ab","一二三四五","ab"],"threshold":1,"out":["abc","abc","。","。","ab","一二三四五","ab"]}
+{"texts":["a"],"threshold":4,"out":["a"]}
+{"texts":["abcdef"],"threshold":8,"out":["abcdef"]}
+{"texts":["","ab","x"," ","abcdef","","。"],"threshold":4,"out":["abx ","abcdef。"]}
+{"texts":["一二三四五"," ","你好","你好","。","。"],"threshold":2,"out":["一二三四五"," 你好","你好","。。"]}
+{"texts":["abc","x","ab","x"," "],"threshold":2,"out":["abc","xab","x "]}
+{"texts":["ab","ab","abc"," "],"threshold":4,"out":["abab","abc "]}
+{"texts":["ab","","abcdef"],"threshold":2,"out":["ab","abcdef"]}
+{"texts":["你好"," ","你好"," "],"threshold":6,"out":["你好 你好 "]}
+{"texts":["","ab"],"threshold":1,"out":["ab"]}
+{"texts":[],"threshold":3,"out":[]}
+{"texts":["。","一二三四五","a"," "],"threshold":5,"out":["。一二三四五a "]}
+{"texts":[],"threshold":8,"out":[]}
+{"texts":["ab","。","a","你好","abcdef","你好","abc"],"threshold":6,"out":["ab。a你好","abcdef你好abc"]}
+{"texts":["ab","x"," ","abc","一二三四五","你好"],"threshold":2,"out":["ab","x ","abc","一二三四五","你好"]}
+{"texts":["ab","a","一二三四五","你好","abcdef"," ","a"],"threshold":2,"out":["ab","a一二三四五","你好","abcdef"," a"]}
+{"texts":["","你好","x","x","ab"],"threshold":4,"out":["你好xxab"]}
+{"texts":["你好","。","abc","a","abcdef","abc"],"threshold":5,"out":["你好。abc","aabcdefabc"]}
+{"texts":["你好","一二三四五","","ab","a","","你好","a"],"threshold":0,"out":["你好","一二三四五","","ab","a","","你好","a"]}
+{"texts":["。","abcdef"],"threshold":2,"out":["。abcdef"]}
+{"texts":[" ","abcdef",""],"threshold":6,"out":[" abcdef"]}
+{"texts":["一二三四五"," ","一二三四五","","abc"],"threshold":8,"out":["一二三四五 一二三四五abc"]}
+{"texts":["你好","abc","你好","abc"],"threshold":7,"out":["你好abc你好abc"]}
+{"texts":[],"threshold":2,"out":[]}
+{"texts":[],"threshold":2,"out":[]}
+{"texts":["a","a","你好","。","","一二三四五","你好","a"],"threshold":8,"out":["aa你好。一二三四五你好a"]}
+{"texts":["","abc","a","。","","一二三四五","你好"],"threshold":3,"out":["abc","a。一二三四五你好"]}
+{"texts":[" ","你好","一二三四五","a","abcdef"," "," "],"threshold":4,"out":[" 你好一二三四五","aabcdef  "]}
+{"texts":[],"threshold":0,"out":[]}
+{"texts":["abc","。"],"threshold":6,"out":["abc。"]}
+{"texts":["一二三四五","你好","。","abcdef","。"],"threshold":4,"out":["一二三四五","你好。abcdef。"]}
+{"texts":["a","。","x","a"],"threshold":4,"out":["a。xa"]}
+{"texts":["abc","ab","abc","","ab"],"threshold":8,"out":["abcababcab"]}
+{"texts":["abc","ab","。","a"],"threshold":2,"out":["abc","ab","。a"]}
+{"texts":["。","。"],"threshold":2,"out":["。。"]}
+{"texts":["",""," ","一二三四五",""," "],"threshold":1,"out":[" ","一二三四五"," "]}
+{"texts":["一二三四五","abc","","ab","。"],"threshold":1,"out":["一二三四五","abc","ab","。"]}
+{"texts":["x"],"threshold":5,"out":["x"]}
+{"texts":["abcdef","abc","abcdef"," ","ab","你好"],"threshold":1,"out":["abcdef","abc","abcdef"," ","ab","你好"]}
+{"texts":["。","ab","。","一二三四五","","ab"],"threshold":6,"out":["。ab。一二三四五ab"]}
+{"texts":[],"threshold":3,"out":[]}
+{"texts":["abcdef"," ","一二三四五","x","a"],"threshold":1,"out":["abcdef"," ","一二三四五","x","a"]}
+{"texts":[" ","abcdef"," "," ","一二三四五","abc"," "],"threshold":8,"out":[" abcdef "," 一二三四五abc "]}
+{"texts":[],"threshold":8,"out":[]}
+{"texts":[],"threshold":8,"out":[]}
+{"texts":["abcdef","你好","x","","x","","。"],"threshold":2,"out":["abcdef","你好","xx。"]}
+{"texts":["abcdef","。","你好","x","。","abc","abcdef","一二三四五"],"threshold":6,"out":["abcdef","。你好x。abc","abcdef一二三四五"]}
+{"texts":[],"threshold":2,"out":[]}
+{"texts":["a","abc","ab","ab","a","a","一二三四五"],"threshold":4,"out":["aabc","abab","aa一二三四五"]}
+{"texts":["a","ab","","。"],"threshold":4,"out":["aab。"]}
+{"texts":["。","abcdef","abc","一二三四五",""," ","abc","abcdef"],"threshold":4,"out":["。abcdef","abc一二三四五"," abc","abcdef"]}
+{"texts":["a","a","一二三四五"],"threshold":7,"out":["aa一二三四五"]}
+{"texts":["abc","a","abcdef","","一二三四五","a","ab"],"threshold":5,"out":["abcaabcdef","一二三四五aab"]}
+{"texts":["a","。"],"threshold":0,"out":["a","。"]}
+{"texts":["abc","你好","a"," ","ab"],"threshold":6,"out":["abc你好a ab"]}
+{"texts":[],"threshold":7,"out":[]}
+{"texts":["a","a","abc","一二三四五","。","abc","一二三四五"],"threshold":6,"out":["aaabc一二三四五","。abc一二三四五"]}
+{"texts":["","。","。","你好","x","abc"],"threshold":3,"out":["。。你好","xabc"]}
+{"texts":["ab","ab"],"threshold":7,"out":["abab"]}
+{"texts":[],"threshold":2,"out":[]}
+{"texts":["a","你好","。","x"],"threshold":5,"out":["a你好。x"]}
+{"texts":["abc","","a","abc"],"threshold":5,"out":["abcaabc"]}
+{"texts":[" ","abc","ab","a"],"threshold":4,"out":[" abcaba"]}
+{"texts":["。","x"," ","你好","abcdef","ab"],"threshold":8,"out":["。x 你好abcdefab"]}
+{"texts":["a"],"threshold":5,"out":["a"]}
+{"texts":[" ","abc","abcdef","x","a","你好","a","你好"],"threshold":1,"out":[" ","abc","abcdef","x","a","你好","a","你好"]}
+{"texts":["abc","abcdef"," ","abc"," ","x","abc"],"threshold":7,"out":["abcabcdef"," abc xabc"]}
+{"texts":["。"],"threshold":6,"out":["。"]}
+{"texts":["你好","x","abcdef","你好","你好"],"threshold":0,"out":["你好","x","abcdef","你好","你好"]}
+{"texts":[""," ","。"],"threshold":2,"out":[" 。"]}
+{"texts":[" "," ","你好","。"],"threshold":1,"out":[" "," ","你好","。"]}
+{"texts":["一二三四五"],"threshold":1,"out":["一二三四五"]}
+{"texts":["abc","a","。","","。","","x"],"threshold":5,"out":["abca。。x"]}
+{"texts":[],"threshold":2,"out":[]}
+{"texts":["a","。","ab","abcdef","一二三四五","。","abcdef"],"threshold":0,"out":["a","。","ab","abcdef","一二三四五","。","abcdef"]}
+{"texts":[""," "," "],"threshold":3,"out":["  "]}
+{"texts":["a","","a","abcdef"," ","abc","一二三四五","x"],"threshold":3,"out":["aaabcdef"," abc","一二三四五x"]}
+{"texts":["。","ab","一二三四五"," ","a","a",""],"threshold":2,"out":["。ab","一二三四五"," aa"]}
+{"texts":["abcdef","a"," ","abcdef"],"threshold":2,"out":["abcdef","a ","abcdef"]}
+{"texts":[],"threshold":5,"out":[]}
+{"texts":["","a","。"," ","一二三四五"],"threshold":8,"out":["a。 一二三四五"]}
+{"texts":["a","a","你好","一二三四五","x","a","a","x"],"threshold":3,"out":["aa你好","一二三四五","xaax"]}
+{"texts":["a","一二三四五"],"threshold":8,"out":["a一二三四五"]}
+{"texts":["你好","。","abc","abc"],"threshold":6,"out":["你好。abcabc"]}
+{"texts":["","abc","x","abcdef","ab","一二三四五","a"],"threshold":7,"out":["abcxabcdef","ab一二三四五a"]}
+{"texts":["a","一二三四五"],"threshold":2,"out":["a一二三四五"]}
+{"texts":["x","一二三四五"],"threshold":2,"out":["x一二三四五"]}
+{"texts":["x","x","a"," ","","abc"],"threshold":2,"out":["xx","a ","abc"]}
+{"texts":[" "],"threshold":2,"out":[" "]}
+{"texts":["一二三四五","x",""," "],"threshold":1,"out":["一二三四五","x"," "]}
+{"texts":["你好","一二三四五",""," "," ","你好","a"],"threshold":3,"out":["你好一二三四五","  你好a"]}
+{"texts":["一二三四五","a"," ","。"],"threshold":7,"out":["一二三四五a 。"]}
+{"texts":["一二三四五","ab","x"],"threshold":8,"out":["一二三四五abx"]}
+{"texts":[" "],"threshold":4,"out":[" "]}
+{"texts":["x","你好","abc","。"],"threshold":1,"out":["x","你好","abc","。"]}
+{"texts":["abcdef"," ","。"," ","。","abcdef"],"threshold":1,"out":["abcdef"," ","。"," ","。","abcdef"]}
+{"texts":[],"threshold":4,"out":[]}
+{"texts":["","ab","一二三四五"," ","一二三四五","。"," ","abc"],"threshold":1,"out":["ab","一二三四五"," ","一二三四五","。"," ","abc"]}
+{"texts":["","。","。","abcdef","abc"],"threshold":8,"out":["。。abcdefabc"]}
+{"texts":["abcdef","","。"," ","x","a","","x"],"threshold":5,"out":["abcdef","。 xax"]}
+{"texts":["。","x","。"],"threshold":4,"out":["。x。"]}
+{"texts":["x","x",""],"threshold":5,"out":["xx"]}
+{"texts":["abcdef","a"],"threshold":8,"out":["abcdefa"]}
+{"texts":["","a","abc","你好","x"],"threshold":4,"out":["aabc你好x"]}
+{"texts":["。"," ","a","你好","x","a"],"threshold":1,"out":["。"," ","a","你好","x","a"]}
+{"texts":["abc","你好","。","","。","ab"],"threshold":2,"out":["abc","你好","。。","ab"]}
+{"texts":["你好","","abcdef",""],"threshold":6,"out":["你好abcdef"]}
+{"texts":["一二三四五"],"threshold":2,"out":["一二三四五"]}
+{"texts":["","x","abc","x","一二三四五"],"threshold":0,"out":["","x","abc","x","一二三四五"]}
+{"texts":[" ","。","a","ab","a","abcdef","ab"],"threshold":6,"out":[" 。aaba","abcdefab"]}
+{"texts":[" ","a","abcdef","。","a","a","。"],"threshold":8,"out":[" aabcdef。aa。"]}
+{"texts":["a"],"threshold":6,"out":["a"]}
+{"texts":["一二三四五","a","abc","a"],"threshold":6,"out":["一二三四五aabca"]}
+{"texts":["一二三四五","ab","a","ab","你好"],"threshold":7,"out":["一二三四五abaab你好"]}
+{"texts":[""," "," ","abc","abcdef","abcdef"],"threshold":6,"out":["  abcabcdef","abcdef"]}
+{"texts":["一二三四五","abcdef","a","一二三四五","ab","x"],"threshold":5,"out":["一二三四五","abcdef","a一二三四五abx"]}
+{"texts":["","。","ab"],"threshold":5,"out":["。ab"]}
+{"texts":["x","一二三四五"," ","abcdef","x","x"],"threshold":7,"out":["x一二三四五 ","abcdefxx"]}
+{"texts":["x","ab","abcdef"," ","。"],"threshold":1,"out":["x","ab","abcdef"," ","。"]}
+{"texts":["abc","你好","。"," ","x","","你好"],"threshold":1,"out":["abc","你好","。"," ","x","你好"]}
+{"texts":[" ","abc","abc"," "],"threshold":1,"out":[" ","abc","abc"," "]}
+{"texts":["ab"," ","一二三四五","abcdef"," ","abcdef","a","abc"],"threshold":2,"out":["ab"," 一二三四五","abcdef"," abcdef","aabc"]}
+{"texts":["你好"],"threshold":8,"out":["你好"]}
+{"texts":["","。"],"threshold":2,"out":["。"]}
+{"texts":["abcdef","。","abcdef","ab","abcdef","。","你好","a"],"threshold":3,"out":["abcdef","。abcdef","ababcdef","。你好a"]}
+{"texts":["abc","abc"],"threshold":8,"out":["abcabc"]}
+{"texts":["a","ab","abc","x","ab"],"threshold":5,"out":["aababcxab"]}
+{"texts":["。","a","你好","x","你好"],"threshold":1,"out":["。","a","你好","x","你好"]}
+{"texts":["。","","ab"],"threshold":8,"out":["。ab"]}
+{"texts":["你好","你好","你好","一二三四五"],"threshold":2,"out":["你好","你好","你好","一二三四五"]}
+{"texts":["abcdef","a","你好",""],"threshold":4,"out":["abcdefa你好"]}
+{"texts":["一二三四五","ab"," ","ab"],"threshold":8,"out":["一二三四五ab ab"]}
+{"texts":["x","a"],"threshold":8,"out":["xa"]}
+{"texts":["一二三四五","x"],"threshold":4,"out":["一二三四五x"]}
+{"texts":[""," ","。","一二三四五"],"threshold":3,"out":[" 。一二三四五"]}
+{"texts":["abcdef","。","。","abc","一二三四五","你好","x"],"threshold":5,"out":["abcdef","。。abc","一二三四五你好x"]}
+{"texts":["a","一二三四五","a"],"threshold":1,"out":["a","一二三四五","a"]}
+{"texts":["","a","x","a"],"threshold":3,"out":["axa"]}
+{"texts":["你好","。","ab","","a"],"threshold":2,"out":["你好","。aba"]}
+{"texts":[],"threshold":6,"out":[]}
+{"texts":["一二三四五","一二三四五"],"threshold":1,"out":["一二三四五","一二三四五"]}
+{"texts":["一二三四五","ab","a","一二三四五","。","x"],"threshold":7,"out":["一二三四五ab","a一二三四五。x"]}
+{"texts":["a"," ","ab"],"threshold":7,"out":["a ab"]}
+{"texts":["a","abcdef",""],"threshold":8,"out":["aabcdef"]}
+{"texts":["a","ab","你好","你好","。","abc","你好","ab"],"threshold":8,"out":["aab你好你好。abc你好ab"]}
+{"texts":[" ",""],"threshold":7,"out":[" "]}
+{"texts":["ab","a","一二三四五","ab",""],"threshold":1,"out":["ab","a","一二三四五","ab"]}
+{"texts":["你好"],"threshold":4,"out":["你好"]}
+{"texts":[],"threshold":6,"out":[]}
+{"texts":[],"threshold":2,"out":[]}
+{"texts":["x","一二三四五"],"threshold":1,"out":["x","一二三四五"]}
+{"texts":[],"threshold":5,"out":[]}
+{"texts":["abc"],"threshold":6,"out":["abc"]}
+{"texts":[" ","。","。"],"threshold":3,"out":[" 。。"]}
+{"texts":[" ","","abc","你好",""],"threshold":5,"out":[" abc你好"]}
+{"texts":["。","一二三四五","。","abcdef","abc"," ","ab","abc"],"threshold":2,"out":["。一二三四五","。abcdef","abc"," ab","abc"]}
+{"texts":["你好","abcdef","abcdef"],"threshold":3,"out":["你好abcdef","abcdef"]}
+{"texts":["ab","abc","x","你好","x"],"threshold":8,"out":["ababcx你好x"]}
+{"texts":["x","","ab","你好"],"threshold":3,"out":["xab你好"]}
+{"texts":["你好"],"threshold":8,"out":["你好"]}
+{"texts":["abc","","abc","一二三四五","a"],"threshold":1,"out":["abc","abc","一二三四五","a"]}
+{"texts":["abc","abcdef","abc",""," ","一二三四五","ab","。"],"threshold":5,"out":["abcabcdef","abc 一二三四五ab。"]}
+{"texts":["a"],"threshold":6,"out":["a"]}
+{"texts":[" ","abc"],"threshold":5,"out":[" abc"]}
+{"texts":[" ","你好","一二三四五"],"threshold":1,"out":[" ","你好","一二三四五"]}
+{"texts":["","","abcdef",""," ","a"," "],"threshold":2,"out":["abcdef"," a "]}
+{"texts":["a","abc"],"threshold":2,"out":["aabc"]}
+{"texts":["abc","。","。","ab","ab","ab","。"],"threshold":0,"out":["abc","。","。","ab","ab","ab","。"]}
+{"texts":["abc","ab","abc"],"threshold":7,"out":["abcababc"]}
+{"texts":["。","a","你好","ab","a"],"threshold":2,"out":["。a","你好","aba"]}
+{"texts":["","a","你好","。","ab"],"threshold":1,"out":["a","你好","。","ab"]}
+{"texts":["一二三四五","一二三四五","一二三四五","x"],"threshold":7,"out":["一二三四五一二三四五一二三四五x"]}
+{"texts":["你好","a","a","abc","","a","你好","一二三四五"],"threshold":2,"out":["你好","aa","abc","a你好","一二三四五"]}
+{"texts":["。","x"],"threshold":1,"out":["。","x"]}
+{"texts":["abcdef","x","abcdef","。"],"threshold":7,"out":["abcdefx","abcdef。"]}
+{"texts":["","abc","ab","abcdef","","abcdef","x"],"threshold":6,"out":["abcababcdef","abcdefx"]}
+{"texts":["","你好","ab","","ab"," ","abc",""],"threshold":0,"out":["","你好","ab","","ab"," ","abc",""]}
+{"texts":[" ","abcdef","x"],"threshold":1,"out":[" ","abcdef","x"]}
+{"texts":["","ab","。","","ab","你好",""],"threshold":5,"out":["ab。ab你好"]}
+{"texts":["x","一二三四五","。","abcdef"],"threshold":4,"out":["x一二三四五","。abcdef"]}
+{"texts":["ab","。","ab","x","x"],"threshold":6,"out":["ab。abxx"]}
+{"texts":["一二三四五","x","abcdef","你好","。","abcdef"],"threshold":3,"out":["一二三四五","xabcdef","你好。","abcdef"]}
+{"texts":["abcdef","一二三四五"],"threshold":8,"out":["abcdef一二三四五"]}
+{"texts":["ab","。","abc","一二三四五"],"threshold":6,"out":["ab。abc一二三四五"]}
+{"texts":["。","你好"],"threshold":1,"out":["。","你好"]}
+{"texts":[],"threshold":5,"out":[]}
+{"texts":["一二三四五","a","abcdef","一二三四五"," ","","abcdef"],"threshold":6,"out":["一二三四五a","abcdef","一二三四五 ","abcdef"]}
+{"texts":["abcdef","x","x","abcdef"],"threshold":0,"out":["abcdef","x","x","abcdef"]}
+{"texts":["。"],"threshold":7,"out":["。"]}
+{"texts":["","ab","","你好","一二三四五","abcdef",""],"threshold":1,"out":["ab","你好","一二三四五","abcdef"]}
+{"texts":["","abc","x"," "],"threshold":0,"out":["","abc","x"," "]}
+{"texts":["abc","一二三四五","a"," "],"threshold":5,"out":["abc一二三四五a "]}
+{"texts":["","a","abcdef","abcdef","ab","你好","。","一二三四五"],"threshold":8,"out":["aabcdefabcdef","ab你好。一二三四五"]}
+{"texts":["abc","abc","abcdef","你好","ab"],"threshold":3,"out":["abc","abc","abcdef","你好ab"]}
+{"texts":["你好","ab","a","abcdef"],"threshold":4,"out":["你好ab","aabcdef"]}
+{"texts":["","","一二三四五"],"threshold":5,"out":["一二三四五"]}
+{"texts":["x"," ","a","ab","a","你好","你好"],"threshold":6,"out":["x aaba你好你好"]}
+{"texts":["你好","ab","x","你好"],"threshold":2,"out":["你好","ab","x你好"]}
+{"texts":[],"threshold":6,"out":[]}
+{"texts":[" ","","x","你好","abcdef","abcdef"],"threshold":3,"out":[" x你好","abcdef","abcdef"]}
+{"texts":["。","","","ab","abcdef","abc"],"threshold":3,"out":["。ab","abcdef","abc"]}
+{"texts":["ab"],"threshold":8,"out":["ab"]}
+{"texts":["。","abcdef","你好","ab","","你好"],"threshold":1,"out":["。","abcdef","你好","ab","你好"]}
+{"texts":["。","","","你好","一二三四五"],"threshold":4,"out":["。你好一二三四五"]}
+{"texts":["","。","a","你好","abc","一二三四五","abcdef"],"threshold":1,"out":["。","a","你好","abc","一二三四五","abcdef"]}
+{"texts":[],"threshold":1,"out":[]}
+{"texts":["","abcdef","一二三四五","abc","你好","abc","x","。"],"threshold":3,"out":["abcdef","一二三四五","abc","你好abcx。"]}
+{"texts":["。"," ","a","。","","。"],"threshold":4,"out":["。 a。。"]}
+{"texts":["一二三四五"," ","abc"," ","abc","abcdef","a","a"],"threshold":6,"out":["一二三四五 ","abc abc","abcdefaa"]}
+{"texts":["abcdef"," ","一二三四五","一二三四五","你好","x"],"threshold":8,"out":["abcdef 一二三四五","一二三四五你好x"]}
+{"texts":["","一二三四五","a","abc","ab",""],"threshold":2,"out":["一二三四五","aabc","ab"]}
+{"texts":["一二三四五","你好"],"threshold":5,"out":["一二三四五你好"]}
+{"texts":["","","abcdef",""],"threshold":6,"out":["abcdef"]}
+{"texts":["abcdef"],"threshold":3,"out":["abcdef"]}
+{"texts":["","一二三四五","a",""],"threshold":4,"out":["一二三四五a"]}
+{"texts":["x","abcdef","ab"," ","abcdef","x","abc"],"threshold":6,"out":["xabcdef","ab abcdefxabc"]}
+{"texts":["x"," ",""],"threshold":1,"out":["x"," "]}
+{"texts":["abc",""],"threshold":7,"out":["abc"]}
+{"texts":[""," ","a"," ","abcdef","x"],"threshold":1,"out":[" ","a"," ","abcdef","x"]}
+{"texts":["abc","abcdef","x"],"threshold":5,"out":["abcabcdefx"]}
+{"texts":["。"],"threshold":4,"out":["。"]}
+{"texts":[],"threshold":3,"out":[]}
+{"texts":["x"," "," ","abc","你好","","a","你好"],"threshold":7,"out":["x  abc你好a你好"]}
+{"texts":["。"," ","abc"],"threshold":7,"out":["。 abc"]}
+{"texts":["。","abc","x",""," ","你好"],"threshold":1,"out":["。","abc","x"," ","你好"]}
+{"texts":["abcdef","一二三四五","abcdef"," ","一二三四五"," ","a"],"threshold":3,"out":["abcdef","一二三四五","abcdef"," 一二三四五 a"]}
+{"texts":["abc","x","x","abcdef"],"threshold":6,"out":["abcxxabcdef"]}
+{"texts":["你好","abc","x"],"threshold":1,"out":["你好","abc","x"]}
+{"texts":["x","。","x"," ",""," ","。"," "],"threshold":4,"out":["x。x  。 "]}
+{"texts":["x"],"threshold":6,"out":["x"]}
+{"texts":[" ","你好","abc"],"threshold":6,"out":[" 你好abc"]}
+{"texts":[],"threshold":7,"out":[]}
+{"texts":[],"threshold":3,"out":[]}
+{"texts":["a","x","。","。","x","abcdef"],"threshold":4,"out":["ax。。","xabcdef"]}
+{"texts":["一二三四五"," ","一二三四五","ab"],"threshold":0,"out":["一二三四五"," ","一二三四五","ab"]}
+{"texts":["x","。"],"threshold":8,"out":["x。"]}
+{"texts":[],"threshold":4,"out":[]}
+{"texts":["一二三四五","abcdef","。","ab","abcdef"],"threshold":7,"out":["一二三四五abcdef","。ababcdef"]}
+{"texts":[" ","ab","a","x"],"threshold":0,"out":[" ","ab","a","x"]}
+{"texts":["abcdef","一二三四五","一二三四五","abcdef","x","","你好"],"threshold":5,"out":["abcdef","一二三四五","一二三四五","abcdefx你好"]}
+{"texts":["","a","","你好","一二三四五","ab"],"threshold":5,"out":["a你好一二三四五ab"]}
+{"texts":[" ","你好","ab"],"threshold":5,"out":[" 你好ab"]}
+{"texts":["一二三四五","","一二三四五","。"," "," ","ab","你好"],"threshold":3,"out":["一二三四五","一二三四五","。  ","ab你好"]}
+{"texts":["ab","","a"],"threshold":1,"out":["ab","a"]}
+{"texts":[],"threshold":3,"out":[]}
+{"texts":["","abcdef","","x"],"threshold":0,"out":["","abcdef","","x"]}
+{"texts":["。","abc","x","。"],"threshold":5,"out":["。abcx。"]}
+{"texts":["abc","abcdef","。","","abcdef"],"threshold":4,"out":["abcabcdef","。abcdef"]}
+{"texts":["。","abc","一二三四五","abc","x","x","。","ab"],"threshold":5,"out":["。abc一二三四五","abcxx。ab"]}
+{"texts":[" ","ab","ab","x","ab","abcdef","。"],"threshold":5,"out":[" abab","xababcdef。"]}
+{"texts":["。","abc","abcdef"],"threshold":5,"out":["。abcabcdef"]}
+{"texts":[],"threshold":3,"out":[]}
+{"texts":["","a","一二三四五","x","","a","。"],"threshold":0,"out":["","a","一二三四五","x","","a","。"]}
+{"texts":["abcdef","x","一二三四五"," ","a"],"threshold":1,"out":["abcdef","x","一二三四五"," ","a"]}
+{"texts":["","x","ab","一二三四五","你好",""],"threshold":2,"out":["xab","一二三四五","你好"]}
+{"texts":["","abcdef","你好","abc","一二三四五"],"threshold":0,"out":["","abcdef","你好","abc","一二三四五"]}
+{"texts":["abc","。","","abc","你好"],"threshold":4,"out":["abc。","abc你好"]}
+{"texts":["","","。","你好"],"threshold":6,"out":["。你好"]}
+{"texts":["你好","ab"],"threshold":1,"out":["你好","ab"]}
+{"texts":["a","abcdef"],"threshold":8,"out":["aabcdef"]}
+{"texts":["你好","一二三四五","x"],"threshold":7,"out":["你好一二三四五x"]}
+{"texts":["abc"," "," ","。","一二三四五","你好","abcdef","abcdef"],"threshold":8,"out":["abc  。一二三四五","你好abcdefabcdef"]}
+{"texts":["abc","你好","","你好","你好"," ","",""],"threshold":7,"out":["abc你好你好你好 "]}
+{"texts":["一二三四五","abc","。","一二三四五"],"threshold":7,"out":["一二三四五abc。一二三四五"]}
+{"texts":["abcdef","a"," ","一二三四五","一二三四五"],"threshold":3,"out":["abcdef","a 一二三四五","一二三四五"]}
+{"texts":["a","a","abc"],"threshold":8,"out":["aaabc"]}
+{"texts":["一二三四五"," ","一二三四五","一二三四五","你好"],"threshold":0,"out":["一二三四五"," ","一二三四五","一二三四五","你好"]}
+{"texts":["一二三四五","。","a","一二三四五"],"threshold":1,"out":["一二三四五","。","a","一二三四五"]}
+{"texts":[],"threshold":2,"out":[]}
+{"texts":["a","abcdef","一二三四五"," ","x","一二三四五"],"threshold":0,"out":["a","abcdef","一二三四五"," ","x","一二三四五"]}
+{"texts":["a","abcdef"],"threshold":3,"out":["aabcdef"]}
+{"texts":["abc","abcdef","一二三四五","。","x","x",""],"threshold":0,"out":["abc","abcdef","一二三四五","。","x","x",""]}
+{"texts":["abc","x","a"],"threshold":3,"out":["abcxa"]}
+{"texts":["。","ab","一二三四五","一二三四五"],"threshold":1,"out":["。","ab","一二三四五","一二三四五"]}
+{"texts":["你好","abc"],"threshold":3,"out":["你好abc"]}
+{"texts":["","。"],"threshold":0,"out":["","。"]}
+{"texts":["abc",""],"threshold":2,"out":["abc"]}
+{"texts":["。","你好","ab","。","a","x",""],"threshold":0,"out":["。","你好","ab","。","a","x",""]}
+{"texts":[" ","你好"," ","ab"],"threshold":6,"out":[" 你好 ab"]}
+{"texts":["","abc","x","你好","你好","abc","a"],"threshold":1,"out":["abc","x","你好","你好","abc","a"]}
+{"texts":["ab","abc"," ","你好"],"threshold":1,"out":["ab","abc"," ","你好"]}
+{"texts":["。","abcdef","",""," ","abcdef"],"threshold":6,"out":["。abcdef"," abcdef"]}
+{"texts":["一二三四五"],"threshold":4,"out":["一二三四五"]}
+{"texts":[],"threshold":1,"out":[]}
+{"texts":[],"threshold":5,"out":[]}
+{"texts":["一二三四五","。"," ","ab","x"],"threshold":2,"out":["一二三四五","。 ","abx"]}
+{"texts":["一二三四五","","abcdef"],"threshold":3,"out":["一二三四五","abcdef"]}
+{"texts":["abc","abcdef","","a","一二三四五","","ab"],"threshold":3,"out":["abc","abcdef","a一二三四五ab"]}
+{"texts":["abcdef","abc"," ","x"," ","ab"],"threshold":5,"out":["abcdef","abc x ab"]}
+{"texts":[],"threshold":5,"out":[]}
+{"texts":["ab"],"threshold":4,"out":["ab"]}
+{"texts":["x",""],"threshold":0,"out":["x",""]}
+{"texts":[" ","ab","a"],"threshold":0,"out":[" ","ab","a"]}
+{"texts":["。","x"],"threshold":0,"out":["。","x"]}
+{"texts":["abc"],"threshold":4,"out":["abc"]}
+{"texts":["abc","abcdef"],"threshold":1,"out":["abc","abcdef"]}
+{"texts":["abc","a","一二三四五","ab","a","ab"],"threshold":8,"out":["abca一二三四五abaab"]}
+{"texts":[" ","ab"," ","x","一二三四五","a"],"threshold":6,"out":[" ab x一二三四五a"]}
+{"texts":[],"threshold":7,"out":[]}
+{"texts":["","x","","abc"],"threshold":5,"out":["xabc"]}
+{"texts":[],"threshold":6,"out":[]}
+{"texts":["你好","一二三四五","你好","ab","ab"," "],"threshold":5,"out":["你好一二三四五","你好abab "]}
+{"texts":[""],"threshold":4,"out":[""]}
+{"texts":["你好","你好","abc","a"],"threshold":2,"out":["你好","你好","abca"]}
+{"texts":["。","你好","a","一二三四五","a"," "],"threshold":5,"out":["。你好a一二三四五a "]}
+{"texts":["abc","abcdef","你好","x"],"threshold":2,"out":["abc","abcdef","你好x"]}
+{"texts":[" ","abcdef","x","a"],"threshold":2,"out":[" abcdef","xa"]}
+{"texts":[],"threshold":6,"out":[]}
+{"texts":["abc","。","x"," "],"threshold":3,"out":["abc","。x "]}
+{"texts":["abcdef","","你好","ab"],"threshold":5,"out":["abcdef你好ab"]}
+{"texts":["x","abc","一二三四五","你好","abc"," ","一二三四五","x"],"threshold":5,"out":["xabc一二三四五","你好abc"," 一二三四五x"]}
+{"texts":[],"threshold":1,"out":[]}
+{"texts":[],"threshold":0,"out":[]}
+{"texts":["你好","abcdef","一二三四五","","a"],"threshold":6,"out":["你好abcdef","一二三四五a"]}
+{"texts":["abcdef","ab","abcdef"],"threshold":7,"out":["abcdefababcdef"]}
+{"texts":["你好","。","一二三四五"," ","abc","。"],"threshold":7,"out":["你好。一二三四五 abc。"]}
+{"texts":["x","ab","abc","ab","x","x","ab",""],"threshold":6,"out":["xababc","abxxab"]}

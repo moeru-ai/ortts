@@ -1,0 +1,77 @@
+gpt_sovits_text
+===============
+
+This crate contains a Rust translation of code from the following projects.
+
+PaddleSpeech zh_normalization (Apache License 2.0)
+--------------------------------------------------
+
+src/zh_normalization/ and data/zh_normalization/ are translated to Rust from
+the `zh_normalization` package of PaddleSpeech
+(https://github.com/PaddlePaddle/PaddleSpeech, paddlespeech/t2s/frontend/zh_normalization)
+in the copy vendored by GPT-SoVITS at commit 04a44eb
+(https://github.com/RVC-Boss/GPT-SoVITS, GPT_SoVITS/text/zh_normalization),
+including the GPT-SoVITS modifications to that copy.
+
+Copyright (c) 2020-2021 PaddlePaddle Authors. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (see LICENSE-APACHE).
+
+Changes: the Python modules char_convert.py, chronology.py, constants.py,
+num.py, phonecode.py, quantifier.py and text_normlization.py were translated
+to Rust. The literal character tables of char_convert.py were moved verbatim
+into data/zh_normalization/. Python exceptions are returned as
+`zh_normalization::Error` values.
+
+PaddleSpeech tone_sandhi (Apache License 2.0)
+---------------------------------------------
+
+src/tone_sandhi.rs is translated to Rust from GPT_SoVITS/text/tone_sandhi.py
+(GPT-SoVITS commit 04a44eb), which is PaddleSpeech's
+paddlespeech/t2s/frontend/tone_sandhi.py with GPT-SoVITS modifications.
+
+Copyright (c) 2021 PaddlePaddle Authors. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (see LICENSE-APACHE).
+
+g2pW (Apache License 2.0)
+-------------------------
+
+src/g2pw/ is translated to Rust from GPT_SoVITS/text/g2pw (GPT-SoVITS commit
+04a44eb), which is derived from g2pW (https://github.com/GitYCC/g2pW) and
+pypinyin-g2pW (https://github.com/mozillazg/pypinyin-g2pW).
+
+Licensed under the Apache License, Version 2.0 (see LICENSE-APACHE).
+
+ESPnet (Apache License 2.0)
+---------------------------
+
+japanese::pyopenjtalk_g2p_prosody and japanese::_numeric_feature_by_regex
+are translated from GPT_SoVITS/text/japanese.py, which copied them from ESPnet
+(https://github.com/espnet/espnet, espnet2/text/phoneme_tokenizer.py).
+
+Copyright 2017 Johns Hopkins University (Shinji Watanabe)
+
+Licensed under the Apache License, Version 2.0 (see LICENSE-APACHE).
+
+MeCab, as bundled with Open JTalk (BSD 3-Clause)
+------------------------------------------------
+
+Parts of src/japanese.rs (the user dictionary tokenizer: tokenizeCSV,
+unknown word processing and max-grouping-size handling) are translated to
+Rust from MeCab as bundled with Open JTalk
+(https://github.com/r9y9/open_jtalk, src/mecab/src/utils.cpp,
+tokenizer.cpp, viterbi.cc), which pyopenjtalk uses.
+
+Copyright (c) 2001-2008, Taku Kudo
+Copyright (c) 2004-2008, Nippon Telegraph and Telephone Corporation
+
+Licensed under the BSD 3-Clause License (see LICENSE-MECAB).
+
+Data files (Apache License 2.0)
+-------------------------------
+
+data/g2pw/tokenizer.json is the tokenizer of hfl/chinese-roberta-wwm-ext-large
+(https://huggingface.co/hfl/chinese-roberta-wwm-ext-large), Apache-2.0.
+data/g2pw/opencc/ contains dictionaries from OpenCC 1.4.2
+(https://github.com/BYVoid/OpenCC), Apache-2.0. See data/g2pw/README.md.

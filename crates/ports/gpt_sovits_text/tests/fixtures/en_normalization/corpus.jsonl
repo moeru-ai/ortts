@@ -1,0 +1,220 @@
+{"i": "你好，很高兴认识你。", "o": ""}
+{"i": "今天天气真不错，我们去公园散步吧。", "o": ""}
+{"i": "这是一个用于测试语音合成前端的句子。", "o": ""}
+{"i": "请把窗户关上，外面风很大。", "o": ""}
+{"i": "他说他明天不来了，让我们别等他。", "o": ""}
+{"i": "春眠不觉晓，处处闻啼鸟。夜来风雨声，花落知多少。", "o": ""}
+{"i": "人工智能正在改变我们的生活方式。", "o": ""}
+{"i": "我想喝一杯热咖啡，再来一块蛋糕。", "o": ""}
+{"i": "妈妈正在厨房里做饭，爸爸在客厅看报纸。", "o": ""}
+{"i": "这座城市的夜景非常漂亮。", "o": ""}
+{"i": "嗯。", "o": ""}
+{"i": "好的", "o": ""}
+{"i": "啊？真的吗？", "o": ""}
+{"i": "谢谢你一直以来的帮助和支持。", "o": ""}
+{"i": "我们下周三下午开会讨论这个方案。", "o": ""}
+{"i": "银行的行长在人行道上行走。", "o": ""}
+{"i": "他长得很高，是家里的长子。", "o": ""}
+{"i": "这首音乐让人感到快乐。", "o": ""}
+{"i": "我觉得今天睡了一个好觉。", "o": ""}
+{"i": "重新考虑一下这个重要的问题。", "o": ""}
+{"i": "他还没还我钱。", "o": ""}
+{"i": "这个地方的地道小吃很好吃。", "o": ""}
+{"i": "请把这封信交给传达室的人。", "o": ""}
+{"i": "他们一起处理了那个难处理的事情。", "o": ""}
+{"i": "我们要为人民服务，不为别的。", "o": ""}
+{"i": "这件衣服的颜色很好看，我很喜好。", "o": ""}
+{"i": "曾经有个姓曾的人住在这里。", "o": ""}
+{"i": "单老师的单车坏了。", "o": ""}
+{"i": "他的着装很得体，着实让人着迷。", "o": ""}
+{"i": "参加会议的人参差不齐。", "o": ""}
+{"i": "朝阳区的朝鲜族朋友早上来了。", "o": ""}
+{"i": "这个调查结果需要调整一下。", "o": ""}
+{"i": "他把东西藏在西藏的朋友家。", "o": ""}
+{"i": "我们得好好学习，得到好成绩。", "o": ""}
+{"i": "发现头发里有一根白头发。", "o": ""}
+{"i": "她便宜地买了一些方便面。", "o": ""}
+{"i": "那个模样的模型很特别。", "o": ""}
+{"i": "空调的空气不太好，空着也浪费。", "o": ""}
+{"i": "一个一样一定一起一天一年。", "o": ""}
+{"i": "第一名，十一点，一二三四五。", "o": ""}
+{"i": "不是不要不对不去不好。", "o": ""}
+{"i": "你好，我很好，老李也很好。", "o": ""}
+{"i": "展览馆里有很多古老的雨伞。", "o": ""}
+{"i": "看一看，想一想，试一试。", "o": ""}
+{"i": "好不好，行不行，要不要。", "o": ""}
+{"i": "我买了五把小雨伞。", "o": ""}
+{"i": "我的朋友们都在桌子上放了东西。", "o": ""}
+{"i": "这孩子真聪明，脑袋瓜子转得快。", "o": ""}
+{"i": "你来了吗？我们走吧。", "o": ""}
+{"i": "妹妹的衣服在柜子里头。", "o": ""}
+{"i": "他把事情告诉了大家伙儿。", "o": ""}
+{"i": "明白了，知道了，记住了。", "o": ""}
+{"i": "我们去那儿玩儿一会儿吧。", "o": ""}
+{"i": "这小孩儿真好玩儿。", "o": ""}
+{"i": "老北京的胡同儿里有好多小卖部。", "o": ""}
+{"i": "儿子和女儿都长大了。", "o": ""}
+{"i": "2026年11月2日是星期一。", "o": "twenty twenty-sixeleventwo"}
+{"i": "2026", "o": "twenty twenty-six"}
+{"i": "11", "o": "eleven"}
+{"i": "2", "o": "two"}
+{"i": "这件衣服卖199元。", "o": "one hundred ninety-nine"}
+{"i": "199", "o": "one hundred ninety-nine"}
+{"i": "价格是3.5元一斤。", "o": "three point five"}
+{"i": "3.5", "o": "three point five"}
+{"i": "增长率达到了12.5%。", "o": "twelve point five percent"}
+{"i": "12.5%", "o": "twelve point five percent"}
+{"i": "现在是下午3:45。", "o": "threeforty-five"}
+{"i": "3:45", "o": "three forty-five a.m."}
+{"i": "会议在14:30开始。", "o": "fourteenthirty"}
+{"i": "14:30", "o": "two thirty p.m."}
+{"i": "我的电话号码是13812345678。", "o": "thirteen billion, eight hundred twelve million, three hundred forty-five thousand, six hundred seventy-eight"}
+{"i": "13812345678", "o": "thirteen billion, eight hundred twelve million, three hundred forty-five thousand, six hundred seventy-eight"}
+{"i": "今天气温是-5℃到3℃。", "o": "-fivethree"}
+{"i": "-5℃", "o": "negative five"}
+{"i": "3℃", "o": "three"}
+{"i": "比分是3:2，我们赢了。", "o": "threetwo"}
+{"i": "3:2", "o": "threetwo"}
+{"i": "全国大约有14亿人口。", "o": "fourteen"}
+{"i": "14", "o": "fourteen"}
+{"i": "这本书一共有1024页。", "o": "ten twenty-four"}
+{"i": "1024", "o": "ten twenty-four"}
+{"i": "他跑了100米，用时10.5秒。", "o": "one hundredten point five"}
+{"i": "100", "o": "one hundred"}
+{"i": "10.5", "o": "ten point five"}
+{"i": "三分之二的人同意，1/3的人反对。", "o": "one third"}
+{"i": "1/3", "o": "one third"}
+{"i": "这个房间有25平方米。", "o": "twenty-five"}
+{"i": "25", "o": "twenty-five"}
+{"i": "第1章到第10章是重点。", "o": "oneten"}
+{"i": "1", "o": "one"}
+{"i": "10", "o": "ten"}
+{"i": "2008年北京奥运会非常精彩。", "o": "two thousand eight"}
+{"i": "2008", "o": "two thousand eight"}
+{"i": "他今年25岁，身高180cm，体重70kg。", "o": "twenty-fiveone hundred eightycmseventykg"}
+{"i": "180cm", "o": "one hundred eightycm"}
+{"i": "70kg", "o": "seventykg"}
+{"i": "我们公司有1,000,000用户。", "o": "one million"}
+{"i": "1,000,000", "o": "one million"}
+{"i": "请在2026-11-02之前提交。", "o": "twenty twenty-six-eleven-two"}
+{"i": "2026-11-02", "o": "twenty twenty-six-eleven-two"}
+{"i": "售价￥299，原价$59。", "o": "two hundred ninety-ninefifty-nine dollars"}
+{"i": "299", "o": "two hundred ninety-nine"}
+{"i": "$59", "o": "fifty-nine dollars"}
+{"i": "第3季度营收增长了20%-30%。", "o": "threetwenty percent-thirty percent"}
+{"i": "3", "o": "three"}
+{"i": "20%-30%", "o": "twenty percent-thirty percent"}
+{"i": "房间号是302，楼层是3楼。", "o": "three hundred twothree"}
+{"i": "302", "o": "three hundred two"}
+{"i": "0.001和1000相差很大。", "o": "zero point zero zero oneone thousand"}
+{"i": "0.001", "o": "zero point zero zero one"}
+{"i": "1000", "o": "one thousand"}
+{"i": "123元", "o": "one hundred twenty-three"}
+{"i": "123", "o": "one hundred twenty-three"}
+{"i": "第二十三届运动会有一百二十个国家参加。", "o": ""}
+{"i": "什么？！你再说一遍……", "o": ""}
+{"i": "他说：“我明天会来。”", "o": ""}
+{"i": "苹果、香蕉、橘子，都是水果；我都喜欢。", "o": ""}
+{"i": "《红楼梦》是中国古典小说之一。", "o": ""}
+{"i": "这个——怎么说呢——有点复杂。", "o": ""}
+{"i": "（括号里的内容）不用读出来吗？", "o": ""}
+{"i": "哈哈哈😂太好笑了！", "o": ""}
+{"i": "早上好~今天也要加油哦！", "o": ""}
+{"i": "第一，第二，第三；最后：总结。", "o": ""}
+{"i": "这是一个长句子，没有句号", "o": ""}
+{"i": "他的邮箱是test@example.com。", "o": "testexample.com"}
+{"i": "test@example.com", "o": "testexample.com"}
+{"i": "A和B之间#的关系&是什么？", "o": "A B"}
+{"i": "A", "o": "A"}
+{"i": "B", "o": "B"}
+{"i": "這是一個繁體中文的句子。", "o": ""}
+{"i": "我們應該學習電腦技術。", "o": ""}
+{"i": "在很久很久以前，有一个美丽的小村庄，村庄里住着一位善良的老奶奶，她每天都会在门口种花，村里的孩子们都很喜欢她，常常跑到她家里听她讲故事。", "o": ""}
+{"i": "随着科技的不断发展，越来越多的人开始使用智能手机来处理日常事务，比如支付账单、预订机票、查询天气，甚至远程办公。这些变化让生活更加便利，但也带来了新的挑战。", "o": ""}
+{"i": "第一段。\n第二段的内容比较长一些，需要换行。\n\n第三段。", "o": ""}
+{"i": "Hello, how are you today?", "o": "Hello, how are you today?"}
+{"i": "The quick brown fox jumps over the lazy dog.", "o": "The quick brown fox jumps over the lazy dog."}
+{"i": "I would like a cup of coffee, please.", "o": "I would like a cup of coffee, please."}
+{"i": "This is a test of the speech synthesis frontend.", "o": "This is a test of the speech synthesis frontend."}
+{"i": "She sells seashells by the seashore.", "o": "She sells seashells by the seashore."}
+{"i": "Good morning!", "o": "Good morning!"}
+{"i": "Yes.", "o": "Yes."}
+{"i": "Can you hear me? I can't hear you.", "o": "Can you hear me? I can't hear you."}
+{"i": "It's John's book, and they're going to read it.", "o": "It's John's book, and they're going to read it."}
+{"i": "We'll see what happens when we've finished.", "o": "We'll see what happens when we've finished."}
+{"i": "I read the book yesterday, and I will read it again.", "o": "I read the book yesterday, and I will read it again."}
+{"i": "I live here, and the concert is live tonight.", "o": "I live here, and the concert is live tonight."}
+{"i": "Please record the record.", "o": "Please record the record."}
+{"i": "The wind is too strong to wind the sail.", "o": "The wind is too strong to wind the sail."}
+{"i": "They refuse to move the refuse.", "o": "They refuse to move the refuse."}
+{"i": "I object to that object.", "o": "I object to that object."}
+{"i": "Supercalifragilisticexpialidocious is a long word.", "o": "Supercalifragilisticexpialidocious is a long word."}
+{"i": "Moeru and Ortts are project names.", "o": "Moeru and Ortts are project names."}
+{"i": "Kubernetes runs on Grafana dashboards.", "o": "Kubernetes runs on Grafana dashboards."}
+{"i": "I love Pikachu and Hatsune Miku.", "o": "I love Pikachu and Hatsune Miku."}
+{"i": "Blorpified zentastic quixel.", "o": "Blorpified zentastic quixel."}
+{"i": "I have 3 apples and 25 oranges.", "o": "I have three apples and twenty-five oranges."}
+{"i": "The price is $19.99.", "o": "The price is nineteen dollars and ninety-nine cents."}
+{"i": "It was founded in 1999.", "o": "It was founded in nineteen ninety-nine."}
+{"i": "The meeting starts at 3:30 pm.", "o": "The meeting starts at three thirty a.m. pm."}
+{"i": "He finished 1st, she finished 2nd.", "o": "He finished first, she finished second."}
+{"i": "About 50% of people agree.", "o": "About fifty percent of people agree."}
+{"i": "Dr. Smith works at NASA.", "o": "Dr. Smith works at N A S A."}
+{"i": "The USA and the UK signed the deal.", "o": "The U S A and the U K signed the deal."}
+{"i": "Mr. and Mrs. Brown live on Main St.", "o": "Mr. and Mrs. Brown live on Main St."}
+{"i": "I use an API and a GPU for AI.", "o": "I use an A P I and a G P U for A I."}
+{"i": "我今天用iPhone拍了一张照片。", "o": "i Phone"}
+{"i": "iPhone", "o": "i Phone"}
+{"i": "这个API的response time太长了。", "o": "A P Iresponse time"}
+{"i": "API", "o": "A P I"}
+{"i": "response time", "o": "response time"}
+{"i": "你好hello世界", "o": "hello"}
+{"i": "hello", "o": "hello"}
+{"i": "我们用GPT-SoVITS做语音合成。", "o": "G P T- So V I T S"}
+{"i": "GPT-SoVITS", "o": "G P T- So V I T S"}
+{"i": "明天的meeting改到下午三点。", "o": "meeting"}
+{"i": "meeting", "o": "meeting"}
+{"i": "他是一名software engineer，在Google工作。", "o": "software engineer Google"}
+{"i": "software engineer", "o": "software engineer"}
+{"i": "Google", "o": "Google"}
+{"i": "OK，那我们就这么定了。", "o": "O K"}
+{"i": "OK", "o": "O K"}
+{"i": "请打开Wi-Fi和Bluetooth。", "o": "Wi- Fi Bluetooth"}
+{"i": "Wi-Fi", "o": "Wi- Fi"}
+{"i": "Bluetooth", "o": "Bluetooth"}
+{"i": "这部电影叫Inception，非常好看。", "o": "Inception"}
+{"i": "Inception", "o": "Inception"}
+{"i": "我买了3个USB接口和2根HDMI线。", "o": "three U S Btwo H D M I"}
+{"i": "USB", "o": "U S B"}
+{"i": "HDMI", "o": "H D M I"}
+{"i": "Python和Rust哪个更快？", "o": "Python Rust"}
+{"i": "Python", "o": "Python"}
+{"i": "Rust", "o": "Rust"}
+{"i": "我最喜欢的歌是Let It Go。", "o": "Let It Go"}
+{"i": "Let It Go", "o": "Let It Go"}
+{"i": "AI正在改变world，这是一个new era。", "o": "A Iworldnew era"}
+{"i": "AI", "o": "A I"}
+{"i": "world", "o": "world"}
+{"i": "new era", "o": "new era"}
+{"i": "Hello大家好，我是Neko。", "o": "Hello Neko"}
+{"i": "Hello", "o": "Hello"}
+{"i": "Neko", "o": "Neko"}
+{"i": "版本号是v2.0.1，发布于2026年。", "o": "vtwo point zero.onetwenty twenty-six"}
+{"i": "v2.0.1", "o": "vtwo point zero.one"}
+{"i": "我在用macOS和Windows 11。", "o": "mac O S Windows eleven"}
+{"i": "macOS", "o": "mac O S"}
+{"i": "Windows 11", "o": "Windows eleven"}
+{"i": "Thank you very much，谢谢！", "o": "Thank you very much"}
+{"i": "Thank you very much", "o": "Thank you very much"}
+{"i": "这个bug在CI上reproduce不了。", "o": "bug C Ireproduce"}
+{"i": "bug", "o": "bug"}
+{"i": "CI", "o": "C I"}
+{"i": "reproduce", "o": "reproduce"}
+{"i": "你好，今日天氣好好。", "o": ""}
+{"i": "我哋一齊去飲茶啦。", "o": ""}
+{"i": "佢唔係好鍾意食辣嘢。", "o": ""}
+{"i": "呢個地方好靚，我好鍾意。", "o": ""}
+{"i": "你食咗飯未呀？", "o": ""}
+{"i": "香港係一個國際大都會。", "o": ""}
+{"i": "今日係2026年11月2號。", "o": "twenty twenty-sixeleventwo"}
+{"i": "我用iPhone打電話俾你。", "o": "i Phone"}

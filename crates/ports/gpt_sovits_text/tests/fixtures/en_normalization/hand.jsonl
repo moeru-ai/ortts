@@ -1,0 +1,345 @@
+{"i": "", "o": ""}
+{"i": " ", "o": " "}
+{"i": "hello", "o": "hello"}
+{"i": "Hello, world!", "o": "Hello, world!"}
+{"i": "1. test ordinal number 1st", "o": "first, test ordinal number first"}
+{"i": "32.3$, $6.24, 1.1£, £7.14.", "o": "thirty-two dollars and thirty cents, six dollars and twenty-four cents, one pound and ten pence, seven pounds and fourteen pence."}
+{"i": "3/23, 1/2, 3/2, 1/3, 6/1", "o": "three twenty-thirds, one half, three halves, one third, six"}
+{"i": "1st, 22nd", "o": "first, twenty-second"}
+{"i": "a test 20h, 1.2s, 1L, 0.1km", "o": "a test twenty hours, one point two seconds, one liter, zero point one kilometers"}
+{"i": "a test of time 4:00, 13:00, 13:30", "o": "a test of time four o'clock a.m., one o'clock p.m., one thirty p.m."}
+{"i": "a test of temperature 4°F, 23°C, -19°C", "o": "a test of temperature four degrees fahrenheit, twenty-three degrees celsius,negative nineteen degrees celsius"}
+{"i": "1. ", "o": "first, "}
+{"i": "1.", "o": "one."}
+{"i": "1. a", "o": "first, a"}
+{"i": "2. b 3. c 11. d 12. e 13. f 21. g 101. h 111. i", "o": "second, b third, c eleventh, d twelfth, e thirteenth, f twenty-first, g one hundred and first, h one hundred and eleventh, i"}
+{"i": "Step 10. Done", "o": "Step tenth, Done"}
+{"i": "a1. b", "o": "aone. b"}
+{"i": "_1. b", "o": "one. b"}
+{"i": "é1. b", "o": "eone. b"}
+{"i": "́1. b", "o": "first, b"}
+{"i": "²1. b", "o": "one. b"}
+{"i": "0. zero", "o": "zeroth, zero"}
+{"i": "007. bond", "o": "seventh, bond"}
+{"i": "3.  two spaces", "o": "third,  two spaces"}
+{"i": "3.\tTab", "o": "three. Tab"}
+{"i": "99999999999999999999999999999999999999999. big", "e": ["NumOutOfRangeError", ""]}
+{"i": "1 + 2", "o": "one plus two"}
+{"i": "1 + 2 + 3", "o": "one plus two plus three"}
+{"i": "1 + 2 = 3", "o": "one plus two Equals three"}
+{"i": "10 - 3 = 7", "o": "ten minus three Equals seven"}
+{"i": "6 × 7 = 42", "o": "six times seven Equals forty-two"}
+{"i": "8 ÷ 2 = 4", "o": "eight divided by two Equals four"}
+{"i": "x + y = z", "o": "x plus y Equals z"}
+{"i": "a - b", "o": "a minus b"}
+{"i": "abc + def", "o": "abc plus def"}
+{"i": "-1 + -2", "o": "negative one plusnegative two"}
+{"i": "1 - -2", "o": "one minusnegative two"}
+{"i": "1.5 + 2.25", "o": "one point five plus two point two five"}
+{"i": ".5 + .25", "o": ".five plus .twenty-five"}
+{"i": "x² + y² = z²", "o": "x plus y Equals z"}
+{"i": "2ⁿ - 1", "o": "two minus one"}
+{"i": "eˣ = y", "o": "e Equals y"}
+{"i": "1+2", "o": "onetwo"}
+{"i": "1 +2", "o": "one two"}
+{"i": "1  +  2", "o": "one plus two"}
+{"i": "1\t+\t2", "o": "one plus two"}
+{"i": "1　+　2", "o": "one plus two"}
+{"i": "1\u001c+\u001c2", "o": "one plus two"}
+{"i": "1 + 2", "o": "one plus two"}
+{"i": "١ + ٢", "o": " plus "}
+{"i": "3 * 4", "o": "three  four"}
+{"i": "3 / 4", "o": "three  four"}
+{"i": "A = B = C = D", "o": "A Equals B Equals C Equals D"}
+{"i": "1 + 2 + 3 + 4 + 5 + 6", "o": "one plus two plus three plus four plus five plus six"}
+{"i": "e = mc²", "o": "e Equals mc"}
+{"i": "2 - 1 - 0", "o": "two minus one minus zero"}
+{"i": "-5", "o": "negative five"}
+{"i": "-5 degrees", "o": "negative five degrees"}
+{"i": "it is -5 outside", "o": "it isnegative five outside"}
+{"i": "it is  -5 outside", "o": "it isnegative five outside"}
+{"i": "it is\t-5", "o": "it isnegative five"}
+{"i": "it is\u001f-5", "o": "it isnegative five"}
+{"i": "a-5", "o": "a-five"}
+{"i": "-١٢", "o": "negative "}
+{"i": "--5", "o": "--five"}
+{"i": "x -0", "o": "xnegative zero"}
+{"i": "-3.14", "o": "negative three point one four"}
+{"i": "temperature: -19°C", "o": "temperaturenegative nineteen degrees celsius"}
+{"i": "1,000", "o": "one thousand"}
+{"i": "12,345,678", "o": "twelve million, three hundred forty-five thousand, six hundred seventy-eight"}
+{"i": "1,2,3", "o": "one hundred twenty-three"}
+{"i": "1,,2", "o": "twelve"}
+{"i": "1,", "o": "one,"}
+{"i": ",1", "o": ",one"}
+{"i": "100,000 people", "o": "one hundred thousand people"}
+{"i": "1,000,000,000,000", "o": "one trillion"}
+{"i": "1, 2, 3", "o": "one, two, three"}
+{"i": "10,5", "o": "one hundred five"}
+{"i": "3:30", "o": "three thirty a.m."}
+{"i": "03:30", "o": "three thirty a.m."}
+{"i": "0:00", "o": "zero o'clock a.m."}
+{"i": "00:00", "o": "zero o'clock a.m."}
+{"i": "12:00", "o": "twelve o'clock p.m."}
+{"i": "12:00 a.m.", "o": "twelve o'clock p.m. a.m."}
+{"i": "12:01", "o": "twelve one p.m."}
+{"i": "13:00", "o": "one o'clock p.m."}
+{"i": "13:30", "o": "one thirty p.m."}
+{"i": "23:59", "o": "eleven fifty-nine p.m."}
+{"i": "24:00", "o": "twenty-fourzero"}
+{"i": "19:60", "o": "nineteensixty"}
+{"i": "3:30pm", "o": "threethirtypm"}
+{"i": "3:30 PM", "o": "three thirty a.m. P M"}
+{"i": "at 7:05.", "o": "at seven five a.m.."}
+{"i": "123:45", "o": "one hundred twenty-threeforty-five"}
+{"i": "1:234", "o": "onetwo hundred thirty-four"}
+{"i": "a3:30", "o": "athreethirty"}
+{"i": "3:30a", "o": "threethirtya"}
+{"i": "é3:30", "o": "ethreethirty"}
+{"i": "3:30é", "o": "threethirtye"}
+{"i": "́3:30", "o": "three thirty a.m."}
+{"i": "3:30́", "o": "three thirty a.m."}
+{"i": "²3:30", "o": "threethirty"}
+{"i": "3:30²", "o": "threethirty"}
+{"i": "_3:30", "o": "threethirty"}
+{"i": "1:2:3", "o": "onetwothree"}
+{"i": "10:10:10", "o": "ten ten a.m.ten"}
+{"i": "2:5", "o": "twofive"}
+{"i": "1m", "o": "one meter"}
+{"i": "2m", "o": "two meters"}
+{"i": "1.0m", "o": "one point zero meters"}
+{"i": "0.1km", "o": "zero point one kilometers"}
+{"i": "01m", "o": "one meter"}
+{"i": "5km", "o": "five kilometers"}
+{"i": "5km/h", "o": "five kilometersh"}
+{"i": "100 km/h", "o": "one hundred kmh"}
+{"i": "6ft", "o": "six feet"}
+{"i": "1ft", "o": "one feet"}
+{"i": "2L", "o": "two liters"}
+{"i": "1L", "o": "one liter"}
+{"i": "3tbsp", "o": "three tablespoons"}
+{"i": "1tsp", "o": "one teaspoon"}
+{"i": "24h", "o": "twenty-four hours"}
+{"i": "1h", "o": "one hour"}
+{"i": "5min", "o": "five minutes"}
+{"i": "1min", "o": "one minute"}
+{"i": "30s", "o": "thirty seconds"}
+{"i": "1s", "o": "one second"}
+{"i": "1.5s", "o": "one point five seconds"}
+{"i": "23°C", "o": "twenty-three degrees celsius"}
+{"i": "1°C", "o": "one degree celsius"}
+{"i": "4°F", "o": "four degrees fahrenheit"}
+{"i": "-19°C", "o": "negative nineteen degrees celsius"}
+{"i": "5mins", "o": "fivemins"}
+{"i": "5ms", "o": "fivems"}
+{"i": "5m2", "o": "fivemtwo"}
+{"i": "a5m", "o": "afivem"}
+{"i": "5mé", "o": "fiveme"}
+{"i": "5ḿ", "o": "five meters"}
+{"i": "5m²", "o": "fivem"}
+{"i": "5 m", "o": "five m"}
+{"i": "1.2.3m", "o": "one point two.three meters"}
+{"i": "10.5km", "o": "ten point five kilometers"}
+{"i": "99999999999999999999999999999999999999999m", "e": ["NumOutOfRangeError", ""]}
+{"i": "£5", "o": "five pounds"}
+{"i": "£1", "o": "one pound"}
+{"i": "£1.01", "o": "one pound and one penny"}
+{"i": "£1.5", "o": "one pound and fifty pence"}
+{"i": "£2.50", "o": "two pounds and fifty pence"}
+{"i": "£0.01", "o": "one penny"}
+{"i": "£0.99", "o": "ninety-nine pence"}
+{"i": "£.5", "o": "fifty pence"}
+{"i": "£0", "o": "zero pounds"}
+{"i": "£0.00", "o": "zero pounds"}
+{"i": "£1.2.3", "o": "one point two.three pounds"}
+{"i": "£1,000", "o": "one thousand pounds"}
+{"i": "£1,000.50", "o": "one thousand pounds and fifty pence"}
+{"i": "5£", "o": "five pounds"}
+{"i": "1.1£", "o": "one pound and ten pence"}
+{"i": "1.01£", "o": "one pound and one penny"}
+{"i": "£,5", "e": ["ValueError", "invalid literal for int() with base 10: ',5'"]}
+{"i": "£5,.3", "e": ["ValueError", "invalid literal for int() with base 10: '5,'"]}
+{"i": "£1.,5", "e": ["ValueError", "invalid literal for int() with base 10: ',5'"]}
+{"i": "£1.5,5", "o": "one pound and fifty-five pence"}
+{"i": "£007", "o": "seven pounds"}
+{"i": "£1.123", "o": "one pound and one hundred twenty-three pence"}
+{"i": "$5", "o": "five dollars"}
+{"i": "$1", "o": "one dollar"}
+{"i": "$1.01", "o": "one dollar and one cent"}
+{"i": "$6.24", "o": "six dollars and twenty-four cents"}
+{"i": "$0.5", "o": "fifty cents"}
+{"i": "$.99", "o": "ninety-nine cents"}
+{"i": "$0", "o": "zero dollars"}
+{"i": "$0.00", "o": "zero dollars"}
+{"i": "$1.2.3", "o": "one point two.three dollars"}
+{"i": "$1,000,000", "o": "one million dollars"}
+{"i": "$1,000.99", "o": "one thousand dollars and ninety-nine cents"}
+{"i": "32.3$", "o": "thirty-two dollars and thirty cents"}
+{"i": "1$", "o": "one dollar"}
+{"i": "(5$", "e": ["ValueError", "invalid literal for int() with base 10: '(5'"]}
+{"i": "(1.5$)", "e": ["ValueError", "invalid literal for int() with base 10: '(1'"]}
+{"i": "($5)", "o": "five dollars"}
+{"i": "$,5", "e": ["ValueError", "invalid literal for int() with base 10: ',5'"]}
+{"i": "5,$", "o": "five,"}
+{"i": "$5,.3", "e": ["ValueError", "invalid literal for int() with base 10: '5,'"]}
+{"i": "$1.,5", "e": ["ValueError", "invalid literal for int() with base 10: ',5'"]}
+{"i": "$100 and $200", "o": "one hundred dollars and two hundred dollars"}
+{"i": "$1.001", "o": "one dollar and one cent"}
+{"i": "3.14", "o": "three point one four"}
+{"i": "13.234", "o": "thirteen point two three four"}
+{"i": "0.5", "o": "zero point five"}
+{"i": "1.0", "o": "one point zero"}
+{"i": "1.\n5", "o": "one point  five"}
+{"i": "1.\t5", "o": "one point  five"}
+{"i": "1.\u001c5", "o": "one point  five"}
+{"i": "1.　5", "o": "one point  five"}
+{"i": "1..5", "o": "one..five"}
+{"i": "1.2.3", "o": "one point two.three"}
+{"i": "1.2.3.4", "o": "one point two.three point four"}
+{"i": "192.168.0.1", "o": "one hundred ninety-two point one six eight.zero point one"}
+{"i": "v1.2", "o": "vone point two"}
+{"i": "1/2", "o": "one half"}
+{"i": "3/2", "o": "three halves"}
+{"i": "0/2", "o": "zero halves"}
+{"i": "1/3", "o": "one third"}
+{"i": "3/4", "o": "three fourths"}
+{"i": "5/6", "o": "five sixths"}
+{"i": "10/3", "o": "ten thirds"}
+{"i": "6/1", "o": "six"}
+{"i": "0/1", "o": "zero"}
+{"i": "1/0", "o": "one zeroth"}
+{"i": "2/0", "o": "two zeroths"}
+{"i": "1/100", "o": "one one hundredth"}
+{"i": "2/101", "o": "two one hundred and firsts"}
+{"i": "1/1000000", "o": "one one millionth"}
+{"i": "1/2/3", "o": "one halfthree"}
+{"i": "22/7", "o": "twenty-two sevenths"}
+{"i": "101/3", "o": "one hundred and one thirds"}
+{"i": "1/99999999999999999999999999999999999999999", "e": ["NumOutOfRangeError", ""]}
+{"i": "99999999999999999999999999999999999999999/2", "e": ["NumOutOfRangeError", ""]}
+{"i": "1st", "o": "first"}
+{"i": "2nd", "o": "second"}
+{"i": "3rd", "o": "third"}
+{"i": "4th", "o": "fourth"}
+{"i": "11th", "o": "eleventh"}
+{"i": "12th", "o": "twelfth"}
+{"i": "13th", "o": "thirteenth"}
+{"i": "21st", "o": "twenty-first"}
+{"i": "22nd", "o": "twenty-second"}
+{"i": "23rd", "o": "twenty-third"}
+{"i": "101st", "o": "one hundred and first"}
+{"i": "103rd", "o": "one hundred and third"}
+{"i": "111th", "o": "one hundred and eleventh"}
+{"i": "1000th", "o": "one thousandth"}
+{"i": "1nd", "o": "first"}
+{"i": "2st", "o": "second"}
+{"i": "0th", "o": "zeroth"}
+{"i": "1sth", "o": "firsth"}
+{"i": "1stst", "o": "firstst"}
+{"i": "99999999999999999999999999999999999999999th", "e": ["NumOutOfRangeError", ""]}
+{"i": "0", "o": "zero"}
+{"i": "1", "o": "one"}
+{"i": "7", "o": "seven"}
+{"i": "13", "o": "thirteen"}
+{"i": "99", "o": "ninety-nine"}
+{"i": "100", "o": "one hundred"}
+{"i": "101", "o": "one hundred one"}
+{"i": "999", "o": "nine hundred ninety-nine"}
+{"i": "1000", "o": "one thousand"}
+{"i": "1001", "o": "ten oh one"}
+{"i": "1066", "o": "ten sixty-six"}
+{"i": "1100", "o": "eleven hundred"}
+{"i": "1200", "o": "twelve hundred"}
+{"i": "1905", "o": "nineteen oh five"}
+{"i": "1999", "o": "nineteen ninety-nine"}
+{"i": "2000", "o": "two thousand"}
+{"i": "2001", "o": "two thousand one"}
+{"i": "2008", "o": "two thousand eight"}
+{"i": "2009", "o": "two thousand nine"}
+{"i": "2010", "o": "twenty ten"}
+{"i": "2019", "o": "twenty nineteen"}
+{"i": "2100", "o": "twenty-one hundred"}
+{"i": "2999", "o": "twenty-nine ninety-nine"}
+{"i": "3000", "o": "three thousand"}
+{"i": "3001", "o": "three thousand one"}
+{"i": "10000", "o": "ten thousand"}
+{"i": "123456", "o": "one hundred twenty-three thousand, four hundred fifty-six"}
+{"i": "1000000", "o": "one million"}
+{"i": "007", "o": "seven"}
+{"i": "0001999", "o": "nineteen ninety-nine"}
+{"i": "999999999999999999999999999999999999", "o": "nine hundred ninety-nine decillion, nine hundred ninety-nine nonillion, nine hundred ninety-nine octillion, nine hundred ninety-nine septillion, nine hundred ninety-nine sextillion, nine hundred ninety-nine quintillion, nine hundred ninety-nine quadrillion, nine hundred ninety-nine trillion, nine hundred ninety-nine billion, nine hundred ninety-nine million, nine hundred ninety-nine thousand, nine hundred ninety-nine"}
+{"i": "9999999999999999999999999999999999999", "e": ["NumOutOfRangeError", ""]}
+{"i": "999999999999999999999999999999999999999", "e": ["NumOutOfRangeError", ""]}
+{"i": "1000000000000000000000000000000000000", "e": ["NumOutOfRangeError", ""]}
+{"i": "10000000000000000000000000000000000000000", "e": ["NumOutOfRangeError", ""]}
+{"i": "99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999", "e": ["NumOutOfRangeError", ""]}
+{"i": "(999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999$", "e": ["ValueError", "invalid literal for int() with base 10: '(999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999"]}
+{"i": "£,999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999", "e": ["ValueError", "invalid literal for int() with base 10: ',999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999"]}
+{"i": "50%", "o": "fifty percent"}
+{"i": "12.5%", "o": "twelve point five percent"}
+{"i": "100 %", "o": "one hundred  percent"}
+{"i": "%", "o": " percent"}
+{"i": "%%", "o": " percent percent"}
+{"i": "café", "o": "cafe"}
+{"i": "naïve résumé", "o": "naive resume"}
+{"i": "Ångström", "o": "Angstrom"}
+{"i": "K", "o": "K"}
+{"i": "Å", "o": "A"}
+{"i": "ﬁne", "o": "ne"}
+{"i": "ÆØÅ", "o": "A"}
+{"i": "Straße", "o": "Strae"}
+{"i": "Đà Nẵng", "o": "a Nang"}
+{"i": "日本語 text", "o": " text"}
+{"i": "full width １２３", "o": "full width "}
+{"i": "emoji 😀 ok", "o": "emoji  ok"}
+{"i": "quotes \"double\" and 'single'", "o": "quotes double and 'single'"}
+{"i": "semi; colon: dash - en – em —", "o": "semi colon dash minus en  em "}
+{"i": "a/b\\c", "o": "abc"}
+{"i": "tab\there\nnewline", "o": "tabherenewline"}
+{"i": "#hash @at &amp *star", "o": "hash at amp star"}
+{"i": "(parens) [brackets] {braces}", "o": "parens brackets braces"}
+{"i": "under_score", "o": "underscore"}
+{"i": "i.e.", "o": "that is"}
+{"i": "I.E.", "o": "that is"}
+{"i": "e.g.", "o": "for example"}
+{"i": "E.G.", "o": "for example"}
+{"i": "this, i.e. that", "o": "this, that is that"}
+{"i": "fruit, e.g. apples", "o": "fruit, for example apples"}
+{"i": "ie eg", "o": "ie eg"}
+{"i": "i.e.e.g.", "o": "that isfor example"}
+{"i": "NASA", "o": "N A S A"}
+{"i": "API", "o": "A P I"}
+{"i": "GPU", "o": "G P U"}
+{"i": "macOS", "o": "mac O S"}
+{"i": "iPhone", "o": "i Phone"}
+{"i": "McDonald", "o": "Mc Donald"}
+{"i": "USA and UK", "o": "U S A and U K"}
+{"i": "A", "o": "A"}
+{"i": " A", "o": " A"}
+{"i": "a A", "o": "a A"}
+{"i": "aA", "o": "a A"}
+{"i": "AbC", "o": "Ab C"}
+{"i": "OpenAI GPT-4", "o": "Open A I G P T-four"}
+{"i": "HTTPS URL", "o": "H T T P S U R L"}
+{"i": "The CPU's cache", "o": "The C P U's cache"}
+{"i": "I'm OK", "o": "I'm O K"}
+{"i": "Dr. Smith", "o": "Dr. Smith"}
+{"i": "Mr. and Mrs. Jones", "o": "Mr. and Mrs. Jones"}
+{"i": "St. Louis", "o": "St. Louis"}
+{"i": "Prof. X", "o": "Prof. X"}
+{"i": "Jan. 1st", "o": "Jan. first"}
+{"i": "etc.", "o": "etc."}
+{"i": "vs.", "o": "vs."}
+{"i": "No. 1", "o": "No. one"}
+{"i": "10-20", "o": "ten-twenty"}
+{"i": "1990-2000", "o": "nineteen ninety-two thousand"}
+{"i": "pages 3-5", "o": "pages three-five"}
+{"i": "5 - 10", "o": "five minus ten"}
+{"i": "1,000-2,000", "o": "one thousand-two thousand"}
+{"i": "$5-$10", "o": "five dollars-ten dollars"}
+{"i": "3:30-4:30", "o": "three thirty a.m.-four thirty a.m."}
+{"i": "Wait... what?!", "o": "Wait... what?!"}
+{"i": "Hello?? Yes!!", "o": "Hello?? Yes!!"}
+{"i": "--", "o": "--"}
+{"i": "a - b - c", "o": "a minus b minus c"}
+{"i": "x--y", "o": "x--y"}
