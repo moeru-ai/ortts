@@ -1,90 +1,38 @@
 # wordsegment
 
-Rust port of the Python package [wordsegment](http://www.grantjenks.com/docs/wordsegment/)
-1.3.1 (Apache-2.0, Copyright 2018 Grant Jenks). GPT-SoVITS calls
-`wordsegment.segment(word.lower())` from `en_G2p.qryword`
-(`GPT_SoVITS/text/english.py`) to split out-of-vocabulary English words.
+Rust port of [wordsegment](http://www.grantjenks.com/docs/wordsegment/) 1.3.1.
+Full port of `wordsegment/__init__.py` except the CLI. GPT-SoVITS uses it to
+split out-of-vocabulary English words in `en_G2p.qryword`.
 
-## Ported scope
+```rust
+wordsegment::load();
+assert_eq!(wordsegment::segment("thisisatest"), ["this", "is", "a", "test"]);
 
-All of `wordsegment/__init__.py` except the CLI:
+let mut segmenter = wordsegment::Segmenter::new();
+segmenter.load();
+let words = segmenter.segment("camelCaseWords");
+```
 
-| Python | Rust |
-|---|---|
-| `Segmenter` | `Segmenter` (`unigrams`, `bigrams`, `total`, `limit`, `words` fields) |
-| `Segmenter.ALPHABET`, `TOTAL`, `LIMIT` | associated consts |
-| `Segmenter.UNIGRAMS_FILENAME`, `BIGRAMS_FILENAME`, `WORDS_FILENAME` | `UNIGRAMS_DATA`, `BIGRAMS_DATA`, `WORDS_DATA` (embedded file contents) |
-| `Segmenter.load`, `parse`, `score`, `isegment`, `segment`, `divide`, `clean` | methods with the same names |
-| module-level `load`, `clean`, `isegment`, `segment` | free functions that use a global `RwLock<Segmenter>` |
-| module-level `UNIGRAMS`, `BIGRAMS`, `WORDS` | functions that return a read guard to the global segmenter's field |
+## Ported
 
-Data files `data/unigrams.txt`, `data/bigrams.txt` and `data/words.txt` are
-copied unmodified from the 1.3.1 wheel and embedded with `include_str!`.
+- `Segmenter` with `load`, `parse`, `score`, `isegment`, `segment`, `divide`, `clean`
+- Module-level `load`, `clean`, `isegment`, `segment`, `UNIGRAMS`, `BIGRAMS`, `WORDS` (global segmenter)
+- Data files `data/{unigrams,bigrams,words}.txt`, embedded with `include_str!`
 
-Behaviour kept from Python:
+## Not ported
 
-- `f64` math in the same order as Python: `count / total`,
-  `10.0 / (total * float(10 ** len(word)))` (the power of ten is correctly
-  rounded, like Python's int-to-float conversion), and
-  `bigram / total / score(previous)` for the stupid-backoff path.
-- `max(candidates())` tie-breaking: a candidate replaces the current best only
-  when the `(score, words)` tuple is strictly greater, so equal scores fall back
-  to comparing the word lists lexicographically.
-- `isegment` chunks the cleaned text in 250-character chunks and carries the
-  last five words of each chunk into the next.
-- `bigrams.txt` contains duplicate keys; the last value wins, like `dict()`.
-- `load()` called twice extends `words` again, like Python.
-- Python exceptions become panics with the Python exception name in the
-  message: `ZeroDivisionError` when `score` runs on an unloaded segmenter,
-  `OverflowError` for an OOV word longer than 308 characters, `ValueError`
-  from `max()` when `limit` is 0, and `ValueError` for malformed data lines.
-
-Implementation differences that do not change results:
-
-- `unigrams` and `bigrams` are `Counts` (a `HashMap` with an in-crate
-  `FxHasher`) instead of the default SipHash map, for lookup speed.
-- The `search` memo is keyed by byte offsets into the searched text instead of
-  `(suffix, prefix)` strings, and candidate word lists share their memoized
-  suffix as a linked list instead of copying it.
-- `score` checks `previous in unigrams` before building the bigram key. Python
-  checks `bigram in bigrams` first; both are side-effect-free lookups.
-
-## Left out
-
-- `main` (the command-line interface) and `__main__.py`.
-- `parse` takes file contents instead of a file name; `load` reads the
-  embedded data instead of files next to the module.
-- `isegment` computes the whole result before it returns the iterator, instead
-  of yielding words lazily per chunk. The words are the same.
+- `main` (the CLI) and `__main__.py`
+- File names: `parse` takes file contents and `load` reads the embedded data
+- Lazy `isegment`: the whole result is computed first (same words)
 
 ## Parity
 
-`parity/gen_fixtures.py` writes the fixtures in `tests/fixtures/`;
-`tests/parity.rs` checks them exactly (scores compare the f64 bit pattern). Inputs are hand-written edge cases (empty, punctuation,
-digits, apostrophes, non-ASCII including characters that lowercase to ASCII,
-inputs longer than one 250-character chunk) and seeded bulk inputs (2-5 word
-concatenations from common, rare and `words.txt` entries, camelCase product
-names, synthetic OOV names, mixed digits and apostrophes, very short and
-40+ character strings). There are no known mismatches, so the exception list
-is empty.
+Fixtures are generated from the pinned Python package with
+`pixi run --manifest-path crates/ports/wordsegment/pixi.toml fixtures`.
+All 10,582 cases match exactly (scores compare the f64 bit pattern), with no
+known differences. See [parity/README.md](parity/README.md) for details.
 
-| Fixture | Cases | Exact |
-|---|---|---|
-| `segment.jsonl` (`clean` and `segment`) | 6050 | 6050 |
-| `score.jsonl` (f64 bits) | 4491 | 4491 |
-| `divide.jsonl` | 40 | 40 |
-| `meta.json` (table sizes, `WORDS` samples, `TOTAL`, `LIMIT`) | 1 | 1 |
+## License
 
-The segment fixture runs about 93 million candidate evaluations, so
-`cargo test -p wordsegment` takes about 80 s in a debug build (about 12 s with
-`--release`). Generating the fixtures with Python takes about 9 minutes.
-
-`parity/copy_data.py` copies the files in `data/` and `parity/make_license.py`
-writes `LICENSE`. The scripts run in the pixi workspace of this crate; see
-`parity/README.md`. To regenerate everything:
-
-```sh
-pixi run --manifest-path crates/ports/wordsegment/pixi.toml fixtures
-pixi run --manifest-path crates/ports/wordsegment/pixi.toml data
-pixi run --manifest-path crates/ports/wordsegment/pixi.toml license
-```
+Apache-2.0, Copyright 2018 Grant Jenks (based on code by Peter Norvig). See
+[LICENSE](LICENSE) and [NOTICE](NOTICE).
