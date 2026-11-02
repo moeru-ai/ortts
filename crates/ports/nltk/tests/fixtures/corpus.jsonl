@@ -1,0 +1,122 @@
+{"text":".","tokens":["."],"tags":["."]}
+{"text":"","tokens":[],"tags":[]}
+{"text":"?","tokens":["?"],"tags":["."]}
+{"text":"twenty twenty-sixeleventwo.","tokens":["twenty","twenty-sixeleventwo","."],"tags":["JJ","NN","."]}
+{"text":"one hundred ninety-nine.","tokens":["one","hundred","ninety-nine","."],"tags":["CD","CD","NN","."]}
+{"text":"three point five.","tokens":["three","point","five","."],"tags":["CD","NN","CD","."]}
+{"text":"twelve point five percent.","tokens":["twelve","point","five","percent","."],"tags":["NN","NN","CD","NN","."]}
+{"text":"threeforty-five.","tokens":["threeforty-five","."],"tags":["JJ","."]}
+{"text":"fourteenthirty.","tokens":["fourteenthirty","."],"tags":["NN","."]}
+{"text":"thirteen billion, eight hundred twelve million, three hundred forty-five thousand, six hundred seventy-eight.","tokens":["thirteen","billion",",","eight","hundred","twelve","million",",","three","hundred","forty-five","thousand",",","six","hundred","seventy-eight","."],"tags":["JJ","CD",",","CD","VBD","CD","CD",",","CD","VBD","JJ","NN",",","CD","VBD","NN","."]}
+{"text":"-fivethree.","tokens":["-","fivethree","."],"tags":[":","NN","."]}
+{"text":"threetwo.","tokens":["threetwo","."],"tags":["NN","."]}
+{"text":"fourteen.","tokens":["fourteen","."],"tags":["NN","."]}
+{"text":"ten twenty-four.","tokens":["ten","twenty-four","."],"tags":["JJ","NN","."]}
+{"text":"one hundredten point five.","tokens":["one","hundredten","point","five","."],"tags":["CD","NN","NN","CD","."]}
+{"text":"one third.","tokens":["one","third","."],"tags":["CD","NN","."]}
+{"text":"twenty-five.","tokens":["twenty-five","."],"tags":["JJ","."]}
+{"text":"oneten.","tokens":["oneten","."],"tags":["NNS","."]}
+{"text":"two thousand eight.","tokens":["two","thousand","eight","."],"tags":["CD","CD","CD","."]}
+{"text":"cm","tokens":["cm"],"tags":["NN"]}
+{"text":"seventykg.","tokens":["seventykg","."],"tags":["NN","."]}
+{"text":"twenty-fiveone hundred eightycmseventykg.","tokens":["twenty-fiveone","hundred","eightycmseventykg","."],"tags":["NN","VBD","NNS","."]}
+{"text":"one million.","tokens":["one","million","."],"tags":["CD","CD","."]}
+{"text":"twenty twenty-six-eleven-two.","tokens":["twenty","twenty-six-eleven-two","."],"tags":["JJ","NN","."]}
+{"text":"two hundred ninety-ninefifty-nine dollars.","tokens":["two","hundred","ninety-ninefifty-nine","dollars","."],"tags":["CD","VBD","JJ","NNS","."]}
+{"text":"threetwenty percent-thirty percent.","tokens":["threetwenty","percent-thirty","percent","."],"tags":["JJ","JJ","NN","."]}
+{"text":"three hundred twothree.","tokens":["three","hundred","twothree","."],"tags":["CD","VBD","NN","."]}
+{"text":"zero point zero zero oneone thousand.","tokens":["zero","point","zero","zero","oneone","thousand","."],"tags":["CD","NN","NN","CD","NN","NN","."]}
+{"text":".zero point zero zero oneone thousand.","tokens":[".","zero","point","zero","zero","oneone","thousand","."],"tags":[".","CD","NN","NN","CD","NN","NN","."]}
+{"text":"one hundred twenty-three","tokens":["one","hundred","twenty-three"],"tags":["CD","CD","JJ"]}
+{"text":"one hundred twenty-three.","tokens":["one","hundred","twenty-three","."],"tags":["CD","CD","JJ","."]}
+{"text":"!","tokens":["!"],"tags":["."]}
+{"text":"testexample.com.","tokens":["testexample.com","."],"tags":["NN","."]}
+{"text":"A","tokens":["A"],"tags":["DT"]}
+{"text":"B","tokens":["B"],"tags":["NN"]}
+{"text":"A B?","tokens":["A","B","?"],"tags":["DT","NNP","."]}
+{"text":". A B?","tokens":[".","A","B","?"],"tags":[".","DT","NNP","."]}
+{"text":"Hello, how are you today?","tokens":["Hello",",","how","are","you","today","?"],"tags":["NNP",",","WRB","VBP","PRP","NN","."]}
+{"text":"The quick brown fox jumps over the lazy dog.","tokens":["The","quick","brown","fox","jumps","over","the","lazy","dog","."],"tags":["DT","JJ","NN","NN","VBZ","IN","DT","JJ","NN","."]}
+{"text":"I would like a cup of coffee, please.","tokens":["I","would","like","a","cup","of","coffee",",","please","."],"tags":["PRP","MD","VB","DT","NN","IN","NN",",","NN","."]}
+{"text":"This is a test of the speech synthesis frontend.","tokens":["This","is","a","test","of","the","speech","synthesis","frontend","."],"tags":["DT","VBZ","DT","NN","IN","DT","NN","NN","NN","."]}
+{"text":"She sells seashells by the seashore.","tokens":["She","sells","seashells","by","the","seashore","."],"tags":["PRP","VBZ","NNS","IN","DT","NN","."]}
+{"text":"Good morning!","tokens":["Good","morning","!"],"tags":["JJ","NN","."]}
+{"text":"Yes.","tokens":["Yes","."],"tags":["UH","."]}
+{"text":". Yes.","tokens":[".","Yes","."],"tags":[".","UH","."]}
+{"text":"Can you hear me? I can't hear you.","tokens":["Can","you","hear","me","?","I","can't","hear","you","."],"tags":["MD","PRP","VB","PRP",".","PRP","VBP","JJ","PRP","."]}
+{"text":"It's John's book, and they're going to read it.","tokens":["It's","John's","book",",","and","they're","going","to","read","it","."],"tags":["NNP","NNP","NN",",","CC","RB","VBG","TO","VB","PRP","."]}
+{"text":"We'll see what happens when we've finished.","tokens":["We'll","see","what","happens","when","we've","finished","."],"tags":["NNP","VBP","WP","VBZ","WRB","NN","VBN","."]}
+{"text":"I read the book yesterday, and I will read it again.","tokens":["I","read","the","book","yesterday",",","and","I","will","read","it","again","."],"tags":["PRP","VBP","DT","NN","NN",",","CC","PRP","MD","VB","PRP","RB","."]}
+{"text":"I live here, and the concert is live tonight.","tokens":["I","live","here",",","and","the","concert","is","live","tonight","."],"tags":["PRP","VBP","RB",",","CC","DT","NN","VBZ","JJ","NN","."]}
+{"text":"Please record the record.","tokens":["Please","record","the","record","."],"tags":["NN","VBZ","DT","NN","."]}
+{"text":"The wind is too strong to wind the sail.","tokens":["The","wind","is","too","strong","to","wind","the","sail","."],"tags":["DT","NN","VBZ","RB","JJ","TO","VB","DT","NN","."]}
+{"text":"They refuse to move the refuse.","tokens":["They","refuse","to","move","the","refuse","."],"tags":["PRP","VBP","TO","VB","DT","NN","."]}
+{"text":"I object to that object.","tokens":["I","object","to","that","object","."],"tags":["PRP","VBP","TO","DT","NN","."]}
+{"text":"Supercalifragilisticexpialidocious is a long word.","tokens":["Supercalifragilisticexpialidocious","is","a","long","word","."],"tags":["NNP","VBZ","DT","JJ","NN","."]}
+{"text":"Moeru and Ortts are project names.","tokens":["Moeru","and","Ortts","are","project","names","."],"tags":["NNP","CC","NNP","VBP","JJ","NNS","."]}
+{"text":"Kubernetes runs on Grafana dashboards.","tokens":["Kubernetes","runs","on","Grafana","dashboards","."],"tags":["NNS","VBZ","IN","NNP","NNS","."]}
+{"text":"I love Pikachu and Hatsune Miku.","tokens":["I","love","Pikachu","and","Hatsune","Miku","."],"tags":["PRP","VBP","NNP","CC","NNP","NNP","."]}
+{"text":"Blorpified zentastic quixel.","tokens":["Blorpified","zentastic","quixel","."],"tags":["NNP","JJ","NN","."]}
+{"text":"I have three apples and twenty-five oranges.","tokens":["I","have","three","apples","and","twenty-five","oranges","."],"tags":["PRP","VBP","CD","NNS","CC","JJ","NNS","."]}
+{"text":"The price is nineteen dollars and ninety-nine cents.","tokens":["The","price","is","nineteen","dollars","and","ninety-nine","cents","."],"tags":["DT","NN","VBZ","JJ","NNS","CC","JJ","NNS","."]}
+{"text":"It was founded in nineteen ninety-nine.","tokens":["It","was","founded","in","nineteen","ninety-nine","."],"tags":["PRP","VBD","VBN","IN","JJ","JJ","."]}
+{"text":"The meeting starts at three thirty a.m. pm.","tokens":["The","meeting","starts","at","three","thirty","a",".","m",".","pm","."],"tags":["DT","NN","VBZ","IN","CD","NN","DT",".","NN",".","NN","."]}
+{"text":"He finished first, she finished second.","tokens":["He","finished","first",",","she","finished","second","."],"tags":["PRP","VBD","RB",",","PRP","VBD","JJ","."]}
+{"text":"About fifty percent of people agree.","tokens":["About","fifty","percent","of","people","agree","."],"tags":["IN","JJ","NN","IN","NNS","VBP","."]}
+{"text":"Dr. Smith works at N A S A.","tokens":["Dr",".","Smith","works","at","N","A","S","A","."],"tags":["NNP",".","NNP","VBZ","IN","NNP","NNP","NNP","NNP","."]}
+{"text":". Dr. Smith works at N A S A.","tokens":[".","Dr",".","Smith","works","at","N","A","S","A","."],"tags":[".","NNP",".","NNP","VBZ","IN","NNP","NNP","NNP","NNP","."]}
+{"text":"The U S A and the U K signed the deal.","tokens":["The","U","S","A","and","the","U","K","signed","the","deal","."],"tags":["DT","NNP","NNP","NNP","CC","DT","NNP","NNP","VBD","DT","NN","."]}
+{"text":"Mr. and Mrs. Brown live on Main St.","tokens":["Mr",".","and","Mrs",".","Brown","live","on","Main","St","."],"tags":["NNP",".","CC","NNP",".","NNP","VBP","IN","NNP","NNP","."]}
+{"text":". Mr. and Mrs. Brown live on Main St.","tokens":[".","Mr",".","and","Mrs",".","Brown","live","on","Main","St","."],"tags":[".","NNP",".","CC","NNP",".","NNP","VBP","IN","NNP","NNP","."]}
+{"text":"I use an A P I and a G P U for A I.","tokens":["I","use","an","A","P","I","and","a","G","P","U","for","A","I","."],"tags":["PRP","VBP","DT","NNP","NNP","PRP","CC","DT","NNP","NNP","NNP","IN","NNP","PRP","."]}
+{"text":"i Phone","tokens":["i","Phone"],"tags":["NN","NN"]}
+{"text":"i Phone.","tokens":["i","Phone","."],"tags":["NN","NNP","."]}
+{"text":".i Phone.","tokens":[".","i","Phone","."],"tags":[".","NN","NN","."]}
+{"text":"A P I","tokens":["A","P","I"],"tags":["DT","NNP","PRP"]}
+{"text":"response time","tokens":["response","time"],"tags":["NN","NN"]}
+{"text":"A P Iresponse time.","tokens":["A","P","Iresponse","time","."],"tags":["DT","NNP","NNP","NN","."]}
+{"text":"hello","tokens":["hello"],"tags":["NN"]}
+{"text":".hello","tokens":[".","hello"],"tags":[".","NN"]}
+{"text":"hello.","tokens":["hello","."],"tags":["NN","."]}
+{"text":".hello.","tokens":[".","hello","."],"tags":[".","NN","."]}
+{"text":"G P T- So V I T S","tokens":["G","P","T","-","So","V","I","T","S"],"tags":["NNP","NNP","NNP",":","RB","NNP","PRP","VBP","JJ"]}
+{"text":"G P T- So V I T S.","tokens":["G","P","T","-","So","V","I","T","S","."],"tags":["NNP","NNP","NNP",":","RB","NNP","PRP","NNP","NNP","."]}
+{"text":"meeting","tokens":["meeting"],"tags":["NN"]}
+{"text":"meeting.","tokens":["meeting","."],"tags":["NN","."]}
+{"text":"software engineer","tokens":["software","engineer"],"tags":["NN","NN"]}
+{"text":"Google","tokens":["Google"],"tags":["NN"]}
+{"text":"software engineer Google.","tokens":["software","engineer","Google","."],"tags":["NN","NN","NNP","."]}
+{"text":"O K","tokens":["O","K"],"tags":["NNP","NNP"]}
+{"text":". O K","tokens":[".","O","K"],"tags":[".","NNP","NNP"]}
+{"text":"O K.","tokens":["O","K","."],"tags":["NNP","NNP","."]}
+{"text":". O K.","tokens":[".","O","K","."],"tags":[".","NNP","NNP","."]}
+{"text":"Wi- Fi","tokens":["Wi","-","Fi"],"tags":["NNP",":","NN"]}
+{"text":"Bluetooth.","tokens":["Bluetooth","."],"tags":["NNP","."]}
+{"text":"Wi- Fi Bluetooth.","tokens":["Wi","-","Fi","Bluetooth","."],"tags":["NNP",":","NNP","NNP","."]}
+{"text":"Inception","tokens":["Inception"],"tags":["NN"]}
+{"text":"Inception.","tokens":["Inception","."],"tags":["NN","."]}
+{"text":"U S B","tokens":["U","S","B"],"tags":["NNP","NNP","NNP"]}
+{"text":"H D M I","tokens":["H","D","M","I"],"tags":["NNP","NNP","NNP","PRP"]}
+{"text":"three U S Btwo H D M I.","tokens":["three","U","S","Btwo","H","D","M","I","."],"tags":["CD","NNP","NNP","NNP","NNP","NNP","NNP","PRP","."]}
+{"text":"Python","tokens":["Python"],"tags":["NN"]}
+{"text":"Rust","tokens":["Rust"],"tags":["NN"]}
+{"text":"Python Rust?","tokens":["Python","Rust","?"],"tags":["NNP","NNP","."]}
+{"text":"Let It Go.","tokens":["Let","It","Go","."],"tags":["VB","PRP","NNP","."]}
+{"text":"A I","tokens":["A","I"],"tags":["DT","PRP"]}
+{"text":"world","tokens":["world"],"tags":["NN"]}
+{"text":"new era.","tokens":["new","era","."],"tags":["JJ","NN","."]}
+{"text":"A Iworldnew era.","tokens":["A","Iworldnew","era","."],"tags":["DT","NNP","NN","."]}
+{"text":"Hello","tokens":["Hello"],"tags":["NN"]}
+{"text":"Neko.","tokens":["Neko","."],"tags":["NNP","."]}
+{"text":"Hello Neko.","tokens":["Hello","Neko","."],"tags":["NNP","NNP","."]}
+{"text":"v","tokens":["v"],"tags":["NN"]}
+{"text":"vtwo point zero.onetwenty twenty-six.","tokens":["vtwo","point","zero.onetwenty","twenty-six","."],"tags":["NN","NN","CD","NN","."]}
+{"text":"mac O S","tokens":["mac","O","S"],"tags":["NN","NNP","NNP"]}
+{"text":"Windows eleven.","tokens":["Windows","eleven","."],"tags":["NNP","RB","."]}
+{"text":"mac O S Windows eleven.","tokens":["mac","O","S","Windows","eleven","."],"tags":["NN","NNP","NNP","NNP","RB","."]}
+{"text":"Thank you very much","tokens":["Thank","you","very","much"],"tags":["NNP","PRP","RB","RB"]}
+{"text":"Thank you very much!","tokens":["Thank","you","very","much","!"],"tags":["NNP","PRP","RB","RB","."]}
+{"text":"bug","tokens":["bug"],"tags":["NN"]}
+{"text":"C I","tokens":["C","I"],"tags":["NNP","PRP"]}
+{"text":"reproduce","tokens":["reproduce"],"tags":["NN"]}
+{"text":"bug C Ireproduce.","tokens":["bug","C","Ireproduce","."],"tags":["NN","NNP","NNP","."]}

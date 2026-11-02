@@ -1,0 +1,18 @@
+[package]
+name = "nltk"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+authors.workspace = true
+license = "Apache-2.0"
+description = "Subset port of the Python nltk 3.10.4 package (TweetTokenizer, pos_tag) used by GPT-SoVITS"
+
+[dependencies]
+fancy-regex.workspace = true
+serde = { workspace = true, features = ["derive"] }
+# `float_roundtrip` makes float parsing correctly rounded, like Python `json`.
+serde_json = { workspace = true, features = ["float_roundtrip"] }
+
+[dev-dependencies]
+serde = { workspace = true, features = ["derive"] }
+serde_json.workspace = true
