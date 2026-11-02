@@ -1,0 +1,348 @@
+{"text":"","lcut":[],"search":null,"pos":null,"flags":""}
+{"text":" ","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"  ","lcut":[1,1],"search":null,"pos":null,"flags":"x x"}
+{"text":"\t","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"\n","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"\r\n","lcut":[2],"search":null,"pos":null,"flags":"x"}
+{"text":"\r","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"\r\r\n\n","lcut":[1,2,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"　","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":" ","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"\u001c\u001d\u001e\u001f","lcut":[1,1,1,1],"search":null,"pos":null,"flags":"x x x x"}
+{"text":"","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"  ","lcut":[1,1],"search":null,"pos":null,"flags":"x x"}
+{"text":"   ","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"​","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"a","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"A","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"1","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":".","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"%","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"+","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"#","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"&","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"_","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"我","lcut":[1],"search":null,"pos":null,"flags":"r"}
+{"text":"的","lcut":[1],"search":null,"pos":null,"flags":"uj"}
+{"text":"了","lcut":[1],"search":null,"pos":null,"flags":"ul"}
+{"text":"一","lcut":[1],"search":null,"pos":null,"flags":"m"}
+{"text":"鿕","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"鿖","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"䷿","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"㐀","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"𠀀","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"𪛖","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"𠮷野家","lcut":[1,2],"search":null,"pos":null,"flags":"x n"}
+{"text":"𪚥𪚥","lcut":[1,1],"search":null,"pos":null,"flags":"x x"}
+{"text":"中鿖国","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"中鿕国","lcut":[3],"search":null,"pos":[1,1,1],"flags":"f yg n"}
+{"text":"我爱北京天安门","lcut":[1,1,2,3],"search":["我","爱","北京","天安","天安门"],"pos":null,"flags":"r v ns ns"}
+{"text":"他来到了网易杭研大厦","lcut":[1,2,1,2,2,2],"search":null,"pos":[1,2,1,2,1,1,2],"flags":"r v ul n j vn n"}
+{"text":"小明硕士毕业于中国科学院计算所，后在日本京都大学深造","lcut":[2,2,2,1,5,3,1,1,1,6,2],"search":["小明","硕士","毕业","于","中国","科学","学院","科学院","中国科学院","计算","计算所","，","后","在","日本","京都","大学","日本京都大学","深造"],"pos":[2,2,2,1,5,3,1,2,6,2],"flags":"nr n n p nt n x t nt v"}
+{"text":"我来到北京清华大学","lcut":[1,2,2,4],"search":["我","来到","北京","清华","华大","大学","清华大学"],"pos":null,"flags":"r v ns nt"}
+{"text":"工信处女干事每月经过下属科室都要亲口交代24口交换机等技术性器件的安装工作","lcut":[3,3,2,2,2,2,1,1,2,2,2,1,3,1,3,2,1,2,2],"search":["工信处","干事","女干事","每月","经过","下属","科室","都","要","亲口","交代","24","口","交换","换机","交换机","等","技术","技术性","器件","的","安装","工作"],"pos":null,"flags":"n n r p v n d v n n m n n u n n uj v vn"}
+{"text":"结婚的和尚未结婚的","lcut":[2,1,1,2,2,1],"search":null,"pos":null,"flags":"v uj c d v uj"}
+{"text":"南京市长江大桥","lcut":[3,4],"search":["南京","京市","南京市","长江","大桥","长江大桥"],"pos":null,"flags":"ns ns"}
+{"text":"永和服装饰品有限公司","lcut":[2,2,2,4],"search":["永和","服装","饰品","有限","公司","有限公司"],"pos":null,"flags":"nz vn n n"}
+{"text":"乒乓球拍卖完了","lcut":[3,2,1,1],"search":["乒乓","乒乓球","拍卖","完","了"],"pos":null,"flags":"n v v ul"}
+{"text":"研究生命的起源","lcut":[2,2,1,2],"search":null,"pos":null,"flags":"vn vn uj n"}
+{"text":"这个门把手坏了","lcut":[2,3,1,1],"search":["这个","把手","门把手","坏","了"],"pos":null,"flags":"r n a ul"}
+{"text":"他说的确实在理","lcut":[1,1,1,2,2],"search":null,"pos":[1,1,1,2,1,1],"flags":"r v uj ad p n"}
+{"text":"长春市长春节讲话","lcut":[2,2,2,2],"search":null,"pos":null,"flags":"ns n t n"}
+{"text":"人要是行，干一行行一行","lcut":[1,2,1,1,1,3,2],"search":["人","要是","行","，","干","一行","行行","一行行","一行"],"pos":null,"flags":"n c zg x v n m"}
+{"text":"下雨天留客天留我不留","lcut":[3,2,2,1,2],"search":["下雨","雨天","下雨天","留客","天留","我","不留"],"pos":[3,2,1,1,1,2],"flags":"n v q v r v"}
+{"text":"我们中出了一个叛徒","lcut":[2,2,1,2,2],"search":null,"pos":[2,1,1,1,2,2],"flags":"r f v ul m n"}
+{"text":"李小福是创新办主任也是云计算方面的专家","lcut":[3,1,2,1,2,1,1,1,2,2,1,2],"search":null,"pos":null,"flags":"nr v v v b d v n v n uj n"}
+{"text":"今天天气不错","lcut":[4,2],"search":["今天","天天","天气","今天天气","不错"],"pos":null,"flags":"i a"}
+{"text":"我是拖拉机学院手扶拖拉机专业的","lcut":[1,1,3,2,5,2,1],"search":["我","是","拖拉","拖拉机","学院","手扶","拖拉","拖拉机","手扶拖拉机","专业","的"],"pos":null,"flags":"r v n n n n uj"}
+{"text":"不用多久，我就会升职加薪，当上CEO，走上人生巅峰","lcut":[2,2,1,1,1,1,2,2,1,2,3,1,2,2,2],"search":null,"pos":null,"flags":"v m x r d v v nr x t eng x v n n"}
+{"text":"江州市长江大桥参加了长江大桥的通车仪式","lcut":[2,1,4,2,1,4,1,2,2],"search":["江州","市","长江","大桥","长江大桥","参加","了","长江","大桥","长江大桥","的","通车","仪式"],"pos":null,"flags":"ns n ns v ul ns uj n n"}
+{"text":"张三丰和李四光在王五家吃饭","lcut":[3,1,3,1,1,2,2],"search":["三丰","张三丰","和","李四","李四光","在","王","五家","吃饭"],"pos":null,"flags":"nr c nr p nr m v"}
+{"text":"欧阳娜娜和上官婉儿","lcut":[2,2,1,4],"search":["欧阳","娜娜","和","上官","上官婉儿"],"pos":null,"flags":"ns nrt c nr"}
+{"text":"123","lcut":[3],"search":null,"pos":null,"flags":"m"}
+{"text":"3.14","lcut":[4],"search":null,"pos":null,"flags":"m"}
+{"text":"3.14.15","lcut":[4,1,2],"search":null,"pos":[7],"flags":"m"}
+{"text":"50%","lcut":[3],"search":null,"pos":[2,1],"flags":"m x"}
+{"text":"50.5%","lcut":[5],"search":null,"pos":[4,1],"flags":"m x"}
+{"text":"100%的人","lcut":[4,1,1],"search":null,"pos":[3,1,1,1],"flags":"m x uj n"}
+{"text":"1.2.3版本","lcut":[3,1,1,2],"search":null,"pos":[5,2],"flags":"m n"}
+{"text":".5","lcut":[1,1],"search":null,"pos":[2],"flags":"m"}
+{"text":"5.","lcut":[1,1],"search":null,"pos":[2],"flags":"m"}
+{"text":"..","lcut":[2],"search":null,"pos":null,"flags":"m"}
+{"text":"...","lcut":[3],"search":null,"pos":null,"flags":"m"}
+{"text":"a.b","lcut":[1,1,1],"search":null,"pos":null,"flags":"eng m eng"}
+{"text":"a_b","lcut":[1,1,1],"search":null,"pos":null,"flags":"eng x eng"}
+{"text":"a+b=c","lcut":[1,1,1,1,1],"search":null,"pos":null,"flags":"eng x eng x x"}
+{"text":"C++和C#","lcut":[3,1,2],"search":null,"pos":null,"flags":"nz c nz"}
+{"text":"AT&T公司","lcut":[4,2],"search":null,"pos":null,"flags":"nz n"}
+{"text":"R&D部门","lcut":[1,1,1,2],"search":null,"pos":null,"flags":"eng x eng n"}
+{"text":"x86_64架构","lcut":[3,1,2,2],"search":null,"pos":null,"flags":"eng x m n"}
+{"text":"#话题#","lcut":[1,2,1],"search":null,"pos":null,"flags":"x n x"}
+{"text":"100kg","lcut":[5],"search":null,"pos":[3,2],"flags":"m eng"}
+{"text":"20km/h","lcut":[4,1,1],"search":null,"pos":[2,2,1,1],"flags":"m eng x x"}
+{"text":"第1名","lcut":[1,1,1],"search":null,"pos":null,"flags":"m m n"}
+{"text":"第一名","lcut":[3],"search":["第一","一名","第一名"],"pos":null,"flags":"m"}
+{"text":"1st","lcut":[3],"search":null,"pos":[1,2],"flags":"m eng"}
+{"text":"2nd","lcut":[3],"search":null,"pos":[1,2],"flags":"m eng"}
+{"text":"3rd","lcut":[3],"search":null,"pos":[1,2],"flags":"m eng"}
+{"text":"No.1","lcut":[4],"search":null,"pos":[2,2],"flags":"eng m"}
+{"text":"iPhone15ProMax","lcut":[14],"search":null,"pos":null,"flags":"eng"}
+{"text":"GPT-SoVITS","lcut":[3,1,6],"search":null,"pos":null,"flags":"eng x eng"}
+{"text":"v2Pro","lcut":[5],"search":null,"pos":null,"flags":"eng"}
+{"text":"v2ProPlus","lcut":[9],"search":null,"pos":null,"flags":"eng"}
+{"text":"Hello World","lcut":[5,1,5],"search":null,"pos":null,"flags":"eng x eng"}
+{"text":"hello，世界","lcut":[5,1,2],"search":null,"pos":null,"flags":"eng x n"}
+{"text":"你好world","lcut":[2,5],"search":null,"pos":null,"flags":"l eng"}
+{"text":"你好 world","lcut":[2,1,5],"search":null,"pos":null,"flags":"l x eng"}
+{"text":"你好\tworld","lcut":[2,1,5],"search":null,"pos":null,"flags":"l x eng"}
+{"text":"你好\r\nworld","lcut":[2,2,5],"search":null,"pos":null,"flags":"l x eng"}
+{"text":"你好\nworld","lcut":[2,1,5],"search":null,"pos":null,"flags":"l x eng"}
+{"text":"abc123def","lcut":[9],"search":null,"pos":null,"flags":"eng"}
+{"text":"123abc","lcut":[6],"search":null,"pos":[3,3],"flags":"m eng"}
+{"text":"ABC","lcut":[3],"search":null,"pos":null,"flags":"eng"}
+{"text":"aBc","lcut":[3],"search":null,"pos":null,"flags":"eng"}
+{"text":"a1","lcut":[2],"search":null,"pos":null,"flags":"eng"}
+{"text":"1a","lcut":[2],"search":null,"pos":[1,1],"flags":"m eng"}
+{"text":"Ａ","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"ａｂｃ","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"１２３","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"１２３ＡＢＣ","lcut":[1,1,1,1,1,1],"search":null,"pos":null,"flags":"x x x x x x"}
+{"text":"全角，标点。","lcut":[2,1,2,1],"search":null,"pos":null,"flags":"n x n x"}
+{"text":"!!!","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"？？？","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"……","lcut":[1,1],"search":null,"pos":null,"flags":"x x"}
+{"text":"——","lcut":[1,1],"search":null,"pos":null,"flags":"x x"}
+{"text":"～","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"《红楼梦》","lcut":[1,3,1],"search":["《","红楼","红楼梦","》"],"pos":null,"flags":"x nz x"}
+{"text":"「你好」","lcut":[1,2,1],"search":null,"pos":null,"flags":"x l x"}
+{"text":"『世界』","lcut":[1,2,1],"search":null,"pos":null,"flags":"x n x"}
+{"text":"(括号)","lcut":[1,2,1],"search":null,"pos":null,"flags":"x n x"}
+{"text":"[方括号]","lcut":[1,3,1],"search":["[","括号","方括号","]"],"pos":null,"flags":"x n x"}
+{"text":"{花括号}","lcut":[1,1,2,1],"search":null,"pos":null,"flags":"x v n x"}
+{"text":"😀","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"我😀你","lcut":[1,1,1],"search":null,"pos":null,"flags":"r x r"}
+{"text":"👨‍👩‍👧","lcut":[1,1,1,1,1],"search":null,"pos":null,"flags":"x x x x x"}
+{"text":"こんにちは","lcut":[1,1,1,1,1],"search":null,"pos":null,"flags":"x x x x x"}
+{"text":"日本語のテキスト","lcut":[2,1,1,1,1,1,1],"search":null,"pos":null,"flags":"ns x x x x x x"}
+{"text":"한국어","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"Привет","lcut":[1,1,1,1,1,1],"search":null,"pos":null,"flags":"x x x x x x"}
+{"text":"ελληνικά","lcut":[1,1,1,1,1,1,1,1],"search":null,"pos":null,"flags":"x x x x x x x x"}
+{"text":"עברית","lcut":[1,1,1,1,1],"search":null,"pos":null,"flags":"x x x x x"}
+{"text":"مرحبا","lcut":[1,1,1,1,1],"search":null,"pos":null,"flags":"x x x x x"}
+{"text":"ไทย","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"café","lcut":[3,1],"search":null,"pos":null,"flags":"eng x"}
+{"text":"naïve","lcut":[2,1,2],"search":null,"pos":null,"flags":"eng x eng"}
+{"text":"ß","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"İ","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"ﬁ","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"Ⅻ","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"①②③","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"㈠㈡","lcut":[1,1],"search":null,"pos":null,"flags":"x x"}
+{"text":"〇","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"〇一二","lcut":[1,2],"search":null,"pos":null,"flags":"x m"}
+{"text":"零一二三","lcut":[1,3],"search":["零","一二","二三","一二三"],"pos":null,"flags":"m m"}
+{"text":"一二三四五六七八九十","lcut":[10],"search":["一二","二三","三四","四五","五六","六七","七八","八九","九十","一二三","八九十","一二三四五六七八九十"],"pos":null,"flags":"m"}
+{"text":"百千万亿","lcut":[4],"search":["百千","千万","万亿","百千万","千万亿","百千万亿"],"pos":null,"flags":"m"}
+{"text":"壹贰叁肆伍陆柒捌玖拾","lcut":[1,1,1,2,2,1,1,1],"search":null,"pos":[1,1,1,1,1,1,1,1,1,1],"flags":"m m m m m m m m m v"}
+{"text":"廿卅","lcut":[2],"search":null,"pos":null,"flags":"m"}
+{"text":"这是一个句子。这是另一个句子！","lcut":[2,2,2,1,1,1,1,2,2,1],"search":null,"pos":[1,1,2,2,1,1,1,1,2,2,1],"flags":"r v m n x r v r m n x"}
+{"text":"句子一\n句子二\r\n句子三","lcut":[2,1,1,2,1,2,2,1],"search":null,"pos":null,"flags":"n m x n m x n m"}
+{"text":"  前后有空格  ","lcut":[1,1,2,1,2,1,1],"search":null,"pos":null,"flags":"x x f v n x x"}
+{"text":"中 文 空 格","lcut":[1,1,1,1,1,1,1],"search":null,"pos":null,"flags":"f x n x n x n"}
+{"text":"中　文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"中 文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"繁體中文測試","lcut":[2,2,2],"search":null,"pos":null,"flags":"a nz vn"}
+{"text":"臺灣","lcut":[1,1],"search":null,"pos":null,"flags":"yg v"}
+{"text":"香港特別行政區","lcut":[2,2,2,1],"search":null,"pos":null,"flags":"ns d n x"}
+{"text":"這個問題很難解決","lcut":[2,2,1,1,2],"search":null,"pos":[2,2,2,2],"flags":"r n d v"}
+{"text":"我們一起去學校吧","lcut":[2,2,1,2,1],"search":null,"pos":null,"flags":"r m v n y"}
+{"text":"電腦軟體","lcut":[2,2],"search":null,"pos":null,"flags":"n n"}
+{"text":"龘","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"靐","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"齉","lcut":[1],"search":null,"pos":null,"flags":"zg"}
+{"text":"爩","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"鱻","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"麤","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"龖","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"厵","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"灪","lcut":[1],"search":null,"pos":null,"flags":"zg"}
+{"text":"籱","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"饢","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"驫","lcut":[1],"search":null,"pos":null,"flags":"zg"}
+{"text":"鸜","lcut":[1],"search":null,"pos":null,"flags":"zg"}
+{"text":"麷","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"鼺","lcut":[1],"search":null,"pos":null,"flags":"x"}
+{"text":"龘靐齉爩","lcut":[4],"search":null,"pos":[1,1,1,1],"flags":"x zg x zg"}
+{"text":"鱻麤龖厵灪","lcut":[5],"search":null,"pos":[1,1,1,1,1],"flags":"y x zg x zg"}
+{"text":"我龘你","lcut":[3],"search":null,"pos":[1,1,1],"flags":"r y r"}
+{"text":"龘龘龘","lcut":[3],"search":null,"pos":[1,1,1],"flags":"y x zg"}
+{"text":"嘤嘤嘤","lcut":[1,1,1],"search":null,"pos":null,"flags":"o o o"}
+{"text":"哈哈哈哈哈哈","lcut":[3,3],"search":["哈哈","哈哈","哈哈哈","哈哈","哈哈","哈哈哈"],"pos":null,"flags":"o o"}
+{"text":"啊啊啊啊啊啊啊啊啊啊","lcut":[3,1,3,3],"search":null,"pos":[3,3,3,1],"flags":"nr nr nr zg"}
+{"text":"的的的的的的","lcut":[1,1,1,1,1,1],"search":null,"pos":[2,1,2,1],"flags":"u uj u uj"}
+{"text":"了了了了","lcut":[1,1,1,1],"search":null,"pos":[1,2,1],"flags":"ul v ul"}
+{"text":"是是是","lcut":[1,1,1],"search":null,"pos":null,"flags":"v v v"}
+{"text":"一一一一","lcut":[2,2],"search":null,"pos":null,"flags":"m m"}
+{"text":"不不不不","lcut":[1,1,1,1],"search":null,"pos":[4],"flags":"l"}
+{"text":"我我我我我我我我我我我我我我我我","lcut":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"search":null,"pos":null,"flags":"r r r r r r r r r r r r r r r r"}
+{"text":"噫吁嚱危乎高哉","lcut":[1,1,1,2,2],"search":null,"pos":[1,1,1,2,1,1],"flags":"e vg zg v a y"}
+{"text":"鱼鱼雅雅","lcut":[4],"search":["雅雅","鱼鱼雅雅"],"pos":null,"flags":"nr"}
+{"text":"饕餮","lcut":[2],"search":null,"pos":null,"flags":"n"}
+{"text":"魑魅魍魉","lcut":[4],"search":["魑魅","魍魉","魑魅魍魉"],"pos":null,"flags":"i"}
+{"text":"耄耋","lcut":[2],"search":null,"pos":null,"flags":"n"}
+{"text":"囹圄","lcut":[2],"search":null,"pos":null,"flags":"n"}
+{"text":"犄角旮旯","lcut":[2,2],"search":null,"pos":null,"flags":"n n"}
+{"text":"圐圙","lcut":[2],"search":null,"pos":[1,1],"flags":"x zg"}
+{"text":"嘚瑟","lcut":[1,1],"search":null,"pos":null,"flags":"yg ng"}
+{"text":"嘚啵","lcut":[1,1],"search":null,"pos":null,"flags":"y y"}
+{"text":"王小明","lcut":[3],"search":null,"pos":null,"flags":"nr"}
+{"text":"张伟","lcut":[2],"search":null,"pos":null,"flags":"nr"}
+{"text":"诸葛亮","lcut":[3],"search":["诸葛","诸葛亮"],"pos":null,"flags":"nr"}
+{"text":"司马懿","lcut":[3],"search":["司马","司马懿"],"pos":null,"flags":"nr"}
+{"text":"阿里巴巴","lcut":[4],"search":["阿里","巴巴","阿里巴巴"],"pos":null,"flags":"nrt"}
+{"text":"腾讯","lcut":[2],"search":null,"pos":null,"flags":"nz"}
+{"text":"字节跳动","lcut":[2,2],"search":null,"pos":null,"flags":"n vn"}
+{"text":"华为技术有限公司","lcut":[8],"search":["华为","技术","有限","公司","华为技术有限公司"],"pos":null,"flags":"nt"}
+{"text":"中华人民共和国","lcut":[7],"search":["中华","华人","人民","共和","共和国","中华人民共和国"],"pos":null,"flags":"ns"}
+{"text":"中华人民共和国国务院","lcut":[10],"search":["中华","华人","人民","共和","国务","共和国","国务院","中华人民共和国国务院"],"pos":null,"flags":"nt"}
+{"text":"中华人民共和国中央人民政府","lcut":[13],"search":["中华","华人","人民","共和","国中","中央","人民","民政","政府","共和国","中华人民共和国中央人民政府"],"pos":null,"flags":"nt"}
+{"text":"联合国教科文组织","lcut":[8],"search":["联合","国教","教科","科文","组织","联合国","教科文","联合国教科文组织"],"pos":null,"flags":"nt"}
+{"text":"上海浦东新区","lcut":[6],"search":["上海","浦东","新区","上海浦东新区"],"pos":null,"flags":"ns"}
+{"text":"北京市海淀区中关村","lcut":[3,3,3],"search":["北京","京市","北京市","海淀","淀区","海淀区","中关","关村","中关村"],"pos":null,"flags":"ns ns ns"}
+{"text":"广东省深圳市南山区","lcut":[3,3,3],"search":["广东","广东省","深圳","深圳市","南山","山区","南山区"],"pos":null,"flags":"ns ns ns"}
+{"text":"重庆","lcut":[2],"search":null,"pos":null,"flags":"ns"}
+{"text":"重新","lcut":[2],"search":null,"pos":null,"flags":"a"}
+{"text":"银行","lcut":[2],"search":null,"pos":null,"flags":"n"}
+{"text":"行走","lcut":[2],"search":null,"pos":null,"flags":"v"}
+{"text":"仳涏","lcut":[2],"search":null,"pos":[1,1],"flags":"x zg"}
+{"text":"忐睧儿","lcut":[3],"search":null,"pos":[2,1],"flags":"i ng"}
+{"text":"他仳涏了","lcut":[4],"search":null,"pos":[1,1,1,1],"flags":"r x y ul"}
+{"text":"忐睧儿的事","lcut":[5],"search":null,"pos":[2,1,1,1],"flags":"i ng uj n"}
+{"text":"中+文","lcut":[1,1,1],"search":null,"pos":null,"flags":"ns x n"}
+{"text":"+中","lcut":[1,1],"search":null,"pos":null,"flags":"x ns"}
+{"text":"中+","lcut":[1,1],"search":null,"pos":null,"flags":"ns x"}
+{"text":"++中++","lcut":[2,1,2],"search":null,"pos":null,"flags":"x ns x"}
+{"text":"中#文","lcut":[1,1,1],"search":null,"pos":null,"flags":"ns x n"}
+{"text":"#中","lcut":[1,1],"search":null,"pos":null,"flags":"x ns"}
+{"text":"中#","lcut":[1,1],"search":null,"pos":null,"flags":"ns x"}
+{"text":"##中##","lcut":[2,1,2],"search":null,"pos":null,"flags":"x ns x"}
+{"text":"中&文","lcut":[1,1,1],"search":null,"pos":null,"flags":"ns x n"}
+{"text":"&中","lcut":[1,1],"search":null,"pos":null,"flags":"x ns"}
+{"text":"中&","lcut":[1,1],"search":null,"pos":null,"flags":"ns x"}
+{"text":"&&中&&","lcut":[2,1,2],"search":null,"pos":null,"flags":"x ns x"}
+{"text":"中.文","lcut":[1,1,1],"search":null,"pos":null,"flags":"ns m n"}
+{"text":".中","lcut":[1,1],"search":null,"pos":null,"flags":"m ns"}
+{"text":"中.","lcut":[1,1],"search":null,"pos":null,"flags":"ns m"}
+{"text":"..中..","lcut":[2,1,2],"search":null,"pos":null,"flags":"m ns m"}
+{"text":"中_文","lcut":[1,1,1],"search":null,"pos":null,"flags":"ns x n"}
+{"text":"_中","lcut":[1,1],"search":null,"pos":null,"flags":"x ns"}
+{"text":"中_","lcut":[1,1],"search":null,"pos":null,"flags":"ns x"}
+{"text":"__中__","lcut":[2,1,2],"search":null,"pos":null,"flags":"x ns x"}
+{"text":"中%文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"%中","lcut":[1,1],"search":null,"pos":null,"flags":"x f"}
+{"text":"中%","lcut":[1,1],"search":null,"pos":null,"flags":"f x"}
+{"text":"%%中%%","lcut":[2,1,2],"search":null,"pos":[1,1,1,1,1],"flags":"x x f x x"}
+{"text":"中0文","lcut":[1,1,1],"search":null,"pos":null,"flags":"ns m n"}
+{"text":"0中","lcut":[1,1],"search":null,"pos":null,"flags":"m ns"}
+{"text":"中0","lcut":[1,1],"search":null,"pos":null,"flags":"ns m"}
+{"text":"00中00","lcut":[2,1,2],"search":null,"pos":null,"flags":"m ns m"}
+{"text":"中1文","lcut":[1,1,1],"search":null,"pos":null,"flags":"ns m n"}
+{"text":"1中","lcut":[1,1],"search":null,"pos":null,"flags":"m ns"}
+{"text":"中1","lcut":[1,1],"search":null,"pos":null,"flags":"ns m"}
+{"text":"11中11","lcut":[2,1,2],"search":null,"pos":null,"flags":"m ns m"}
+{"text":"中2文","lcut":[1,1,1],"search":null,"pos":null,"flags":"ns m n"}
+{"text":"2中","lcut":[1,1],"search":null,"pos":null,"flags":"m ns"}
+{"text":"中2","lcut":[1,1],"search":null,"pos":null,"flags":"ns m"}
+{"text":"22中22","lcut":[2,1,2],"search":null,"pos":null,"flags":"m ns m"}
+{"text":"中3文","lcut":[1,1,1],"search":null,"pos":null,"flags":"ns m n"}
+{"text":"3中","lcut":[1,1],"search":null,"pos":null,"flags":"m ns"}
+{"text":"中3","lcut":[1,1],"search":null,"pos":null,"flags":"ns m"}
+{"text":"33中33","lcut":[2,1,2],"search":null,"pos":null,"flags":"m ns m"}
+{"text":"中4文","lcut":[1,1,1],"search":null,"pos":null,"flags":"ns m n"}
+{"text":"4中","lcut":[1,1],"search":null,"pos":null,"flags":"m ns"}
+{"text":"中4","lcut":[1,1],"search":null,"pos":null,"flags":"ns m"}
+{"text":"44中44","lcut":[2,1,2],"search":null,"pos":null,"flags":"m ns m"}
+{"text":"中5文","lcut":[1,1,1],"search":null,"pos":null,"flags":"ns m n"}
+{"text":"5中","lcut":[1,1],"search":null,"pos":null,"flags":"m ns"}
+{"text":"中5","lcut":[1,1],"search":null,"pos":null,"flags":"ns m"}
+{"text":"55中55","lcut":[2,1,2],"search":null,"pos":null,"flags":"m ns m"}
+{"text":"中6文","lcut":[1,1,1],"search":null,"pos":null,"flags":"ns m n"}
+{"text":"6中","lcut":[1,1],"search":null,"pos":null,"flags":"m ns"}
+{"text":"中6","lcut":[1,1],"search":null,"pos":null,"flags":"ns m"}
+{"text":"66中66","lcut":[2,1,2],"search":null,"pos":null,"flags":"m ns m"}
+{"text":"中7文","lcut":[1,1,1],"search":null,"pos":null,"flags":"ns m n"}
+{"text":"7中","lcut":[1,1],"search":null,"pos":null,"flags":"m ns"}
+{"text":"中7","lcut":[1,1],"search":null,"pos":null,"flags":"ns m"}
+{"text":"77中77","lcut":[2,1,2],"search":null,"pos":null,"flags":"m ns m"}
+{"text":"中8文","lcut":[1,1,1],"search":null,"pos":null,"flags":"ns m n"}
+{"text":"8中","lcut":[1,1],"search":null,"pos":null,"flags":"m ns"}
+{"text":"中8","lcut":[1,1],"search":null,"pos":null,"flags":"ns m"}
+{"text":"88中88","lcut":[2,1,2],"search":null,"pos":null,"flags":"m ns m"}
+{"text":"中9文","lcut":[1,1,1],"search":null,"pos":null,"flags":"ns m n"}
+{"text":"9中","lcut":[1,1],"search":null,"pos":null,"flags":"m ns"}
+{"text":"中9","lcut":[1,1],"search":null,"pos":null,"flags":"ns m"}
+{"text":"99中99","lcut":[2,1,2],"search":null,"pos":null,"flags":"m ns m"}
+{"text":"中a文","lcut":[1,1,1],"search":null,"pos":null,"flags":"ns eng n"}
+{"text":"a中","lcut":[1,1],"search":null,"pos":null,"flags":"eng ns"}
+{"text":"中a","lcut":[1,1],"search":null,"pos":null,"flags":"ns eng"}
+{"text":"aa中aa","lcut":[2,1,2],"search":null,"pos":null,"flags":"eng ns eng"}
+{"text":"中Z文","lcut":[1,1,1],"search":null,"pos":null,"flags":"ns eng n"}
+{"text":"Z中","lcut":[1,1],"search":null,"pos":null,"flags":"eng ns"}
+{"text":"中Z","lcut":[1,1],"search":null,"pos":null,"flags":"ns eng"}
+{"text":"ZZ中ZZ","lcut":[2,1,2],"search":null,"pos":null,"flags":"eng ns eng"}
+{"text":"中\t文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a\tb","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中\n文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a\nb","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中\u000b文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a\u000bb","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中\f文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a\fb","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中\r文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a\rb","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中\u001c文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a\u001cb","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中\u001d文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a\u001db","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中\u001e文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a\u001eb","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中\u001f文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a\u001fb","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中 文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a b","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"ab","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"a b","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中 文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a b","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中 文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a b","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中 文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a b","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中 文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a b","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中 文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a b","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中 文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a b","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中 文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a b","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中 文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a b","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中 文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a b","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中 文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a b","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中 文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a b","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中 文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a b","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中 文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a b","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中 文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a b","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中 文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a b","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"中 文","lcut":[1,1,1],"search":null,"pos":null,"flags":"f x n"}
+{"text":"a b","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}
+{"text":"a　b","lcut":[1,1,1],"search":null,"pos":null,"flags":"x x x"}

@@ -1,0 +1,155 @@
+{"text":"你好，很高兴认识你。","lcut":[2,1,1,2,2,1,1],"search":null,"pos":null,"flags":"l x zg b v r x"}
+{"text":"今天天气真不错，我们去公园散步吧。","lcut":[4,3,1,2,1,2,2,1,1],"search":["今天","天天","天气","今天天气","真不","不错","真不错","，","我们","去","公园","散步","吧","。"],"pos":null,"flags":"i i x r v n n y x"}
+{"text":"这是一个用于测试语音合成前端的句子。","lcut":[2,2,2,2,2,2,2,1,2,1],"search":null,"pos":[1,1,2,2,2,2,2,2,1,2,1],"flags":"r v m v vn n v f uj n x"}
+{"text":"请把窗户关上，外面风很大。","lcut":[1,1,2,2,1,2,1,2,1],"search":null,"pos":null,"flags":"v p n s x f n a x"}
+{"text":"他说他明天不来了，让我们别等他。","lcut":[1,1,1,2,2,1,1,1,2,1,1,1,1],"search":null,"pos":[1,1,1,2,2,1,1,1,2,2,1,1],"flags":"r v r t v ul x v r r r x"}
+{"text":"春眠不觉晓，处处闻啼鸟。夜来风雨声，花落知多少。","lcut":[2,2,1,1,2,3,1,2,2,1,1,2,3,1],"search":["春眠","不觉","晓","，","处处","闻啼鸟","。","夜来","风雨","声","，","花落","多少","知多少","。"],"pos":[2,2,1,1,2,1,1,1,1,2,2,1,1,2,3,1],"flags":"t d nr x v v v n x t n n x n l x"}
+{"text":"人工智能正在改变我们的生活方式。","lcut":[4,2,2,2,1,2,2,1],"search":["人工","智能","人工智能","正在","改变","我们","的","生活","方式","。"],"pos":null,"flags":"n t v r uj vn n x"}
+{"text":"我想喝一杯热咖啡，再来一块蛋糕。","lcut":[1,1,3,3,1,1,1,2,2,1],"search":["我","想","一杯","喝一杯","咖啡","热咖啡","，","再","来","一块","蛋糕","。"],"pos":null,"flags":"r v v nr x d v m n x"}
+{"text":"妈妈正在厨房里做饭，爸爸在客厅看报纸。","lcut":[2,2,2,1,2,1,2,1,2,1,2,1],"search":null,"pos":null,"flags":"n t n f v x n p n v n x"}
+{"text":"这座城市的夜景非常漂亮。","lcut":[2,2,1,2,2,2,1],"search":null,"pos":[1,1,2,1,2,2,2,1],"flags":"r q ns uj n d a x"}
+{"text":"嗯。","lcut":[1,1],"search":null,"pos":null,"flags":"e x"}
+{"text":"好的","lcut":[1,1],"search":null,"pos":null,"flags":"a uj"}
+{"text":"啊？真的吗？","lcut":[1,1,2,1,1],"search":null,"pos":null,"flags":"zg x d y x"}
+{"text":"谢谢你一直以来的帮助和支持。","lcut":[2,1,2,2,1,2,1,2,1],"search":null,"pos":null,"flags":"nr r d f uj v c v x"}
+{"text":"我们下周三下午开会讨论这个方案。","lcut":[2,1,2,2,4,2,2,1],"search":["我们","下","周三","下午","开会","讨论","开会讨论","这个","方案","。"],"pos":null,"flags":"r f t t n r n x"}
+{"text":"银行的行长在人行道上行走。","lcut":[2,1,2,1,3,1,2,1],"search":["银行","的","行长","在","人行","行道","人行道","上","行走","。"],"pos":null,"flags":"n uj n p n f v x"}
+{"text":"他长得很高，是家里的长子。","lcut":[2,1,1,1,1,1,2,1,2,1],"search":null,"pos":[1,1,1,1,1,1,1,2,1,2,1],"flags":"r a ud d a x v s uj n x"}
+{"text":"这首音乐让人感到快乐。","lcut":[2,2,1,1,2,2,1],"search":null,"pos":[1,1,2,1,1,2,2,1],"flags":"r m n v n v a x"}
+{"text":"我觉得今天睡了一个好觉。","lcut":[1,2,2,1,1,2,2,1],"search":null,"pos":[1,2,2,1,1,2,1,1,1],"flags":"r v t v ul m a v x"}
+{"text":"重新考虑一下这个重要的问题。","lcut":[4,2,2,2,1,2,1],"search":["重新","考虑","重新考虑","一下","这个","重要","的","问题","。"],"pos":null,"flags":"n m r a uj n x"}
+{"text":"他还没还我钱。","lcut":[1,1,1,1,1,1,1],"search":null,"pos":null,"flags":"r d d d r n x"}
+{"text":"这个地方的地道小吃很好吃。","lcut":[2,2,1,2,2,1,2,1],"search":null,"pos":null,"flags":"r n uj n n zg v x"}
+{"text":"请把这封信交给传达室的人。","lcut":[1,1,1,2,2,3,1,1,1],"search":["请","把","这","封信","交给","传达","传达室","的","人","。"],"pos":null,"flags":"v p r nr v n uj n x"}
+{"text":"他们一起处理了那个难处理的事情。","lcut":[2,2,2,1,2,1,2,1,2,1],"search":null,"pos":null,"flags":"r m v ul r a v uj n x"}
+{"text":"我们要为人民服务，不为别的。","lcut":[2,1,1,2,2,1,1,1,2,1],"search":null,"pos":null,"flags":"r v p n vn x d p r x"}
+{"text":"这件衣服的颜色很好看，我很喜好。","lcut":[2,2,1,2,1,2,1,1,1,2,1],"search":null,"pos":null,"flags":"mq n uj n zg v x r d v x"}
+{"text":"曾经有个姓曾的人住在这里。","lcut":[2,2,1,1,1,1,1,1,2,1],"search":null,"pos":null,"flags":"d r v d uj n v p r x"}
+{"text":"单老师的单车坏了。","lcut":[1,2,1,2,1,1,1],"search":null,"pos":null,"flags":"n n uj n a ul x"}
+{"text":"他的着装很得体，着实让人着迷。","lcut":[1,1,2,1,2,1,2,1,1,2,1],"search":null,"pos":null,"flags":"r uj v zg a x d v n v x"}
+{"text":"参加会议的人参差不齐。","lcut":[2,2,1,1,4,1],"search":["参加","会议","的","人","参差","不齐","参差不齐","。"],"pos":null,"flags":"v n uj n i x"}
+{"text":"朝阳区的朝鲜族朋友早上来了。","lcut":[3,1,3,2,2,1,1,1],"search":["朝阳","朝阳区","的","朝鲜","朝鲜族","朋友","早上","来","了","。"],"pos":null,"flags":"ns uj nz n t v ul x"}
+{"text":"这个调查结果需要调整一下。","lcut":[2,4,2,2,2,1],"search":["这个","调查","查结","结果","调查结果","需要","调整","一下","。"],"pos":null,"flags":"r n v vn m x"}
+{"text":"他把东西藏在西藏的朋友家。","lcut":[1,1,2,1,1,2,1,3,1],"search":["他","把","东西","藏","在","西藏","的","朋友","朋友家","。"],"pos":null,"flags":"r p ns j p ns uj n x"}
+{"text":"我们得好好学习，得到好成绩。","lcut":[2,1,4,1,2,1,2,1],"search":["我们","得","好好","好学","学习","好好学","好好学习","，","得到","好","成绩","。"],"pos":null,"flags":"r ud n x v a n x"}
+{"text":"发现头发里有一根白头发。","lcut":[2,2,1,1,2,3,1],"search":["发现","头发","里","有","一根","白头","头发","白头发","。"],"pos":null,"flags":"v n f v m i x"}
+{"text":"她便宜地买了一些方便面。","lcut":[1,2,2,1,2,3,1],"search":["她","便宜","地买","了","一些","方便","方便面","。"],"pos":[1,2,1,1,1,2,3,1],"flags":"r a uv v ul m n x"}
+{"text":"那个模样的模型很特别。","lcut":[2,2,1,2,1,2,1],"search":null,"pos":null,"flags":"r n uj n zg d x"}
+{"text":"空调的空气不太好，空着也浪费。","lcut":[2,1,2,3,1,2,1,2,1],"search":null,"pos":[2,1,2,3,1,1,1,1,2,1],"flags":"n uj n v x a uz d n x"}
+{"text":"一个一样一定一起一天一年。","lcut":[2,2,2,2,2,2,1],"search":null,"pos":null,"flags":"m r d m m m x"}
+{"text":"第一名，十一点，一二三四五。","lcut":[3,1,3,1,5,1],"search":["第一","一名","第一名","，","十一","一点","十一点","，","一二","二三","三四","四五","一二三","一二三四五","。"],"pos":null,"flags":"m x m x m x"}
+{"text":"不是不要不对不去不好。","lcut":[2,2,1,1,1,1,2,1],"search":null,"pos":[2,2,2,2,2,1],"flags":"c df d v d x"}
+{"text":"你好，我很好，老李也很好。","lcut":[2,1,1,1,1,1,2,1,1,1,1],"search":null,"pos":null,"flags":"l x r d a x nr d d a x"}
+{"text":"展览馆里有很多古老的雨伞。","lcut":[3,1,1,2,2,1,2,1],"search":["展览","展览馆","里","有","很多","古老","的","雨伞","。"],"pos":null,"flags":"n f v m nr uj n x"}
+{"text":"看一看，想一想，试一试。","lcut":[3,1,3,1,3,1],"search":null,"pos":null,"flags":"v x i x v x"}
+{"text":"好不好，行不行，要不要。","lcut":[3,1,3,1,1,2,1],"search":["不好","好不好","，","不行","行不行","，","要","不要","。"],"pos":null,"flags":"l x v x v df x"}
+{"text":"我买了五把小雨伞。","lcut":[1,1,1,1,1,1,2,1],"search":null,"pos":[1,1,1,2,1,2,1],"flags":"r v ul m n n x"}
+{"text":"我的朋友们都在桌子上放了东西。","lcut":[1,1,2,1,1,1,2,2,1,2,1],"search":null,"pos":null,"flags":"r uj n k d p n v ul ns x"}
+{"text":"这孩子真聪明，脑袋瓜子转得快。","lcut":[1,2,1,2,1,4,2,1,1],"search":["这","孩子","真","聪明","，","脑袋","瓜子","脑袋瓜","脑袋瓜子","转得","快","。"],"pos":null,"flags":"r n d a x n v a x"}
+{"text":"你来了吗？我们走吧。","lcut":[1,1,1,1,1,2,1,1,1],"search":null,"pos":null,"flags":"r v ul y x r v y x"}
+{"text":"妹妹的衣服在柜子里头。","lcut":[2,1,2,1,2,2,1],"search":null,"pos":null,"flags":"n uj n p n f x"}
+{"text":"他把事情告诉了大家伙儿。","lcut":[1,1,2,2,1,4,1],"search":["他","把","事情","告诉","了","大家","家伙","大家伙","大家伙儿","。"],"pos":null,"flags":"r p n v ul n x"}
+{"text":"明白了，知道了，记住了。","lcut":[2,1,1,2,1,1,2,1,1],"search":null,"pos":null,"flags":"nr ul x v ul x v ul x"}
+{"text":"我们去那儿玩儿一会儿吧。","lcut":[2,1,2,2,3,1,1],"search":["我们","去","那儿","玩儿","一会","会儿","一会儿","吧","。"],"pos":null,"flags":"r v r n m y x"}
+{"text":"这小孩儿真好玩儿。","lcut":[1,3,1,3,1],"search":["这","小孩","孩儿","小孩儿","真","好玩","玩儿","好玩儿","。"],"pos":null,"flags":"r n d v x"}
+{"text":"老北京的胡同儿里有好多小卖部。","lcut":[1,2,1,2,2,1,2,3,1],"search":null,"pos":[1,2,1,2,1,1,1,2,3,1],"flags":"a ns uj nr n f v m n x"}
+{"text":"儿子和女儿都长大了。","lcut":[2,1,2,1,2,1,1],"search":null,"pos":null,"flags":"n c n d ns ul x"}
+{"text":"2026年11月2日是星期一。","lcut":[4,1,2,1,1,1,1,3,1],"search":["2026","年","11","月","2","日","是","星期","星期一","。"],"pos":null,"flags":"m m m m m m v t x"}
+{"text":"这件衣服卖199元。","lcut":[2,2,1,3,1,1],"search":null,"pos":null,"flags":"mq n v m m x"}
+{"text":"价格是3.5元一斤。","lcut":[2,1,3,1,2,1],"search":null,"pos":null,"flags":"n v m m m x"}
+{"text":"增长率达到了12.5%。","lcut":[3,2,1,5,1],"search":["增长","增长率","达到","了","12.5%","。"],"pos":[3,2,1,4,1,1],"flags":"n v ul m x x"}
+{"text":"现在是下午3:45。","lcut":[2,1,2,1,1,2,1],"search":null,"pos":null,"flags":"t v t x x m x"}
+{"text":"会议在14:30开始。","lcut":[2,1,2,1,2,2,1],"search":null,"pos":null,"flags":"n p m x m v x"}
+{"text":"我的电话号码是13812345678。","lcut":[1,1,4,1,11,1],"search":["我","的","电话","号码","电话号码","是","13812345678","。"],"pos":null,"flags":"r uj n v m x"}
+{"text":"今天气温是-5℃到3℃。","lcut":[2,2,1,1,1,1,1,1,1,1],"search":null,"pos":null,"flags":"t n v x x x v m x x"}
+{"text":"比分是3:2，我们赢了。","lcut":[2,1,1,1,1,1,2,1,1,1],"search":null,"pos":null,"flags":"d v m x x x r v ul x"}
+{"text":"全国大约有14亿人口。","lcut":[2,2,1,2,1,2,1],"search":null,"pos":null,"flags":"n d v m m n x"}
+{"text":"这本书一共有1024页。","lcut":[1,2,2,1,4,1,1],"search":null,"pos":null,"flags":"r r j v m m x"}
+{"text":"他跑了100米，用时10.5秒。","lcut":[1,1,1,3,1,1,2,4,1,1],"search":null,"pos":[1,1,1,3,1,1,1,1,4,1,1],"flags":"r v ul m m x p n m m x"}
+{"text":"三分之二的人同意，1/3的人反对。","lcut":[4,1,1,2,1,1,1,1,1,1,2,1],"search":["三分","之二","三分之二","的","人","同意","，","1","/","3","的","人","反对","。"],"pos":null,"flags":"m uj n d x x x m uj n d x"}
+{"text":"这个房间有25平方米。","lcut":[2,2,1,2,3,1],"search":["这个","房间","有","25","平方","平方米","。"],"pos":null,"flags":"r n v m q x"}
+{"text":"第1章到第10章是重点。","lcut":[1,1,2,1,2,1,1,2,1],"search":null,"pos":[1,1,1,1,1,2,1,1,2,1],"flags":"m m m v m m m v n x"}
+{"text":"2008年北京奥运会非常精彩。","lcut":[4,1,2,3,2,2,1],"search":["2008","年","北京","奥运","奥运会","非常","精彩","。"],"pos":null,"flags":"m m ns j d n x"}
+{"text":"他今年25岁，身高180cm，体重70kg。","lcut":[1,2,2,1,1,2,5,1,2,4,1],"search":null,"pos":[1,2,2,1,1,2,3,2,1,2,2,2,1],"flags":"r t m m x v m eng x n m eng x"}
+{"text":"我们公司有1,000,000用户。","lcut":[2,2,1,1,1,3,1,3,2,1],"search":null,"pos":null,"flags":"r n v m x m x m n x"}
+{"text":"请在2026-11-02之前提交。","lcut":[1,1,4,1,2,1,2,2,2,1],"search":null,"pos":null,"flags":"v p m x m x m f v x"}
+{"text":"售价￥299，原价$59。","lcut":[2,1,3,1,2,1,2,1],"search":null,"pos":null,"flags":"n x m x n x m x"}
+{"text":"第3季度营收增长了20%-30%。","lcut":[1,1,2,2,2,1,3,1,3,1],"search":null,"pos":[1,1,2,2,2,1,2,1,1,2,1,1],"flags":"m m n n v ul m x x m x x"}
+{"text":"房间号是302，楼层是3楼。","lcut":[2,1,1,3,1,2,1,1,1,1],"search":null,"pos":null,"flags":"n m v m x n v m n x"}
+{"text":"0.001和1000相差很大。","lcut":[5,1,4,2,2,1],"search":null,"pos":null,"flags":"m c m v a x"}
+{"text":"123元","lcut":[3,1],"search":null,"pos":null,"flags":"m m"}
+{"text":"第二十三届运动会有一百二十个国家参加。","lcut":[5,3,1,5,2,2,1],"search":["第二","二十","十三","三届","第二十","二十三","十三届","第二十三届","运动","运动会","有","一百","百二","二十","十个","一百二","二十个","一百二十个","国家","参加","。"],"pos":null,"flags":"m n v m n v x"}
+{"text":"什么？！你再说一遍……","lcut":[2,1,1,1,2,2,1,1],"search":null,"pos":null,"flags":"r x x r c m x x"}
+{"text":"他说：“我明天会来。”","lcut":[1,1,1,1,1,2,1,1,1,1],"search":null,"pos":null,"flags":"r v x x r t v v x x"}
+{"text":"苹果、香蕉、橘子，都是水果；我都喜欢。","lcut":[2,1,2,1,2,1,1,1,2,1,1,1,2,1],"search":null,"pos":null,"flags":"n x n x n x d v n x r d v x"}
+{"text":"《红楼梦》是中国古典小说之一。","lcut":[1,3,1,1,2,4,2,1],"search":["《","红楼","红楼梦","》","是","中国","古典","小说","古典小说","之一","。"],"pos":null,"flags":"x nz x v ns n r x"}
+{"text":"这个——怎么说呢——有点复杂。","lcut":[2,1,1,2,1,1,1,1,2,2,1],"search":null,"pos":null,"flags":"r x x r v y x x n a x"}
+{"text":"（括号里的内容）不用读出来吗？","lcut":[1,2,1,1,2,1,2,3,1,1],"search":["（","括号","里","的","内容","）","不用","读出","出来","读出来","吗","？"],"pos":null,"flags":"x n f uj n x v v y x"}
+{"text":"哈哈哈😂太好笑了！","lcut":[3,1,1,2,1,1],"search":["哈哈","哈哈","哈哈哈","😂","太","好笑","了","！"],"pos":null,"flags":"o x d v ul x"}
+{"text":"早上好~今天也要加油哦！","lcut":[3,1,2,1,1,2,1,1],"search":["早上","上好","早上好","~","今天","也","要","加油","哦","！"],"pos":null,"flags":"l x t d v v zg x"}
+{"text":"第一，第二，第三；最后：总结。","lcut":[2,1,2,1,2,1,2,1,2,1],"search":null,"pos":null,"flags":"m x m x m x f x n x"}
+{"text":"这是一个长句子，没有句号","lcut":[2,2,1,2,1,2,2],"search":null,"pos":[1,1,2,1,2,1,2,2],"flags":"r v m a n x v n"}
+{"text":"他的邮箱是test@example.com。","lcut":[1,1,2,1,4,1,7,1,3,1],"search":null,"pos":null,"flags":"r uj n v eng x eng m eng x"}
+{"text":"A和B之间#的关系&是什么？","lcut":[1,1,1,2,1,1,2,1,1,2,1],"search":null,"pos":null,"flags":"eng c eng f x uj n x v r x"}
+{"text":"這是一個繁體中文的句子。","lcut":[2,2,2,2,1,2,1],"search":null,"pos":[1,1,2,2,2,1,2,1],"flags":"r v m a nz uj n x"}
+{"text":"我們應該學習電腦技術。","lcut":[2,2,2,2,2,1],"search":null,"pos":null,"flags":"r v v n n x"}
+{"text":"在很久很久以前，有一个美丽的小村庄，村庄里住着一位善良的老奶奶，她每天都会在门口种花，村里的孩子们都很喜欢她，常常跑到她家里听她讲故事。","lcut":[1,4,2,1,1,2,2,1,1,2,1,2,1,1,1,2,2,1,3,1,1,2,1,1,1,2,2,1,2,1,2,1,1,1,2,1,1,2,1,1,1,2,1,1,3,1],"search":["在","很久","很久","很久很久","以前","，","有","一个","美丽","的","小","村庄","，","村庄","里","住","着","一位","善良","的","奶奶","老奶奶","，","她","每天","都","会","在","门口","种花","，","村里","的","孩子","们","都","很","喜欢","她","，","常常","跑","到","她","家里","听","她","故事","讲故事","。"],"pos":null,"flags":"p m f x v m ns uj n n x n f v uz m a uj n x r r d v p s n x s uj n k d d v r x d v v r s v r n x"}
+{"text":"随着科技的不断发展，越来越多的人开始使用智能手机来处理日常事务，比如支付账单、预订机票、查询天气，甚至远程办公。这些变化让生活更加便利，但也带来了新的挑战。","lcut":[2,2,1,2,2,1,3,1,1,1,2,2,4,1,2,4,1,2,2,2,1,2,2,1,2,2,1,2,2,2,1,2,2,1,2,2,2,1,1,1,2,1,1,1,2,1],"search":["随着","科技","的","不断","发展","，","越来","越来越","多","的","人","开始","使用","智能","能手","手机","智能手机","来","处理","日常","常事","事务","日常事务","，","比如","支付","账单","、","预订","机票","、","查询","天气","，","甚至","远程","办公","。","这些","变化","让","生活","更加","便利","，","但","也","带来","了","新","的","挑战","。"],"pos":null,"flags":"p n uj d vn x d m uj n v v n v v n x v v n x v n x v n x d n n x r vn v vn d a x c d v ul a uj vn x"}
+{"text":"第一段。\n第二段的内容比较长一些，需要换行。\n\n第三段。","lcut":[3,1,1,3,1,2,2,1,2,1,2,2,1,1,1,3,1],"search":["第一","一段","第一段","。","\n","第二","二段","第二段","的","内容","比较","长","一些","，","需要","换行","。","\n","\n","第三","三段","第三段","。"],"pos":null,"flags":"m x x m uj n d a m x v v x x x m x"}
+{"text":"Hello, how are you today?","lcut":[5,1,1,3,1,3,1,3,1,5,1],"search":null,"pos":null,"flags":"eng x x eng x eng x eng x eng x"}
+{"text":"The quick brown fox jumps over the lazy dog.","lcut":[3,1,5,1,5,1,3,1,5,1,4,1,3,1,4,1,3,1],"search":null,"pos":null,"flags":"eng x eng x eng x eng x eng x eng x eng x eng x eng m"}
+{"text":"I would like a cup of coffee, please.","lcut":[1,1,5,1,4,1,1,1,3,1,2,1,6,1,1,6,1],"search":null,"pos":null,"flags":"x x eng x eng x x x eng x eng x eng x x eng m"}
+{"text":"This is a test of the speech synthesis frontend.","lcut":[4,1,2,1,1,1,4,1,2,1,3,1,6,1,9,1,8,1],"search":null,"pos":null,"flags":"eng x eng x x x eng x eng x eng x eng x eng x eng m"}
+{"text":"She sells seashells by the seashore.","lcut":[3,1,5,1,9,1,2,1,3,1,8,1],"search":null,"pos":null,"flags":"eng x eng x eng x eng x eng x eng m"}
+{"text":"Good morning!","lcut":[4,1,7,1],"search":null,"pos":null,"flags":"eng x eng x"}
+{"text":"Yes.","lcut":[3,1],"search":null,"pos":null,"flags":"eng m"}
+{"text":"Can you hear me? I can't hear you.","lcut":[3,1,3,1,4,1,2,1,1,1,1,3,1,1,1,4,1,3,1],"search":null,"pos":null,"flags":"eng x eng x eng x eng x x x x eng x x x eng x eng m"}
+{"text":"It's John's book, and they're going to read it.","lcut":[2,1,1,1,4,1,1,1,4,1,1,3,1,4,1,2,1,5,1,2,1,4,1,2,1],"search":null,"pos":null,"flags":"eng x x x eng x x x eng x x eng x eng x eng x eng x eng x eng x eng m"}
+{"text":"We'll see what happens when we've finished.","lcut":[2,1,2,1,3,1,4,1,7,1,4,1,2,1,2,1,8,1],"search":null,"pos":null,"flags":"eng x eng x eng x eng x eng x eng x eng x eng x eng m"}
+{"text":"I read the book yesterday, and I will read it again.","lcut":[1,1,4,1,3,1,4,1,9,1,1,3,1,1,1,4,1,4,1,2,1,5,1],"search":null,"pos":null,"flags":"x x eng x eng x eng x eng x x eng x x x eng x eng x eng x eng m"}
+{"text":"I live here, and the concert is live tonight.","lcut":[1,1,4,1,4,1,1,3,1,3,1,7,1,2,1,4,1,7,1],"search":null,"pos":null,"flags":"x x eng x eng x x eng x eng x eng x eng x eng x eng m"}
+{"text":"Please record the record.","lcut":[6,1,6,1,3,1,6,1],"search":null,"pos":null,"flags":"eng x eng x eng x eng m"}
+{"text":"The wind is too strong to wind the sail.","lcut":[3,1,4,1,2,1,3,1,6,1,2,1,4,1,3,1,4,1],"search":null,"pos":null,"flags":"eng x eng x eng x eng x eng x eng x eng x eng x eng m"}
+{"text":"They refuse to move the refuse.","lcut":[4,1,6,1,2,1,4,1,3,1,6,1],"search":null,"pos":null,"flags":"eng x eng x eng x eng x eng x eng m"}
+{"text":"I object to that object.","lcut":[1,1,6,1,2,1,4,1,6,1],"search":null,"pos":null,"flags":"x x eng x eng x eng x eng m"}
+{"text":"Supercalifragilisticexpialidocious is a long word.","lcut":[34,1,2,1,1,1,4,1,4,1],"search":null,"pos":null,"flags":"eng x eng x x x eng x eng m"}
+{"text":"Moeru and Ortts are project names.","lcut":[5,1,3,1,5,1,3,1,7,1,5,1],"search":null,"pos":null,"flags":"eng x eng x eng x eng x eng x eng m"}
+{"text":"Kubernetes runs on Grafana dashboards.","lcut":[10,1,4,1,2,1,7,1,10,1],"search":null,"pos":null,"flags":"eng x eng x eng x eng x eng m"}
+{"text":"I love Pikachu and Hatsune Miku.","lcut":[1,1,4,1,7,1,3,1,7,1,4,1],"search":null,"pos":null,"flags":"x x eng x eng x eng x eng x eng m"}
+{"text":"Blorpified zentastic quixel.","lcut":[10,1,9,1,6,1],"search":null,"pos":null,"flags":"eng x eng x eng m"}
+{"text":"I have 3 apples and 25 oranges.","lcut":[1,1,4,1,1,1,6,1,3,1,2,1,7,1],"search":null,"pos":null,"flags":"x x eng x x x eng x eng x m x eng m"}
+{"text":"The price is $19.99.","lcut":[3,1,5,1,2,1,1,5,1],"search":null,"pos":[3,1,5,1,2,1,1,6],"flags":"eng x eng x eng x x m"}
+{"text":"It was founded in 1999.","lcut":[2,1,3,1,7,1,2,1,4,1],"search":null,"pos":[2,1,3,1,7,1,2,1,5],"flags":"eng x eng x eng x eng x m"}
+{"text":"The meeting starts at 3:30 pm.","lcut":[3,1,7,1,6,1,2,1,1,1,2,1,2,1],"search":null,"pos":null,"flags":"eng x eng x eng x eng x x x m x eng m"}
+{"text":"He finished 1st, she finished 2nd.","lcut":[2,1,8,1,3,1,1,3,1,8,1,3,1],"search":null,"pos":[2,1,8,1,1,2,1,1,3,1,8,1,1,2,1],"flags":"eng x eng x m eng x x eng x eng x m eng m"}
+{"text":"About 50% of people agree.","lcut":[5,1,3,1,2,1,6,1,5,1],"search":null,"pos":[5,1,2,1,1,2,1,6,1,5,1],"flags":"eng x m x x eng x eng x eng m"}
+{"text":"Dr. Smith works at NASA.","lcut":[2,1,1,5,1,5,1,2,1,4,1],"search":null,"pos":null,"flags":"eng m x eng x eng x eng x eng m"}
+{"text":"The USA and the UK signed the deal.","lcut":[3,1,3,1,3,1,3,1,2,1,6,1,3,1,4,1],"search":null,"pos":null,"flags":"eng x eng x eng x eng x eng x eng x eng x eng m"}
+{"text":"Mr. and Mrs. Brown live on Main St.","lcut":[2,1,1,3,1,3,1,1,5,1,4,1,2,1,4,1,2,1],"search":null,"pos":null,"flags":"eng m x eng x eng m x eng x eng x eng x eng x eng m"}
+{"text":"I use an API and a GPU for AI.","lcut":[1,1,3,1,2,1,3,1,3,1,1,1,3,1,3,1,2,1],"search":null,"pos":null,"flags":"x x eng x eng x eng x eng x x x eng x eng x eng m"}
+{"text":"我今天用iPhone拍了一张照片。","lcut":[1,2,1,6,1,1,2,2,1],"search":null,"pos":null,"flags":"r t p eng v ul m n x"}
+{"text":"这个API的response time太长了。","lcut":[2,3,1,8,1,4,2,1,1],"search":null,"pos":[2,3,1,8,1,4,1,1,1,1],"flags":"r eng uj eng x eng d a ul x"}
+{"text":"你好hello世界","lcut":[2,5,2],"search":null,"pos":null,"flags":"l eng n"}
+{"text":"我们用GPT-SoVITS做语音合成。","lcut":[2,1,3,1,6,1,2,2,1],"search":null,"pos":null,"flags":"r p eng x eng v n v x"}
+{"text":"明天的meeting改到下午三点。","lcut":[2,1,7,2,2,2,1],"search":null,"pos":null,"flags":"t uj eng v t m x"}
+{"text":"他是一名software engineer，在Google工作。","lcut":[1,1,2,8,1,8,1,1,6,2,1],"search":null,"pos":null,"flags":"r v m eng x eng x p eng vn x"}
+{"text":"OK，那我们就这么定了。","lcut":[2,1,1,2,1,2,1,1,1],"search":null,"pos":null,"flags":"eng x r r d r v ul x"}
+{"text":"请打开Wi-Fi和Bluetooth。","lcut":[1,2,2,1,2,1,9,1],"search":null,"pos":null,"flags":"v v eng x eng c eng x"}
+{"text":"这部电影叫Inception，非常好看。","lcut":[2,2,1,9,1,2,2,1],"search":null,"pos":null,"flags":"r n v eng x d v x"}
+{"text":"我买了3个USB接口和2根HDMI线。","lcut":[1,1,1,1,1,3,2,1,1,1,4,1,1],"search":null,"pos":null,"flags":"r v ul m m eng v c m p eng n x"}
+{"text":"Python和Rust哪个更快？","lcut":[6,1,4,2,1,1,1],"search":null,"pos":null,"flags":"eng c eng r d a x"}
+{"text":"我最喜欢的歌是Let It Go。","lcut":[1,1,2,1,1,1,3,1,2,1,2,1],"search":null,"pos":null,"flags":"r d v uj n v eng x eng x eng x"}
+{"text":"AI正在改变world，这是一个new era。","lcut":[2,2,2,5,1,2,2,3,1,3,1],"search":null,"pos":[2,2,2,5,1,1,1,2,3,1,3,1],"flags":"eng t v eng x r v m eng x eng x"}
+{"text":"Hello大家好，我是Neko。","lcut":[5,2,1,1,1,1,4,1],"search":null,"pos":null,"flags":"eng n a x r v eng x"}
+{"text":"版本号是v2.0.1，发布于2026年。","lcut":[3,1,4,1,1,1,2,1,4,1,1],"search":["版本","版本号","是","v2.0",".","1","，","发布","于","2026","年","。"],"pos":[3,1,2,4,1,2,1,4,1,1],"flags":"n v eng m x v p m m x"}
+{"text":"我在用macOS和Windows 11。","lcut":[1,1,1,5,1,7,1,2,1],"search":null,"pos":null,"flags":"r p p eng c eng x m x"}
+{"text":"Thank you very much，谢谢！","lcut":[5,1,3,1,4,1,4,1,2,1],"search":null,"pos":null,"flags":"eng x eng x eng x eng x nr x"}
+{"text":"这个bug在CI上reproduce不了。","lcut":[2,3,1,2,1,9,2,1],"search":null,"pos":null,"flags":"r eng p eng ns eng v x"}
+{"text":"你好，今日天氣好好。","lcut":[2,1,2,2,2,1],"search":null,"pos":null,"flags":"l x t n d x"}
+{"text":"我哋一齊去飲茶啦。","lcut":[1,1,2,1,1,1,1,1],"search":null,"pos":[1,1,1,1,1,1,1,1,1],"flags":"r y m v v v n y x"}
+{"text":"佢唔係好鍾意食辣嘢。","lcut":[9,1],"search":null,"pos":[1,1,1,1,1,1,1,1,1,1],"flags":"y y y a nr ng v v zg x"}
+{"text":"呢個地方好靚，我好鍾意。","lcut":[1,1,2,2,1,1,1,1,1,1],"search":null,"pos":[1,1,2,1,1,1,1,1,1,1,1],"flags":"y q n a g x r a nr ng x"}
+{"text":"你食咗飯未呀？","lcut":[1,1,1,1,1,1,1],"search":null,"pos":null,"flags":"r v zg n d y x"}
+{"text":"香港係一個國際大都會。","lcut":[2,1,2,2,2,1,1],"search":null,"pos":[2,1,1,1,1,1,2,1,1],"flags":"ns yg m q n vg ns zg x"}
+{"text":"今日係2026年11月2號。","lcut":[2,1,4,1,2,1,1,1,1],"search":null,"pos":null,"flags":"t yg m m m m m m x"}
+{"text":"我用iPhone打電話俾你。","lcut":[2,6,3,1,1,1],"search":null,"pos":[1,1,6,1,1,1,1,1,1],"flags":"r p eng v n n vg r x"}

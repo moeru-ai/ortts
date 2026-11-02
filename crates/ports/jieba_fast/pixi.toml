@@ -1,0 +1,31 @@
+# Python reference environment for the jieba_fast port. Versions are pinned so
+# the golden fixtures and data files are reproducible. See parity/README.md.
+#
+#   pixi run --manifest-path crates/ports/jieba_fast/pixi.toml fixtures
+#   pixi run --manifest-path crates/ports/jieba_fast/pixi.toml data
+[workspace]
+name = "jieba_fast-parity"
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-arm64", "win-64"]
+
+[dependencies]
+# 3.11 (Unicode 14) is the version the fixtures were generated with; the hand
+# set enumerates every str.isspace() character.
+python = "3.11.*"
+
+[pypi-dependencies]
+jieba_fast = "==0.53"
+opencc = "==1.4.2"
+
+[tasks.upstream]
+cmd = "python parity/fetch_upstream.py"
+description = "Shallow, sparse checkout of GPT-SoVITS 04a44eb into parity/.cache/GPT-SoVITS"
+
+[tasks.fixtures]
+cmd = "python parity/gen_fixtures.py"
+depends-on = ["upstream"]
+description = "Regenerate tests/fixtures/*.jsonl"
+
+[tasks.data]
+cmd = "python parity/export_data.py"
+description = "Regenerate data/ (dict.txt and the HMM tables)"

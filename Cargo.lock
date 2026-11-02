@@ -1473,6 +1473,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "jieba_fast"
+version = "0.1.0-beta.4"
+dependencies = [
+ "serde",
+ "serde_json",
+ "unicode-general-category",
+]
+
+[[package]]
 name = "jobserver"
 version = "0.1.34"
 source = "registry+https://github.com/rust-lang/crates.io-index"

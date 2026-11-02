@@ -1,0 +1,15 @@
+[package]
+name = "jieba_fast"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+authors.workspace = true
+license = "MIT"
+description = "Subset port of the Python jieba_fast 0.53 package (cut, cut_for_search, posseg) used by GPT-SoVITS"
+
+[dependencies]
+unicode-general-category.workspace = true
+
+[dev-dependencies]
+serde = { workspace = true, features = ["derive"] }
+serde_json.workspace = true
