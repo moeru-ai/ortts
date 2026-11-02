@@ -132,3 +132,6 @@ ep_webgpu = ["ortts_onnx/ep_webgpu"]
 # The parity tests run heavy numeric loops; unoptimized builds take minutes.
 [profile.dev.package.fast_langdetect]
 opt-level = 3
+
+[profile.dev.package.wordsegment]
+opt-level = 3
