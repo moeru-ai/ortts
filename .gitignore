@@ -39,3 +39,11 @@ target
 
 # Docs
 docs
+
+# Large reference assets for tools/parity (G2PW ONNX model, tokenizers)
+tools/parity/assets/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
