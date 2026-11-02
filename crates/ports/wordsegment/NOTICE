@@ -1,0 +1,11 @@
+wordsegment (Rust port)
+
+This crate is a Rust translation of the Python package wordsegment 1.3.1
+(http://www.grantjenks.com/docs/wordsegment/), Copyright 2018 Grant Jenks,
+licensed under the Apache License, Version 2.0. wordsegment is based on code
+from the chapter "Natural Language Corpus Data" from the book "Beautiful Data"
+(Segaran and Hammerbacher, 2009), Copyright (c) 2008-2009 by Peter Norvig.
+
+The source code was translated from Python to Rust for the ortts project. The
+data files in data/ (unigrams.txt, bigrams.txt, words.txt) are copied
+unmodified from the wordsegment 1.3.1 distribution.
