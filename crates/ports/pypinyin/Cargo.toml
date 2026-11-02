@@ -1,0 +1,11 @@
+[package]
+name = "pypinyin"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+authors.workspace = true
+license = "MIT"
+description = "Subset port of the Python pypinyin 0.55.0 package used by GPT-SoVITS"
+
+[dependencies]
+serde_json.workspace = true

@@ -1,0 +1,233 @@
+# pypinyin: port and parity notes
+
+Maintainer notes for the `pypinyin` crate: the ported modules, how the
+Python subclassing extension points map to Rust, and how the fixtures and
+generated data are made.
+
+## Scripts
+
+Python scripts that write the golden fixtures and the generated data of this
+crate. They run in the crate's own pixi workspace (`../pixi.toml`), which
+holds only Python 3.11 and pypinyin 0.55.0 from conda-forge.
+
+| Script | Writes |
+|---|---|
+| `gen_fixtures.py` | `tests/fixtures/*.json` (seed `20250723`) |
+| `copy_dicts.py` | `data/pinyin_dict.json`, `data/phrases_dict.json` (copied unchanged from the installed pypinyin package) |
+| `gen_unicode_digits.py` | `src/_re_digit.rs` (the Python 3.11 / Unicode 14.0.0 `\d` table) |
+
+## Tasks
+
+Run from the repository root (or use `pixi run <task>` in the crate
+directory):
+
+```sh
+pixi run --manifest-path crates/ports/pypinyin/pixi.toml fixtures
+pixi run --manifest-path crates/ports/pypinyin/pixi.toml data
+```
+
+| Task | Runs |
+|---|---|
+| `fixtures` | `gen_fixtures.py` |
+| `dicts` | `copy_dicts.py` |
+| `unicode-digits` | `gen_unicode_digits.py` |
+| `data` | `dicts` and `unicode-digits` |
+
+The scripts need no downloads, no upstream checkout and no environment
+variables. They find the crate from their own location. `parity/.cache/` is
+gitignored for local scratch files, but no task uses it.
+
+Keep Python at 3.11: a different minor version ships different Unicode data
+and changes `src/_re_digit.rs`. The file header also records the Python patch
+version, which `pixi.lock` pins.
+
+## Fixtures
+
+`parity/gen_fixtures.py` writes the fixtures in
+`tests/fixtures/` from pypinyin 0.55.0 (seed `20250723`):
+
+| Fixture | Contents | Cases | Exact |
+|---|---|---|---|
+| `chars.json` | every character of `PINYIN_DICT`: `pinyin(TONE3, heteronym, n5)`, `lazy_pinyin(INITIALS, n5)`, `lazy_pinyin(FINALS_TONE3, n5)` | 125,769 | 125,769 |
+| `phrases.json` | 20,002 sampled `PHRASES_DICT` phrases: `pinyin(TONE3, n5)`, `lazy_pinyin(INITIALS / FINALS_TONE3, n5)` | 60,006 | 60,006 |
+| `sentences.json` | 2,000 random mixed sentences (Han, punctuation, digits, Latin, emoji, spaces, other scripts, Han without pinyin) with the GPT-SoVITS calls; the first 400 also with other styles, `strict=False`, `v_to_u` and `errors='ignore'` / `'replace'` | 13,600 | 13,600 |
+| `syllables.json` | `UltimateConverter.convert_style` for every dictionary syllable and edge syllables, all ported styles × `strict` × `v_to_u` × `neutral_tone_with_five` | 78,144 | 78,144 |
+| `tone_convert.json` | every `contrib.tone_convert` function over all dictionary syllables, all bases with tones 1–5 (TONE3), their TONE2 and TONE forms, and edge inputs | 126,620 | 126,620 |
+| `edge_cases.json` | `simple_seg`, `seg`, `mmseg` (also non-strict), `RE_HANS`, list input, callable `errors`, converter and `Pinyin` hook overrides, the G2PW-like subclass, `DefaultConverter` | 3,448 | 3,448 |
+
+There are no known mismatches, so there is no exception list.
+
+The fixtures are about 3.9 MB. The dictionary-wide sets (every character,
+20k phrases, every syllable with every tone) take most of it.
+
+## Ported modules
+
+| Python | Rust |
+|---|---|
+| `pypinyin.pinyin`, `pypinyin.lazy_pinyin` (`pypinyin.core`) | `pypinyin::pinyin`, `pypinyin::lazy_pinyin` with `PinyinOptions` / `LazyPinyinOptions` |
+| `pypinyin.core.Pinyin` (`pinyin`, `lazy_pinyin`, `pre_seg`, `seg`, `get_seg`, `post_seg`) | `core::Pinyin<C>` + `core::PinyinMethods` trait |
+| `pypinyin.converter.Converter`, `DefaultConverter`, `UltimateConverter` | `converter::Converter` trait, `DefaultConverter`, `UltimateConverter`, `converter::default_converter::*` |
+| `pypinyin.constants`: `Style`, `RE_HANS`, `PINYIN_DICT`, `PHRASES_DICT`, `SUPPORT_UCS4` | `constants::*` |
+| `pypinyin.style` (`convert`) and the styles `NORMAL`, `TONE`, `TONE2`, `TONE3`, `INITIALS`, `FIRST_LETTER`, `FINALS`, `FINALS_TONE`, `FINALS_TONE2`, `FINALS_TONE3` | `style::convert`, `style::{tone, initials, finals, others}` |
+| `pypinyin.style._tone_convert`, `_tone_rule`, `_utils`, `_constants` | `style::{_tone_convert, _tone_rule, _utils, _constants}` |
+| `pypinyin.contrib.tone_convert` (all functions, e.g. `to_tone`, `to_initials`, `to_finals_tone3`) | `contrib::tone_convert` |
+| `pypinyin.contrib.uv.V2UMixin`, `pypinyin.contrib.neutral_tone.NeutralToneWith5Mixin` | `contrib::uv`, `contrib::neutral_tone` |
+| `pypinyin.contrib._tone_rule`, `pypinyin.contrib.mmseg` (re-exports) | `contrib::_tone_rule`, `contrib::mmseg` |
+| `pypinyin.seg.simpleseg` (`seg`, `simple_seg`, `_seg`) | `seg::simpleseg` |
+| `pypinyin.seg.mmseg` (`Seg`, `PrefixSet`, `seg`, `p_set`, `retrain`) | `seg::mmseg` |
+| `pypinyin.standard` | `standard` |
+| `pypinyin.phonetic_symbol` | `phonetic_symbol` |
+| `pypinyin.utils._remove_dup_items`, `_remove_dup_and_empty` | `utils` |
+| `errors`: `'default'`, `'ignore'`, `'replace'`, callable | `converter::Errors` |
+
+GPT-SoVITS calls:
+
+- `lazy_pinyin(word, neutral_tone_with_five=True, style=Style.INITIALS)` and
+  `style=Style.FINALS_TONE3` (`chinese.py`, `chinese2.py`, `tone_sandhi.py`).
+- `pinyin(sent, neutral_tone_with_five=True, style=Style.TONE3)`
+  (`g2pw/onnx_api.py`).
+- `to_finals_tone3`, `to_initials` (`chinese2.py`) and `to_tone`
+  (`g2pw/g2pw.py`).
+- `G2PWPinyin` / `Converter` in `g2pw/g2pw.py`, which subclass
+  `Pinyin` and `UltimateConverter` (see below).
+
+## Data
+
+`data/pinyin_dict.json` and `data/phrases_dict.json` are the files that
+pypinyin 0.55.0 ships, unchanged. They are embedded with `include_str!`.
+`parity/copy_dicts.py` copies them from the pinned package.
+
+`\d` in the Python regexes matches every Unicode `Nd` character.
+`src/_re_digit.rs` holds the table of Python 3.11 (Unicode 14.0.0). It is
+generated by `parity/gen_unicode_digits.py`.
+
+## Not ported
+
+- `tone_sandhi` (`pypinyin.contrib.tone_sandhi.ToneSandhiMixin` and the
+  `tone_sandhi` option). GPT-SoVITS does not set it. It has its own tone sandhi.
+- `errors='exception'` (`PinyinNotFoundException`).
+- The styles `BOPOMOFO`, `BOPOMOFO_FIRST`, `CYRILLIC`, `CYRILLIC_FIRST`,
+  `WADEGILES`, `GWOYEU`, `BRAILLE_MAINLAND`, `BRAILLE_MAINLAND_TONE`, and
+  `pypinyin.style.register` (custom styles). `style::convert` uses a `match`
+  instead of the registry.
+- `load_single_dict`, `load_phrases_dict`, `slug`, the legacy helpers in
+  `pypinyin.core` (`to_fixed`, `handle_nopinyin`, `single_pinyin`,
+  `phrase_pinyin`), `pypinyin.runner`, and the `PYPINYIN_NO_PHRASES`
+  environment variable.
+- The legacy `neutral_tone_with_5` keyword of the `tone_convert` functions,
+  and `**kwargs` everywhere.
+
+## Python exceptions
+
+Python exceptions are panics in the port, for example the `TypeError` of
+`NeutralToneWith5Mixin` when `right_mark_index` returns `None` (the
+non-strict `FINALS_TONE2` final `g` of `ng`), the `IndexError` of
+`FIRST_LETTER` for an empty pinyin, and the `TypeError` of
+`errors='replace'` on an empty string.
+
+## Subclassing (the GPT-SoVITS G2PW extension point)
+
+Python customises pypinyin with subclasses that override methods and call
+`super()`. The port expresses this with traits:
+
+- `converter::Converter` has one method per `DefaultConverter` method. The
+  default bodies are the `DefaultConverter` bodies. They are also free
+  functions in `converter::default_converter`, generic over the converter,
+  so `super().convert(...)` is `default_converter::convert(self, ...)`. Calls
+  inside those bodies dispatch on `self`, as in Python.
+- `UltimateConverter` overrides `post_convert_style` and `post_pinyin`. To
+  port a subclass of `UltimateConverter`, hold an `UltimateConverter`,
+  forward those two methods to it, and return `true` from
+  `Converter::is_ultimate_converter` (the `isinstance` check in
+  `Pinyin.pinyin`).
+- `core::PinyinMethods` has the `Pinyin` methods (`pinyin`, `lazy_pinyin`,
+  `pre_seg`, `seg`, `get_seg`, `post_seg`). `core::Pinyin<C>` is the plain
+  class, generic over its converter. To port a subclass of `Pinyin`,
+  implement `PinyinMethods` and override what the subclass overrides.
+
+The GPT-SoVITS `g2pw.py` classes become:
+
+```rust
+use pypinyin::constants::RE_HANS;
+use pypinyin::contrib::tone_convert::to_tone;
+use pypinyin::converter::default_converter;
+use pypinyin::seg::simpleseg::simple_seg;
+use pypinyin::utils::_remove_dup_and_empty;
+use pypinyin::{Converter, Errors, PinyinMethods, Style, UltimateConverter};
+
+/// class Converter(UltimateConverter)
+struct G2PWConverter {
+  inner: UltimateConverter,
+  // self._g2pw
+}
+
+impl G2PWConverter {
+  /// Converter._to_pinyin
+  fn _to_pinyin(&self, han: &str, heteronym: bool, errors: &Errors, strict: bool) -> Vec<Vec<String>> {
+    let g2pw_pinyin: Vec<Vec<Option<String>>> = todo!("self._g2pw(han)");
+    if g2pw_pinyin.is_empty() {
+      // super(Converter, self).convert(han, Style.TONE, ...)
+      return default_converter::convert(self, han, Style::TONE, heteronym, errors, strict);
+    }
+    let chars: Vec<char> = han.chars().collect();
+    let mut pinyins = Vec::new();
+    for (i, item) in g2pw_pinyin[0].iter().enumerate() {
+      match item {
+        None => pinyins.extend(default_converter::convert(
+          self, &chars[i].to_string(), Style::TONE, heteronym, errors, strict,
+        )),
+        Some(item) => pinyins.push(vec![to_tone(item)]),
+      }
+    }
+    pinyins
+  }
+}
+
+impl Converter for G2PWConverter {
+  /// Converter.convert
+  fn convert(&self, words: &str, style: Style, heteronym: bool, errors: &Errors, strict: bool) -> Vec<Vec<String>> {
+    let mut pys = Vec::new();
+    if RE_HANS.is_match(words) {
+      pys = self._to_pinyin(words, heteronym, errors, strict);
+      if let Some(post_data) = self.post_pinyin(words, heteronym, &pys) {
+        pys = post_data;
+      }
+      pys = self.convert_styles(pys, words, style, heteronym, errors, strict);
+    } else {
+      pys.extend(self.handle_nopinyin(words, style, heteronym, errors, strict));
+    }
+    _remove_dup_and_empty(&pys)
+  }
+
+  // Inherited from UltimateConverter.
+  fn post_convert_style(&self, han: &str, orig: &str, converted: &str, style: Style, strict: bool) -> Option<String> {
+    self.inner.post_convert_style(han, orig, converted, style, strict)
+  }
+  fn post_pinyin(&self, han: &str, heteronym: bool, pinyin: &[Vec<String>]) -> Option<Vec<Vec<String>>> {
+    self.inner.post_pinyin(han, heteronym, pinyin)
+  }
+  fn is_ultimate_converter(&self) -> bool {
+    true
+  }
+}
+
+/// class G2PWPinyin(Pinyin)
+struct G2PWPinyin {
+  _converter: G2PWConverter,
+}
+
+impl PinyinMethods for G2PWPinyin {
+  type Converter = G2PWConverter;
+  fn converter(&self) -> &G2PWConverter {
+    &self._converter
+  }
+  /// G2PWPinyin.get_seg
+  fn get_seg(&self) -> fn(&str) -> Vec<String> {
+    |hans| simple_seg(hans)
+  }
+}
+```
+
+`tests/parity.rs` runs this exact structure (`G2PWLikeConverter`) with a
+deterministic stand-in for the G2PW model and compares it with the same
+Python classes.

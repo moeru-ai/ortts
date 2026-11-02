@@ -1,0 +1,18 @@
+# Python reference environment for the parity fixtures and generated data of
+# the `pypinyin` port crate. Versions are pinned so the output is reproducible.
+# Usage: pixi run --manifest-path crates/ports/pypinyin/pixi.toml <task>
+[workspace]
+name = "pypinyin-parity"
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-arm64", "win-64"]
+
+[dependencies]
+# Keep 3.11: src/_re_digit.rs is the `\d` table of Python 3.11 (Unicode 14.0.0).
+python = "3.11.*"
+pypinyin = "==0.55.0"
+
+[tasks]
+fixtures = { cmd = "python parity/gen_fixtures.py", description = "Regenerate tests/fixtures/*.json" }
+dicts = { cmd = "python parity/copy_dicts.py", description = "Copy the pypinyin dictionaries into data/" }
+unicode-digits = { cmd = "python parity/gen_unicode_digits.py", description = "Regenerate src/_re_digit.rs" }
+data = { depends-on = ["dicts", "unicode-digits"], description = "Regenerate data/ and src/_re_digit.rs" }
