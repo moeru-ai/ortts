@@ -33,6 +33,7 @@ members = [
   "./crates/backend_kokoro",
   "./crates/backend_qwen3_tts",
   "./crates/onnx",
+  "./crates/ports/*",
   "./crates/server",
   "./crates/shared",
   "./crates/shared_chatterbox",
@@ -126,3 +127,7 @@ ep_cuda = ["ortts_onnx/ep_cuda", "ortts_server/ep_cuda"]
 ep_coreml = ["ortts_onnx/ep_coreml"]
 ep_directml = ["ortts_onnx/ep_directml"]
 ep_webgpu = ["ortts_onnx/ep_webgpu"]
+
+# The parity tests run heavy numeric loops; unoptimized builds take minutes.
+[profile.dev.package.fast_langdetect]
+opt-level = 3

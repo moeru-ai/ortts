@@ -1,0 +1,25 @@
+# Parity tooling for the fast_langdetect port crate.
+#
+#   pixi run --manifest-path crates/ports/fast_langdetect/pixi.toml fixtures
+#
+# See parity/README.md.
+[workspace]
+name = "fast_langdetect-parity"
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-arm64", "win-64"]
+
+[dependencies]
+python = "3.11.*"
+
+[pypi-dependencies]
+fast_langdetect = "==1.1.0"
+fasttext-predict = "==0.9.2.4"
+
+[tasks.lid-model]
+description = "Download lid.176.bin into parity/.cache (skipped when present)"
+cmd = "python parity/fetch_model.py"
+
+[tasks.fixtures]
+description = "Regenerate tests/fixtures/detect.jsonl"
+cmd = "python parity/gen_fixtures.py"
+depends-on = ["lid-model"]
