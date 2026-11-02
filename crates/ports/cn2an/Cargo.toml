@@ -1,0 +1,14 @@
+[package]
+name = "cn2an"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+authors.workspace = true
+license = "MIT"
+description = "Subset port of the Python cn2an 0.5.24 package used by GPT-SoVITS"
+
+[dependencies]
+
+[dev-dependencies]
+serde = { workspace = true, features = ["derive"] }
+serde_json.workspace = true
