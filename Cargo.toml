@@ -48,6 +48,7 @@ ortts_onnx.path = "./crates/onnx"
 ortts_server.path = "./crates/server"
 ortts_shared.path = "./crates/shared"
 ortts_shared_chatterbox.path = "./crates/shared_chatterbox"
+fast_langdetect.path = "./crates/ports/fast_langdetect"
 anyhow = "1.0"
 axum = { version = "0.8", features = ["tokio", "macros"] }
 base64 = "0.22.1"

@@ -1,0 +1,26 @@
+split_lang
+==========
+
+This crate is a Rust translation of split-lang 2.1.1
+(https://github.com/DoodleBears/split-lang), Copyright (c) 2024 DoodleBear,
+licensed under the MIT License (see LICENSE).
+
+It also contains a Rust translation of code from the following project.
+
+BudouX (Apache License 2.0)
+---------------------------
+
+src/budoux.rs is translated to Rust from `budoux/parser.py` of BudouX 0.10.2
+(https://github.com/google/budoux). data/budoux/ja.json and
+data/budoux/zh-hans.json are verbatim copies of the models shipped in
+`budoux/models/` of the same release.
+
+Copyright 2021 Google LLC
+
+Licensed under the Apache License, Version 2.0 (see LICENSE-APACHE).
+
+Changes: `Parser.__init__`, `Parser.parse`, `load_default_japanese_parser`
+and `load_default_simplified_chinese_parser` were translated to Rust. The
+default parsers are loaded once and shared. The HTML processing
+(`translate_html_string`, `html_processor.py`), the Thai and Traditional
+Chinese loaders and the training scripts were not translated.
