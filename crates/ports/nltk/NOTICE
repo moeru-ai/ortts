@@ -1,0 +1,22 @@
+nltk (Rust port)
+
+This crate is a partial translation to Rust of NLTK, the Natural Language
+Toolkit, version 3.10.4 (https://www.nltk.org/,
+https://github.com/nltk/nltk).
+
+Copyright (C) 2001-2026 NLTK Project
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Translated parts: nltk/tokenize/casual.py (Christopher Potts, Ewan Klein,
+Pierpaolo Pantone, Tom Aarsen), nltk/tag/perceptron.py (averaged perceptron
+tagger after Matthew Honnibal), and pos_tag from nltk/tag/__init__.py. The
+code was translated from Python to Rust by the ortts authors; changes are
+described in README.md.
+
+data/averaged_perceptron_tagger_eng.*.json are the pretrained English model
+files of the nltk_data package taggers/averaged_perceptron_tagger_eng,
+copied unchanged.
+
+data/html_name2codepoint.json, data/python_str.json and data/regex_sets.json
+are generated from the Python 3.11 standard library and the Python `regex`
+module by parity/gen_data.py.

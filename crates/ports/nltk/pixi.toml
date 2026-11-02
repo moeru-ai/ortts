@@ -1,0 +1,73 @@
+# Python reference environment for the nltk port. It generates the golden
+# fixtures in tests/fixtures and the tables in data. See parity/README.md.
+#
+#   pixi run --manifest-path crates/ports/nltk/pixi.toml fixtures
+#   pixi run --manifest-path crates/ports/nltk/pixi.toml data
+#
+# Versions are pinned to the ones the committed files were generated with.
+[workspace]
+name = "nltk-parity"
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-arm64", "win-64"]
+
+[dependencies]
+# Python 3.11 has Unicode 14.0.0; data/python_str.json depends on it.
+python = "3.11.*"
+nltk = "3.10.*"
+# The `regex` module decides data/regex_sets.json and tests/fixtures/char_classes.json.
+regex = "==2026.9.29"
+# Only for tests/fixtures/corpus.jsonl, which runs the GPT-SoVITS text frontend.
+inflect = "7.6.*"
+numpy = "1.26.*"
+onnxruntime = ">=1.20"
+pypinyin = "==0.55.0"
+pytorch = ">=2.4"
+requests = "*"
+transformers = "4.57.*"
+jieba = "==0.42.1"
+
+[pypi-dependencies]
+# Only for tests/fixtures/corpus.jsonl (GPT-SoVITS text frontend).
+cn2an = "==0.5.24"
+fast_langdetect = "==1.1.0"
+g2p_en = "==2.1.0"
+jieba_fast = "==0.53"
+opencc = "==1.4.2"
+pyopenjtalk = ">=0.4.1"
+split-lang = "==2.1.1"
+ToJyutping = "==3.2.0"
+wordsegment = "==1.3.1"
+
+[tasks.upstream]
+cmd = "python parity/fetch.py upstream"
+description = "Fetch GPT-SoVITS at commit 04a44eb into parity/.cache/GPT-SoVITS"
+
+[tasks.g2pw]
+cmd = "python parity/fetch.py g2pw"
+description = "Download the G2PW ONNX model (589 MB zip) into parity/.cache/G2PWModel"
+
+[tasks.bert-tokenizer]
+cmd = "python parity/fetch.py bert-tokenizer"
+description = "Download the chinese-roberta-wwm-ext-large tokenizer into parity/.cache"
+
+[tasks.lid-model]
+cmd = "python parity/fetch.py lid-model"
+description = "Download fastText lid.176.bin into parity/.cache/fast_langdetect"
+
+[tasks.nltk-data]
+cmd = "python parity/fetch.py nltk-data"
+description = "Download the nltk_data packages into parity/.cache/nltk_data"
+
+[tasks.fetch]
+depends-on = ["upstream", "g2pw", "bert-tokenizer", "lid-model", "nltk-data"]
+description = "Run every download task"
+
+[tasks.data]
+cmd = "python parity/gen_data.py"
+depends-on = ["nltk-data"]
+description = "Regenerate data/*.json and check the perceptron model hashes"
+
+[tasks.fixtures]
+cmd = "python parity/gen_fixtures.py"
+depends-on = ["fetch"]
+description = "Regenerate every file in tests/fixtures (slow)"
