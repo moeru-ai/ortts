@@ -2898,6 +2898,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "split_lang"
+version = "0.1.0-beta.4"
+dependencies = [
+ "fast_langdetect",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "spm_precompiled"
 version = "0.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"

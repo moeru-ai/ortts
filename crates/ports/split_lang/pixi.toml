@@ -1,0 +1,24 @@
+# Python reference environment for the split_lang port. Versions are pinned so
+# the golden fixtures and data files are reproducible. See parity/README.md.
+#
+#   pixi run --manifest-path crates/ports/split_lang/pixi.toml fixtures
+#   pixi run --manifest-path crates/ports/split_lang/pixi.toml data
+[workspace]
+name = "split_lang-parity"
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-arm64", "win-64"]
+
+[dependencies]
+# 3.11 is required: data/python_isdigit.txt is Python 3.11's Unicode 14 table.
+python = "3.11.*"
+
+[pypi-dependencies]
+split-lang = "==2.1.1"
+budoux = "==0.10.2"
+fast_langdetect = "==1.1.0"
+fasttext-predict = "==0.9.2.4"
+
+[tasks]
+lid-model = { cmd = "python parity/fetch_lid_model.py", description = "Download lid.176.bin into parity/.cache/fast_langdetect" }
+fixtures = { cmd = "python parity/gen_fixtures.py", depends-on = ["lid-model"], description = "Regenerate tests/fixtures" }
+data = { cmd = "python parity/gen_data.py", description = "Regenerate data/python_isdigit.txt and data/budoux" }
