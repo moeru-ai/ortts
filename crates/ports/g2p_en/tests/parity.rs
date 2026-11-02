@@ -19,7 +19,7 @@ struct Vocab {
 }
 
 /// Fixture words whose Rust prediction is allowed to differ from Python.
-/// Must stay in sync with the crate README. Empty: every case matches.
+/// Must stay in sync with `parity/README.md`. Empty: every case matches.
 const KNOWN_MISMATCHES: &[&str] = &[];
 
 #[test]

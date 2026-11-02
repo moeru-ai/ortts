@@ -3,7 +3,7 @@
     python parity/copy_data.py
 
 The files are copied byte for byte from the installed g2p_en 2.1.0 and their
-SHA-1 is checked against the values in the crate README.
+SHA-1 is checked against the values in parity/README.md.
 """
 
 import hashlib

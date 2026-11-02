@@ -1,5 +1,5 @@
 //! Port of `g2p_en/g2p.py`: the `G2p` class without `__call__` and the
-//! nltk CMUdict / POS tagger setup (see the crate README).
+//! nltk CMUdict / POS tagger setup (see `parity/README.md`).
 
 use std::collections::HashMap;
 
@@ -206,7 +206,7 @@ impl Default for G2p {
 /// Every output is summed in index order, `out[j] = (((0 + x[0] * w[j, 0]) +
 /// x[1] * w[j, 1]) + ...) + b[j]`, without fused multiply-add. numpy hands
 /// the dot products to OpenBLAS, whose summation order depends on the CPU
-/// kernel and is not reproduced bit for bit (see the crate README). The loop
+/// kernel and is not reproduced bit for bit (see `parity/README.md`). The loop
 /// runs over the transposed weights so that it vectorizes across `j`.
 fn matmul_t_add(x: &[f32], w: &Array2, b: &[f32]) -> Vec<f32> {
   debug_assert_eq!(x.len(), w.cols);

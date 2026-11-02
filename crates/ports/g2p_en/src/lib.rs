@@ -3,7 +3,7 @@
 //! Ports `g2p_en/__init__.py` (re-export of [`G2p`]) and the parts of
 //! `g2p_en/g2p.py` that GPT-SoVITS `text/english.py` (`en_G2p`) uses: the
 //! `G2p.__init__` vocab tables, the numpy GRU weights from `checkpoint20.npz`,
-//! `homograph2features` and `G2p.predict`. See the crate README for the scope.
+//! `homograph2features` and `G2p.predict`. See `parity/README.md` for the scope.
 
 pub mod g2p;
 mod npz;
