@@ -1,0 +1,18 @@
+# Python reference environment for the `inflect` port. It generates the golden
+# fixtures in tests/fixtures and the table in data/. Versions are pinned so the
+# generated files are reproducible. See parity/README.md.
+[workspace]
+name = "inflect-parity"
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-arm64", "win-64"]
+
+[dependencies]
+# Keep 3.11: data/decimal_digits.tsv holds the Unicode 14.0.0 digits of Python 3.11.
+python = "3.11.*"
+inflect = "==7.6.0"
+# inflect raises typeguard.TypeCheckError for the empty string.
+typeguard = "==4.6.0"
+
+[tasks]
+data = { cmd = "python parity/gen_fixtures.py --only data", description = "Regenerate data/decimal_digits.tsv" }
+fixtures = { cmd = "python parity/gen_fixtures.py --only fixtures", description = "Regenerate tests/fixtures/range.json and cases.jsonl" }
